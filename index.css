@@ -1,0 +1,54 @@
+@import "tailwindcss";
+
+body {
+  font-family: Georgia, serif;
+  background-color: rgb(249, 239, 239);
+}
+
+@keyframes marquee {
+  0% { transform: translateX(100%); }
+  100% { transform: translateX(-100%); }
+}
+.animate-marquee {
+  animation: marquee 20s linear infinite;
+}
+
+@keyframes pan-left-right {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(-15px); }
+}
+@keyframes pan-right-left {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(15px); }
+}
+.animate-pan-lr {
+  animation: pan-left-right 4s ease-in-out infinite;
+}
+.animate-pan-rl {
+  animation: pan-right-left 4s ease-in-out infinite;
+}
+
+/* Entrance animations */
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-up {
+  animation: fade-up 0.8s ease-out both;
+}
+.fade-delay-1 { animation-delay: 0.15s; }
+.fade-delay-2 { animation-delay: 0.3s; }
+.fade-delay-3 { animation-delay: 0.45s; }
+
+/* Gentle float for depth */
+@keyframes float-soft {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+.animate-float {
+  animation: float-soft 5s ease-in-out infinite;
+}
+
+html {
+  scroll-behavior: smooth;
+}

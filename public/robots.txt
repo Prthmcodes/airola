@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+Disallow: /dashboard
+Disallow: /admin
+Disallow: /admin/team
+Disallow: /login
+Disallow: /add-property
+Disallow: /quote/review
+
+Sitemap: https://airola.co.uk/sitemap.xml
