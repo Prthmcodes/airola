@@ -3,3 +3,7 @@ dist/
 .env
 Airola-Business-Summary.docx
 scripts/listings.csv
+scripts/airola_outreach_targets.csv
+docs/
+*.docx
+.vercel/

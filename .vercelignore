@@ -1,0 +1,6 @@
+scripts/
+docs/
+node_modules/
+airola_outreach_targets.csv
+listings.csv
+*.docx
