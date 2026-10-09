@@ -3,14 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Airola | Airbnb Turnover Cleaning in East London</title>
-    <meta name="description" content="Turnover cleaning for Airbnb and short-let hosts in East London (Stratford, Royal Wharf, Canary Wharf). Guest-ready resets with photo proof after every clean.">
-    <meta property="og:title" content="Airola | Airbnb Turnover Cleaning in East London">
-    <meta property="og:description" content="Flawless Airbnb turnovers, every check-out. Cleaning, laundry and guest essentials for short-let hosts.">
+    <title>Airbnb Turnover Cleaning East London | Airola</title>
+    <meta name="description" content="Airbnb turnover cleaning in East London. Guest-ready resets with photo proof sent to your WhatsApp after every clean. Get your price in 60 seconds.">
+    <meta property="og:title" content="Airbnb Turnover Cleaning East London | Airola">
+    <meta property="og:description" content="Flawless Airbnb turnovers, every check-out. Guest-ready cleaning, linen changes and restocking for short-let hosts in East London. Photo proof every clean.">
     <meta property="og:type" content="website">
-    <meta property="og:image" content="/hero-bg.jpg">
-    <link rel="icon" type="image/png" href="/Final_logo-removebg-preview.png">
-    <link rel="canonical" href="https://airola.co.uk">
+    <meta property="og:url" content="https://airola.co.uk/">
+    <!-- TODO: image pending. Switch to /images/og-airola.jpg (1200x630) once it is in public/images/. -->
+    <meta property="og:image" content="https://airola.co.uk/hero-bg.jpg">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="/icon-512.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <!-- Fonts used above the fold: preloaded so text renders in its final font with less swap shift -->
+    <link rel="preload" href="./node_modules/@fontsource-variable/fraunces/files/fraunces-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="./node_modules/@fontsource-variable/inter/files/inter-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="canonical" href="https://airola.co.uk/">
+    <!-- [CONFIRM: opening hours] Add openingHoursSpecification to the LocalBusiness block below once hours are confirmed. -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -43,11 +51,24 @@
         {"@type": "Offer", "name": "Standard Turnover Clean", "price": "45", "priceCurrency": "GBP", "description": "Guest-ready Airbnb turnover with photo confirmation, damage check and bed staging. Price for 1 bedroom."},
         {"@type": "Offer", "name": "Guest-Ready Plus", "price": "79", "priceCurrency": "GBP", "description": "Full turnover plus linen change, dishwashing and pre-check-in double inspection. Price for 1 bedroom."}
       ],
-      "sameAs": []
+      "sameAs": ["https://www.instagram.com/airola.uk/"]
     }
     </script>
 </head>
 <body>
+    <noscript>
+      <div style="max-width:640px;margin:124px auto 40px;padding:24px;font-family:var(--font-sans);color:#0f172a;background:#ffffff;border-radius:16px;line-height:1.6;font-size:16px">
+        <p style="font-family:var(--font-serif);font-size:28px;font-weight:600;margin:0 0 8px">Airola</p>
+        <p style="margin:0 0 8px">Airbnb and short-let turnover cleaning in East London.</p>
+        <p style="margin:0 0 8px"><strong>Photo proof every clean.</strong> From £45.</p>
+        <p style="margin:0 0 16px">This site needs JavaScript, but you can reach us directly:</p>
+        <ul style="margin:0;padding-left:20px">
+          <li>WhatsApp: <a href="https://wa.me/447925123219" style="color:#2D6E5F">+44 7925 123219</a></li>
+          <li>Email: <a href="mailto:contact@airola.co.uk" style="color:#2D6E5F">contact@airola.co.uk</a></li>
+          <li>Instagram: <a href="https://www.instagram.com/airola.uk/" style="color:#2D6E5F">@airola.uk</a></li>
+        </ul>
+      </div>
+    </noscript>
     <div id="root"></div>
     <script type="module" src="/index.tsx"></script>
 </body>

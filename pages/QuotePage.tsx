@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Page, QuoteData, User as UserType } from '../types';
+import { safePrice, PRICE_FALLBACK_TEXT } from '../utils/quoteSafety';
 import {
   ChevronRight, ChevronLeft, Sparkles, CheckCircle, Calendar as CalendarIcon,
   Link as LinkIcon, MapPin, ClipboardList, User, Phone, Mail, Shield, Star, Check,
@@ -16,6 +17,8 @@ interface QuotePageProps {
 const QuotePage: React.FC<QuotePageProps> = ({ quote, setQuote, onNavigate, user }) => {
   const [step, setStep] = useState(1);
   const [stepError, setStepError] = useState('');
+  const showFieldErrors = step === 2 && stepError !== '';
+  const emailInvalid = !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(quote.ownerEmail || '');
   const totalSteps = 2;
 
   const addOns = [
@@ -97,7 +100,7 @@ const QuotePage: React.FC<QuotePageProps> = ({ quote, setQuote, onNavigate, user
         <div className="flex-grow">
           <div className="mb-10">
             <h1 className="text-4xl font-black text-slate-900 mb-2">Get Your Price</h1>
-            <p className="text-slate-500 font-medium tracking-wide">
+            <p className="text-slate-600 font-medium tracking-wide">
               Step {step} of {totalSteps}: {step === 1 ? 'Build your clean — your price updates live' : 'Your details'}
             </p>
 
@@ -114,17 +117,19 @@ const QuotePage: React.FC<QuotePageProps> = ({ quote, setQuote, onNavigate, user
               <div className="space-y-12">
                 {/* Property size */}
                 <div>
-                  <h3 className="text-2xl font-bold mb-6 text-slate-900">Your Property</h3>
+                  <h2 className="text-2xl font-bold mb-6 text-slate-900">Your Property</h2>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <div>
-                      <label className="block text-xs font-black text-slate-400 mb-4 uppercase tracking-[0.2em]">Bedrooms</label>
-                      <div className="flex flex-wrap gap-3">
+                      <p id="beds-label" className="block text-xs font-black text-slate-500 mb-4 uppercase tracking-[0.05em]">Bedrooms</p>
+                      <div className="flex flex-wrap gap-3" role="group" aria-labelledby="beds-label">
                         {[1, 2, 3, 4, 5, 6].map(n => (
                           <button
                             key={n}
+                            type="button"
+                            aria-pressed={quote.beds === n}
                             onClick={() => setQuote({ ...quote, beds: n })}
                             className={`w-14 h-14 rounded-2xl border-2 font-black text-lg transition-all ${
-                              quote.beds === n ? 'border-[rgb(61,141,122)] bg-[rgb(235,247,244)] text-[rgb(61,141,122)] shadow-md' : 'border-slate-100 text-slate-400 hover:border-slate-300'
+                              quote.beds === n ? 'border-[rgb(61,141,122)] bg-[rgb(235,247,244)] text-[#2D6E5F] shadow-md' : 'border-slate-100 text-slate-500 hover:border-slate-300'
                             }`}
                           >
                             {n}
@@ -133,14 +138,16 @@ const QuotePage: React.FC<QuotePageProps> = ({ quote, setQuote, onNavigate, user
                       </div>
                     </div>
                     <div>
-                      <label className="block text-xs font-black text-slate-400 mb-4 uppercase tracking-[0.2em]">Bathrooms</label>
-                      <div className="flex flex-wrap gap-3">
+                      <p id="baths-label" className="block text-xs font-black text-slate-500 mb-4 uppercase tracking-[0.05em]">Bathrooms</p>
+                      <div className="flex flex-wrap gap-3" role="group" aria-labelledby="baths-label">
                         {[1, 2, 3, 4].map(n => (
                           <button
                             key={n}
+                            type="button"
+                            aria-pressed={quote.baths === n}
                             onClick={() => setQuote({ ...quote, baths: n })}
                             className={`w-14 h-14 rounded-2xl border-2 font-black text-lg transition-all ${
-                              quote.baths === n ? 'border-[rgb(61,141,122)] bg-[rgb(235,247,244)] text-[rgb(61,141,122)] shadow-md' : 'border-slate-100 text-slate-400 hover:border-slate-300'
+                              quote.baths === n ? 'border-[rgb(61,141,122)] bg-[rgb(235,247,244)] text-[#2D6E5F] shadow-md' : 'border-slate-100 text-slate-500 hover:border-slate-300'
                             }`}
                           >
                             {n}
@@ -154,14 +161,14 @@ const QuotePage: React.FC<QuotePageProps> = ({ quote, setQuote, onNavigate, user
                 {/* Tier */}
                 <div>
                   <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
-                    <h3 className="text-2xl font-bold text-slate-900">Choose Your Clean</h3>
+                    <h2 className="text-2xl font-bold text-slate-900">Choose Your Clean</h2>
                     <div className="flex items-center space-x-3">
-                      <span className={`text-sm font-medium ${quote.frequency === 'one-time' ? 'text-slate-900' : 'text-slate-400'}`}>One-off</span>
+                      <span className={`text-sm font-medium ${quote.frequency === 'one-time' ? 'text-slate-900' : 'text-slate-500'}`}>One-off</span>
                       <label htmlFor="pricing-toggle" className="relative inline-flex items-center cursor-pointer">
-                        <input type="checkbox" id="pricing-toggle" className="sr-only peer" checked={quote.frequency === 'recurring'} onChange={(e) => setQuote({ ...quote, frequency: e.target.checked ? 'recurring' : 'one-time' })} />
-                        <div className="w-14 h-8 bg-slate-200 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-1 after:left-[4px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all peer-checked:bg-[rgb(61,141,122)]"></div>
+                        <input type="checkbox" id="pricing-toggle" aria-label="Book every turnover (save £10 per clean)" className="sr-only peer" checked={quote.frequency === 'recurring'} onChange={(e) => setQuote({ ...quote, frequency: e.target.checked ? 'recurring' : 'one-time' })} />
+                        <div className="w-14 h-8 bg-slate-200 rounded-full peer peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-[#2D6E5F] peer-focus-visible:outline-solid peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-1 after:left-[4px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all peer-checked:bg-[rgb(61,141,122)]"></div>
                       </label>
-                      <span className={`text-sm font-medium ${quote.frequency === 'recurring' ? 'text-slate-900' : 'text-slate-400'}`}>Every turnover (save £10)</span>
+                      <span className={`text-sm font-medium ${quote.frequency === 'recurring' ? 'text-slate-900' : 'text-slate-500'}`}>Every turnover (save £10)</span>
                     </div>
                   </div>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
@@ -171,6 +178,8 @@ const QuotePage: React.FC<QuotePageProps> = ({ quote, setQuote, onNavigate, user
                     ].map((pkg) => (
                       <button
                         key={pkg.id}
+                        type="button"
+                        aria-pressed={quote.cleaningType === pkg.id}
                         onClick={() => setQuote({ ...quote, cleaningType: pkg.id as any })}
                         className={`p-6 rounded-[2rem] border-2 text-left transition-all relative group ${
                           quote.cleaningType === pkg.id
@@ -179,15 +188,15 @@ const QuotePage: React.FC<QuotePageProps> = ({ quote, setQuote, onNavigate, user
                         }`}
                       >
                         <div className={`w-11 h-11 rounded-xl flex items-center justify-center mb-4 transition-colors ${
-                          quote.cleaningType === pkg.id ? 'bg-[rgb(61,141,122)] text-white' : 'bg-white text-slate-400 shadow-sm'
+                          quote.cleaningType === pkg.id ? 'bg-[#2D6E5F] text-white' : 'bg-white text-slate-400 shadow-sm'
                         }`}>
                           {pkg.icon}
                         </div>
-                        <h4 className="text-lg font-black text-slate-900 mb-1">{pkg.name}</h4>
-                        <p className="text-2xl font-black text-[rgb(61,141,122)] mb-2">£{tierPrice(pkg.id)}</p>
-                        <p className="text-slate-500 text-xs font-medium leading-relaxed">{pkg.desc}</p>
+                        <h3 className="text-lg font-black text-slate-900 mb-1">{pkg.name}</h3>
+                        <p className="price text-2xl text-[#2D6E5F] mb-2">{safePrice(tierPrice(pkg.id)) !== null ? `£${tierPrice(pkg.id)}` : <span className="text-base">{PRICE_FALLBACK_TEXT}</span>}</p>
+                        <p className="text-slate-600 text-xs font-medium leading-relaxed">{pkg.desc}</p>
                         {quote.cleaningType === pkg.id && (
-                          <div className="absolute top-5 right-5 bg-[rgb(61,141,122)] text-white p-1 rounded-full">
+                          <div className="absolute top-5 right-5 bg-[#2D6E5F] text-white p-1 rounded-full">
                             <Check className="w-4 h-4" />
                           </div>
                         )}
@@ -203,32 +212,34 @@ const QuotePage: React.FC<QuotePageProps> = ({ quote, setQuote, onNavigate, user
 
                 {/* Add-ons */}
                 <div>
-                  <h3 className="text-2xl font-bold mb-2 text-slate-900">Add-Ons <span className="text-sm font-medium text-slate-400">(optional)</span></h3>
+                  <h2 className="text-2xl font-bold mb-2 text-slate-900">Add-Ons <span className="text-sm font-medium text-slate-500">(optional)</span></h2>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-6">
                     {addOns.map(addon => {
                       const selected = quote.toiletries.includes(addon.id);
                       return (
                         <button
                           key={addon.id}
+                          type="button"
+                          aria-pressed={selected}
                           onClick={() => toggleAddon(addon.id)}
                           className={`p-5 rounded-2xl border-2 text-left transition-all flex items-center gap-4 ${
                             selected ? 'bg-[rgb(235,247,244)] border-[rgb(61,141,122)] shadow-md' : 'bg-white border-slate-100 hover:border-slate-300'
                           }`}
                         >
                           <div className={`shrink-0 w-12 h-12 rounded-xl flex items-center justify-center transition-colors ${
-                            selected ? 'bg-[rgb(61,141,122)] text-white' : 'bg-slate-50 text-[rgb(61,141,122)]'
+                            selected ? 'bg-[#2D6E5F] text-white' : 'bg-slate-50 text-[rgb(61,141,122)]'
                           }`}>
                             {addon.icon}
                           </div>
                           <div className="flex-grow">
                             <div className="flex items-center justify-between">
-                              <h4 className={`font-bold ${selected ? 'text-[rgb(45,110,95)]' : 'text-slate-900'}`}>{addon.name}</h4>
-                              <span className="text-xs font-black text-[rgb(61,141,122)]">{addon.priceText}</span>
+                              <h3 className={`font-bold ${selected ? 'text-[rgb(45,110,95)]' : 'text-slate-900'}`}>{addon.name}</h3>
+                              <span className="price text-xs text-[#2D6E5F]">{addon.priceText}</span>
                             </div>
-                            <p className="text-slate-500 text-xs font-medium mt-0.5">{addon.description}</p>
+                            <p className="text-slate-600 text-xs font-medium mt-0.5">{addon.description}</p>
                           </div>
                           <div className={`shrink-0 w-6 h-6 rounded-full border-2 flex items-center justify-center transition-all ${
-                            selected ? 'bg-[rgb(61,141,122)] border-[rgb(61,141,122)] text-white' : 'border-slate-200 text-transparent'
+                            selected ? 'bg-[#2D6E5F] border-[rgb(61,141,122)] text-white' : 'border-slate-200 text-transparent'
                           }`}>
                             <Check className="w-3.5 h-3.5" />
                           </div>
@@ -242,53 +253,53 @@ const QuotePage: React.FC<QuotePageProps> = ({ quote, setQuote, onNavigate, user
 
             {step === 2 && (
               <div>
-                <h3 className="text-2xl font-bold mb-8 text-slate-900">Where do we send your quote?</h3>
+                <h2 className="text-2xl font-bold mb-8 text-slate-900">Where do we send your quote?</h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                   <div className="space-y-6">
                     <div>
-                      <label className="block text-xs font-black text-slate-400 mb-3 uppercase tracking-[0.2em]">Your Name</label>
+                      <label htmlFor="quote-name" className="block text-xs font-black text-slate-500 mb-3 uppercase tracking-[0.05em]">Your Name</label>
                       <div className="relative">
                         <User className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
-                        <input type="text" value={quote.ownerName || ''} onChange={(e) => setQuote({ ...quote, ownerName: e.target.value })} placeholder="e.g. John Doe" className={inputClass} required />
+                        <input id="quote-name" aria-invalid={showFieldErrors && !quote.ownerName} aria-describedby={showFieldErrors && !quote.ownerName ? 'quote-error' : undefined} type="text" value={quote.ownerName || ''} onChange={(e) => setQuote({ ...quote, ownerName: e.target.value })} placeholder="e.g. John Doe" className={inputClass} required />
                       </div>
                     </div>
                     <div>
-                      <label className="block text-xs font-black text-slate-400 mb-3 uppercase tracking-[0.2em]">Email</label>
+                      <label htmlFor="quote-email" className="block text-xs font-black text-slate-500 mb-3 uppercase tracking-[0.05em]">Email</label>
                       <div className="relative">
                         <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
-                        <input type="email" value={quote.ownerEmail || ''} onChange={(e) => setQuote({ ...quote, ownerEmail: e.target.value })} placeholder="e.g. john@example.com" className={inputClass} required />
+                        <input id="quote-email" aria-invalid={showFieldErrors && emailInvalid} aria-describedby={showFieldErrors && emailInvalid ? 'quote-error' : undefined} type="email" value={quote.ownerEmail || ''} onChange={(e) => setQuote({ ...quote, ownerEmail: e.target.value })} placeholder="e.g. john@example.com" className={inputClass} required />
                       </div>
                     </div>
                     <div>
-                      <label className="block text-xs font-black text-slate-400 mb-3 uppercase tracking-[0.2em]">Mobile</label>
+                      <label htmlFor="quote-phone" className="block text-xs font-black text-slate-500 mb-3 uppercase tracking-[0.05em]">Mobile</label>
                       <div className="relative">
                         <Phone className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
-                        <input type="tel" value={quote.ownerPhone || ''} onChange={(e) => setQuote({ ...quote, ownerPhone: e.target.value })} placeholder="+44 7700 900000" className={inputClass} required />
+                        <input id="quote-phone" aria-invalid={showFieldErrors && !quote.ownerPhone} aria-describedby={showFieldErrors && !quote.ownerPhone ? 'quote-error' : undefined} type="tel" value={quote.ownerPhone || ''} onChange={(e) => setQuote({ ...quote, ownerPhone: e.target.value })} placeholder="+44 7700 900000" className={inputClass} required />
                       </div>
                     </div>
                     <div>
-                      <label className="block text-xs font-black text-slate-400 mb-3 uppercase tracking-[0.2em]">Property Address</label>
+                      <label htmlFor="quote-address" className="block text-xs font-black text-slate-500 mb-3 uppercase tracking-[0.05em]">Property Address</label>
                       <div className="relative">
                         <MapPin className="absolute left-4 top-4 w-5 h-5 text-slate-400" />
-                        <textarea value={quote.address || ''} onChange={(e) => setQuote({ ...quote, address: e.target.value })} placeholder="Street address and postcode" className={`${inputClass} min-h-[90px]`} required />
+                        <textarea id="quote-address" aria-invalid={showFieldErrors && !quote.address} aria-describedby={showFieldErrors && !quote.address ? 'quote-error' : undefined} value={quote.address || ''} onChange={(e) => setQuote({ ...quote, address: e.target.value })} placeholder="Street address and postcode" className={`${inputClass} min-h-[90px]`} required />
                       </div>
                     </div>
                   </div>
                   <div className="space-y-6">
                     <div>
-                      <label className="block text-xs font-black text-slate-400 mb-3 uppercase tracking-[0.2em]">Notes <span className="normal-case font-medium">(optional)</span></label>
+                      <label htmlFor="quote-notes" className="block text-xs font-black text-slate-500 mb-3 uppercase tracking-[0.05em]">Notes <span className="normal-case font-medium">(optional)</span></label>
                       <div className="relative">
                         <ClipboardList className="absolute left-4 top-4 w-5 h-5 text-slate-400" />
-                        <textarea value={quote.notes || ''} onChange={(e) => setQuote({ ...quote, notes: e.target.value })} placeholder="Entry instructions, pets, anything we should know" className={`${inputClass} min-h-[90px]`} />
+                        <textarea id="quote-notes" value={quote.notes || ''} onChange={(e) => setQuote({ ...quote, notes: e.target.value })} placeholder="Entry instructions, pets, anything we should know" className={`${inputClass} min-h-[90px]`} />
                       </div>
                     </div>
                     <div>
-                      <label className="block text-xs font-black text-slate-400 mb-3 uppercase tracking-[0.2em]">Airbnb Calendar Link <span className="normal-case font-medium">(optional)</span></label>
+                      <label htmlFor="quote-calendar" className="block text-xs font-black text-slate-500 mb-3 uppercase tracking-[0.05em]">Airbnb Calendar Link <span className="normal-case font-medium">(optional)</span></label>
                       <div className="relative">
                         <LinkIcon className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
-                        <input type="url" value={quote.calendarUrl || ''} onChange={(e) => setQuote({ ...quote, calendarUrl: e.target.value })} placeholder="https://www.airbnb.com/calendar/export/..." className={inputClass} />
+                        <input id="quote-calendar" type="url" value={quote.calendarUrl || ''} onChange={(e) => setQuote({ ...quote, calendarUrl: e.target.value })} placeholder="https://www.airbnb.com/calendar/export/..." className={inputClass} />
                       </div>
-                      <p className="mt-2 text-xs text-slate-400 flex items-start"><CalendarIcon className="w-3.5 h-3.5 mr-1.5 mt-0.5 shrink-0" /> Share it and we auto-schedule cleans around your check-outs. We only see dates, never guest details.</p>
+                      <p className="mt-2 text-xs text-slate-500 flex items-start"><CalendarIcon className="w-3.5 h-3.5 mr-1.5 mt-0.5 shrink-0" /> Share it and we auto-schedule cleans around your check-outs. We only see dates, never guest details.</p>
                     </div>
                   </div>
                 </div>
@@ -296,17 +307,17 @@ const QuotePage: React.FC<QuotePageProps> = ({ quote, setQuote, onNavigate, user
             )}
 
             {stepError && (
-              <div className="mt-8 p-4 bg-red-50 border border-red-100 rounded-2xl text-red-600 text-sm font-bold">
+              <div id="quote-error" role="alert" className="mt-8 p-4 bg-red-50 border border-red-100 rounded-2xl text-red-700 text-sm font-bold">
                 {stepError}
               </div>
             )}
 
             <div className="mt-12 pt-10 border-t border-slate-50 flex flex-col sm:flex-row gap-4 justify-between items-center">
-              <button onClick={prevStep} className="px-8 py-4 rounded-2xl font-bold text-slate-400 hover:text-slate-900 transition-colors flex items-center">
+              <button onClick={prevStep} className="px-8 py-4 rounded-2xl font-bold text-slate-500 hover:text-slate-900 transition-colors flex items-center">
                 <ChevronLeft className="w-5 h-5 mr-1" /> Back
               </button>
               <div className="flex flex-col sm:flex-row items-center gap-4">
-                <a href="https://wa.me/447925123219" target="_blank" rel="noopener noreferrer" className="text-sm font-bold text-slate-400 hover:text-[rgb(61,141,122)] flex items-center transition-colors">
+                <a href="https://wa.me/447925123219" target="_blank" rel="noopener noreferrer" className="text-sm font-bold text-slate-500 hover:text-[#2D6E5F] flex items-center transition-colors">
                   <MessageCircle className="w-4 h-4 mr-1.5" /> Prefer WhatsApp? Message us
                 </a>
                 <button onClick={nextStep} className="px-10 py-5 bg-slate-900 text-white rounded-2xl font-black text-lg hover:bg-slate-800 transition-all shadow-xl flex items-center">
@@ -320,11 +331,11 @@ const QuotePage: React.FC<QuotePageProps> = ({ quote, setQuote, onNavigate, user
         {/* Live estimate sidebar */}
         <div className="w-full lg:w-96">
           <div className="bg-slate-900 rounded-[3rem] p-10 text-white sticky top-28 shadow-2xl">
-            <h3 className="text-xl font-bold mb-8 border-b border-white/10 pb-6">Your Price</h3>
+            <h2 className="text-xl font-bold mb-8 border-b border-white/10 pb-6">Your Price</h2>
             <div className="space-y-4 mb-8">
               {(user.isLoggedIn || quote.ownerName) && (
                 <div className="mb-4">
-                  <p className="text-[10px] font-black uppercase text-[rgb(106,176,160)] tracking-widest mb-1">Host</p>
+                  <p className="text-xs font-black uppercase text-[rgb(106,176,160)] tracking-[0.05em] mb-1">Host</p>
                   <p className="text-sm font-bold truncate">{user.isLoggedIn ? user.name : quote.ownerName}</p>
                   <p className="text-xs text-slate-400 font-medium">{user.isLoggedIn ? user.email : quote.ownerEmail || ''}</p>
                 </div>
@@ -334,7 +345,7 @@ const QuotePage: React.FC<QuotePageProps> = ({ quote, setQuote, onNavigate, user
                 <span>
                   {quote.cleaningType === 'premium' ? 'Guest-Ready Plus' : 'Standard Turnover'} ({quote.beds} bed{quote.beds > 1 ? 's' : ''}, {quote.baths} bath{quote.baths > 1 ? 's' : ''})
                 </span>
-                <span className="text-white">£{quote.basePrice}</span>
+                <span className="price text-white">{safePrice(quote.basePrice) !== null ? `£${quote.basePrice}` : '–'}</span>
               </div>
 
               {quote.frequency === 'recurring' && (
@@ -351,7 +362,7 @@ const QuotePage: React.FC<QuotePageProps> = ({ quote, setQuote, onNavigate, user
                 return (
                   <div key={addonId} className="flex justify-between text-slate-400 font-medium text-xs">
                     <span>{addon.name} {addon.id === 'linen' && `(${quote.beds} bed${quote.beds > 1 ? 's' : ''})`}</span>
-                    <span className="text-white">£{actualPrice}</span>
+                    <span className="price text-white">£{actualPrice}</span>
                   </div>
                 );
               })}
@@ -359,8 +370,10 @@ const QuotePage: React.FC<QuotePageProps> = ({ quote, setQuote, onNavigate, user
 
             <div className="border-t border-white/10 pt-8 mb-8">
               <div className="flex justify-between items-end">
-                <span className="text-slate-400 font-bold uppercase text-xs tracking-widest">Per Turnover</span>
-                <span className="text-5xl font-black text-[rgb(106,176,160)]">£{quote.totalPrice}</span>
+                <span className="text-slate-400 font-bold uppercase text-xs tracking-[0.05em]">Per Turnover</span>
+                {safePrice(quote.totalPrice) !== null
+                  ? <span className="price text-5xl text-[rgb(106,176,160)]">£{quote.totalPrice}</span>
+                  : <span className="text-lg font-bold text-[rgb(106,176,160)] text-right">{PRICE_FALLBACK_TEXT}</span>}
               </div>
             </div>
 

@@ -14,28 +14,28 @@ const ContactPage: React.FC = () => {
           <a href="mailto:contact@airola.co.uk" className="flex items-center p-4 bg-slate-50 rounded-2xl hover:bg-[rgb(235,247,244)] transition-colors group">
             <Mail className="w-6 h-6 mr-4 text-[rgb(61,141,122)]" />
             <div>
-              <p className="text-xs font-black text-slate-400 uppercase tracking-widest">Email</p>
+              <p className="text-xs font-black text-slate-500 uppercase tracking-[0.05em]">Email</p>
               <p className="font-bold text-slate-900 group-hover:text-[rgb(45,110,95)]">contact@airola.co.uk</p>
             </div>
           </a>
           <a href="tel:+447925123219" className="flex items-center p-4 bg-slate-50 rounded-2xl hover:bg-[rgb(235,247,244)] transition-colors group">
             <Phone className="w-6 h-6 mr-4 text-[rgb(61,141,122)]" />
             <div>
-              <p className="text-xs font-black text-slate-400 uppercase tracking-widest">Phone</p>
+              <p className="text-xs font-black text-slate-500 uppercase tracking-[0.05em]">Phone</p>
               <p className="font-bold text-slate-900 group-hover:text-[rgb(45,110,95)]">+44 7925 123219</p>
             </div>
           </a>
           <a href="https://wa.me/447925123219" target="_blank" rel="noopener noreferrer" className="flex items-center p-4 bg-slate-50 rounded-2xl hover:bg-[rgb(235,247,244)] transition-colors group">
             <MessageCircle className="w-6 h-6 mr-4 text-[rgb(61,141,122)]" />
             <div>
-              <p className="text-xs font-black text-slate-400 uppercase tracking-widest">WhatsApp</p>
+              <p className="text-xs font-black text-slate-500 uppercase tracking-[0.05em]">WhatsApp</p>
               <p className="font-bold text-slate-900 group-hover:text-[rgb(45,110,95)]">Chat with us directly</p>
             </div>
           </a>
           <div className="flex items-center p-4 bg-slate-50 rounded-2xl">
             <MapPin className="w-6 h-6 mr-4 text-[rgb(61,141,122)]" />
             <div>
-              <p className="text-xs font-black text-slate-400 uppercase tracking-widest">Service Area</p>
+              <p className="text-xs font-black text-slate-500 uppercase tracking-[0.05em]">Service Area</p>
               <p className="font-bold text-slate-900">East London: Stratford, Royal Wharf, Canary Wharf and nearby</p>
             </div>
           </div>

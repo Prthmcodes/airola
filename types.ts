@@ -14,10 +14,45 @@ export enum Page {
   ABOUT_US = 'about_us',
   CONTACT = 'contact',
   LEGAL = 'legal',
-  OFFER = 'offer'
+  OFFER = 'offer',
+  NOT_FOUND = 'not_found',
+  AREA_STRATFORD = 'area_stratford',
+  AREA_CANARY_WHARF = 'area_canary_wharf',
+  AREA_ROYAL_WHARF = 'area_royal_wharf',
+  TESTIMONIALS = 'testimonials'
 }
 
 export type UserRole = 'owner' | 'admin';
+
+// A published (approved) review, as anyone can see it. Never includes the reviewer's email.
+export interface Testimonial {
+  id: string;
+  createdAt: string;
+  displayName: string;
+  area?: string;
+  rating: number;
+  body: string;
+  verified: boolean;
+}
+
+// What the public form sends. Status, verified and notes are always set by the database.
+export interface TestimonialSubmission {
+  displayName: string;
+  area?: string;
+  rating: number;
+  body: string;
+  email: string;
+  consent: boolean;
+}
+
+export type TestimonialStatus = 'pending' | 'approved' | 'rejected';
+
+// Admin-only view of a review, including the private email and moderation fields.
+export interface AdminTestimonial extends Testimonial {
+  email: string;
+  status: TestimonialStatus;
+  adminNote?: string;
+}
 
 export interface User {
   id?: string;

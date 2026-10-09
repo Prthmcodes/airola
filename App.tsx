@@ -1,14 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Suspense, lazy } from 'react';
 import { Page, User, QuoteData, UserRole, AirolaNotification } from './types';
 import { db } from './db';
 import LandingPage from './pages/LandingPage';
-import OwnerDashboard from './pages/OwnerDashboard';
-import AdminDashboard from './pages/AdminDashboard';
-import StaffManagementPage from './pages/StaffManagementPage';
 import QuotePage from './pages/QuotePage';
-import AddPropertyPage from './pages/AddPropertyPage';
 import PricingPage from './pages/PricingPage';
-import QuoteReview from './pages/QuoteReview';
 import LoginPage from './pages/LoginPage';
 import { GiveawayPage } from './pages/GiveawayPage';
 import { ThanksPage } from './pages/ThanksPage';
@@ -17,38 +12,51 @@ import AboutUs from './pages/AboutUs';
 import ContactPage from './pages/ContactPage';
 import LegalPage from './pages/LegalPage';
 import OfferPage from './pages/OfferPage';
+import NotFound from './pages/NotFound';
+import AreaPage from './pages/AreaPage';
+import TestimonialsPage from './pages/TestimonialsPage';
+import ErrorBoundary from './components/ErrorBoundary';
+import { PAGE_META, canonicalUrl, DEFAULT_OG_IMAGE } from './config/routes';
+import { AREA_PAGES } from './config/areas';
+import { loadQuoteDraft, saveQuoteDraft } from './utils/quoteSafety';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import WhatsAppFAB from './components/WhatsAppFAB';
 import NotificationCenter from './components/NotificationCenter';
 import ChatBot from './components/ChatBot';
 
-const GUEST_USER: User = { name: '', email: '', isLoggedIn: false, role: 'owner' };
+// Private and post-quote routes load on demand, keeping them out of the public pages' bundle.
+const OwnerDashboard = lazy(() => import('./pages/OwnerDashboard'));
+const AdminDashboard = lazy(() => import('./pages/AdminDashboard'));
+const StaffManagementPage = lazy(() => import('./pages/StaffManagementPage'));
+const AddPropertyPage = lazy(() => import('./pages/AddPropertyPage'));
+const QuoteReview = lazy(() => import('./pages/QuoteReview'));
 
-// SEO: every page gets a real URL, title and description
-const PAGE_META: Record<Page, { path: string; title: string; description: string; noindex?: boolean }> = {
-  [Page.LANDING]: { path: '/', title: 'Airola | Airbnb Turnover Cleaning in East London', description: 'Turnover cleaning for Airbnb and short-let hosts in East London. Guest-ready resets with photo proof after every clean.' },
-  [Page.PRICING]: { path: '/pricing', title: 'Pricing & Packages | Airola Airbnb Cleaning East London', description: 'Simple pricing for Airbnb turnover cleaning. Standard Turnover from £45, Guest-Ready Plus from £79. £20 per extra bedroom. £10 off recurring cleans.' },
-  [Page.QUOTE]: { path: '/quote', title: 'Get Your Price in 60 Seconds | Airola', description: 'Instant quote for your Airbnb turnover clean in East London. Live pricing by bedrooms, package and add-ons.' },
-  [Page.REVIEW]: { path: '/quote/review', title: 'Review Your Quote | Airola', description: 'Confirm your Airbnb turnover cleaning quote.' },
-  [Page.GIVEAWAY]: { path: '/giveaway', title: 'Win a £1 Turnover Clean | Airola Giveaway', description: 'East London Airbnb hosts: enter to win a full guest-ready turnover clean for £1.' },
-  [Page.ABOUT_US]: { path: '/about-us', title: 'About Airola | East London Airbnb Cleaning Team', description: 'Airola removes the stress from short-let turnovers in East London with reliable cleaning and photo proof after every clean.' },
-  [Page.CONTACT]: { path: '/contact', title: 'Contact Airola | Airbnb Cleaning East London', description: 'Get in touch: WhatsApp, phone or email. Serving Stratford, Royal Wharf, Canary Wharf and nearby.' },
-  [Page.LEGAL]: { path: '/legal', title: 'Privacy, Terms & Cookies | Airola', description: 'Airola privacy policy, terms and conditions, and cookie policy.' },
-  [Page.LOGIN]: { path: '/login', title: 'Host Login | Airola', description: 'Log in to manage your Airbnb turnover cleans.' },
-  [Page.DASHBOARD]: { path: '/dashboard', title: 'Host Hub | Airola', description: 'Manage your properties and turnover cleans.' },
-  [Page.ADMIN_DASHBOARD]: { path: '/admin', title: 'Command Center | Airola', description: 'Airola operations dashboard.' },
-  [Page.STAFF_MANAGEMENT]: { path: '/admin/team', title: 'Team | Airola', description: 'Airola team management.' },
-  [Page.ADD_PROPERTY]: { path: '/add-property', title: 'Register a Property | Airola', description: 'Add a listing to your Airola portfolio.' },
-  [Page.BONUS]: { path: '/giveaway/entered', title: "You're In | Airola Giveaway", description: 'Giveaway entry confirmed.' },
-  [Page.THANKS]: { path: '/thanks', title: 'Thank You | Airola', description: 'Thanks from Airola.' },
-  [Page.OFFER]: { path: '/offer', title: '10% Off Your First Turnover Clean | Airola', description: 'Web offer: 10% off your first Airbnb turnover clean in East London with code WEB10. From £45, photo proof every clean.', noindex: true },
+const PageLoading: React.FC = () => (
+  <p role="status" className="max-w-xl mx-auto px-4 py-24 text-center text-slate-600">Loading…</p>
+);
+
+// Creates the <meta>/<link> tag if index.html doesn't already have it.
+const upsertHeadTag = (selector: string, create: () => HTMLElement, attr: string, value: string) => {
+  let el = document.head.querySelector(selector);
+  if (!el) {
+    el = create();
+    document.head.appendChild(el);
+  }
+  el.setAttribute(attr, value);
 };
+const metaTag = (key: 'name' | 'property', name: string) => () => {
+  const el = document.createElement('meta');
+  el.setAttribute(key, name);
+  return el;
+};
+
+const GUEST_USER: User = { name: '', email: '', isLoggedIn: false, role: 'owner' };
 
 const pageFromPath = (pathname: string): Page => {
   const clean = pathname.replace(/\/+$/, '') || '/';
   const entry = (Object.entries(PAGE_META) as [Page, { path: string }][]).find(([, m]) => m.path === clean);
-  return entry ? entry[0] : Page.LANDING;
+  return entry ? entry[0] : Page.NOT_FOUND;
 };
 
 const initialQuote: QuoteData = {
@@ -75,7 +83,12 @@ const App: React.FC = () => {
   const [user, setUser] = useState<User>(GUEST_USER);
   const [notifications, setNotifications] = useState<AirolaNotification[]>([]);
   const [showNotifications, setShowNotifications] = useState(false);
-  const [currentQuote, setCurrentQuote] = useState<QuoteData>(initialQuote);
+  // Restore an in-progress quote after a reload so the visitor doesn't lose what they entered.
+  const [currentQuote, setCurrentQuote] = useState<QuoteData>(() => ({ ...initialQuote, ...loadQuoteDraft() }));
+
+  useEffect(() => {
+    saveQuoteDraft(currentQuote);
+  }, [currentQuote]);
 
   const refreshData = async () => {
     const session = await db.getSession();
@@ -116,7 +129,8 @@ const App: React.FC = () => {
       setCurrentPage(event.state?.page || pageFromPath(window.location.pathname));
     };
     window.addEventListener('popstate', handlePopState);
-    window.history.replaceState({ page: currentPage }, '', PAGE_META[currentPage].path);
+    // Unknown URLs keep their address so the visitor can see what they typed.
+    window.history.replaceState({ page: currentPage }, '', currentPage === Page.NOT_FOUND ? window.location.pathname : PAGE_META[currentPage].path);
     return () => window.removeEventListener('popstate', handlePopState);
   }, []);
 
@@ -124,10 +138,13 @@ const App: React.FC = () => {
   useEffect(() => {
     const meta = PAGE_META[currentPage];
     document.title = meta.title;
-    const desc = document.querySelector('meta[name="description"]');
-    if (desc) desc.setAttribute('content', meta.description);
-    const canonical = document.querySelector('link[rel="canonical"]');
-    if (canonical) canonical.setAttribute('href', `https://airola.co.uk${meta.path === '/' ? '' : meta.path}`);
+    const url = canonicalUrl(currentPage === Page.NOT_FOUND ? window.location.pathname : meta.path);
+    upsertHeadTag('meta[name="description"]', metaTag('name', 'description'), 'content', meta.description);
+    upsertHeadTag('link[rel="canonical"]', () => Object.assign(document.createElement('link'), { rel: 'canonical' }), 'href', url);
+    upsertHeadTag('meta[property="og:title"]', metaTag('property', 'og:title'), 'content', meta.title);
+    upsertHeadTag('meta[property="og:description"]', metaTag('property', 'og:description'), 'content', meta.ogDescription ?? meta.description);
+    upsertHeadTag('meta[property="og:url"]', metaTag('property', 'og:url'), 'content', url);
+    upsertHeadTag('meta[property="og:image"]', metaTag('property', 'og:image'), 'content', DEFAULT_OG_IMAGE);
     let robots = document.querySelector('meta[name="robots"]');
     if (meta.noindex) {
       if (!robots) {
@@ -135,7 +152,7 @@ const App: React.FC = () => {
         robots.setAttribute('name', 'robots');
         document.head.appendChild(robots);
       }
-      robots.setAttribute('content', 'noindex, nofollow');
+      robots.setAttribute('content', 'noindex');
     } else {
       robots?.remove();
     }
@@ -215,12 +232,29 @@ const App: React.FC = () => {
       case Page.CONTACT: return <ContactPage />;
       case Page.LEGAL: return <LegalPage />;
       case Page.OFFER: return <OfferPage />;
+      case Page.NOT_FOUND: return <NotFound onNavigate={navigate} />;
+      case Page.TESTIMONIALS: return <TestimonialsPage />;
+      case Page.AREA_STRATFORD: return <AreaPage area={AREA_PAGES.stratford} onNavigate={navigate} />;
+      case Page.AREA_CANARY_WHARF: return <AreaPage area={AREA_PAGES['canary-wharf']} onNavigate={navigate} />;
+      case Page.AREA_ROYAL_WHARF: return <AreaPage area={AREA_PAGES['royal-wharf']} onNavigate={navigate} />;
       default: return <LandingPage onNavigate={navigate} />;
     }
   };
 
   return (
     <div className="flex flex-col min-h-screen">
+      <a
+        href="#main"
+        onClick={(e) => {
+          e.preventDefault();
+          const main = document.getElementById('main');
+          main?.focus();
+          main?.scrollIntoView();
+        }}
+        className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[200] focus:px-5 focus:py-3 focus:rounded-xl focus:bg-[#2D6E5F] focus:text-white focus:font-bold"
+      >
+        Skip to main content
+      </a>
       <Navbar
         currentPage={currentPage}
         user={user}
@@ -230,8 +264,12 @@ const App: React.FC = () => {
         notifications={notifications}
         onToggleNotifications={() => setShowNotifications(!showNotifications)}
       />
-      <main className="flex-grow pt-[90px]">
-        {renderPage()}
+      <main id="main" tabIndex={-1} className="flex-grow pt-[90px] focus:outline-none">
+        <ErrorBoundary key={currentPage}>
+          <Suspense fallback={<PageLoading />}>
+            {renderPage()}
+          </Suspense>
+        </ErrorBoundary>
       </main>
       <Footer onNavigate={navigate} />
       <NotificationCenter
@@ -243,8 +281,10 @@ const App: React.FC = () => {
         onMarkRead={markNotificationRead}
         onDelete={deleteNotification}
       />
-      <WhatsAppFAB />
-      <ChatBot onNavigate={navigate} />
+      <aside aria-label="Contact shortcuts">
+        <WhatsAppFAB />
+        <ChatBot onNavigate={navigate} />
+      </aside>
     </div>
   );
 };

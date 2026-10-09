@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Page } from '../types';
 import { MessageSquare, X, Send, Sparkles } from 'lucide-react';
+import { useFocusTrap } from './useFocusTrap';
 
 interface ChatBotProps {
   onNavigate: (page: Page) => void;
@@ -26,6 +27,16 @@ const ChatBot: React.FC<ChatBotProps> = ({ onNavigate }) => {
   const [input, setInput] = useState('');
   const [awaitingBeds, setAwaitingBeds] = useState(false);
   const bottomRef = useRef<HTMLDivElement>(null);
+  const panelRef = useRef<HTMLDivElement>(null);
+  const launcherRef = useRef<HTMLButtonElement>(null);
+  const wasOpen = useRef(false);
+  useFocusTrap(open, panelRef, () => setOpen(false));
+
+  // The launcher unmounts while the panel is open, so hand focus back to it explicitly on close.
+  useEffect(() => {
+    if (open) wasOpen.current = true;
+    else if (wasOpen.current) launcherRef.current?.focus();
+  }, [open]);
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -139,38 +150,39 @@ const ChatBot: React.FC<ChatBotProps> = ({ onNavigate }) => {
       {/* Launcher */}
       {!open && (
         <button
+          ref={launcherRef}
           onClick={() => setOpen(true)}
           className="fixed bottom-6 right-6 z-[100] w-16 h-16 rounded-full bg-slate-900 text-[rgb(106,176,160)] shadow-2xl flex items-center justify-center hover:scale-105 transition-transform"
           aria-label="Chat with Airola assistant"
         >
-          <MessageSquare className="w-7 h-7" />
+          <MessageSquare className="w-7 h-7" aria-hidden="true" />
         </button>
       )}
 
       {/* Panel */}
       {open && (
-        <div className="fixed bottom-6 right-6 z-[110] w-[calc(100vw-3rem)] max-w-sm bg-white rounded-[2rem] shadow-2xl border border-slate-200 flex flex-col overflow-hidden" style={{ height: 'min(560px, calc(100vh - 8rem))' }}>
-          <div className="bg-slate-900 text-white p-5 flex items-center justify-between shrink-0">
+        <div ref={panelRef} role="dialog" aria-modal="true" aria-labelledby="chat-title" className="fixed bottom-6 right-6 z-[110] w-[calc(100vw-3rem)] max-w-sm bg-white rounded-[2rem] shadow-2xl border border-slate-200 flex flex-col overflow-hidden" style={{ height: 'min(560px, calc(100vh - 8rem))' }}>
+          <div className="on-dark bg-slate-900 text-white p-5 flex items-center justify-between shrink-0">
             <div className="flex items-center gap-3">
               <div className="w-9 h-9 bg-[rgb(61,141,122)] rounded-xl flex items-center justify-center">
                 <Sparkles className="w-5 h-5" />
               </div>
               <div>
-                <p className="font-black leading-tight">Airola Assistant</p>
-                <p className="text-[10px] text-[rgb(106,176,160)] font-bold uppercase tracking-widest">Instant answers</p>
+                <h2 id="chat-title" className="font-black leading-tight">Airola Assistant</h2>
+                <p className="text-xs text-[rgb(106,176,160)] font-bold uppercase tracking-[0.05em]">Instant answers</p>
               </div>
             </div>
-            <button onClick={() => setOpen(false)} className="p-2 hover:bg-white/10 rounded-xl" aria-label="Close chat">
-              <X className="w-5 h-5" />
+            <button onClick={() => setOpen(false)} className="w-11 h-11 flex items-center justify-center hover:bg-white/10 rounded-xl" aria-label="Close chat">
+              <X className="w-5 h-5" aria-hidden="true" />
             </button>
           </div>
 
-          <div className="flex-grow overflow-y-auto p-4 space-y-3 bg-slate-50/60">
+          <div className="flex-grow overflow-y-auto p-4 space-y-3 bg-slate-50/60" role="log" aria-live="polite" aria-label="Chat messages">
             {messages.map((m, i) => (
               <div key={i} className={`flex ${m.from === 'user' ? 'justify-end' : 'justify-start'}`}>
                 <div className={`max-w-[85%] px-4 py-3 rounded-2xl text-sm leading-relaxed ${
                   m.from === 'user'
-                    ? 'bg-[rgb(61,141,122)] text-white rounded-br-md'
+                    ? 'bg-[#2D6E5F] text-white rounded-br-md'
                     : 'bg-white text-slate-700 border border-slate-100 shadow-sm rounded-bl-md'
                 }`}>
                   {m.text}
@@ -186,7 +198,7 @@ const ChatBot: React.FC<ChatBotProps> = ({ onNavigate }) => {
                 <button
                   key={c}
                   onClick={() => chipClick(c)}
-                  className="px-3 py-1.5 bg-white border border-[rgb(204,236,229)] text-[rgb(45,110,95)] rounded-full text-xs font-bold hover:bg-[rgb(235,247,244)] transition-colors"
+                  className="min-h-[44px] px-4 py-2 bg-white border border-[rgb(204,236,229)] text-[rgb(45,110,95)] rounded-full text-xs font-bold hover:bg-[rgb(235,247,244)] transition-colors"
                 >
                   {c}
                 </button>
@@ -195,15 +207,17 @@ const ChatBot: React.FC<ChatBotProps> = ({ onNavigate }) => {
           )}
 
           <form onSubmit={submit} className="p-3 border-t border-slate-100 bg-white flex gap-2 shrink-0">
+            <label htmlFor="chat-input" className="sr-only">Type a question</label>
             <input
+              id="chat-input"
               type="text"
               value={input}
               onChange={e => setInput(e.target.value)}
               placeholder="Type a question..."
               className="flex-grow px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-[rgb(106,176,160)]"
             />
-            <button type="submit" className="px-4 bg-[rgb(61,141,122)] text-white rounded-xl hover:bg-[rgb(45,110,95)] transition-colors" aria-label="Send">
-              <Send className="w-4 h-4" />
+            <button type="submit" className="min-w-[44px] min-h-[44px] px-4 bg-[#2D6E5F] text-white rounded-xl hover:bg-[#245A4E] transition-colors" aria-label="Send">
+              <Send className="w-4 h-4" aria-hidden="true" />
             </button>
           </form>
         </div>

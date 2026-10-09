@@ -1,43 +1,53 @@
 import React from 'react';
 import { Page } from '../types';
+import RouteLink from './RouteLink';
 
 const Footer: React.FC<{ onNavigate: (page: Page) => void }> = ({ onNavigate }) => {
-  const link = (page: Page, label: string) => (
+  // Real links (<a href>) so crawlers can follow them
+  const link = (page: Page, label: string, hash?: string) => (
     <li>
-      <a href="#" onClick={(e) => { e.preventDefault(); onNavigate(page); }} className="hover:text-white transition-colors">
+      <RouteLink
+        page={page}
+        hash={hash}
+        onNavigate={onNavigate}
+        afterNavigate={hash ? () => setTimeout(() => document.getElementById(hash)?.scrollIntoView({ behavior: 'smooth' }), 100) : undefined}
+        className="inline-block text-left py-1 hover:text-white transition-colors"
+      >
         {label}
-      </a>
+      </RouteLink>
     </li>
   );
 
   return (
-    <footer className="bg-[rgb(61,141,122)] text-white py-12">
+    <footer className="on-dark bg-[#2D6E5F] text-white py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div className="col-span-1">
-            <h3 className="text-2xl font-bold mb-4">Airola</h3>
+            <h2 className="text-2xl font-bold mb-4">Airola</h2>
             <p className="text-[rgb(204,236,229)] mb-4">
               Turnover cleaning for short-let and Airbnb hosts in East London.
             </p>
+            {/* [CONFIRM: active public liability policy] */}
             <p className="text-[rgb(204,236,229)] text-sm">• Fully insured</p>
             <p className="text-[rgb(204,236,229)] text-sm">• Photo proof after every clean</p>
             <p className="text-[rgb(204,236,229)] text-sm">• Host-first service</p>
           </div>
 
           <div className="col-span-1">
-            <h4 className="font-bold mb-4">Quick Links</h4>
+            <h2 className="font-bold mb-4">Quick Links</h2>
             <ul className="space-y-2 text-[rgb(204,236,229)]">
               {link(Page.LANDING, 'Home')}
               {link(Page.PRICING, 'Packages')}
-              {link(Page.LANDING, 'Services')}
+              {link(Page.LANDING, 'Services', 'services')}
               {link(Page.GIVEAWAY, 'Giveaway')}
               {link(Page.ABOUT_US, 'About')}
+              {link(Page.TESTIMONIALS, 'Reviews')}
               {link(Page.CONTACT, 'Contact')}
             </ul>
           </div>
 
           <div className="col-span-1">
-            <h4 className="font-bold mb-4">Contact</h4>
+            <h2 className="font-bold mb-4">Contact</h2>
             <ul className="space-y-2 text-[rgb(204,236,229)]">
               <li><a href="mailto:contact@airola.co.uk" className="hover:text-white transition-colors">contact@airola.co.uk</a></li>
               <li><a href="tel:+447925123219" className="hover:text-white transition-colors">+44 7925 123219</a></li>
@@ -47,7 +57,7 @@ const Footer: React.FC<{ onNavigate: (page: Page) => void }> = ({ onNavigate }) 
           </div>
 
           <div className="col-span-1">
-            <h4 className="font-bold mb-4">Legal</h4>
+            <h2 className="font-bold mb-4">Legal</h2>
             <ul className="space-y-2 text-[rgb(204,236,229)]">
               {link(Page.LEGAL, 'Privacy Policy')}
               {link(Page.LEGAL, 'Terms & Conditions')}

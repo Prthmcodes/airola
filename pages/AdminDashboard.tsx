@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Page, CleaningTask, TaskStatus, Cleaner, Property } from '../types';
+import { Page, CleaningTask, TaskStatus, Cleaner, Property, AdminTestimonial, TestimonialStatus } from '../types';
+import { StarDisplay } from '../components/StarRating';
 import { db } from '../db';
 import ActionQueue from '../components/ActionQueue';
 import {
@@ -33,7 +34,7 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ onNavigate }) => {
   const [staff, setStaff] = useState<Cleaner[]>([]);
   const [expandedTaskId, setExpandedTaskId] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
-  const [activeTab, setActiveTab] = useState<'tasks' | 'properties'>('tasks');
+  const [activeTab, setActiveTab] = useState<'tasks' | 'properties' | 'testimonials'>('tasks');
   const [search, setSearch] = useState('');
 
   const [vettingTarget, setVettingTarget] = useState<{ type: 'task' | 'property', id: string } | null>(null);
@@ -262,6 +263,13 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ onNavigate }) => {
               Property Registry
               {activeTab === 'properties' && <div className="absolute bottom-0 left-0 right-0 h-1 bg-[rgb(61,141,122)] rounded-full" />}
             </button>
+            <button
+              onClick={() => setActiveTab('testimonials')}
+              className={`pb-4 text-sm font-black uppercase tracking-widest transition-all relative ${activeTab === 'testimonials' ? 'text-[rgb(61,141,122)]' : 'text-slate-400 hover:text-slate-600'}`}
+            >
+              Testimonials
+              {activeTab === 'testimonials' && <div className="absolute bottom-0 left-0 right-0 h-1 bg-[rgb(61,141,122)] rounded-full" />}
+            </button>
           </div>
           <div className="relative w-full max-w-md mb-4 lg:mb-8">
             <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
@@ -276,7 +284,9 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ onNavigate }) => {
         </div>
 
         <div className="overflow-x-auto min-h-[400px]">
-          {activeTab === 'tasks' ? (
+          {activeTab === 'testimonials' ? (
+            <TestimonialModeration search={q} />
+          ) : activeTab === 'tasks' ? (
             <table className="w-full text-left">
               <thead>
                 <tr className="bg-slate-50/50 text-slate-400 text-[10px] font-black uppercase tracking-widest border-b border-slate-50">
@@ -495,6 +505,113 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ onNavigate }) => {
           </div>
         </div>
       )}
+    </div>
+  );
+};
+
+// ---------- Testimonial moderation ----------
+// Approve/Reject only change status. Reviews are never edited. Reject only for spam, abuse,
+// personal data or off-topic content, with the reason in the note. Never to hide a genuine negative review.
+
+const STATUS_ORDER: Record<TestimonialStatus, number> = { pending: 0, approved: 1, rejected: 2 };
+const STATUS_STYLE: Record<TestimonialStatus, string> = {
+  pending: 'bg-amber-50 text-amber-800 border-amber-200',
+  approved: 'bg-[rgb(235,247,244)] text-[#2D6E5F] border-[rgb(204,236,229)]',
+  rejected: 'bg-slate-100 text-slate-700 border-slate-200',
+};
+
+const TestimonialModeration: React.FC<{ search: string }> = ({ search }) => {
+  const [items, setItems] = useState<AdminTestimonial[]>([]);
+  const [notes, setNotes] = useState<Record<string, string>>({});
+  const [message, setMessage] = useState('');
+  const [busyId, setBusyId] = useState<string | null>(null);
+  const [loadError, setLoadError] = useState('');
+
+  const load = async () => {
+    try {
+      const rows = await db.getAllTestimonials();
+      setItems(rows);
+      setNotes(Object.fromEntries(rows.map(r => [r.id, r.adminNote || ''])));
+      setLoadError('');
+    } catch (e) {
+      console.error(e);
+      setLoadError('Could not load testimonials. Has the testimonials migration been applied?');
+    }
+  };
+
+  useEffect(() => { load(); }, []);
+
+  const act = async (t: AdminTestimonial, changes: { status?: TestimonialStatus; verified?: boolean }) => {
+    const note = notes[t.id] ?? '';
+    if (changes.status === 'rejected' && !note.trim()) {
+      setMessage('Add the reason for rejecting (spam, abuse, personal data or off-topic) in the note first.');
+      return;
+    }
+    setBusyId(t.id);
+    setMessage('');
+    try {
+      await db.moderateTestimonial(t.id, { ...changes, adminNote: note });
+      await load();
+    } catch (e) {
+      console.error(e);
+      setMessage('That change did not save. Please try again.');
+    } finally {
+      setBusyId(null);
+    }
+  };
+
+  const visible = items
+    .filter(t => !search || [t.displayName, t.area, t.body, t.email].some(v => v?.toLowerCase().includes(search)))
+    .sort((a, b) => STATUS_ORDER[a.status] - STATUS_ORDER[b.status] || b.createdAt.localeCompare(a.createdAt));
+
+  return (
+    <div className="p-8 space-y-6">
+      <p className="text-sm text-slate-600 max-w-3xl">
+        Approve genuine reviews, including negative ones. Reject only spam, abuse, personal data or off-topic content, and record the reason in the note. Review text can't be edited.
+      </p>
+      {loadError && <p role="alert" className="p-4 bg-red-50 border border-red-100 rounded-2xl text-red-700 text-sm font-bold">{loadError}</p>}
+      {message && <p role="alert" className="p-4 bg-amber-50 border border-amber-200 rounded-2xl text-amber-900 text-sm font-bold">{message}</p>}
+      {!loadError && visible.length === 0 && (
+        <p className="py-16 text-center text-slate-500 font-bold">{search ? 'No testimonials match your search.' : 'No testimonials yet.'}</p>
+      )}
+      {visible.map(t => (
+        <article key={t.id} className="border border-slate-100 rounded-[2rem] p-6 space-y-4">
+          <div className="flex flex-wrap items-center gap-3">
+            <span className={`px-2.5 py-1 rounded-full border text-xs font-black uppercase ${STATUS_STYLE[t.status]}`}>{t.status}</span>
+            <StarDisplay value={t.rating} />
+            <span className="font-bold text-slate-900">{t.displayName}</span>
+            {t.area && <span className="text-slate-600 text-sm">{t.area}</span>}
+            <a href={`mailto:${t.email}`} className="text-sm text-[#2D6E5F] underline">{t.email}</a>
+            <time dateTime={t.createdAt} className="text-sm text-slate-600">{new Date(t.createdAt).toLocaleString('en-GB')}</time>
+            {t.verified && <span className="px-2.5 py-1 rounded-full bg-[rgb(235,247,244)] text-[#2D6E5F] text-xs font-bold">Verified customer</span>}
+          </div>
+          <p className="text-slate-800 whitespace-pre-line break-words">{t.body}</p>
+          <div>
+            <label htmlFor={`note-${t.id}`} className="block text-xs font-bold text-slate-600 mb-1">Admin note (required to reject)</label>
+            <textarea
+              id={`note-${t.id}`}
+              value={notes[t.id] ?? ''}
+              onChange={e => setNotes(prev => ({ ...prev, [t.id]: e.target.value }))}
+              rows={2}
+              className="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl text-sm"
+            />
+          </div>
+          <div className="flex flex-wrap gap-3">
+            <button disabled={busyId === t.id || t.status === 'approved'} onClick={() => act(t, { status: 'approved' })} className="min-h-[44px] px-5 rounded-xl bg-[#2D6E5F] text-white font-bold hover:bg-[#245A4E] disabled:opacity-50">
+              Approve
+            </button>
+            <button disabled={busyId === t.id || t.status === 'rejected'} onClick={() => act(t, { status: 'rejected' })} className="min-h-[44px] px-5 rounded-xl bg-white border border-slate-300 text-slate-800 font-bold hover:border-red-600 hover:text-red-700 disabled:opacity-50">
+              Reject
+            </button>
+            <button disabled={busyId === t.id} onClick={() => act(t, { verified: !t.verified })} className="min-h-[44px] px-5 rounded-xl bg-white border border-slate-300 text-slate-800 font-bold hover:border-[#2D6E5F] disabled:opacity-50">
+              {t.verified ? 'Remove verified customer' : 'Mark as verified customer'}
+            </button>
+            <button disabled={busyId === t.id} onClick={() => act(t, {})} className="min-h-[44px] px-5 rounded-xl bg-white border border-slate-300 text-slate-800 font-bold hover:border-[#2D6E5F] disabled:opacity-50">
+              Save note
+            </button>
+          </div>
+        </article>
+      ))}
     </div>
   );
 };

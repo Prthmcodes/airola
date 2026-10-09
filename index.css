@@ -1,8 +1,21 @@
 @import "tailwindcss";
 
+@theme {
+  --font-sans: "Inter Variable", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-serif: "Fraunces Variable", Georgia, serif;
+  /* Two-font system: anything using font-mono (admin refs, the /offer code) also gets Inter */
+  --font-mono: var(--font-sans);
+}
+
 body {
-  font-family: Georgia, serif;
+  font-family: var(--font-sans);
   background-color: rgb(249, 239, 239);
+}
+
+/* Headings, the wordmark and prices: serif at 600. Unlayered, so it wins over font-black/extrabold utilities. */
+h1, h2, h3, .price {
+  font-family: var(--font-serif);
+  font-weight: 600;
 }
 
 @keyframes marquee {
@@ -51,4 +64,37 @@ body {
 
 html {
   scroll-behavior: smooth;
+}
+
+/* ---------- Accessibility ---------- */
+
+/* Visible keyboard focus on every interactive element (unlayered, so it wins over focus:outline-none utilities). */
+:where(a[href], button, input, select, textarea, summary, [tabindex]:not([tabindex="-1"])):focus-visible {
+  outline: 2px solid #2D6E5F;
+  outline-offset: 2px;
+}
+/* On dark or photo backgrounds the dark-green ring disappears, so use white there. */
+.on-dark :where(a[href], button, input, select, textarea, [tabindex]:not([tabindex="-1"])):focus-visible {
+  outline-color: #ffffff;
+}
+
+/* Respect reduced-motion: stop looping/entrance animations and hover lifts. */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  /* Only cancel hover utilities; translates used for positioning (e.g. -translate-x-1/2) are left alone. */
+  [class*="hover:scale"]:hover,
+  .group:hover [class*="group-hover:scale"] {
+    scale: none !important;
+  }
+  [class*="hover:-translate-y"]:hover:not([class*="translate-x-1/2"]):not([class*="translate-y-1/2"]),
+  [class*="hover:translate-y"]:hover:not([class*="translate-x-1/2"]):not([class*="translate-y-1/2"]),
+  .group:hover [class*="group-hover:translate-x"],
+  .group:hover [class*="group-hover:-translate-y"]:not([class*="translate-x-1/2"]):not([class*="translate-y-1/2"]) {
+    translate: none !important;
+  }
 }

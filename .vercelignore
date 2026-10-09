@@ -1,4 +1,6 @@
-scripts/
+# Keep the build-time prerender script; the rest of scripts/ stays out of deploys.
+scripts/*
+!scripts/prerender.mjs
 docs/
 node_modules/
 airola_outreach_targets.csv

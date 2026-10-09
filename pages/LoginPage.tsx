@@ -60,14 +60,14 @@ const LoginPage: React.FC<LoginPageProps> = ({ onLogin, onNavigate }) => {
           <div className="inline-flex items-center justify-center w-20 h-20 rounded-[1.5rem] mb-6 bg-[rgb(235,247,244)] text-[rgb(61,141,122)]">
             <MailCheck className="w-10 h-10" />
           </div>
-          <h2 className="text-3xl font-black text-slate-900 mb-3">Check Your Inbox</h2>
+          <h1 className="text-3xl font-black text-slate-900 mb-3">Check Your Inbox</h1>
           <p className="text-slate-500 font-medium mb-8">
             We've sent a confirmation link to <span className="font-bold text-slate-900">{email}</span>.
             Click it to activate your account, then log in here.
           </p>
           <button
             onClick={() => { setNeedsConfirmation(false); setIsSignUp(false); }}
-            className="w-full py-4 bg-[rgb(61,141,122)] text-white rounded-2xl font-bold hover:bg-[rgb(45,110,95)] transition-all"
+            className="w-full py-4 bg-[#2D6E5F] text-white rounded-2xl font-bold hover:bg-[#245A4E] transition-all"
           >
             Back to Log In
           </button>
@@ -84,16 +84,16 @@ const LoginPage: React.FC<LoginPageProps> = ({ onLogin, onNavigate }) => {
             <div className="inline-flex items-center justify-center w-20 h-20 rounded-[1.5rem] mb-6 bg-[rgb(235,247,244)] text-[rgb(61,141,122)]">
               <ShieldCheck className="w-10 h-10" />
             </div>
-            <h2 className="text-3xl font-black text-slate-900 mb-2">
+            <h1 className="text-3xl font-black text-slate-900 mb-2">
               {isSignUp ? 'Join Airola' : 'Welcome Back'}
-            </h2>
+            </h1>
             <p className="text-slate-500 font-medium">
               {isSignUp ? 'Start automating your turnover management' : 'Log in to manage your portfolio'}
             </p>
           </div>
 
           {error && (
-            <div className="mb-6 p-4 bg-red-50 border border-red-100 rounded-2xl text-red-600 text-sm font-bold">
+            <div role="alert" className="mb-6 p-4 bg-red-50 border border-red-100 rounded-2xl text-red-700 text-sm font-bold">
               {error}
             </div>
           )}
@@ -102,10 +102,11 @@ const LoginPage: React.FC<LoginPageProps> = ({ onLogin, onNavigate }) => {
             {isSignUp && (
               <>
                 <div className="space-y-2">
-                  <label className="text-xs font-black text-slate-400 uppercase tracking-widest ml-1">Full Name</label>
+                  <label htmlFor="login-name" className="text-xs font-black text-slate-500 uppercase tracking-[0.05em] ml-1">Full Name</label>
                   <div className="relative">
                     <UserIcon className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-300" />
                     <input
+                    id="login-name"
                       type="text"
                       value={name}
                       onChange={(e) => setName(e.target.value)}
@@ -117,10 +118,11 @@ const LoginPage: React.FC<LoginPageProps> = ({ onLogin, onNavigate }) => {
                 </div>
 
                 <div className="space-y-2">
-                  <label className="text-xs font-black text-slate-400 uppercase tracking-widest ml-1">Mobile Number</label>
+                  <label htmlFor="login-phone" className="text-xs font-black text-slate-500 uppercase tracking-[0.05em] ml-1">Mobile Number</label>
                   <div className="relative">
                     <Phone className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-300" />
                     <input
+                    id="login-phone"
                       type="tel"
                       value={phone}
                       onChange={(e) => setPhone(e.target.value)}
@@ -134,10 +136,11 @@ const LoginPage: React.FC<LoginPageProps> = ({ onLogin, onNavigate }) => {
             )}
 
             <div className="space-y-2">
-              <label className="text-xs font-black text-slate-400 uppercase tracking-widest ml-1">Email Address</label>
+              <label htmlFor="login-email" className="text-xs font-black text-slate-500 uppercase tracking-[0.05em] ml-1">Email Address</label>
               <div className="relative">
                 <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-300" />
                 <input
+                    id="login-email"
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
@@ -149,10 +152,11 @@ const LoginPage: React.FC<LoginPageProps> = ({ onLogin, onNavigate }) => {
             </div>
 
             <div className="space-y-2">
-              <label className="text-xs font-black text-slate-400 uppercase tracking-widest ml-1">Password</label>
+              <label htmlFor="login-password" className="text-xs font-black text-slate-500 uppercase tracking-[0.05em] ml-1">Password</label>
               <div className="relative">
                 <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-300" />
                 <input
+                    id="login-password"
                   type={showPassword ? 'text' : 'password'}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
@@ -164,7 +168,7 @@ const LoginPage: React.FC<LoginPageProps> = ({ onLogin, onNavigate }) => {
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-300 hover:text-[rgb(61,141,122)] transition-colors focus:outline-none p-1"
+                  className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-300 hover:text-[#2D6E5F] transition-colors focus:outline-none p-1"
                   aria-label={showPassword ? 'Hide password' : 'Show password'}
                 >
                   {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
@@ -175,7 +179,7 @@ const LoginPage: React.FC<LoginPageProps> = ({ onLogin, onNavigate }) => {
             <button
               type="submit"
               disabled={isSubmitting}
-              className={`w-full py-5 rounded-2xl font-black text-lg transition-all shadow-xl flex items-center justify-center bg-[rgb(61,141,122)] text-white hover:bg-[rgb(45,110,95)] ${isSubmitting ? 'opacity-70 cursor-not-allowed' : ''}`}
+              className={`w-full py-5 rounded-2xl font-black text-lg transition-all shadow-xl flex items-center justify-center bg-[#2D6E5F] text-white hover:bg-[#245A4E] ${isSubmitting ? 'opacity-70 cursor-not-allowed' : ''}`}
             >
               {isSubmitting ? 'Please wait…' : isSignUp ? 'Create Account' : 'Log In'}
               {!isSubmitting && <ArrowRight className="ml-3 w-5 h-5" />}
@@ -187,7 +191,7 @@ const LoginPage: React.FC<LoginPageProps> = ({ onLogin, onNavigate }) => {
               {isSignUp ? 'Already a Host?' : 'New to Airola?'}
               <button
                 onClick={() => { setIsSignUp(!isSignUp); setError(''); }}
-                className="ml-2 font-black text-[rgb(61,141,122)] hover:text-[rgb(45,110,95)] uppercase tracking-widest text-xs"
+                className="ml-2 font-black text-[#2D6E5F] hover:text-[rgb(45,110,95)] uppercase tracking-[0.05em] text-xs"
               >
                 {isSignUp ? 'Log In' : 'Sign Up'}
               </button>
@@ -195,7 +199,7 @@ const LoginPage: React.FC<LoginPageProps> = ({ onLogin, onNavigate }) => {
           </div>
         </div>
 
-        <div className="mt-8 text-center flex items-center justify-center space-x-2 text-slate-400 font-bold text-[10px] uppercase tracking-[0.2em]">
+        <div className="mt-8 text-center flex items-center justify-center space-x-2 text-slate-600 font-bold text-xs uppercase tracking-[0.05em]">
           <ShieldCheck className="w-4 h-4" />
           <span>Encrypted authentication &amp; UK-hosted data</span>
         </div>
