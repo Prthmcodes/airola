@@ -13,7 +13,8 @@ export enum Page {
   BONUS = 'bonus',
   ABOUT_US = 'about_us',
   CONTACT = 'contact',
-  LEGAL = 'legal'
+  LEGAL = 'legal',
+  OFFER = 'offer'
 }
 
 export type UserRole = 'owner' | 'admin';

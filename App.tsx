@@ -16,6 +16,7 @@ import { BonusPage } from './pages/BonusPage';
 import AboutUs from './pages/AboutUs';
 import ContactPage from './pages/ContactPage';
 import LegalPage from './pages/LegalPage';
+import OfferPage from './pages/OfferPage';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import WhatsAppFAB from './components/WhatsAppFAB';
@@ -25,7 +26,7 @@ import ChatBot from './components/ChatBot';
 const GUEST_USER: User = { name: '', email: '', isLoggedIn: false, role: 'owner' };
 
 // SEO: every page gets a real URL, title and description
-const PAGE_META: Record<Page, { path: string; title: string; description: string }> = {
+const PAGE_META: Record<Page, { path: string; title: string; description: string; noindex?: boolean }> = {
   [Page.LANDING]: { path: '/', title: 'Airola | Airbnb Turnover Cleaning in East London', description: 'Turnover cleaning for Airbnb and short-let hosts in East London. Guest-ready resets with photo proof after every clean.' },
   [Page.PRICING]: { path: '/pricing', title: 'Pricing & Packages | Airola Airbnb Cleaning East London', description: 'Simple pricing for Airbnb turnover cleaning. Standard Turnover from £45, Guest-Ready Plus from £79. £20 per extra bedroom. £10 off recurring cleans.' },
   [Page.QUOTE]: { path: '/quote', title: 'Get Your Price in 60 Seconds | Airola', description: 'Instant quote for your Airbnb turnover clean in East London. Live pricing by bedrooms, package and add-ons.' },
@@ -41,6 +42,7 @@ const PAGE_META: Record<Page, { path: string; title: string; description: string
   [Page.ADD_PROPERTY]: { path: '/add-property', title: 'Register a Property | Airola', description: 'Add a listing to your Airola portfolio.' },
   [Page.BONUS]: { path: '/giveaway/entered', title: "You're In | Airola Giveaway", description: 'Giveaway entry confirmed.' },
   [Page.THANKS]: { path: '/thanks', title: 'Thank You | Airola', description: 'Thanks from Airola.' },
+  [Page.OFFER]: { path: '/offer', title: '10% Off Your First Turnover Clean | Airola', description: 'Web offer: 10% off your first Airbnb turnover clean in East London with code WEB10. From £45, photo proof every clean.', noindex: true },
 };
 
 const pageFromPath = (pathname: string): Page => {
@@ -126,6 +128,17 @@ const App: React.FC = () => {
     if (desc) desc.setAttribute('content', meta.description);
     const canonical = document.querySelector('link[rel="canonical"]');
     if (canonical) canonical.setAttribute('href', `https://airola.co.uk${meta.path === '/' ? '' : meta.path}`);
+    let robots = document.querySelector('meta[name="robots"]');
+    if (meta.noindex) {
+      if (!robots) {
+        robots = document.createElement('meta');
+        robots.setAttribute('name', 'robots');
+        document.head.appendChild(robots);
+      }
+      robots.setAttribute('content', 'noindex, nofollow');
+    } else {
+      robots?.remove();
+    }
   }, [currentPage]);
 
   const navigate = (page: Page) => {
@@ -201,6 +214,7 @@ const App: React.FC = () => {
       case Page.ABOUT_US: return <AboutUs onNavigate={navigate} />;
       case Page.CONTACT: return <ContactPage />;
       case Page.LEGAL: return <LegalPage />;
+      case Page.OFFER: return <OfferPage />;
       default: return <LandingPage onNavigate={navigate} />;
     }
   };
