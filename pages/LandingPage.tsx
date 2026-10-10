@@ -10,6 +10,7 @@ import { SITE_IMAGES } from '../config/images';
 import SafeImage from '../components/SafeImage';
 import JsonLd from '../components/JsonLd';
 import TestimonialCard from '../components/TestimonialCard';
+import TestimonialPreview, { isSamplePreview } from '../components/TestimonialPreview';
 import { db } from '../db';
 import { Testimonial } from '../types';
 
@@ -521,7 +522,10 @@ const LandingPage: React.FC<LandingPageProps> = ({ onNavigate }) => {
             <h2 id="home-reviews-heading" className="text-3xl md:text-4xl font-black text-slate-900 mb-10 text-center">
               What hosts say
             </h2>
-            {reviews.length > 0 ? (
+            {/* Dev-only layout preview (?preview=1); stripped from production builds */}
+            {import.meta.env.DEV && isSamplePreview() ? (
+              <TestimonialPreview className="mb-8" />
+            ) : reviews.length > 0 ? (
               <>
                 <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
                   {reviews.map(r => (
