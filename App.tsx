@@ -24,6 +24,7 @@ import Footer from './components/Footer';
 import WhatsAppFAB from './components/WhatsAppFAB';
 import NotificationCenter from './components/NotificationCenter';
 import ChatBot from './components/ChatBot';
+import MobileActionBar, { MOBILE_BAR_SPACER } from './components/MobileActionBar';
 
 // Private and post-quote routes load on demand, keeping them out of the public pages' bundle.
 const OwnerDashboard = lazy(() => import('./pages/OwnerDashboard'));
@@ -272,6 +273,8 @@ const App: React.FC = () => {
         </ErrorBoundary>
       </main>
       <Footer onNavigate={navigate} />
+      {/* Room for the mobile action bar so it never covers the end of the footer */}
+      <div aria-hidden="true" className={MOBILE_BAR_SPACER} />
       <NotificationCenter
         isOpen={showNotifications}
         onClose={() => setShowNotifications(false)}
@@ -283,6 +286,7 @@ const App: React.FC = () => {
       />
       <aside aria-label="Contact shortcuts">
         <WhatsAppFAB />
+        <MobileActionBar currentPage={currentPage} onNavigate={navigate} />
         <ChatBot onNavigate={navigate} />
       </aside>
     </div>

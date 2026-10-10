@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { Page } from '../types';
 import { MessageSquare, X, Send, Sparkles } from 'lucide-react';
 import { useFocusTrap } from './useFocusTrap';
+import { OPEN_CHAT_EVENT } from './MobileActionBar';
 
 interface ChatBotProps {
   onNavigate: (page: Page) => void;
@@ -31,6 +32,13 @@ const ChatBot: React.FC<ChatBotProps> = ({ onNavigate }) => {
   const launcherRef = useRef<HTMLButtonElement>(null);
   const wasOpen = useRef(false);
   useFocusTrap(open, panelRef, () => setOpen(false));
+
+  // On phones the chat opens from the MobileActionBar instead of the floating launcher.
+  useEffect(() => {
+    const open = () => setOpen(true);
+    window.addEventListener(OPEN_CHAT_EVENT, open);
+    return () => window.removeEventListener(OPEN_CHAT_EVENT, open);
+  }, []);
 
   // The launcher unmounts while the panel is open, so hand focus back to it explicitly on close.
   useEffect(() => {
@@ -152,7 +160,7 @@ const ChatBot: React.FC<ChatBotProps> = ({ onNavigate }) => {
         <button
           ref={launcherRef}
           onClick={() => setOpen(true)}
-          className="fixed bottom-6 right-6 z-[100] w-16 h-16 rounded-full bg-slate-900 text-[rgb(106,176,160)] shadow-2xl flex items-center justify-center hover:scale-105 transition-transform"
+          className="fixed bottom-6 right-6 z-[100] w-16 h-16 rounded-full bg-slate-900 text-[rgb(106,176,160)] shadow-2xl hidden md:flex items-center justify-center hover:scale-105 transition-transform"
           aria-label="Chat with Airola assistant"
         >
           <MessageSquare className="w-7 h-7" aria-hidden="true" />
