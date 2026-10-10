@@ -81,7 +81,7 @@ const Navbar: React.FC<NavbarProps> = ({ currentPage, user, onNavigate, onLogout
           </div>
 
           {/* Desktop nav */}
-          <div className="hidden md:flex items-center space-x-8">
+          <div className="hidden lg:flex items-center space-x-8">
             {links.map(link => (
               <RouteLink
                 key={link.label}
@@ -146,7 +146,7 @@ const Navbar: React.FC<NavbarProps> = ({ currentPage, user, onNavigate, onLogout
           </div>
 
           {/* Mobile controls */}
-          <div className="md:hidden flex items-center gap-1">
+          <div className="lg:hidden flex items-center gap-1">
             {user.isLoggedIn && (
               <button className="relative text-slate-600 w-11 h-11 flex items-center justify-center rounded-full hover:bg-slate-100" onClick={onToggleNotifications} title="Notifications" aria-label={notificationsLabel}>
                 <Bell className="w-6 h-6" aria-hidden="true" />
@@ -166,7 +166,7 @@ const Navbar: React.FC<NavbarProps> = ({ currentPage, user, onNavigate, onLogout
 
       {/* Mobile menu */}
       {mobileOpen && (
-        <div id="mobile-menu" className="md:hidden bg-white border-b border-slate-200 shadow-xl">
+        <div id="mobile-menu" className="lg:hidden bg-white border-b border-slate-200 shadow-xl">
           <div className="px-6 py-4 space-y-1">
             {links.map(link => (
               <RouteLink
