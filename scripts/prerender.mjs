@@ -4,6 +4,9 @@
 // Runs after `vite build` (see "build" in package.json). Uses Puppeteer (devDependency), which
 // downloads its own Chromium on `npm install`.
 //
+// On Vercel, the build image (Amazon Linux 2023) lacks some libraries Chrome needs. If the first launch
+// fails there, the script installs them with dnf and retries once.
+//
 // Failsafe: any failure prints a warning and exits 0, so the plain SPA build in dist/ still deploys.
 // A route is only written if its snapshot rendered properly (H1 present, no error page, valid JSON-LD).
 
@@ -11,12 +14,44 @@ import { createServer } from 'node:http';
 import { readFile, writeFile, mkdir, stat } from 'node:fs/promises';
 import { join, extname, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { spawnSync } from 'node:child_process';
 
 // Public, indexable routes only. Never add /dashboard, /admin, /login, /add-property, /quote/review or /offer.
 const ROUTES = ['/', '/pricing', '/quote', '/about-us', '/contact', '/giveaway', '/legal', '/testimonials'];
 
 const DIST = join(dirname(fileURLToPath(import.meta.url)), '..', 'dist');
 const TIMEOUT_MS = 30000;
+
+// Shared libraries headless Chrome needs that Vercel's build image doesn't ship.
+const CHROME_DEPS = [
+  'nss', 'nspr', 'atk', 'at-spi2-atk', 'cups-libs', 'libdrm', 'libxkbcommon', 'libXcomposite',
+  'libXdamage', 'libXext', 'libXfixes', 'libXrandr', 'mesa-libgbm', 'pango', 'cairo', 'alsa-lib', 'libxshmfence',
+];
+const LAUNCH_OPTIONS = { headless: true, args: ['--no-sandbox', '--disable-setuid-sandbox'] };
+
+// Launches Chrome, fixing the two known build-environment problems on the way:
+// a missing browser download (cached installs skip Puppeteer's postinstall), and on Vercel, missing system libraries.
+const launchBrowser = async puppeteer => {
+  for (let attempt = 1; ; attempt++) {
+    try {
+      return await puppeteer.launch(LAUNCH_OPTIONS);
+    } catch (err) {
+      const msg = String(err?.message || err);
+      if (attempt >= 3) throw err;
+      if (msg.includes('Could not find Chrome')) {
+        console.log('[prerender] Chrome is not downloaded yet; installing it.');
+        const res = spawnSync('npx', ['puppeteer', 'browsers', 'install', 'chrome'], { stdio: 'inherit', shell: true, timeout: 180000 });
+        if (res.status !== 0) throw new Error(`Chrome download failed (exit ${res.status ?? res.error})`, { cause: err });
+      } else if (process.env.VERCEL && msg.includes('shared libraries')) {
+        console.log('[prerender] Chrome is missing system libraries on Vercel; installing them with dnf.');
+        const res = spawnSync('dnf', ['install', '-y', '--setopt=install_weak_deps=False', ...CHROME_DEPS], { stdio: 'inherit', timeout: 180000 });
+        if (res.status !== 0) throw new Error(`dnf install failed (exit ${res.status ?? res.error})`, { cause: err });
+      } else {
+        throw err;
+      }
+    }
+  }
+};
 
 const MIME = {
   '.html': 'text/html; charset=utf-8', '.js': 'text/javascript', '.css': 'text/css', '.json': 'application/json',
@@ -77,7 +112,7 @@ const main = async () => {
   const written = [];
 
   try {
-    browser = await puppeteer.launch({ headless: true, args: ['--no-sandbox', '--disable-setuid-sandbox'] });
+    browser = await launchBrowser(puppeteer);
     const snapshots = new Map();
 
     for (const route of ROUTES) {
