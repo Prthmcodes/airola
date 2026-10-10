@@ -1,5 +1,5 @@
 -- Testimonials: hosts submit a star rating and review; nothing is public until an admin approves it.
--- NOT APPLIED. Review, then apply (Supabase SQL editor or tooling) and run the security advisor.
+-- APPLIED to production on 2026-10-10 (Supabase SQL editor, in one transaction). Run the security advisor after any change.
 
 create table public.testimonials (
   id           uuid primary key default gen_random_uuid(),
