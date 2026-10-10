@@ -4,7 +4,7 @@ import { Page } from '../types';
 import RouteLink from '../components/RouteLink';
 import { Sparkles, Calendar, ShoppingBag, CheckCircle, Star, ArrowRight, Gift, Trophy, Armchair, Shield, MessageCircle, Plus, Minus, Clock, Camera, MapPin, Instagram } from 'lucide-react';
 import { TypeAnimation } from 'react-type-animation';
-import { GIVEAWAY_OPEN, INSTAGRAM_URL, INSTAGRAM_DM_URL } from '../config/promos';
+import { GIVEAWAY_ENDS_AT, isGiveawayOpen, formatUkDate, INSTAGRAM_URL, INSTAGRAM_DM_URL } from '../config/promos';
 import IllustrativeLabel from '../components/IllustrativeLabel';
 import { SITE_IMAGES } from '../config/images';
 import SafeImage from '../components/SafeImage';
@@ -66,7 +66,8 @@ const FAQS = [
 const LandingPage: React.FC<LandingPageProps> = ({ onNavigate }) => {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const reducedMotion = usePrefersReducedMotion();
-  // Latest approved reviews. The section only renders when there is at least one: no placeholders, no samples.
+  const giveawayOpen = isGiveawayOpen();
+  // Latest approved reviews. Until the first one is approved the section invites a review instead: no placeholders, no samples.
   const [reviews, setReviews] = useState<Testimonial[]>([]);
   useEffect(() => {
     let cancelled = false;
@@ -515,25 +516,35 @@ const LandingPage: React.FC<LandingPageProps> = ({ onNavigate }) => {
       </section>
 
       {/* What hosts say: real, approved reviews only */}
-      {reviews.length > 0 && (
-        <section aria-labelledby="home-reviews-heading" className="pt-16 pb-4 bg-[rgb(249,239,239)]">
+      <section aria-labelledby="home-reviews-heading" className="pt-16 pb-4 bg-[rgb(249,239,239)]">
           <div className="max-w-6xl mx-auto px-4">
             <h2 id="home-reviews-heading" className="text-3xl md:text-4xl font-black text-slate-900 mb-10 text-center">
               What hosts say
             </h2>
-            <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
-              {reviews.map(r => (
-                <li key={r.id}><TestimonialCard testimonial={r} /></li>
-              ))}
-            </ul>
-            <p className="text-center">
-              <RouteLink page={Page.TESTIMONIALS} onNavigate={onNavigate} className="inline-flex items-center min-h-[44px] font-bold text-[#2D6E5F] underline underline-offset-4 hover:text-[#245A4E]">
-                Read all reviews and leave yours
-              </RouteLink>
-            </p>
+            {reviews.length > 0 ? (
+              <>
+                <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+                  {reviews.map(r => (
+                    <li key={r.id}><TestimonialCard testimonial={r} /></li>
+                  ))}
+                </ul>
+                <p className="text-center">
+                  <RouteLink page={Page.TESTIMONIALS} onNavigate={onNavigate} className="inline-flex items-center min-h-[44px] font-bold text-[#2D6E5F] underline underline-offset-4 hover:text-[#245A4E]">
+                    Read all reviews and leave yours
+                  </RouteLink>
+                </p>
+              </>
+            ) : (
+              <div className="bg-white rounded-[2rem] border border-dashed border-[rgb(172,216,206)] p-8 sm:p-10 text-center max-w-2xl mx-auto">
+                <Star className="w-8 h-8 mx-auto mb-4 text-[rgb(61,141,122)]" aria-hidden="true" />
+                <p className="text-lg text-slate-700 mb-6">We're new, so there are no reviews here yet. If we've cleaned for you, we'd love an honest one.</p>
+                <RouteLink page={Page.TESTIMONIALS} onNavigate={onNavigate} className="inline-flex items-center justify-center min-h-[44px] px-6 py-3 bg-[#2D6E5F] text-white rounded-2xl font-bold hover:bg-[#245A4E] transition-colors">
+                  Leave a review
+                </RouteLink>
+              </div>
+            )}
           </div>
         </section>
-      )}
 
       {/* Giveaway Section */}
       <section className="pt-16 pb-4 bg-[rgb(249,239,239)]">
@@ -543,7 +554,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ onNavigate }) => {
               <Gift className="w-64 h-64 -mr-20 -mt-20" />
             </div>
 
-            {GIVEAWAY_OPEN ? (
+            {giveawayOpen ? (
             <div className="relative z-10 max-w-xl">
               <div className="inline-flex items-center px-4 py-2 rounded-full bg-[rgb(61,141,122)]/10 text-[rgb(45,110,95)] text-xs font-black uppercase tracking-[0.05em] mb-6">
                 <Trophy className="w-4 h-4 mr-2 text-[rgb(61,141,122)]" /> Launch Giveaway
@@ -552,8 +563,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ onNavigate }) => {
                 Win a <span className="text-[#2D6E5F]">£1 turnover clean</span>
               </h2>
               <p className="text-slate-600 text-lg mb-8 font-medium leading-relaxed">
-                To celebrate our launch, East London hosts can experience Airola for just £1.
-                Tell us about your worst cleaning experience to enter.
+                East London hosts can enter free to win a full Standard Turnover for £1. Closes {formatUkDate(GIVEAWAY_ENDS_AT)}.
               </p>
               <RouteLink page={Page.GIVEAWAY} onNavigate={onNavigate} className="flex items-center px-8 py-4 bg-[#2D6E5F] text-white rounded-2xl font-black text-lg hover:bg-[#245A4E] transition-all shadow-lg">
                 Enter the Giveaway <ArrowRight className="w-5 h-5 ml-2" />
@@ -582,7 +592,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ onNavigate }) => {
             </div>
             )}
 
-            {GIVEAWAY_OPEN && (
+            {giveawayOpen && (
             <div className="mt-12 md:mt-0 grid grid-cols-1 gap-4 relative z-10">
               <div className="bg-white/50 backdrop-blur-md p-4 rounded-2xl border border-[rgb(172,216,206)] shadow-md">
                 <p className="text-xs font-bold text-[#2D6E5F] uppercase tracking-wider mb-1">Grand Prize</p>

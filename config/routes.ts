@@ -22,7 +22,7 @@ export const PAGE_META: Record<Page, PageMeta> = {
   [Page.PRICING]: { path: '/pricing', title: 'Airbnb Cleaning Prices, From £45 | Airola', description: 'Turnover cleans from £45 (1-bed), +£20 per extra bedroom. Save £10 a clean when you book every turnover. No contract, photo proof every clean.' },
   [Page.QUOTE]: { path: '/quote', title: 'Get Your Turnover Clean Price in 60 Seconds | Airola', description: 'Instant price for your Airbnb turnover clean in East London. Choose bedrooms, package and add-ons. No payment now.' },
   [Page.REVIEW]: { path: '/quote/review', title: 'Review Your Quote | Airola', description: 'Confirm your Airbnb turnover cleaning quote.', noindex: true },
-  [Page.GIVEAWAY]: { path: '/giveaway', title: 'Win a £1 Turnover Clean | Airola Giveaway', description: 'East London Airbnb hosts: enter to win a full guest-ready turnover clean for £1.' },
+  [Page.GIVEAWAY]: { path: '/giveaway', title: 'Win a £1 Turnover Clean | Airola Giveaway', description: 'East London Airbnb hosts: enter free to win a full guest-ready turnover clean for £1. Closes Saturday 7 November 2026.' },
   [Page.ABOUT_US]: { path: '/about-us', title: 'About Airola | Airbnb Turnover Cleaners in East London', description: 'Airola is an East London team that does one thing: short-let turnovers, with photo proof to your WhatsApp after every clean.' },
   [Page.TESTIMONIALS]: { path: '/testimonials', title: 'Host Reviews | Airola Airbnb Cleaning East London', description: 'Read reviews from East London Airbnb hosts, and leave your own.' },
   [Page.CONTACT]: { path: '/contact', title: 'Contact Airola | Airbnb Cleaning East London', description: 'Get in touch: WhatsApp, phone or email. Serving Stratford, Royal Wharf, Canary Wharf and nearby.' },
