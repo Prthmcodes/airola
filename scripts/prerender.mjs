@@ -133,9 +133,18 @@ const main = async () => {
         if (route === '/') {
           await page.evaluate(() => {
             // Preload the hero image so it starts downloading before the JS bundle runs.
+            // If the hero sits in a <picture> with WebP sizes, preload those (what the browser will pick).
             const hero = document.querySelector('img[fetchpriority="high"]');
             if (hero) {
-              const link = Object.assign(document.createElement('link'), { rel: 'preload', as: 'image', href: hero.getAttribute('src') });
+              const link = Object.assign(document.createElement('link'), { rel: 'preload', as: 'image' });
+              const webp = hero.closest('picture')?.querySelector('source[type="image/webp"]');
+              if (webp) {
+                link.setAttribute('imagesrcset', webp.getAttribute('srcset'));
+                link.setAttribute('imagesizes', webp.getAttribute('sizes') || '100vw');
+                link.setAttribute('type', 'image/webp');
+              } else {
+                link.href = hero.getAttribute('src');
+              }
               link.setAttribute('fetchpriority', 'high');
               document.head.appendChild(link);
             }

@@ -10,6 +10,17 @@
 body {
   font-family: var(--font-sans);
   background-color: rgb(249, 239, 239);
+  /* Long words and URLs wrap instead of pushing the page sideways */
+  overflow-wrap: break-word;
+}
+
+/* Mobile-first body copy: Tailwind's text-sm is 16px below 1024px (14px from 1024px up, unchanged on desktop).
+   Labels and badges use text-xs and stay small by design. */
+@media (width < 64rem) {
+  :root {
+    --text-sm: 1rem;
+    --text-sm--line-height: 1.5;
+  }
 }
 
 /* Headings, the wordmark and prices: serif at 600. Unlayered, so it wins over font-black/extrabold utilities. */
@@ -34,11 +45,14 @@ h1, h2, h3, .price {
   0%, 100% { transform: translateX(0); }
   50% { transform: translateX(15px); }
 }
-.animate-pan-lr {
-  animation: pan-left-right 4s ease-in-out infinite;
-}
-.animate-pan-rl {
-  animation: pan-right-left 4s ease-in-out infinite;
+/* Sideways sway only where there's room for it; on phones it pushed cards into the screen edge */
+@media (width >= 48rem) {
+  .animate-pan-lr {
+    animation: pan-left-right 4s ease-in-out infinite;
+  }
+  .animate-pan-rl {
+    animation: pan-right-left 4s ease-in-out infinite;
+  }
 }
 
 /* Entrance animations */

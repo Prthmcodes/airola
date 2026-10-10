@@ -162,9 +162,9 @@ const QuotePage: React.FC<QuotePageProps> = ({ quote, setQuote, onNavigate, user
                 <div>
                   <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
                     <h2 className="text-2xl font-bold text-slate-900">Choose Your Clean</h2>
-                    <div className="flex items-center space-x-3">
-                      <span className={`text-sm font-medium ${quote.frequency === 'one-time' ? 'text-slate-900' : 'text-slate-500'}`}>One-off</span>
-                      <label htmlFor="pricing-toggle" className="relative inline-flex items-center cursor-pointer">
+                    <div className="grid grid-cols-[1fr_auto_1fr] items-center gap-3 sm:flex sm:gap-0 sm:space-x-3">
+                      <span className={`text-sm font-medium text-right sm:text-left ${quote.frequency === 'one-time' ? 'text-slate-900' : 'text-slate-500'}`}>One-off</span>
+                      <label htmlFor="pricing-toggle" className="relative inline-flex items-center cursor-pointer before:absolute before:-inset-1.5 before:content-['']">
                         <input type="checkbox" id="pricing-toggle" aria-label="Book every turnover (save £10 per clean)" className="sr-only peer" checked={quote.frequency === 'recurring'} onChange={(e) => setQuote({ ...quote, frequency: e.target.checked ? 'recurring' : 'one-time' })} />
                         <div className="w-14 h-8 bg-slate-200 rounded-full peer peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-[#2D6E5F] peer-focus-visible:outline-solid peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-1 after:left-[4px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all peer-checked:bg-[rgb(61,141,122)]"></div>
                       </label>
@@ -194,7 +194,7 @@ const QuotePage: React.FC<QuotePageProps> = ({ quote, setQuote, onNavigate, user
                         </div>
                         <h3 className="text-lg font-black text-slate-900 mb-1">{pkg.name}</h3>
                         <p className="price text-2xl text-[#2D6E5F] mb-2">{safePrice(tierPrice(pkg.id)) !== null ? `£${tierPrice(pkg.id)}` : <span className="text-base">{PRICE_FALLBACK_TEXT}</span>}</p>
-                        <p className="text-slate-600 text-xs font-medium leading-relaxed">{pkg.desc}</p>
+                        <p className="text-slate-600 text-sm lg:text-xs font-medium leading-relaxed">{pkg.desc}</p>
                         {quote.cleaningType === pkg.id && (
                           <div className="absolute top-5 right-5 bg-[#2D6E5F] text-white p-1 rounded-full">
                             <Check className="w-4 h-4" />
@@ -222,7 +222,7 @@ const QuotePage: React.FC<QuotePageProps> = ({ quote, setQuote, onNavigate, user
                           type="button"
                           aria-pressed={selected}
                           onClick={() => toggleAddon(addon.id)}
-                          className={`p-5 rounded-2xl border-2 text-left transition-all flex items-center gap-4 ${
+                          className={`p-4 sm:p-5 rounded-2xl border-2 text-left transition-all flex items-center gap-3 sm:gap-4 ${
                             selected ? 'bg-[rgb(235,247,244)] border-[rgb(61,141,122)] shadow-md' : 'bg-white border-slate-100 hover:border-slate-300'
                           }`}
                         >
@@ -231,12 +231,12 @@ const QuotePage: React.FC<QuotePageProps> = ({ quote, setQuote, onNavigate, user
                           }`}>
                             {addon.icon}
                           </div>
-                          <div className="flex-grow">
-                            <div className="flex items-center justify-between">
+                          <div className="flex-grow min-w-0">
+                            <div className="flex flex-wrap items-baseline justify-between gap-x-2">
                               <h3 className={`font-bold ${selected ? 'text-[rgb(45,110,95)]' : 'text-slate-900'}`}>{addon.name}</h3>
                               <span className="price text-xs text-[#2D6E5F]">{addon.priceText}</span>
                             </div>
-                            <p className="text-slate-600 text-xs font-medium mt-0.5">{addon.description}</p>
+                            <p className="text-slate-600 text-sm lg:text-xs font-medium mt-0.5">{addon.description}</p>
                           </div>
                           <div className={`shrink-0 w-6 h-6 rounded-full border-2 flex items-center justify-center transition-all ${
                             selected ? 'bg-[#2D6E5F] border-[rgb(61,141,122)] text-white' : 'border-slate-200 text-transparent'
@@ -260,28 +260,28 @@ const QuotePage: React.FC<QuotePageProps> = ({ quote, setQuote, onNavigate, user
                       <label htmlFor="quote-name" className="block text-xs font-black text-slate-500 mb-3 uppercase tracking-[0.05em]">Your Name</label>
                       <div className="relative">
                         <User className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
-                        <input id="quote-name" aria-invalid={showFieldErrors && !quote.ownerName} aria-describedby={showFieldErrors && !quote.ownerName ? 'quote-error' : undefined} type="text" value={quote.ownerName || ''} onChange={(e) => setQuote({ ...quote, ownerName: e.target.value })} placeholder="e.g. John Doe" className={inputClass} required />
+                        <input id="quote-name" autoComplete="name" aria-invalid={showFieldErrors && !quote.ownerName} aria-describedby={showFieldErrors && !quote.ownerName ? 'quote-error' : undefined} type="text" value={quote.ownerName || ''} onChange={(e) => setQuote({ ...quote, ownerName: e.target.value })} placeholder="e.g. John Doe" className={inputClass} required />
                       </div>
                     </div>
                     <div>
                       <label htmlFor="quote-email" className="block text-xs font-black text-slate-500 mb-3 uppercase tracking-[0.05em]">Email</label>
                       <div className="relative">
                         <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
-                        <input id="quote-email" aria-invalid={showFieldErrors && emailInvalid} aria-describedby={showFieldErrors && emailInvalid ? 'quote-error' : undefined} type="email" value={quote.ownerEmail || ''} onChange={(e) => setQuote({ ...quote, ownerEmail: e.target.value })} placeholder="e.g. john@example.com" className={inputClass} required />
+                        <input id="quote-email" autoComplete="email" aria-invalid={showFieldErrors && emailInvalid} aria-describedby={showFieldErrors && emailInvalid ? 'quote-error' : undefined} type="email" value={quote.ownerEmail || ''} onChange={(e) => setQuote({ ...quote, ownerEmail: e.target.value })} placeholder="e.g. john@example.com" className={inputClass} required />
                       </div>
                     </div>
                     <div>
                       <label htmlFor="quote-phone" className="block text-xs font-black text-slate-500 mb-3 uppercase tracking-[0.05em]">Mobile</label>
                       <div className="relative">
                         <Phone className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
-                        <input id="quote-phone" aria-invalid={showFieldErrors && !quote.ownerPhone} aria-describedby={showFieldErrors && !quote.ownerPhone ? 'quote-error' : undefined} type="tel" value={quote.ownerPhone || ''} onChange={(e) => setQuote({ ...quote, ownerPhone: e.target.value })} placeholder="+44 7700 900000" className={inputClass} required />
+                        <input id="quote-phone" autoComplete="tel" aria-invalid={showFieldErrors && !quote.ownerPhone} aria-describedby={showFieldErrors && !quote.ownerPhone ? 'quote-error' : undefined} type="tel" value={quote.ownerPhone || ''} onChange={(e) => setQuote({ ...quote, ownerPhone: e.target.value })} placeholder="+44 7700 900000" className={inputClass} required />
                       </div>
                     </div>
                     <div>
                       <label htmlFor="quote-address" className="block text-xs font-black text-slate-500 mb-3 uppercase tracking-[0.05em]">Property Address</label>
                       <div className="relative">
                         <MapPin className="absolute left-4 top-4 w-5 h-5 text-slate-400" />
-                        <textarea id="quote-address" aria-invalid={showFieldErrors && !quote.address} aria-describedby={showFieldErrors && !quote.address ? 'quote-error' : undefined} value={quote.address || ''} onChange={(e) => setQuote({ ...quote, address: e.target.value })} placeholder="Street address and postcode" className={`${inputClass} min-h-[90px]`} required />
+                        <textarea id="quote-address" autoComplete="street-address" aria-invalid={showFieldErrors && !quote.address} aria-describedby={showFieldErrors && !quote.address ? 'quote-error' : undefined} value={quote.address || ''} onChange={(e) => setQuote({ ...quote, address: e.target.value })} placeholder="Street address and postcode" className={`${inputClass} min-h-[90px]`} required />
                       </div>
                     </div>
                   </div>
@@ -317,7 +317,7 @@ const QuotePage: React.FC<QuotePageProps> = ({ quote, setQuote, onNavigate, user
                 <ChevronLeft className="w-5 h-5 mr-1" /> Back
               </button>
               <div className="flex flex-col sm:flex-row items-center gap-4">
-                <a href="https://wa.me/447925123219" target="_blank" rel="noopener noreferrer" className="text-sm font-bold text-slate-500 hover:text-[#2D6E5F] flex items-center transition-colors">
+                <a href="https://wa.me/447925123219" target="_blank" rel="noopener noreferrer" className="text-sm font-bold text-slate-500 hover:text-[#2D6E5F] flex items-center min-h-[44px] transition-colors">
                   <MessageCircle className="w-4 h-4 mr-1.5" /> Prefer WhatsApp? Message us
                 </a>
                 <button onClick={nextStep} className="px-10 py-5 bg-slate-900 text-white rounded-2xl font-black text-lg hover:bg-slate-800 transition-all shadow-xl flex items-center">
@@ -341,7 +341,7 @@ const QuotePage: React.FC<QuotePageProps> = ({ quote, setQuote, onNavigate, user
                 </div>
               )}
 
-              <div className="flex justify-between text-slate-400 font-medium text-sm">
+              <div className="flex justify-between gap-4 lg:gap-0 text-slate-400 font-medium text-sm">
                 <span>
                   {quote.cleaningType === 'premium' ? 'Guest-Ready Plus' : 'Standard Turnover'} ({quote.beds} bed{quote.beds > 1 ? 's' : ''}, {quote.baths} bath{quote.baths > 1 ? 's' : ''})
                 </span>
@@ -360,7 +360,7 @@ const QuotePage: React.FC<QuotePageProps> = ({ quote, setQuote, onNavigate, user
                 if (!addon) return null;
                 const actualPrice = addon.id === 'linen' ? addon.price * (quote.beds || 1) : addon.price;
                 return (
-                  <div key={addonId} className="flex justify-between text-slate-400 font-medium text-xs">
+                  <div key={addonId} className="flex justify-between gap-4 lg:gap-0 text-slate-400 font-medium text-xs">
                     <span>{addon.name} {addon.id === 'linen' && `(${quote.beds} bed${quote.beds > 1 ? 's' : ''})`}</span>
                     <span className="price text-white">£{actualPrice}</span>
                   </div>
@@ -381,7 +381,7 @@ const QuotePage: React.FC<QuotePageProps> = ({ quote, setQuote, onNavigate, user
               <div className="flex items-center space-x-3 text-sm font-bold text-[rgb(106,176,160)]">
                 <CheckCircle className="w-4 h-4" /> <span>Photo proof after every clean</span>
               </div>
-              <p className="text-xs text-slate-400 leading-relaxed">No payment now. We confirm your final price before any clean takes place.</p>
+              <p className="text-sm lg:text-xs text-slate-400 leading-relaxed">No payment now. We confirm your final price before any clean takes place.</p>
             </div>
           </div>
         </div>

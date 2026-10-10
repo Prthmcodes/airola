@@ -79,7 +79,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ onNavigate }) => {
   return (
     <div className="bg-[rgb(249,239,239)]">
       {/* Hero Section */}
-      <section className="on-dark relative min-h-[80vh] flex items-center pt-24 pb-32 overflow-hidden">
+      <section className="on-dark relative min-h-[80svh] flex items-center pt-10 pb-16 sm:pt-24 sm:pb-32 overflow-hidden">
         {/* Background Image with Overlay */}
         <div className="absolute inset-0 z-0 bg-gradient-to-br from-[#2D6E5F] to-[#3D8D7A]">
           <SafeImage 
@@ -97,16 +97,16 @@ const LandingPage: React.FC<LandingPageProps> = ({ onNavigate }) => {
         </div>
         
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-          <h1 className="text-5xl md:text-7xl font-extrabold text-white mb-6 tracking-tight leading-tight drop-shadow-lg animate-fade-up">
+          <h1 className="text-[clamp(2.125rem,7.5vw+0.5rem,3rem)] md:text-7xl font-extrabold text-white mb-4 sm:mb-6 tracking-tight leading-tight drop-shadow-lg animate-fade-up">
             Flawless Airbnb Turnovers <br className="hidden md:block" />
             {reducedMotion ? (
-              <span className="text-[rgb(172,216,206)]">Every Check-Out.</span>
+              <span className="text-[rgb(172,216,206)] whitespace-nowrap">Every Check-Out.</span>
             ) : (
               <>
                 {/* Screen readers get one stable phrase instead of the retyping animation */}
                 <span className="sr-only">Every Check-Out.</span>
                 {/* The invisible copy of the longest phrase reserves its size, so the typing never shifts the layout */}
-                <span aria-hidden="true" className="inline-grid">
+                <span aria-hidden="true" className="inline-grid whitespace-nowrap">
                   <span className="invisible col-start-1 row-start-1">Every Check-Out.|</span>
                   <span className="col-start-1 row-start-1">
                     <TypeAnimation
@@ -126,7 +126,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ onNavigate }) => {
               </>
             )}
           </h1>
-          <p className="text-xl text-slate-100 mb-10 max-w-2xl mx-auto leading-relaxed opacity-90 animate-fade-up fade-delay-1">
+          <p className="text-lg sm:text-xl text-slate-100 mb-8 sm:mb-10 max-w-2xl mx-auto leading-relaxed opacity-90 animate-fade-up fade-delay-1">
             Turnover cleaning for Airbnb hosts in East London. We clean, restock and send you photo proof after every job, so you never stress about check-in day again.
           </p>
           <div className="flex flex-col sm:flex-row justify-center items-center gap-4 animate-fade-up fade-delay-2">
@@ -219,7 +219,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ onNavigate }) => {
       {/* Values Section */}
       <section className="pt-4 pb-8 bg-[rgb(249,239,239)] relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-          <div className="bg-white rounded-[48px] p-8 md:p-16 relative overflow-hidden border border-[#f5f4f1] shadow-sm">
+          <div className="bg-white rounded-[48px] p-5 sm:p-8 md:p-16 relative overflow-hidden border border-[#f5f4f1] shadow-sm">
             
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10">
               {/* Left Content */}
@@ -240,7 +240,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ onNavigate }) => {
               <div className="lg:col-span-7 grid grid-cols-1 md:grid-cols-2 gap-6">
                 {/* Trust Card - Center Left */}
                 <div className="md:mt-12 animate-pan-lr">
-                  <div className="bg-white p-8 rounded-[32px] shadow-sm border border-[#f5f4f1] hover:border-[rgb(172,216,206)]/50 hover:shadow-2xl hover:scale-105 hover:-translate-y-2 transition-all duration-500 cursor-default group">
+                  <div className="bg-white p-6 sm:p-8 rounded-[32px] shadow-sm border border-[#f5f4f1] hover:border-[rgb(172,216,206)]/50 hover:shadow-2xl hover:scale-105 hover:-translate-y-2 transition-all duration-500 cursor-default group">
                     <div className="w-14 h-14 bg-gradient-to-br from-[rgb(235,247,244)] to-[rgb(204,236,229)] rounded-2xl flex items-center justify-center mb-6 group-hover:from-[rgb(61,141,122)] group-hover:to-[rgb(45,110,95)] transition-all duration-500 shadow-sm group-hover:shadow-[rgb(172,216,206)]/50 group-hover:scale-110">
                       <Shield className="w-7 h-7 text-[rgb(61,141,122)] group-hover:text-white transition-colors duration-500" />
                     </div>
@@ -254,7 +254,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ onNavigate }) => {
                 {/* Vertical Stack for Dedication and Vision */}
                 <div className="flex flex-col gap-6">
                   {/* Dedication Card */}
-                  <div className="bg-white p-8 rounded-[32px] shadow-sm border border-[#f5f4f1] hover:border-[rgb(172,216,206)]/50 hover:shadow-2xl hover:scale-105 hover:-translate-y-2 transition-all duration-500 cursor-default group animate-pan-rl">
+                  <div className="bg-white p-6 sm:p-8 rounded-[32px] shadow-sm border border-[#f5f4f1] hover:border-[rgb(172,216,206)]/50 hover:shadow-2xl hover:scale-105 hover:-translate-y-2 transition-all duration-500 cursor-default group animate-pan-rl">
                     <div className="w-14 h-14 bg-gradient-to-br from-[rgb(235,247,244)] to-[rgb(204,236,229)] rounded-2xl flex items-center justify-center mb-6 group-hover:from-[rgb(61,141,122)] group-hover:to-[rgb(45,110,95)] transition-all duration-500 shadow-sm group-hover:shadow-[rgb(172,216,206)]/50 group-hover:scale-110">
                       <Star className="w-7 h-7 text-[rgb(61,141,122)] group-hover:text-white transition-colors duration-500" />
                     </div>
@@ -265,7 +265,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ onNavigate }) => {
                   </div>
 
                   {/* Vision Card */}
-                  <div className="bg-white p-8 rounded-[32px] shadow-sm border border-[#f5f4f1] hover:border-[rgb(172,216,206)]/50 hover:shadow-2xl hover:scale-105 hover:-translate-y-2 transition-all duration-500 cursor-default group animate-pan-lr">
+                  <div className="bg-white p-6 sm:p-8 rounded-[32px] shadow-sm border border-[#f5f4f1] hover:border-[rgb(172,216,206)]/50 hover:shadow-2xl hover:scale-105 hover:-translate-y-2 transition-all duration-500 cursor-default group animate-pan-lr">
                     <div className="w-14 h-14 bg-gradient-to-br from-[rgb(235,247,244)] to-[rgb(204,236,229)] rounded-2xl flex items-center justify-center mb-6 group-hover:from-[rgb(61,141,122)] group-hover:to-[rgb(45,110,95)] transition-all duration-500 shadow-sm group-hover:shadow-[rgb(172,216,206)]/50 group-hover:scale-110">
                       <MessageCircle className="w-7 h-7 text-[rgb(61,141,122)] group-hover:text-white transition-colors duration-500" />
                     </div>
@@ -302,7 +302,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ onNavigate }) => {
               </p>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 text-center">
                 <div className="p-4 rounded-2xl border border-transparent transition-all duration-300 group hover:bg-white hover:shadow-xl hover:shadow-[rgb(172,216,206)]/20">
-                  <div className="shrink-0 w-14 h-14 bg-gradient-to-br from-[rgb(235,247,244)] to-[rgb(204,236,229)] rounded-2xl flex items-center justify-center mr-5 group-hover:from-[rgb(61,141,122)] group-hover:to-[rgb(45,110,95)] transition-all duration-500 shadow-sm group-hover:scale-110 mx-auto">
+                  <div className="shrink-0 w-14 h-14 bg-gradient-to-br from-[rgb(235,247,244)] to-[rgb(204,236,229)] rounded-2xl flex items-center justify-center group-hover:from-[rgb(61,141,122)] group-hover:to-[rgb(45,110,95)] transition-all duration-500 shadow-sm group-hover:scale-110 mx-auto">
                     <CheckCircle className="w-7 h-7 text-[rgb(61,141,122)] group-hover:text-white transition-colors duration-500" />
                   </div>
                   <div>
@@ -310,7 +310,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ onNavigate }) => {
                   </div>
                 </div>
                 <div className="p-4 rounded-2xl border border-transparent transition-all duration-300 group hover:bg-white hover:shadow-xl hover:shadow-[rgb(172,216,206)]/20">
-                  <div className="shrink-0 w-14 h-14 bg-gradient-to-br from-[rgb(235,247,244)] to-[rgb(204,236,229)] rounded-2xl flex items-center justify-center mr-5 group-hover:from-[rgb(61,141,122)] group-hover:to-[rgb(45,110,95)] transition-all duration-500 shadow-sm group-hover:scale-110 mx-auto">
+                  <div className="shrink-0 w-14 h-14 bg-gradient-to-br from-[rgb(235,247,244)] to-[rgb(204,236,229)] rounded-2xl flex items-center justify-center group-hover:from-[rgb(61,141,122)] group-hover:to-[rgb(45,110,95)] transition-all duration-500 shadow-sm group-hover:scale-110 mx-auto">
                     <CheckCircle className="w-7 h-7 text-[rgb(61,141,122)] group-hover:text-white transition-colors duration-500" />
                   </div>
                   <div>
@@ -318,7 +318,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ onNavigate }) => {
                   </div>
                 </div>
                 <div className="p-4 rounded-2xl border border-transparent transition-all duration-300 group hover:bg-white hover:shadow-xl hover:shadow-[rgb(172,216,206)]/20">
-                  <div className="shrink-0 w-14 h-14 bg-gradient-to-br from-[rgb(235,247,244)] to-[rgb(204,236,229)] rounded-2xl flex items-center justify-center mr-5 group-hover:from-[rgb(61,141,122)] group-hover:to-[rgb(45,110,95)] transition-all duration-500 shadow-sm group-hover:scale-110 mx-auto">
+                  <div className="shrink-0 w-14 h-14 bg-gradient-to-br from-[rgb(235,247,244)] to-[rgb(204,236,229)] rounded-2xl flex items-center justify-center group-hover:from-[rgb(61,141,122)] group-hover:to-[rgb(45,110,95)] transition-all duration-500 shadow-sm group-hover:scale-110 mx-auto">
                     <CheckCircle className="w-7 h-7 text-[rgb(61,141,122)] group-hover:text-white transition-colors duration-500" />
                   </div>
                   <div>
@@ -384,9 +384,9 @@ const LandingPage: React.FC<LandingPageProps> = ({ onNavigate }) => {
               ].map((step, i) => (
                 <div 
                   key={i} 
-                  className="bg-white p-6 rounded-2xl shadow-sm border border-[#f5f4f1] transition-all duration-300 group cursor-pointer flex items-center gap-6 hover:scale-105 hover:shadow-xl hover:-translate-y-1 hover:border-[rgb(172,216,206)]/50"
+                  className="bg-white p-4 sm:p-6 rounded-2xl shadow-sm border border-[#f5f4f1] transition-all duration-300 group cursor-pointer flex items-center gap-4 sm:gap-6 hover:scale-105 hover:shadow-xl hover:-translate-y-1 hover:border-[rgb(172,216,206)]/50"
                 >
-                  <div className="shrink-0 w-14 h-14 bg-gradient-to-br from-[rgb(235,247,244)] to-[rgb(204,236,229)] rounded-xl flex items-center justify-center group-hover:from-[rgb(61,141,122)] group-hover:to-[rgb(45,110,95)] transition-all duration-500 shadow-sm group-hover:shadow-[rgb(172,216,206)]/50 group-hover:scale-110">
+                  <div className="shrink-0 w-12 h-12 sm:w-14 sm:h-14 bg-gradient-to-br from-[rgb(235,247,244)] to-[rgb(204,236,229)] rounded-xl flex items-center justify-center group-hover:from-[rgb(61,141,122)] group-hover:to-[rgb(45,110,95)] transition-all duration-500 shadow-sm group-hover:shadow-[rgb(172,216,206)]/50 group-hover:scale-110">
                     <div className="text-[#2D6E5F] group-hover:text-white transition-colors duration-500">
                       {step.icon}
                     </div>
@@ -422,7 +422,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ onNavigate }) => {
       {/* Detailed How It Works Section */}
       <section className="pt-12 bg-[rgb(249,239,239)] overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="bg-white/80 backdrop-blur-sm rounded-[3rem] p-8 md:p-16 relative overflow-hidden border border-[#f5f4f1] shadow-sm hover:shadow-md transition-shadow">
+          <div className="bg-white/80 backdrop-blur-sm rounded-[3rem] p-5 sm:p-8 md:p-16 relative overflow-hidden border border-[#f5f4f1] shadow-sm hover:shadow-md transition-shadow">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center relative z-10">
               <div>
                 <span className="text-[#2D6E5F] font-bold tracking-[0.05em] uppercase text-sm mb-4 block">STRUCTURED TURNOVER PROCESS</span>
@@ -447,9 +447,9 @@ const LandingPage: React.FC<LandingPageProps> = ({ onNavigate }) => {
                   ].map((item, index) => (
                     <div 
                       key={index} 
-                      className="bg-white p-6 rounded-2xl shadow-sm border border-transparent transition-all duration-300 group cursor-pointer flex items-center gap-6 hover:scale-105 hover:shadow-xl hover:-translate-y-1 hover:border-[rgb(172,216,206)]/50"
+                      className="bg-white p-4 sm:p-6 rounded-2xl shadow-sm border border-transparent transition-all duration-300 group cursor-pointer flex items-center gap-4 sm:gap-6 hover:scale-105 hover:shadow-xl hover:-translate-y-1 hover:border-[rgb(172,216,206)]/50"
                     >
-                      <div className="shrink-0 w-16 h-16 bg-gradient-to-br from-[rgb(235,247,244)] to-[rgb(204,236,229)] rounded-2xl flex items-center justify-center group-hover:from-[rgb(61,141,122)] group-hover:to-[rgb(45,110,95)] transition-all duration-500 shadow-sm group-hover:shadow-[rgb(172,216,206)]/50 group-hover:scale-110">
+                      <div className="shrink-0 w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-br from-[rgb(235,247,244)] to-[rgb(204,236,229)] rounded-2xl flex items-center justify-center group-hover:from-[rgb(61,141,122)] group-hover:to-[rgb(45,110,95)] transition-all duration-500 shadow-sm group-hover:shadow-[rgb(172,216,206)]/50 group-hover:scale-110">
                         <div className="text-[#2D6E5F] group-hover:text-white transition-colors duration-500">
                           {item.icon}
                         </div>
@@ -646,7 +646,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ onNavigate }) => {
 
       {/* Still Have Questions Section */}
       <section className="pb-20 bg-[rgb(249,239,239)]">
-        <div className="max-w-3xl mx-auto text-center">
+        <div className="max-w-3xl mx-auto px-4 text-center">
           <h2 className="text-3xl font-bold text-slate-900 mb-4">Still have questions?</h2>
           <p className="text-slate-600 text-lg mb-8">Speak to our team today.</p>
           <RouteLink page={Page.CONTACT} onNavigate={onNavigate} className="px-8 py-4 bg-[#2D6E5F] text-white rounded-full font-bold text-lg hover:bg-[#245A4E] transition-all duration-300 shadow-lg hover:shadow-[0_0_20px_rgba(172,216,206,0.7)]">

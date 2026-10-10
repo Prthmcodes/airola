@@ -1,0 +1,2928 @@
+{
+  "/@360": {
+    "scrollWidth": 360,
+    "innerWidth": 360,
+    "overflow": [],
+    "smallBody": {
+      "count": 17,
+      "examples": [
+        "p.mt-5.text-sm.text-white/90 \"No payment now · No contract · First-cle\" 14px",
+        "p.mt-6.text-sm.text-white/90 \"Prefer a message? WhatsApp us (opens in \" 14px",
+        "p.text-slate-300.text-sm.leading-relaxed \"Full guest-ready reset between check-out\" 14px",
+        "p.text-slate-300.text-sm.leading-relaxed \"Every room, photographed and sent before\" 14px",
+        "p.text-slate-300.text-sm.leading-relaxed \"Reviews protected. Nothing left to chanc\" 14px",
+        "p.text-slate-500.text-sm.leading-relaxed \"We keep our promises, provide upfront ti\" 14px"
+      ]
+    },
+    "tinyText": [],
+    "smallTargets": {
+      "count": 14,
+      "examples": [
+        "a.inline-block.text-center.px-5 \"Close by? Ask us\" 159×42",
+        "a.inline-block.text-left.py-1 \"Home\" 45×32",
+        "a.inline-block.text-left.py-1 \"Packages\" 74×32",
+        "a.inline-block.text-left.py-1 \"Services\" 66×32",
+        "a.inline-block.text-left.py-1 \"Giveaway\" 74×32",
+        "a.inline-block.text-left.py-1 \"About\" 45×32",
+        "a.inline-block.text-left.py-1 \"Reviews\" 63×32",
+        "a.inline-block.text-left.py-1 \"Contact\" 59×32",
+        "a.hover:text-white.transition-colors \"contact@airola.co.uk\" 160×20",
+        "a.hover:text-white.transition-colors \"+44 7925 123219\" 131×20",
+        "a.hover:text-white.transition-colors \"WhatsApp us\" 101×20",
+        "a.inline-block.text-left.py-1 \"Privacy Policy\" 106×32"
+      ]
+    },
+    "edgeText": [
+      "h2.text-3xl.font-bold.text-slate-900 \"Still have questions?\"",
+      "p.text-slate-600.text-lg.mb-8 \"Speak to our team today.\""
+    ],
+    "fixed": [
+      "nav.fixed.top-0.left-0 \"HomePackagesServicesGiveawayReviewsAbout\" fixed 360×100 @(0,0)",
+      "a.fixed.bottom-28.right-6 \"Chat on WhatsApp\" fixed 56×56 @(280,632)",
+      "button.fixed.bottom-6.right-6 \"Chat with Airola assistant\" fixed 64×64 @(272,712)"
+    ],
+    "images": [
+      "/Final_logo-removebg-preview.png → no srcset, oversized 453px for 110px slot, not WebP/AVIF",
+      "/hero-bg.jpg → no srcset, oversized 1252px for 360px slot, not WebP/AVIF",
+      "/why-choose.jpg → no srcset, not WebP/AVIF",
+      "/how-works.jpg → no srcset, not WebP/AVIF"
+    ],
+    "fields": [],
+    "heroCta": {
+      "top": 713,
+      "bottom": 773,
+      "visible": true
+    },
+    "h1": {
+      "fontSize": "48px",
+      "height": 300
+    },
+    "mobileMenu": {
+      "open": true,
+      "height": 449,
+      "coversViewport": false,
+      "closesOnEscape": true
+    }
+  },
+  "/pricing@360": {
+    "scrollWidth": 360,
+    "innerWidth": 360,
+    "overflow": [],
+    "smallBody": {
+      "count": 16,
+      "examples": [
+        "p.text-slate-600.text-sm.mt-2 \"£35 per turnover when you book every tur\" 14px",
+        "p.text-slate-500.text-sm.mt-2 \"The full guest-ready reset, with proof.\" 14px",
+        "span.text-slate-600.text-sm.leading-snug \"Full property turnover: kitchen, bathroo\" 14px",
+        "span.text-slate-600.text-sm.leading-snug \"Photo confirmation after every clean\" 14px",
+        "span.text-slate-600.text-sm.leading-snug \"Priority booking & faster response\" 14px",
+        "span.text-slate-600.text-sm.leading-snug \"No contract, no emergency fees\" 14px"
+      ]
+    },
+    "tinyText": [],
+    "smallTargets": {
+      "count": 13,
+      "examples": [
+        "a.inline-block.text-left.py-1 \"Home\" 45×32",
+        "a.inline-block.text-left.py-1 \"Packages\" 74×32",
+        "a.inline-block.text-left.py-1 \"Services\" 66×32",
+        "a.inline-block.text-left.py-1 \"Giveaway\" 74×32",
+        "a.inline-block.text-left.py-1 \"About\" 45×32",
+        "a.inline-block.text-left.py-1 \"Reviews\" 63×32",
+        "a.inline-block.text-left.py-1 \"Contact\" 59×32",
+        "a.hover:text-white.transition-colors \"contact@airola.co.uk\" 160×20",
+        "a.hover:text-white.transition-colors \"+44 7925 123219\" 131×20",
+        "a.hover:text-white.transition-colors \"WhatsApp us\" 101×20",
+        "a.inline-block.text-left.py-1 \"Privacy Policy\" 106×32",
+        "a.inline-block.text-left.py-1 \"Terms & Conditions\" 147×32"
+      ]
+    },
+    "edgeText": [],
+    "fixed": [
+      "nav.fixed.top-0.left-0 \"HomePackagesServicesGiveawayReviewsAbout\" fixed 360×100 @(0,0)",
+      "a.fixed.bottom-28.right-6 \"Chat on WhatsApp\" fixed 56×56 @(280,632)",
+      "button.fixed.bottom-6.right-6 \"Chat with Airola assistant\" fixed 64×64 @(272,712)"
+    ],
+    "images": [
+      "/Final_logo-removebg-preview.png → no srcset, oversized 453px for 110px slot, not WebP/AVIF"
+    ],
+    "fields": [],
+    "heroCta": {
+      "top": 4223,
+      "bottom": 4291,
+      "visible": false
+    },
+    "h1": {
+      "fontSize": "36px",
+      "height": 80
+    }
+  },
+  "/quote@360": {
+    "scrollWidth": 360,
+    "innerWidth": 360,
+    "overflow": [],
+    "smallBody": {
+      "count": 3,
+      "examples": [
+        "span. \"Standard Turnover (1 bed, 1 bath)\" 14px",
+        "span. \"Photo proof after every clean\" 14px",
+        "p.text-xs.text-slate-400.leading-relaxed \"No payment now. We confirm your final pr\" 12px"
+      ]
+    },
+    "tinyText": [],
+    "smallTargets": {
+      "count": 14,
+      "examples": [
+        "a.text-sm.font-bold.text-slate-500 \"Prefer WhatsApp? Message us\" 233×20",
+        "a.inline-block.text-left.py-1 \"Home\" 45×32",
+        "a.inline-block.text-left.py-1 \"Packages\" 74×32",
+        "a.inline-block.text-left.py-1 \"Services\" 66×32",
+        "a.inline-block.text-left.py-1 \"Giveaway\" 74×32",
+        "a.inline-block.text-left.py-1 \"About\" 45×32",
+        "a.inline-block.text-left.py-1 \"Reviews\" 63×32",
+        "a.inline-block.text-left.py-1 \"Contact\" 59×32",
+        "a.hover:text-white.transition-colors \"contact@airola.co.uk\" 160×20",
+        "a.hover:text-white.transition-colors \"+44 7925 123219\" 131×20",
+        "a.hover:text-white.transition-colors \"WhatsApp us\" 101×20",
+        "a.inline-block.text-left.py-1 \"Privacy Policy\" 106×32"
+      ]
+    },
+    "edgeText": [],
+    "fixed": [
+      "nav.fixed.top-0.left-0 \"HomePackagesServicesGiveawayReviewsAbout\" fixed 360×100 @(0,0)",
+      "div.bg-slate-900.rounded-[3rem].p-10 \"Your PriceStandard Turnover (1 bed, 1 ba\" sticky 328×495 @(16,2338)",
+      "a.fixed.bottom-28.right-6 \"Chat on WhatsApp\" fixed 56×56 @(280,632)",
+      "button.fixed.bottom-6.right-6 \"Chat with Airola assistant\" fixed 64×64 @(272,712)"
+    ],
+    "images": [
+      "/Final_logo-removebg-preview.png → no srcset, oversized 453px for 110px slot, not WebP/AVIF"
+    ],
+    "fields": [],
+    "heroCta": null,
+    "h1": {
+      "fontSize": "36px",
+      "height": 40
+    }
+  },
+  "/about-us@360": {
+    "scrollWidth": 360,
+    "innerWidth": 360,
+    "overflow": [],
+    "smallBody": {
+      "count": 6,
+      "examples": [
+        "p.text-slate-500.text-sm.leading-relaxed \"Full guest-ready reset between every che\" 14px",
+        "p.text-slate-500.text-sm.leading-relaxed \"Photos to your WhatsApp before your gues\" 14px",
+        "p.text-slate-500.text-sm.leading-relaxed \"Fresh linen and hotel-style beds.\" 14px",
+        "p.text-slate-500.text-sm.leading-relaxed \"Every dish, surface and appliance guest-\" 14px",
+        "p.text-slate-500.text-sm.leading-relaxed \"Toilet paper, soap and basics topped up \" 14px",
+        "p.text-slate-500.text-sm.leading-relaxed \"Same-day rescue for our recurring client\" 14px"
+      ]
+    },
+    "tinyText": [],
+    "smallTargets": {
+      "count": 13,
+      "examples": [
+        "a.inline-block.text-left.py-1 \"Home\" 45×32",
+        "a.inline-block.text-left.py-1 \"Packages\" 74×32",
+        "a.inline-block.text-left.py-1 \"Services\" 66×32",
+        "a.inline-block.text-left.py-1 \"Giveaway\" 74×32",
+        "a.inline-block.text-left.py-1 \"About\" 45×32",
+        "a.inline-block.text-left.py-1 \"Reviews\" 63×32",
+        "a.inline-block.text-left.py-1 \"Contact\" 59×32",
+        "a.hover:text-white.transition-colors \"contact@airola.co.uk\" 160×20",
+        "a.hover:text-white.transition-colors \"+44 7925 123219\" 131×20",
+        "a.hover:text-white.transition-colors \"WhatsApp us\" 101×20",
+        "a.inline-block.text-left.py-1 \"Privacy Policy\" 106×32",
+        "a.inline-block.text-left.py-1 \"Terms & Conditions\" 147×32"
+      ]
+    },
+    "edgeText": [],
+    "fixed": [
+      "nav.fixed.top-0.left-0 \"HomePackagesServicesGiveawayReviewsAbout\" fixed 360×100 @(0,0)",
+      "a.fixed.bottom-28.right-6 \"Chat on WhatsApp\" fixed 56×56 @(280,632)",
+      "button.fixed.bottom-6.right-6 \"Chat with Airola assistant\" fixed 64×64 @(272,712)"
+    ],
+    "images": [
+      "/Final_logo-removebg-preview.png → no srcset, oversized 453px for 110px slot, not WebP/AVIF",
+      "/why-choose.jpg → no srcset, oversized 1600px for 328px slot, not WebP/AVIF"
+    ],
+    "fields": [],
+    "heroCta": null,
+    "h1": {
+      "fontSize": "36px",
+      "height": 135
+    }
+  },
+  "/contact@360": {
+    "scrollWidth": 360,
+    "innerWidth": 360,
+    "overflow": [],
+    "smallBody": {
+      "count": 0,
+      "examples": []
+    },
+    "tinyText": [],
+    "smallTargets": {
+      "count": 13,
+      "examples": [
+        "a.inline-block.text-left.py-1 \"Home\" 45×32",
+        "a.inline-block.text-left.py-1 \"Packages\" 74×32",
+        "a.inline-block.text-left.py-1 \"Services\" 66×32",
+        "a.inline-block.text-left.py-1 \"Giveaway\" 74×32",
+        "a.inline-block.text-left.py-1 \"About\" 45×32",
+        "a.inline-block.text-left.py-1 \"Reviews\" 63×32",
+        "a.inline-block.text-left.py-1 \"Contact\" 59×32",
+        "a.hover:text-white.transition-colors \"contact@airola.co.uk\" 160×20",
+        "a.hover:text-white.transition-colors \"+44 7925 123219\" 131×20",
+        "a.hover:text-white.transition-colors \"WhatsApp us\" 101×20",
+        "a.inline-block.text-left.py-1 \"Privacy Policy\" 106×32",
+        "a.inline-block.text-left.py-1 \"Terms & Conditions\" 147×32"
+      ]
+    },
+    "edgeText": [],
+    "fixed": [
+      "nav.fixed.top-0.left-0 \"HomePackagesServicesGiveawayReviewsAbout\" fixed 360×100 @(0,0)",
+      "a.fixed.bottom-28.right-6 \"Chat on WhatsApp\" fixed 56×56 @(280,632)",
+      "button.fixed.bottom-6.right-6 \"Chat with Airola assistant\" fixed 64×64 @(272,712)"
+    ],
+    "images": [
+      "/Final_logo-removebg-preview.png → no srcset, oversized 453px for 110px slot, not WebP/AVIF"
+    ],
+    "fields": [],
+    "heroCta": null,
+    "h1": {
+      "fontSize": "36px",
+      "height": 40
+    }
+  },
+  "/giveaway@360": {
+    "scrollWidth": 360,
+    "innerWidth": 360,
+    "overflow": [],
+    "smallBody": {
+      "count": 1,
+      "examples": [
+        "p.text-sm.text-slate-600.text-center \"One entry per host. Limited to propertie\" 14px"
+      ]
+    },
+    "tinyText": [],
+    "smallTargets": {
+      "count": 13,
+      "examples": [
+        "a.inline-block.text-left.py-1 \"Home\" 45×32",
+        "a.inline-block.text-left.py-1 \"Packages\" 74×32",
+        "a.inline-block.text-left.py-1 \"Services\" 66×32",
+        "a.inline-block.text-left.py-1 \"Giveaway\" 74×32",
+        "a.inline-block.text-left.py-1 \"About\" 45×32",
+        "a.inline-block.text-left.py-1 \"Reviews\" 63×32",
+        "a.inline-block.text-left.py-1 \"Contact\" 59×32",
+        "a.hover:text-white.transition-colors \"contact@airola.co.uk\" 160×20",
+        "a.hover:text-white.transition-colors \"+44 7925 123219\" 131×20",
+        "a.hover:text-white.transition-colors \"WhatsApp us\" 101×20",
+        "a.inline-block.text-left.py-1 \"Privacy Policy\" 106×32",
+        "a.inline-block.text-left.py-1 \"Terms & Conditions\" 147×32"
+      ]
+    },
+    "edgeText": [],
+    "fixed": [
+      "nav.fixed.top-0.left-0 \"HomePackagesServicesGiveawayReviewsAbout\" fixed 360×100 @(0,0)",
+      "a.fixed.bottom-28.right-6 \"Chat on WhatsApp\" fixed 56×56 @(280,632)",
+      "button.fixed.bottom-6.right-6 \"Chat with Airola assistant\" fixed 64×64 @(272,712)"
+    ],
+    "images": [
+      "/Final_logo-removebg-preview.png → no srcset, oversized 453px for 110px slot, not WebP/AVIF"
+    ],
+    "fields": [
+      "input#name.w-full.p-4.bg-slate-50 \"\" → no autocomplete",
+      "input#phone.w-full.p-4.bg-slate-50 \"\" → no autocomplete",
+      "input#email.w-full.p-4.bg-slate-50 \"\" → no autocomplete"
+    ],
+    "heroCta": null,
+    "h1": {
+      "fontSize": "36px",
+      "height": 80
+    }
+  },
+  "/legal@360": {
+    "scrollWidth": 360,
+    "innerWidth": 360,
+    "overflow": [],
+    "smallBody": {
+      "count": 0,
+      "examples": []
+    },
+    "tinyText": [],
+    "smallTargets": {
+      "count": 13,
+      "examples": [
+        "a.inline-block.text-left.py-1 \"Home\" 45×32",
+        "a.inline-block.text-left.py-1 \"Packages\" 74×32",
+        "a.inline-block.text-left.py-1 \"Services\" 66×32",
+        "a.inline-block.text-left.py-1 \"Giveaway\" 74×32",
+        "a.inline-block.text-left.py-1 \"About\" 45×32",
+        "a.inline-block.text-left.py-1 \"Reviews\" 63×32",
+        "a.inline-block.text-left.py-1 \"Contact\" 59×32",
+        "a.hover:text-white.transition-colors \"contact@airola.co.uk\" 160×20",
+        "a.hover:text-white.transition-colors \"+44 7925 123219\" 131×20",
+        "a.hover:text-white.transition-colors \"WhatsApp us\" 101×20",
+        "a.inline-block.text-left.py-1 \"Privacy Policy\" 106×32",
+        "a.inline-block.text-left.py-1 \"Terms & Conditions\" 147×32"
+      ]
+    },
+    "edgeText": [],
+    "fixed": [
+      "nav.fixed.top-0.left-0 \"HomePackagesServicesGiveawayReviewsAbout\" fixed 360×100 @(0,0)",
+      "a.fixed.bottom-28.right-6 \"Chat on WhatsApp\" fixed 56×56 @(280,632)",
+      "button.fixed.bottom-6.right-6 \"Chat with Airola assistant\" fixed 64×64 @(272,712)"
+    ],
+    "images": [
+      "/Final_logo-removebg-preview.png → no srcset, oversized 453px for 110px slot, not WebP/AVIF"
+    ],
+    "fields": [],
+    "heroCta": null,
+    "h1": {
+      "fontSize": "36px",
+      "height": 80
+    }
+  },
+  "/testimonials@360": {
+    "scrollWidth": 360,
+    "innerWidth": 360,
+    "overflow": [],
+    "smallBody": {
+      "count": 3,
+      "examples": [
+        "p#review-displayName-hint.text-sm.text-slate-600.mb-2 \"First name and initial is fine, e.g. Sam\" 14px",
+        "p#review-body-count.mt-2.text-sm.text-slate-600 \"0 / 600 characters (at least 20)\" 14px",
+        "p#review-email-hint.text-sm.text-slate-600.mb-2 \"Never shown publicly. Used only to verif\" 14px"
+      ]
+    },
+    "tinyText": [],
+    "smallTargets": {
+      "count": 13,
+      "examples": [
+        "a.inline-block.text-left.py-1 \"Home\" 45×32",
+        "a.inline-block.text-left.py-1 \"Packages\" 74×32",
+        "a.inline-block.text-left.py-1 \"Services\" 66×32",
+        "a.inline-block.text-left.py-1 \"Giveaway\" 74×32",
+        "a.inline-block.text-left.py-1 \"About\" 45×32",
+        "a.inline-block.text-left.py-1 \"Reviews\" 63×32",
+        "a.inline-block.text-left.py-1 \"Contact\" 59×32",
+        "a.hover:text-white.transition-colors \"contact@airola.co.uk\" 160×20",
+        "a.hover:text-white.transition-colors \"+44 7925 123219\" 131×20",
+        "a.hover:text-white.transition-colors \"WhatsApp us\" 101×20",
+        "a.inline-block.text-left.py-1 \"Privacy Policy\" 106×32",
+        "a.inline-block.text-left.py-1 \"Terms & Conditions\" 147×32"
+      ]
+    },
+    "edgeText": [],
+    "fixed": [
+      "nav.fixed.top-0.left-0 \"HomePackagesServicesGiveawayReviewsAbout\" fixed 360×100 @(0,0)",
+      "a.fixed.bottom-28.right-6 \"Chat on WhatsApp\" fixed 56×56 @(280,632)",
+      "button.fixed.bottom-6.right-6 \"Chat with Airola assistant\" fixed 64×64 @(272,712)"
+    ],
+    "images": [
+      "/Final_logo-removebg-preview.png → no srcset, oversized 453px for 110px slot, not WebP/AVIF"
+    ],
+    "fields": [],
+    "heroCta": null,
+    "h1": {
+      "fontSize": "36px",
+      "height": 80
+    }
+  },
+  "/offer@360": {
+    "scrollWidth": 360,
+    "innerWidth": 360,
+    "overflow": [],
+    "smallBody": {
+      "count": 3,
+      "examples": [
+        "li. \"Cannot be combined with other offers.\" 14px",
+        "li. \"Booking confirmed when the 50% deposit i\" 14px",
+        "li. \"Airola reserves the right to withdraw th\" 14px"
+      ]
+    },
+    "tinyText": [],
+    "smallTargets": {
+      "count": 13,
+      "examples": [
+        "a.inline-block.text-left.py-1 \"Home\" 45×32",
+        "a.inline-block.text-left.py-1 \"Packages\" 74×32",
+        "a.inline-block.text-left.py-1 \"Services\" 66×32",
+        "a.inline-block.text-left.py-1 \"Giveaway\" 74×32",
+        "a.inline-block.text-left.py-1 \"About\" 45×32",
+        "a.inline-block.text-left.py-1 \"Reviews\" 63×32",
+        "a.inline-block.text-left.py-1 \"Contact\" 59×32",
+        "a.hover:text-white.transition-colors \"contact@airola.co.uk\" 160×20",
+        "a.hover:text-white.transition-colors \"+44 7925 123219\" 131×20",
+        "a.hover:text-white.transition-colors \"WhatsApp us\" 101×20",
+        "a.inline-block.text-left.py-1 \"Privacy Policy\" 106×32",
+        "a.inline-block.text-left.py-1 \"Terms & Conditions\" 147×32"
+      ]
+    },
+    "edgeText": [],
+    "fixed": [
+      "nav.fixed.top-0.left-0 \"HomePackagesServicesGiveawayReviewsAbout\" fixed 360×100 @(0,0)",
+      "a.fixed.bottom-28.right-6 \"Chat on WhatsApp\" fixed 56×56 @(280,632)",
+      "button.fixed.bottom-6.right-6 \"Chat with Airola assistant\" fixed 64×64 @(272,712)"
+    ],
+    "images": [
+      "/Final_logo-removebg-preview.png → no srcset, oversized 453px for 110px slot, not WebP/AVIF"
+    ],
+    "fields": [],
+    "heroCta": null,
+    "h1": {
+      "fontSize": "36px",
+      "height": 120
+    }
+  },
+  "/login@360": {
+    "scrollWidth": 360,
+    "innerWidth": 360,
+    "overflow": [],
+    "smallBody": {
+      "count": 1,
+      "examples": [
+        "span. \"Encrypted authentication & UK-hosted dat\" 12px"
+      ]
+    },
+    "tinyText": [],
+    "smallTargets": {
+      "count": 14,
+      "examples": [
+        "button.absolute.right-4.top-1/2 \"Show password\" 28×28",
+        "a.inline-block.text-left.py-1 \"Home\" 45×32",
+        "a.inline-block.text-left.py-1 \"Packages\" 74×32",
+        "a.inline-block.text-left.py-1 \"Services\" 66×32",
+        "a.inline-block.text-left.py-1 \"Giveaway\" 74×32",
+        "a.inline-block.text-left.py-1 \"About\" 45×32",
+        "a.inline-block.text-left.py-1 \"Reviews\" 63×32",
+        "a.inline-block.text-left.py-1 \"Contact\" 59×32",
+        "a.hover:text-white.transition-colors \"contact@airola.co.uk\" 160×20",
+        "a.hover:text-white.transition-colors \"+44 7925 123219\" 131×20",
+        "a.hover:text-white.transition-colors \"WhatsApp us\" 101×20",
+        "a.inline-block.text-left.py-1 \"Privacy Policy\" 106×32"
+      ]
+    },
+    "edgeText": [],
+    "fixed": [
+      "nav.fixed.top-0.left-0 \"HomePackagesServicesGiveawayReviewsAbout\" fixed 360×100 @(0,0)",
+      "a.fixed.bottom-28.right-6 \"Chat on WhatsApp\" fixed 56×56 @(280,632)",
+      "button.fixed.bottom-6.right-6 \"Chat with Airola assistant\" fixed 64×64 @(272,712)"
+    ],
+    "images": [
+      "/Final_logo-removebg-preview.png → no srcset, oversized 453px for 110px slot, not WebP/AVIF"
+    ],
+    "fields": [
+      "input#login-email.w-full.pl-12.pr-4 \"\" → no autocomplete"
+    ],
+    "heroCta": null,
+    "h1": {
+      "fontSize": "30px",
+      "height": 36
+    }
+  },
+  "/areas/stratford@360": {
+    "scrollWidth": 360,
+    "innerWidth": 360,
+    "overflow": [],
+    "smallBody": {
+      "count": 2,
+      "examples": [
+        "p.text-slate-700.text-sm.leading-relaxed \"Full guest-ready reset: kitchen, bathroo\" 14px",
+        "p.text-slate-700.text-sm.leading-relaxed \"Everything in Standard plus linen change\" 14px"
+      ]
+    },
+    "tinyText": [],
+    "smallTargets": {
+      "count": 13,
+      "examples": [
+        "a.inline-block.text-left.py-1 \"Home\" 45×32",
+        "a.inline-block.text-left.py-1 \"Packages\" 74×32",
+        "a.inline-block.text-left.py-1 \"Services\" 66×32",
+        "a.inline-block.text-left.py-1 \"Giveaway\" 74×32",
+        "a.inline-block.text-left.py-1 \"About\" 45×32",
+        "a.inline-block.text-left.py-1 \"Reviews\" 63×32",
+        "a.inline-block.text-left.py-1 \"Contact\" 59×32",
+        "a.hover:text-white.transition-colors \"contact@airola.co.uk\" 160×20",
+        "a.hover:text-white.transition-colors \"+44 7925 123219\" 131×20",
+        "a.hover:text-white.transition-colors \"WhatsApp us\" 101×20",
+        "a.inline-block.text-left.py-1 \"Privacy Policy\" 106×32",
+        "a.inline-block.text-left.py-1 \"Terms & Conditions\" 147×32"
+      ]
+    },
+    "edgeText": [],
+    "fixed": [
+      "nav.fixed.top-0.left-0 \"HomePackagesServicesGiveawayReviewsAbout\" fixed 360×100 @(0,0)",
+      "a.fixed.bottom-28.right-6 \"Chat on WhatsApp\" fixed 56×56 @(280,632)",
+      "button.fixed.bottom-6.right-6 \"Chat with Airola assistant\" fixed 64×64 @(272,712)"
+    ],
+    "images": [
+      "/Final_logo-removebg-preview.png → no srcset, oversized 453px for 110px slot, not WebP/AVIF"
+    ],
+    "fields": [],
+    "heroCta": {
+      "top": 1598,
+      "bottom": 1658,
+      "visible": false
+    },
+    "h1": {
+      "fontSize": "36px",
+      "height": 120
+    }
+  },
+  "/page-that-does-not-exist@360": {
+    "scrollWidth": 360,
+    "innerWidth": 360,
+    "overflow": [],
+    "smallBody": {
+      "count": 0,
+      "examples": []
+    },
+    "tinyText": [],
+    "smallTargets": {
+      "count": 13,
+      "examples": [
+        "a.inline-block.text-left.py-1 \"Home\" 45×32",
+        "a.inline-block.text-left.py-1 \"Packages\" 74×32",
+        "a.inline-block.text-left.py-1 \"Services\" 66×32",
+        "a.inline-block.text-left.py-1 \"Giveaway\" 74×32",
+        "a.inline-block.text-left.py-1 \"About\" 45×32",
+        "a.inline-block.text-left.py-1 \"Reviews\" 63×32",
+        "a.inline-block.text-left.py-1 \"Contact\" 59×32",
+        "a.hover:text-white.transition-colors \"contact@airola.co.uk\" 160×20",
+        "a.hover:text-white.transition-colors \"+44 7925 123219\" 131×20",
+        "a.hover:text-white.transition-colors \"WhatsApp us\" 101×20",
+        "a.inline-block.text-left.py-1 \"Privacy Policy\" 106×32",
+        "a.inline-block.text-left.py-1 \"Terms & Conditions\" 147×32"
+      ]
+    },
+    "edgeText": [],
+    "fixed": [
+      "nav.fixed.top-0.left-0 \"HomePackagesServicesGiveawayReviewsAbout\" fixed 360×100 @(0,0)",
+      "a.fixed.bottom-28.right-6 \"Chat on WhatsApp\" fixed 56×56 @(280,632)",
+      "button.fixed.bottom-6.right-6 \"Chat with Airola assistant\" fixed 64×64 @(272,712)"
+    ],
+    "images": [
+      "/Final_logo-removebg-preview.png → no srcset, oversized 453px for 110px slot, not WebP/AVIF"
+    ],
+    "fields": [],
+    "heroCta": null,
+    "h1": {
+      "fontSize": "30px",
+      "height": 72
+    }
+  },
+  "/@390": {
+    "scrollWidth": 390,
+    "innerWidth": 390,
+    "overflow": [],
+    "smallBody": {
+      "count": 17,
+      "examples": [
+        "p.mt-5.text-sm.text-white/90 \"No payment now · No contract · First-cle\" 14px",
+        "p.mt-6.text-sm.text-white/90 \"Prefer a message? WhatsApp us (opens in \" 14px",
+        "p.text-slate-300.text-sm.leading-relaxed \"Full guest-ready reset between check-out\" 14px",
+        "p.text-slate-300.text-sm.leading-relaxed \"Every room, photographed and sent before\" 14px",
+        "p.text-slate-300.text-sm.leading-relaxed \"Reviews protected. Nothing left to chanc\" 14px",
+        "p.text-slate-500.text-sm.leading-relaxed \"We keep our promises, provide upfront ti\" 14px"
+      ]
+    },
+    "tinyText": [],
+    "smallTargets": {
+      "count": 14,
+      "examples": [
+        "a.inline-block.text-center.px-5 \"Close by? Ask us\" 159×42",
+        "a.inline-block.text-left.py-1 \"Home\" 45×32",
+        "a.inline-block.text-left.py-1 \"Packages\" 74×32",
+        "a.inline-block.text-left.py-1 \"Services\" 66×32",
+        "a.inline-block.text-left.py-1 \"Giveaway\" 74×32",
+        "a.inline-block.text-left.py-1 \"About\" 45×32",
+        "a.inline-block.text-left.py-1 \"Reviews\" 63×32",
+        "a.inline-block.text-left.py-1 \"Contact\" 59×32",
+        "a.hover:text-white.transition-colors \"contact@airola.co.uk\" 160×20",
+        "a.hover:text-white.transition-colors \"+44 7925 123219\" 131×20",
+        "a.hover:text-white.transition-colors \"WhatsApp us\" 101×20",
+        "a.inline-block.text-left.py-1 \"Privacy Policy\" 106×32"
+      ]
+    },
+    "edgeText": [
+      "h2.text-3xl.font-bold.text-slate-900 \"Still have questions?\"",
+      "p.text-slate-600.text-lg.mb-8 \"Speak to our team today.\""
+    ],
+    "fixed": [
+      "nav.fixed.top-0.left-0 \"HomePackagesServicesGiveawayReviewsAbout\" fixed 390×100 @(0,0)",
+      "a.fixed.bottom-28.right-6 \"Chat on WhatsApp\" fixed 56×56 @(310,676)",
+      "button.fixed.bottom-6.right-6 \"Chat with Airola assistant\" fixed 64×64 @(302,756)"
+    ],
+    "images": [
+      "/Final_logo-removebg-preview.png → no srcset, oversized 453px for 110px slot, not WebP/AVIF",
+      "/hero-bg.jpg → no srcset, oversized 1252px for 390px slot, not WebP/AVIF",
+      "/why-choose.jpg → no srcset, not WebP/AVIF",
+      "/how-works.jpg → no srcset, not WebP/AVIF"
+    ],
+    "fields": [],
+    "heroCta": {
+      "top": 653,
+      "bottom": 713,
+      "visible": true
+    },
+    "h1": {
+      "fontSize": "48px",
+      "height": 240
+    },
+    "mobileMenu": {
+      "open": true,
+      "height": 449,
+      "coversViewport": false,
+      "closesOnEscape": true
+    }
+  },
+  "/pricing@390": {
+    "scrollWidth": 390,
+    "innerWidth": 390,
+    "overflow": [],
+    "smallBody": {
+      "count": 16,
+      "examples": [
+        "p.text-slate-600.text-sm.mt-2 \"£35 per turnover when you book every tur\" 14px",
+        "p.text-slate-500.text-sm.mt-2 \"The full guest-ready reset, with proof.\" 14px",
+        "span.text-slate-600.text-sm.leading-snug \"Full property turnover: kitchen, bathroo\" 14px",
+        "span.text-slate-600.text-sm.leading-snug \"Photo confirmation after every clean\" 14px",
+        "span.text-slate-600.text-sm.leading-snug \"Priority booking & faster response\" 14px",
+        "span.text-slate-600.text-sm.leading-snug \"No contract, no emergency fees\" 14px"
+      ]
+    },
+    "tinyText": [],
+    "smallTargets": {
+      "count": 13,
+      "examples": [
+        "a.inline-block.text-left.py-1 \"Home\" 45×32",
+        "a.inline-block.text-left.py-1 \"Packages\" 74×32",
+        "a.inline-block.text-left.py-1 \"Services\" 66×32",
+        "a.inline-block.text-left.py-1 \"Giveaway\" 74×32",
+        "a.inline-block.text-left.py-1 \"About\" 45×32",
+        "a.inline-block.text-left.py-1 \"Reviews\" 63×32",
+        "a.inline-block.text-left.py-1 \"Contact\" 59×32",
+        "a.hover:text-white.transition-colors \"contact@airola.co.uk\" 160×20",
+        "a.hover:text-white.transition-colors \"+44 7925 123219\" 131×20",
+        "a.hover:text-white.transition-colors \"WhatsApp us\" 101×20",
+        "a.inline-block.text-left.py-1 \"Privacy Policy\" 106×32",
+        "a.inline-block.text-left.py-1 \"Terms & Conditions\" 147×32"
+      ]
+    },
+    "edgeText": [],
+    "fixed": [
+      "nav.fixed.top-0.left-0 \"HomePackagesServicesGiveawayReviewsAbout\" fixed 390×100 @(0,0)",
+      "a.fixed.bottom-28.right-6 \"Chat on WhatsApp\" fixed 56×56 @(310,676)",
+      "button.fixed.bottom-6.right-6 \"Chat with Airola assistant\" fixed 64×64 @(302,756)"
+    ],
+    "images": [
+      "/Final_logo-removebg-preview.png → no srcset, oversized 453px for 110px slot, not WebP/AVIF"
+    ],
+    "fields": [],
+    "heroCta": {
+      "top": 4043,
+      "bottom": 4111,
+      "visible": false
+    },
+    "h1": {
+      "fontSize": "36px",
+      "height": 80
+    }
+  },
+  "/quote@390": {
+    "scrollWidth": 390,
+    "innerWidth": 390,
+    "overflow": [],
+    "smallBody": {
+      "count": 3,
+      "examples": [
+        "span. \"Standard Turnover (1 bed, 1 bath)\" 14px",
+        "span. \"Photo proof after every clean\" 14px",
+        "p.text-xs.text-slate-400.leading-relaxed \"No payment now. We confirm your final pr\" 12px"
+      ]
+    },
+    "tinyText": [],
+    "smallTargets": {
+      "count": 14,
+      "examples": [
+        "a.text-sm.font-bold.text-slate-500 \"Prefer WhatsApp? Message us\" 233×20",
+        "a.inline-block.text-left.py-1 \"Home\" 45×32",
+        "a.inline-block.text-left.py-1 \"Packages\" 74×32",
+        "a.inline-block.text-left.py-1 \"Services\" 66×32",
+        "a.inline-block.text-left.py-1 \"Giveaway\" 74×32",
+        "a.inline-block.text-left.py-1 \"About\" 45×32",
+        "a.inline-block.text-left.py-1 \"Reviews\" 63×32",
+        "a.inline-block.text-left.py-1 \"Contact\" 59×32",
+        "a.hover:text-white.transition-colors \"contact@airola.co.uk\" 160×20",
+        "a.hover:text-white.transition-colors \"+44 7925 123219\" 131×20",
+        "a.hover:text-white.transition-colors \"WhatsApp us\" 101×20",
+        "a.inline-block.text-left.py-1 \"Privacy Policy\" 106×32"
+      ]
+    },
+    "edgeText": [],
+    "fixed": [
+      "nav.fixed.top-0.left-0 \"HomePackagesServicesGiveawayReviewsAbout\" fixed 390×100 @(0,0)",
+      "div.bg-slate-900.rounded-[3rem].p-10 \"Your PriceStandard Turnover (1 bed, 1 ba\" sticky 358×455 @(16,2302)",
+      "a.fixed.bottom-28.right-6 \"Chat on WhatsApp\" fixed 56×56 @(310,676)",
+      "button.fixed.bottom-6.right-6 \"Chat with Airola assistant\" fixed 64×64 @(302,756)"
+    ],
+    "images": [
+      "/Final_logo-removebg-preview.png → no srcset, oversized 453px for 110px slot, not WebP/AVIF"
+    ],
+    "fields": [],
+    "heroCta": null,
+    "h1": {
+      "fontSize": "36px",
+      "height": 40
+    }
+  },
+  "/about-us@390": {
+    "scrollWidth": 390,
+    "innerWidth": 390,
+    "overflow": [],
+    "smallBody": {
+      "count": 6,
+      "examples": [
+        "p.text-slate-500.text-sm.leading-relaxed \"Full guest-ready reset between every che\" 14px",
+        "p.text-slate-500.text-sm.leading-relaxed \"Photos to your WhatsApp before your gues\" 14px",
+        "p.text-slate-500.text-sm.leading-relaxed \"Fresh linen and hotel-style beds.\" 14px",
+        "p.text-slate-500.text-sm.leading-relaxed \"Every dish, surface and appliance guest-\" 14px",
+        "p.text-slate-500.text-sm.leading-relaxed \"Toilet paper, soap and basics topped up \" 14px",
+        "p.text-slate-500.text-sm.leading-relaxed \"Same-day rescue for our recurring client\" 14px"
+      ]
+    },
+    "tinyText": [],
+    "smallTargets": {
+      "count": 13,
+      "examples": [
+        "a.inline-block.text-left.py-1 \"Home\" 45×32",
+        "a.inline-block.text-left.py-1 \"Packages\" 74×32",
+        "a.inline-block.text-left.py-1 \"Services\" 66×32",
+        "a.inline-block.text-left.py-1 \"Giveaway\" 74×32",
+        "a.inline-block.text-left.py-1 \"About\" 45×32",
+        "a.inline-block.text-left.py-1 \"Reviews\" 63×32",
+        "a.inline-block.text-left.py-1 \"Contact\" 59×32",
+        "a.hover:text-white.transition-colors \"contact@airola.co.uk\" 160×20",
+        "a.hover:text-white.transition-colors \"+44 7925 123219\" 131×20",
+        "a.hover:text-white.transition-colors \"WhatsApp us\" 101×20",
+        "a.inline-block.text-left.py-1 \"Privacy Policy\" 106×32",
+        "a.inline-block.text-left.py-1 \"Terms & Conditions\" 147×32"
+      ]
+    },
+    "edgeText": [],
+    "fixed": [
+      "nav.fixed.top-0.left-0 \"HomePackagesServicesGiveawayReviewsAbout\" fixed 390×100 @(0,0)",
+      "a.fixed.bottom-28.right-6 \"Chat on WhatsApp\" fixed 56×56 @(310,676)",
+      "button.fixed.bottom-6.right-6 \"Chat with Airola assistant\" fixed 64×64 @(302,756)"
+    ],
+    "images": [
+      "/Final_logo-removebg-preview.png → no srcset, oversized 453px for 110px slot, not WebP/AVIF",
+      "/why-choose.jpg → no srcset, oversized 1600px for 358px slot, not WebP/AVIF"
+    ],
+    "fields": [],
+    "heroCta": null,
+    "h1": {
+      "fontSize": "36px",
+      "height": 90
+    }
+  },
+  "/contact@390": {
+    "scrollWidth": 390,
+    "innerWidth": 390,
+    "overflow": [],
+    "smallBody": {
+      "count": 0,
+      "examples": []
+    },
+    "tinyText": [],
+    "smallTargets": {
+      "count": 13,
+      "examples": [
+        "a.inline-block.text-left.py-1 \"Home\" 45×32",
+        "a.inline-block.text-left.py-1 \"Packages\" 74×32",
+        "a.inline-block.text-left.py-1 \"Services\" 66×32",
+        "a.inline-block.text-left.py-1 \"Giveaway\" 74×32",
+        "a.inline-block.text-left.py-1 \"About\" 45×32",
+        "a.inline-block.text-left.py-1 \"Reviews\" 63×32",
+        "a.inline-block.text-left.py-1 \"Contact\" 59×32",
+        "a.hover:text-white.transition-colors \"contact@airola.co.uk\" 160×20",
+        "a.hover:text-white.transition-colors \"+44 7925 123219\" 131×20",
+        "a.hover:text-white.transition-colors \"WhatsApp us\" 101×20",
+        "a.inline-block.text-left.py-1 \"Privacy Policy\" 106×32",
+        "a.inline-block.text-left.py-1 \"Terms & Conditions\" 147×32"
+      ]
+    },
+    "edgeText": [],
+    "fixed": [
+      "nav.fixed.top-0.left-0 \"HomePackagesServicesGiveawayReviewsAbout\" fixed 390×100 @(0,0)",
+      "a.fixed.bottom-28.right-6 \"Chat on WhatsApp\" fixed 56×56 @(310,676)",
+      "button.fixed.bottom-6.right-6 \"Chat with Airola assistant\" fixed 64×64 @(302,756)"
+    ],
+    "images": [
+      "/Final_logo-removebg-preview.png → no srcset, oversized 453px for 110px slot, not WebP/AVIF"
+    ],
+    "fields": [],
+    "heroCta": null,
+    "h1": {
+      "fontSize": "36px",
+      "height": 40
+    }
+  },
+  "/giveaway@390": {
+    "scrollWidth": 390,
+    "innerWidth": 390,
+    "overflow": [],
+    "smallBody": {
+      "count": 1,
+      "examples": [
+        "p.text-sm.text-slate-600.text-center \"One entry per host. Limited to propertie\" 14px"
+      ]
+    },
+    "tinyText": [],
+    "smallTargets": {
+      "count": 13,
+      "examples": [
+        "a.inline-block.text-left.py-1 \"Home\" 45×32",
+        "a.inline-block.text-left.py-1 \"Packages\" 74×32",
+        "a.inline-block.text-left.py-1 \"Services\" 66×32",
+        "a.inline-block.text-left.py-1 \"Giveaway\" 74×32",
+        "a.inline-block.text-left.py-1 \"About\" 45×32",
+        "a.inline-block.text-left.py-1 \"Reviews\" 63×32",
+        "a.inline-block.text-left.py-1 \"Contact\" 59×32",
+        "a.hover:text-white.transition-colors \"contact@airola.co.uk\" 160×20",
+        "a.hover:text-white.transition-colors \"+44 7925 123219\" 131×20",
+        "a.hover:text-white.transition-colors \"WhatsApp us\" 101×20",
+        "a.inline-block.text-left.py-1 \"Privacy Policy\" 106×32",
+        "a.inline-block.text-left.py-1 \"Terms & Conditions\" 147×32"
+      ]
+    },
+    "edgeText": [],
+    "fixed": [
+      "nav.fixed.top-0.left-0 \"HomePackagesServicesGiveawayReviewsAbout\" fixed 390×100 @(0,0)",
+      "a.fixed.bottom-28.right-6 \"Chat on WhatsApp\" fixed 56×56 @(310,676)",
+      "button.fixed.bottom-6.right-6 \"Chat with Airola assistant\" fixed 64×64 @(302,756)"
+    ],
+    "images": [
+      "/Final_logo-removebg-preview.png → no srcset, oversized 453px for 110px slot, not WebP/AVIF"
+    ],
+    "fields": [
+      "input#name.w-full.p-4.bg-slate-50 \"\" → no autocomplete",
+      "input#phone.w-full.p-4.bg-slate-50 \"\" → no autocomplete",
+      "input#email.w-full.p-4.bg-slate-50 \"\" → no autocomplete"
+    ],
+    "heroCta": null,
+    "h1": {
+      "fontSize": "36px",
+      "height": 80
+    }
+  },
+  "/legal@390": {
+    "scrollWidth": 390,
+    "innerWidth": 390,
+    "overflow": [],
+    "smallBody": {
+      "count": 0,
+      "examples": []
+    },
+    "tinyText": [],
+    "smallTargets": {
+      "count": 13,
+      "examples": [
+        "a.inline-block.text-left.py-1 \"Home\" 45×32",
+        "a.inline-block.text-left.py-1 \"Packages\" 74×32",
+        "a.inline-block.text-left.py-1 \"Services\" 66×32",
+        "a.inline-block.text-left.py-1 \"Giveaway\" 74×32",
+        "a.inline-block.text-left.py-1 \"About\" 45×32",
+        "a.inline-block.text-left.py-1 \"Reviews\" 63×32",
+        "a.inline-block.text-left.py-1 \"Contact\" 59×32",
+        "a.hover:text-white.transition-colors \"contact@airola.co.uk\" 160×20",
+        "a.hover:text-white.transition-colors \"+44 7925 123219\" 131×20",
+        "a.hover:text-white.transition-colors \"WhatsApp us\" 101×20",
+        "a.inline-block.text-left.py-1 \"Privacy Policy\" 106×32",
+        "a.inline-block.text-left.py-1 \"Terms & Conditions\" 147×32"
+      ]
+    },
+    "edgeText": [],
+    "fixed": [
+      "nav.fixed.top-0.left-0 \"HomePackagesServicesGiveawayReviewsAbout\" fixed 390×100 @(0,0)",
+      "a.fixed.bottom-28.right-6 \"Chat on WhatsApp\" fixed 56×56 @(310,676)",
+      "button.fixed.bottom-6.right-6 \"Chat with Airola assistant\" fixed 64×64 @(302,756)"
+    ],
+    "images": [
+      "/Final_logo-removebg-preview.png → no srcset, oversized 453px for 110px slot, not WebP/AVIF"
+    ],
+    "fields": [],
+    "heroCta": null,
+    "h1": {
+      "fontSize": "36px",
+      "height": 80
+    }
+  },
+  "/testimonials@390": {
+    "scrollWidth": 390,
+    "innerWidth": 390,
+    "overflow": [],
+    "smallBody": {
+      "count": 3,
+      "examples": [
+        "p#review-displayName-hint.text-sm.text-slate-600.mb-2 \"First name and initial is fine, e.g. Sam\" 14px",
+        "p#review-body-count.mt-2.text-sm.text-slate-600 \"0 / 600 characters (at least 20)\" 14px",
+        "p#review-email-hint.text-sm.text-slate-600.mb-2 \"Never shown publicly. Used only to verif\" 14px"
+      ]
+    },
+    "tinyText": [],
+    "smallTargets": {
+      "count": 13,
+      "examples": [
+        "a.inline-block.text-left.py-1 \"Home\" 45×32",
+        "a.inline-block.text-left.py-1 \"Packages\" 74×32",
+        "a.inline-block.text-left.py-1 \"Services\" 66×32",
+        "a.inline-block.text-left.py-1 \"Giveaway\" 74×32",
+        "a.inline-block.text-left.py-1 \"About\" 45×32",
+        "a.inline-block.text-left.py-1 \"Reviews\" 63×32",
+        "a.inline-block.text-left.py-1 \"Contact\" 59×32",
+        "a.hover:text-white.transition-colors \"contact@airola.co.uk\" 160×20",
+        "a.hover:text-white.transition-colors \"+44 7925 123219\" 131×20",
+        "a.hover:text-white.transition-colors \"WhatsApp us\" 101×20",
+        "a.inline-block.text-left.py-1 \"Privacy Policy\" 106×32",
+        "a.inline-block.text-left.py-1 \"Terms & Conditions\" 147×32"
+      ]
+    },
+    "edgeText": [],
+    "fixed": [
+      "nav.fixed.top-0.left-0 \"HomePackagesServicesGiveawayReviewsAbout\" fixed 390×100 @(0,0)",
+      "a.fixed.bottom-28.right-6 \"Chat on WhatsApp\" fixed 56×56 @(310,676)",
+      "button.fixed.bottom-6.right-6 \"Chat with Airola assistant\" fixed 64×64 @(302,756)"
+    ],
+    "images": [
+      "/Final_logo-removebg-preview.png → no srcset, oversized 453px for 110px slot, not WebP/AVIF"
+    ],
+    "fields": [],
+    "heroCta": null,
+    "h1": {
+      "fontSize": "36px",
+      "height": 80
+    }
+  },
+  "/offer@390": {
+    "scrollWidth": 390,
+    "innerWidth": 390,
+    "overflow": [],
+    "smallBody": {
+      "count": 3,
+      "examples": [
+        "li. \"Cannot be combined with other offers.\" 14px",
+        "li. \"Booking confirmed when the 50% deposit i\" 14px",
+        "li. \"Airola reserves the right to withdraw th\" 14px"
+      ]
+    },
+    "tinyText": [],
+    "smallTargets": {
+      "count": 13,
+      "examples": [
+        "a.inline-block.text-left.py-1 \"Home\" 45×32",
+        "a.inline-block.text-left.py-1 \"Packages\" 74×32",
+        "a.inline-block.text-left.py-1 \"Services\" 66×32",
+        "a.inline-block.text-left.py-1 \"Giveaway\" 74×32",
+        "a.inline-block.text-left.py-1 \"About\" 45×32",
+        "a.inline-block.text-left.py-1 \"Reviews\" 63×32",
+        "a.inline-block.text-left.py-1 \"Contact\" 59×32",
+        "a.hover:text-white.transition-colors \"contact@airola.co.uk\" 160×20",
+        "a.hover:text-white.transition-colors \"+44 7925 123219\" 131×20",
+        "a.hover:text-white.transition-colors \"WhatsApp us\" 101×20",
+        "a.inline-block.text-left.py-1 \"Privacy Policy\" 106×32",
+        "a.inline-block.text-left.py-1 \"Terms & Conditions\" 147×32"
+      ]
+    },
+    "edgeText": [],
+    "fixed": [
+      "nav.fixed.top-0.left-0 \"HomePackagesServicesGiveawayReviewsAbout\" fixed 390×100 @(0,0)",
+      "a.fixed.bottom-28.right-6 \"Chat on WhatsApp\" fixed 56×56 @(310,676)",
+      "button.fixed.bottom-6.right-6 \"Chat with Airola assistant\" fixed 64×64 @(302,756)"
+    ],
+    "images": [
+      "/Final_logo-removebg-preview.png → no srcset, oversized 453px for 110px slot, not WebP/AVIF"
+    ],
+    "fields": [],
+    "heroCta": null,
+    "h1": {
+      "fontSize": "36px",
+      "height": 120
+    }
+  },
+  "/login@390": {
+    "scrollWidth": 390,
+    "innerWidth": 390,
+    "overflow": [],
+    "smallBody": {
+      "count": 1,
+      "examples": [
+        "span. \"Encrypted authentication & UK-hosted dat\" 12px"
+      ]
+    },
+    "tinyText": [],
+    "smallTargets": {
+      "count": 14,
+      "examples": [
+        "button.absolute.right-4.top-1/2 \"Show password\" 28×28",
+        "a.inline-block.text-left.py-1 \"Home\" 45×32",
+        "a.inline-block.text-left.py-1 \"Packages\" 74×32",
+        "a.inline-block.text-left.py-1 \"Services\" 66×32",
+        "a.inline-block.text-left.py-1 \"Giveaway\" 74×32",
+        "a.inline-block.text-left.py-1 \"About\" 45×32",
+        "a.inline-block.text-left.py-1 \"Reviews\" 63×32",
+        "a.inline-block.text-left.py-1 \"Contact\" 59×32",
+        "a.hover:text-white.transition-colors \"contact@airola.co.uk\" 160×20",
+        "a.hover:text-white.transition-colors \"+44 7925 123219\" 131×20",
+        "a.hover:text-white.transition-colors \"WhatsApp us\" 101×20",
+        "a.inline-block.text-left.py-1 \"Privacy Policy\" 106×32"
+      ]
+    },
+    "edgeText": [],
+    "fixed": [
+      "nav.fixed.top-0.left-0 \"HomePackagesServicesGiveawayReviewsAbout\" fixed 390×100 @(0,0)",
+      "a.fixed.bottom-28.right-6 \"Chat on WhatsApp\" fixed 56×56 @(310,676)",
+      "button.fixed.bottom-6.right-6 \"Chat with Airola assistant\" fixed 64×64 @(302,756)"
+    ],
+    "images": [
+      "/Final_logo-removebg-preview.png → no srcset, oversized 453px for 110px slot, not WebP/AVIF"
+    ],
+    "fields": [
+      "input#login-email.w-full.pl-12.pr-4 \"\" → no autocomplete"
+    ],
+    "heroCta": null,
+    "h1": {
+      "fontSize": "30px",
+      "height": 36
+    }
+  },
+  "/areas/stratford@390": {
+    "scrollWidth": 390,
+    "innerWidth": 390,
+    "overflow": [],
+    "smallBody": {
+      "count": 2,
+      "examples": [
+        "p.text-slate-700.text-sm.leading-relaxed \"Full guest-ready reset: kitchen, bathroo\" 14px",
+        "p.text-slate-700.text-sm.leading-relaxed \"Everything in Standard plus linen change\" 14px"
+      ]
+    },
+    "tinyText": [],
+    "smallTargets": {
+      "count": 13,
+      "examples": [
+        "a.inline-block.text-left.py-1 \"Home\" 45×32",
+        "a.inline-block.text-left.py-1 \"Packages\" 74×32",
+        "a.inline-block.text-left.py-1 \"Services\" 66×32",
+        "a.inline-block.text-left.py-1 \"Giveaway\" 74×32",
+        "a.inline-block.text-left.py-1 \"About\" 45×32",
+        "a.inline-block.text-left.py-1 \"Reviews\" 63×32",
+        "a.inline-block.text-left.py-1 \"Contact\" 59×32",
+        "a.hover:text-white.transition-colors \"contact@airola.co.uk\" 160×20",
+        "a.hover:text-white.transition-colors \"+44 7925 123219\" 131×20",
+        "a.hover:text-white.transition-colors \"WhatsApp us\" 101×20",
+        "a.inline-block.text-left.py-1 \"Privacy Policy\" 106×32",
+        "a.inline-block.text-left.py-1 \"Terms & Conditions\" 147×32"
+      ]
+    },
+    "edgeText": [],
+    "fixed": [
+      "nav.fixed.top-0.left-0 \"HomePackagesServicesGiveawayReviewsAbout\" fixed 390×100 @(0,0)",
+      "a.fixed.bottom-28.right-6 \"Chat on WhatsApp\" fixed 56×56 @(310,676)",
+      "button.fixed.bottom-6.right-6 \"Chat with Airola assistant\" fixed 64×64 @(302,756)"
+    ],
+    "images": [
+      "/Final_logo-removebg-preview.png → no srcset, oversized 453px for 110px slot, not WebP/AVIF"
+    ],
+    "fields": [],
+    "heroCta": {
+      "top": 1572,
+      "bottom": 1632,
+      "visible": false
+    },
+    "h1": {
+      "fontSize": "36px",
+      "height": 120
+    }
+  },
+  "/page-that-does-not-exist@390": {
+    "scrollWidth": 390,
+    "innerWidth": 390,
+    "overflow": [],
+    "smallBody": {
+      "count": 0,
+      "examples": []
+    },
+    "tinyText": [],
+    "smallTargets": {
+      "count": 13,
+      "examples": [
+        "a.inline-block.text-left.py-1 \"Home\" 45×32",
+        "a.inline-block.text-left.py-1 \"Packages\" 74×32",
+        "a.inline-block.text-left.py-1 \"Services\" 66×32",
+        "a.inline-block.text-left.py-1 \"Giveaway\" 74×32",
+        "a.inline-block.text-left.py-1 \"About\" 45×32",
+        "a.inline-block.text-left.py-1 \"Reviews\" 63×32",
+        "a.inline-block.text-left.py-1 \"Contact\" 59×32",
+        "a.hover:text-white.transition-colors \"contact@airola.co.uk\" 160×20",
+        "a.hover:text-white.transition-colors \"+44 7925 123219\" 131×20",
+        "a.hover:text-white.transition-colors \"WhatsApp us\" 101×20",
+        "a.inline-block.text-left.py-1 \"Privacy Policy\" 106×32",
+        "a.inline-block.text-left.py-1 \"Terms & Conditions\" 147×32"
+      ]
+    },
+    "edgeText": [],
+    "fixed": [
+      "nav.fixed.top-0.left-0 \"HomePackagesServicesGiveawayReviewsAbout\" fixed 390×100 @(0,0)",
+      "a.fixed.bottom-28.right-6 \"Chat on WhatsApp\" fixed 56×56 @(310,676)",
+      "button.fixed.bottom-6.right-6 \"Chat with Airola assistant\" fixed 64×64 @(302,756)"
+    ],
+    "images": [
+      "/Final_logo-removebg-preview.png → no srcset, oversized 453px for 110px slot, not WebP/AVIF"
+    ],
+    "fields": [],
+    "heroCta": null,
+    "h1": {
+      "fontSize": "30px",
+      "height": 72
+    }
+  },
+  "/@430": {
+    "scrollWidth": 430,
+    "innerWidth": 430,
+    "overflow": [],
+    "smallBody": {
+      "count": 17,
+      "examples": [
+        "p.mt-5.text-sm.text-white/90 \"No payment now · No contract · First-cle\" 14px",
+        "p.mt-6.text-sm.text-white/90 \"Prefer a message? WhatsApp us (opens in \" 14px",
+        "p.text-slate-300.text-sm.leading-relaxed \"Full guest-ready reset between check-out\" 14px",
+        "p.text-slate-300.text-sm.leading-relaxed \"Every room, photographed and sent before\" 14px",
+        "p.text-slate-300.text-sm.leading-relaxed \"Reviews protected. Nothing left to chanc\" 14px",
+        "p.text-slate-500.text-sm.leading-relaxed \"We keep our promises, provide upfront ti\" 14px"
+      ]
+    },
+    "tinyText": [],
+    "smallTargets": {
+      "count": 14,
+      "examples": [
+        "a.inline-block.text-center.px-5 \"Close by? Ask us\" 159×42",
+        "a.inline-block.text-left.py-1 \"Home\" 45×32",
+        "a.inline-block.text-left.py-1 \"Packages\" 74×32",
+        "a.inline-block.text-left.py-1 \"Services\" 66×32",
+        "a.inline-block.text-left.py-1 \"Giveaway\" 74×32",
+        "a.inline-block.text-left.py-1 \"About\" 45×32",
+        "a.inline-block.text-left.py-1 \"Reviews\" 63×32",
+        "a.inline-block.text-left.py-1 \"Contact\" 59×32",
+        "a.hover:text-white.transition-colors \"contact@airola.co.uk\" 160×20",
+        "a.hover:text-white.transition-colors \"+44 7925 123219\" 131×20",
+        "a.hover:text-white.transition-colors \"WhatsApp us\" 101×20",
+        "a.inline-block.text-left.py-1 \"Privacy Policy\" 106×32"
+      ]
+    },
+    "edgeText": [
+      "h2.text-3xl.font-bold.text-slate-900 \"Still have questions?\"",
+      "p.text-slate-600.text-lg.mb-8 \"Speak to our team today.\""
+    ],
+    "fixed": [
+      "nav.fixed.top-0.left-0 \"HomePackagesServicesGiveawayReviewsAbout\" fixed 430×100 @(0,0)",
+      "a.fixed.bottom-28.right-6 \"Chat on WhatsApp\" fixed 56×56 @(350,764)",
+      "button.fixed.bottom-6.right-6 \"Chat with Airola assistant\" fixed 64×64 @(342,844)"
+    ],
+    "images": [
+      "/Final_logo-removebg-preview.png → no srcset, oversized 453px for 110px slot, not WebP/AVIF",
+      "/hero-bg.jpg → no srcset, not WebP/AVIF",
+      "/why-choose.jpg → no srcset, not WebP/AVIF",
+      "/how-works.jpg → no srcset, not WebP/AVIF"
+    ],
+    "fields": [],
+    "heroCta": {
+      "top": 560,
+      "bottom": 620,
+      "visible": true
+    },
+    "h1": {
+      "fontSize": "48px",
+      "height": 180
+    },
+    "mobileMenu": {
+      "open": true,
+      "height": 449,
+      "coversViewport": false,
+      "closesOnEscape": true
+    }
+  },
+  "/pricing@430": {
+    "scrollWidth": 430,
+    "innerWidth": 430,
+    "overflow": [],
+    "smallBody": {
+      "count": 16,
+      "examples": [
+        "p.text-slate-600.text-sm.mt-2 \"£35 per turnover when you book every tur\" 14px",
+        "p.text-slate-500.text-sm.mt-2 \"The full guest-ready reset, with proof.\" 14px",
+        "span.text-slate-600.text-sm.leading-snug \"Full property turnover: kitchen, bathroo\" 14px",
+        "span.text-slate-600.text-sm.leading-snug \"Photo confirmation after every clean\" 14px",
+        "span.text-slate-600.text-sm.leading-snug \"Priority booking & faster response\" 14px",
+        "span.text-slate-600.text-sm.leading-snug \"No contract, no emergency fees\" 14px"
+      ]
+    },
+    "tinyText": [],
+    "smallTargets": {
+      "count": 13,
+      "examples": [
+        "a.inline-block.text-left.py-1 \"Home\" 45×32",
+        "a.inline-block.text-left.py-1 \"Packages\" 74×32",
+        "a.inline-block.text-left.py-1 \"Services\" 66×32",
+        "a.inline-block.text-left.py-1 \"Giveaway\" 74×32",
+        "a.inline-block.text-left.py-1 \"About\" 45×32",
+        "a.inline-block.text-left.py-1 \"Reviews\" 63×32",
+        "a.inline-block.text-left.py-1 \"Contact\" 59×32",
+        "a.hover:text-white.transition-colors \"contact@airola.co.uk\" 160×20",
+        "a.hover:text-white.transition-colors \"+44 7925 123219\" 131×20",
+        "a.hover:text-white.transition-colors \"WhatsApp us\" 101×20",
+        "a.inline-block.text-left.py-1 \"Privacy Policy\" 106×32",
+        "a.inline-block.text-left.py-1 \"Terms & Conditions\" 147×32"
+      ]
+    },
+    "edgeText": [],
+    "fixed": [
+      "nav.fixed.top-0.left-0 \"HomePackagesServicesGiveawayReviewsAbout\" fixed 430×100 @(0,0)",
+      "a.fixed.bottom-28.right-6 \"Chat on WhatsApp\" fixed 56×56 @(350,764)",
+      "button.fixed.bottom-6.right-6 \"Chat with Airola assistant\" fixed 64×64 @(342,844)"
+    ],
+    "images": [
+      "/Final_logo-removebg-preview.png → no srcset, oversized 453px for 110px slot, not WebP/AVIF"
+    ],
+    "fields": [],
+    "heroCta": {
+      "top": 3803,
+      "bottom": 3871,
+      "visible": false
+    },
+    "h1": {
+      "fontSize": "36px",
+      "height": 40
+    }
+  },
+  "/quote@430": {
+    "scrollWidth": 430,
+    "innerWidth": 430,
+    "overflow": [],
+    "smallBody": {
+      "count": 3,
+      "examples": [
+        "span. \"Standard Turnover (1 bed, 1 bath)\" 14px",
+        "span. \"Photo proof after every clean\" 14px",
+        "p.text-xs.text-slate-400.leading-relaxed \"No payment now. We confirm your final pr\" 12px"
+      ]
+    },
+    "tinyText": [],
+    "smallTargets": {
+      "count": 14,
+      "examples": [
+        "a.text-sm.font-bold.text-slate-500 \"Prefer WhatsApp? Message us\" 233×20",
+        "a.inline-block.text-left.py-1 \"Home\" 45×32",
+        "a.inline-block.text-left.py-1 \"Packages\" 74×32",
+        "a.inline-block.text-left.py-1 \"Services\" 66×32",
+        "a.inline-block.text-left.py-1 \"Giveaway\" 74×32",
+        "a.inline-block.text-left.py-1 \"About\" 45×32",
+        "a.inline-block.text-left.py-1 \"Reviews\" 63×32",
+        "a.inline-block.text-left.py-1 \"Contact\" 59×32",
+        "a.hover:text-white.transition-colors \"contact@airola.co.uk\" 160×20",
+        "a.hover:text-white.transition-colors \"+44 7925 123219\" 131×20",
+        "a.hover:text-white.transition-colors \"WhatsApp us\" 101×20",
+        "a.inline-block.text-left.py-1 \"Privacy Policy\" 106×32"
+      ]
+    },
+    "edgeText": [],
+    "fixed": [
+      "nav.fixed.top-0.left-0 \"HomePackagesServicesGiveawayReviewsAbout\" fixed 430×100 @(0,0)",
+      "div.bg-slate-900.rounded-[3rem].p-10 \"Your PriceStandard Turnover (1 bed, 1 ba\" sticky 398×455 @(16,2213)",
+      "a.fixed.bottom-28.right-6 \"Chat on WhatsApp\" fixed 56×56 @(350,764)",
+      "button.fixed.bottom-6.right-6 \"Chat with Airola assistant\" fixed 64×64 @(342,844)"
+    ],
+    "images": [
+      "/Final_logo-removebg-preview.png → no srcset, oversized 453px for 110px slot, not WebP/AVIF"
+    ],
+    "fields": [],
+    "heroCta": null,
+    "h1": {
+      "fontSize": "36px",
+      "height": 40
+    }
+  },
+  "/about-us@430": {
+    "scrollWidth": 430,
+    "innerWidth": 430,
+    "overflow": [],
+    "smallBody": {
+      "count": 6,
+      "examples": [
+        "p.text-slate-500.text-sm.leading-relaxed \"Full guest-ready reset between every che\" 14px",
+        "p.text-slate-500.text-sm.leading-relaxed \"Photos to your WhatsApp before your gues\" 14px",
+        "p.text-slate-500.text-sm.leading-relaxed \"Fresh linen and hotel-style beds.\" 14px",
+        "p.text-slate-500.text-sm.leading-relaxed \"Every dish, surface and appliance guest-\" 14px",
+        "p.text-slate-500.text-sm.leading-relaxed \"Toilet paper, soap and basics topped up \" 14px",
+        "p.text-slate-500.text-sm.leading-relaxed \"Same-day rescue for our recurring client\" 14px"
+      ]
+    },
+    "tinyText": [],
+    "smallTargets": {
+      "count": 13,
+      "examples": [
+        "a.inline-block.text-left.py-1 \"Home\" 45×32",
+        "a.inline-block.text-left.py-1 \"Packages\" 74×32",
+        "a.inline-block.text-left.py-1 \"Services\" 66×32",
+        "a.inline-block.text-left.py-1 \"Giveaway\" 74×32",
+        "a.inline-block.text-left.py-1 \"About\" 45×32",
+        "a.inline-block.text-left.py-1 \"Reviews\" 63×32",
+        "a.inline-block.text-left.py-1 \"Contact\" 59×32",
+        "a.hover:text-white.transition-colors \"contact@airola.co.uk\" 160×20",
+        "a.hover:text-white.transition-colors \"+44 7925 123219\" 131×20",
+        "a.hover:text-white.transition-colors \"WhatsApp us\" 101×20",
+        "a.inline-block.text-left.py-1 \"Privacy Policy\" 106×32",
+        "a.inline-block.text-left.py-1 \"Terms & Conditions\" 147×32"
+      ]
+    },
+    "edgeText": [],
+    "fixed": [
+      "nav.fixed.top-0.left-0 \"HomePackagesServicesGiveawayReviewsAbout\" fixed 430×100 @(0,0)",
+      "a.fixed.bottom-28.right-6 \"Chat on WhatsApp\" fixed 56×56 @(350,764)",
+      "button.fixed.bottom-6.right-6 \"Chat with Airola assistant\" fixed 64×64 @(342,844)"
+    ],
+    "images": [
+      "/Final_logo-removebg-preview.png → no srcset, oversized 453px for 110px slot, not WebP/AVIF",
+      "/why-choose.jpg → no srcset, oversized 1600px for 398px slot, not WebP/AVIF"
+    ],
+    "fields": [],
+    "heroCta": null,
+    "h1": {
+      "fontSize": "36px",
+      "height": 90
+    }
+  },
+  "/contact@430": {
+    "scrollWidth": 430,
+    "innerWidth": 430,
+    "overflow": [],
+    "smallBody": {
+      "count": 0,
+      "examples": []
+    },
+    "tinyText": [],
+    "smallTargets": {
+      "count": 13,
+      "examples": [
+        "a.inline-block.text-left.py-1 \"Home\" 45×32",
+        "a.inline-block.text-left.py-1 \"Packages\" 74×32",
+        "a.inline-block.text-left.py-1 \"Services\" 66×32",
+        "a.inline-block.text-left.py-1 \"Giveaway\" 74×32",
+        "a.inline-block.text-left.py-1 \"About\" 45×32",
+        "a.inline-block.text-left.py-1 \"Reviews\" 63×32",
+        "a.inline-block.text-left.py-1 \"Contact\" 59×32",
+        "a.hover:text-white.transition-colors \"contact@airola.co.uk\" 160×20",
+        "a.hover:text-white.transition-colors \"+44 7925 123219\" 131×20",
+        "a.hover:text-white.transition-colors \"WhatsApp us\" 101×20",
+        "a.inline-block.text-left.py-1 \"Privacy Policy\" 106×32",
+        "a.inline-block.text-left.py-1 \"Terms & Conditions\" 147×32"
+      ]
+    },
+    "edgeText": [],
+    "fixed": [
+      "nav.fixed.top-0.left-0 \"HomePackagesServicesGiveawayReviewsAbout\" fixed 430×100 @(0,0)",
+      "a.fixed.bottom-28.right-6 \"Chat on WhatsApp\" fixed 56×56 @(350,764)",
+      "button.fixed.bottom-6.right-6 \"Chat with Airola assistant\" fixed 64×64 @(342,844)"
+    ],
+    "images": [
+      "/Final_logo-removebg-preview.png → no srcset, oversized 453px for 110px slot, not WebP/AVIF"
+    ],
+    "fields": [],
+    "heroCta": null,
+    "h1": {
+      "fontSize": "36px",
+      "height": 40
+    }
+  },
+  "/giveaway@430": {
+    "scrollWidth": 430,
+    "innerWidth": 430,
+    "overflow": [],
+    "smallBody": {
+      "count": 1,
+      "examples": [
+        "p.text-sm.text-slate-600.text-center \"One entry per host. Limited to propertie\" 14px"
+      ]
+    },
+    "tinyText": [],
+    "smallTargets": {
+      "count": 13,
+      "examples": [
+        "a.inline-block.text-left.py-1 \"Home\" 45×32",
+        "a.inline-block.text-left.py-1 \"Packages\" 74×32",
+        "a.inline-block.text-left.py-1 \"Services\" 66×32",
+        "a.inline-block.text-left.py-1 \"Giveaway\" 74×32",
+        "a.inline-block.text-left.py-1 \"About\" 45×32",
+        "a.inline-block.text-left.py-1 \"Reviews\" 63×32",
+        "a.inline-block.text-left.py-1 \"Contact\" 59×32",
+        "a.hover:text-white.transition-colors \"contact@airola.co.uk\" 160×20",
+        "a.hover:text-white.transition-colors \"+44 7925 123219\" 131×20",
+        "a.hover:text-white.transition-colors \"WhatsApp us\" 101×20",
+        "a.inline-block.text-left.py-1 \"Privacy Policy\" 106×32",
+        "a.inline-block.text-left.py-1 \"Terms & Conditions\" 147×32"
+      ]
+    },
+    "edgeText": [],
+    "fixed": [
+      "nav.fixed.top-0.left-0 \"HomePackagesServicesGiveawayReviewsAbout\" fixed 430×100 @(0,0)",
+      "a.fixed.bottom-28.right-6 \"Chat on WhatsApp\" fixed 56×56 @(350,764)",
+      "button.fixed.bottom-6.right-6 \"Chat with Airola assistant\" fixed 64×64 @(342,844)"
+    ],
+    "images": [
+      "/Final_logo-removebg-preview.png → no srcset, oversized 453px for 110px slot, not WebP/AVIF"
+    ],
+    "fields": [
+      "input#name.w-full.p-4.bg-slate-50 \"\" → no autocomplete",
+      "input#phone.w-full.p-4.bg-slate-50 \"\" → no autocomplete",
+      "input#email.w-full.p-4.bg-slate-50 \"\" → no autocomplete"
+    ],
+    "heroCta": null,
+    "h1": {
+      "fontSize": "36px",
+      "height": 80
+    }
+  },
+  "/legal@430": {
+    "scrollWidth": 430,
+    "innerWidth": 430,
+    "overflow": [],
+    "smallBody": {
+      "count": 0,
+      "examples": []
+    },
+    "tinyText": [],
+    "smallTargets": {
+      "count": 13,
+      "examples": [
+        "a.inline-block.text-left.py-1 \"Home\" 45×32",
+        "a.inline-block.text-left.py-1 \"Packages\" 74×32",
+        "a.inline-block.text-left.py-1 \"Services\" 66×32",
+        "a.inline-block.text-left.py-1 \"Giveaway\" 74×32",
+        "a.inline-block.text-left.py-1 \"About\" 45×32",
+        "a.inline-block.text-left.py-1 \"Reviews\" 63×32",
+        "a.inline-block.text-left.py-1 \"Contact\" 59×32",
+        "a.hover:text-white.transition-colors \"contact@airola.co.uk\" 160×20",
+        "a.hover:text-white.transition-colors \"+44 7925 123219\" 131×20",
+        "a.hover:text-white.transition-colors \"WhatsApp us\" 101×20",
+        "a.inline-block.text-left.py-1 \"Privacy Policy\" 106×32",
+        "a.inline-block.text-left.py-1 \"Terms & Conditions\" 147×32"
+      ]
+    },
+    "edgeText": [],
+    "fixed": [
+      "nav.fixed.top-0.left-0 \"HomePackagesServicesGiveawayReviewsAbout\" fixed 430×100 @(0,0)",
+      "a.fixed.bottom-28.right-6 \"Chat on WhatsApp\" fixed 56×56 @(350,764)",
+      "button.fixed.bottom-6.right-6 \"Chat with Airola assistant\" fixed 64×64 @(342,844)"
+    ],
+    "images": [
+      "/Final_logo-removebg-preview.png → no srcset, oversized 453px for 110px slot, not WebP/AVIF"
+    ],
+    "fields": [],
+    "heroCta": null,
+    "h1": {
+      "fontSize": "36px",
+      "height": 80
+    }
+  },
+  "/testimonials@430": {
+    "scrollWidth": 430,
+    "innerWidth": 430,
+    "overflow": [],
+    "smallBody": {
+      "count": 3,
+      "examples": [
+        "p#review-displayName-hint.text-sm.text-slate-600.mb-2 \"First name and initial is fine, e.g. Sam\" 14px",
+        "p#review-body-count.mt-2.text-sm.text-slate-600 \"0 / 600 characters (at least 20)\" 14px",
+        "p#review-email-hint.text-sm.text-slate-600.mb-2 \"Never shown publicly. Used only to verif\" 14px"
+      ]
+    },
+    "tinyText": [],
+    "smallTargets": {
+      "count": 13,
+      "examples": [
+        "a.inline-block.text-left.py-1 \"Home\" 45×32",
+        "a.inline-block.text-left.py-1 \"Packages\" 74×32",
+        "a.inline-block.text-left.py-1 \"Services\" 66×32",
+        "a.inline-block.text-left.py-1 \"Giveaway\" 74×32",
+        "a.inline-block.text-left.py-1 \"About\" 45×32",
+        "a.inline-block.text-left.py-1 \"Reviews\" 63×32",
+        "a.inline-block.text-left.py-1 \"Contact\" 59×32",
+        "a.hover:text-white.transition-colors \"contact@airola.co.uk\" 160×20",
+        "a.hover:text-white.transition-colors \"+44 7925 123219\" 131×20",
+        "a.hover:text-white.transition-colors \"WhatsApp us\" 101×20",
+        "a.inline-block.text-left.py-1 \"Privacy Policy\" 106×32",
+        "a.inline-block.text-left.py-1 \"Terms & Conditions\" 147×32"
+      ]
+    },
+    "edgeText": [],
+    "fixed": [
+      "nav.fixed.top-0.left-0 \"HomePackagesServicesGiveawayReviewsAbout\" fixed 430×100 @(0,0)",
+      "a.fixed.bottom-28.right-6 \"Chat on WhatsApp\" fixed 56×56 @(350,764)",
+      "button.fixed.bottom-6.right-6 \"Chat with Airola assistant\" fixed 64×64 @(342,844)"
+    ],
+    "images": [
+      "/Final_logo-removebg-preview.png → no srcset, oversized 453px for 110px slot, not WebP/AVIF"
+    ],
+    "fields": [],
+    "heroCta": null,
+    "h1": {
+      "fontSize": "36px",
+      "height": 80
+    }
+  },
+  "/offer@430": {
+    "scrollWidth": 430,
+    "innerWidth": 430,
+    "overflow": [],
+    "smallBody": {
+      "count": 3,
+      "examples": [
+        "li. \"Cannot be combined with other offers.\" 14px",
+        "li. \"Booking confirmed when the 50% deposit i\" 14px",
+        "li. \"Airola reserves the right to withdraw th\" 14px"
+      ]
+    },
+    "tinyText": [],
+    "smallTargets": {
+      "count": 13,
+      "examples": [
+        "a.inline-block.text-left.py-1 \"Home\" 45×32",
+        "a.inline-block.text-left.py-1 \"Packages\" 74×32",
+        "a.inline-block.text-left.py-1 \"Services\" 66×32",
+        "a.inline-block.text-left.py-1 \"Giveaway\" 74×32",
+        "a.inline-block.text-left.py-1 \"About\" 45×32",
+        "a.inline-block.text-left.py-1 \"Reviews\" 63×32",
+        "a.inline-block.text-left.py-1 \"Contact\" 59×32",
+        "a.hover:text-white.transition-colors \"contact@airola.co.uk\" 160×20",
+        "a.hover:text-white.transition-colors \"+44 7925 123219\" 131×20",
+        "a.hover:text-white.transition-colors \"WhatsApp us\" 101×20",
+        "a.inline-block.text-left.py-1 \"Privacy Policy\" 106×32",
+        "a.inline-block.text-left.py-1 \"Terms & Conditions\" 147×32"
+      ]
+    },
+    "edgeText": [],
+    "fixed": [
+      "nav.fixed.top-0.left-0 \"HomePackagesServicesGiveawayReviewsAbout\" fixed 430×100 @(0,0)",
+      "a.fixed.bottom-28.right-6 \"Chat on WhatsApp\" fixed 56×56 @(350,764)",
+      "button.fixed.bottom-6.right-6 \"Chat with Airola assistant\" fixed 64×64 @(342,844)"
+    ],
+    "images": [
+      "/Final_logo-removebg-preview.png → no srcset, oversized 453px for 110px slot, not WebP/AVIF"
+    ],
+    "fields": [],
+    "heroCta": null,
+    "h1": {
+      "fontSize": "36px",
+      "height": 80
+    }
+  },
+  "/login@430": {
+    "scrollWidth": 430,
+    "innerWidth": 430,
+    "overflow": [],
+    "smallBody": {
+      "count": 1,
+      "examples": [
+        "span. \"Encrypted authentication & UK-hosted dat\" 12px"
+      ]
+    },
+    "tinyText": [],
+    "smallTargets": {
+      "count": 14,
+      "examples": [
+        "button.absolute.right-4.top-1/2 \"Show password\" 28×28",
+        "a.inline-block.text-left.py-1 \"Home\" 45×32",
+        "a.inline-block.text-left.py-1 \"Packages\" 74×32",
+        "a.inline-block.text-left.py-1 \"Services\" 66×32",
+        "a.inline-block.text-left.py-1 \"Giveaway\" 74×32",
+        "a.inline-block.text-left.py-1 \"About\" 45×32",
+        "a.inline-block.text-left.py-1 \"Reviews\" 63×32",
+        "a.inline-block.text-left.py-1 \"Contact\" 59×32",
+        "a.hover:text-white.transition-colors \"contact@airola.co.uk\" 160×20",
+        "a.hover:text-white.transition-colors \"+44 7925 123219\" 131×20",
+        "a.hover:text-white.transition-colors \"WhatsApp us\" 101×20",
+        "a.inline-block.text-left.py-1 \"Privacy Policy\" 106×32"
+      ]
+    },
+    "edgeText": [],
+    "fixed": [
+      "nav.fixed.top-0.left-0 \"HomePackagesServicesGiveawayReviewsAbout\" fixed 430×100 @(0,0)",
+      "a.fixed.bottom-28.right-6 \"Chat on WhatsApp\" fixed 56×56 @(350,764)",
+      "button.fixed.bottom-6.right-6 \"Chat with Airola assistant\" fixed 64×64 @(342,844)"
+    ],
+    "images": [
+      "/Final_logo-removebg-preview.png → no srcset, oversized 453px for 110px slot, not WebP/AVIF"
+    ],
+    "fields": [
+      "input#login-email.w-full.pl-12.pr-4 \"\" → no autocomplete"
+    ],
+    "heroCta": null,
+    "h1": {
+      "fontSize": "30px",
+      "height": 36
+    }
+  },
+  "/areas/stratford@430": {
+    "scrollWidth": 430,
+    "innerWidth": 430,
+    "overflow": [],
+    "smallBody": {
+      "count": 2,
+      "examples": [
+        "p.text-slate-700.text-sm.leading-relaxed \"Full guest-ready reset: kitchen, bathroo\" 14px",
+        "p.text-slate-700.text-sm.leading-relaxed \"Everything in Standard plus linen change\" 14px"
+      ]
+    },
+    "tinyText": [],
+    "smallTargets": {
+      "count": 13,
+      "examples": [
+        "a.inline-block.text-left.py-1 \"Home\" 45×32",
+        "a.inline-block.text-left.py-1 \"Packages\" 74×32",
+        "a.inline-block.text-left.py-1 \"Services\" 66×32",
+        "a.inline-block.text-left.py-1 \"Giveaway\" 74×32",
+        "a.inline-block.text-left.py-1 \"About\" 45×32",
+        "a.inline-block.text-left.py-1 \"Reviews\" 63×32",
+        "a.inline-block.text-left.py-1 \"Contact\" 59×32",
+        "a.hover:text-white.transition-colors \"contact@airola.co.uk\" 160×20",
+        "a.hover:text-white.transition-colors \"+44 7925 123219\" 131×20",
+        "a.hover:text-white.transition-colors \"WhatsApp us\" 101×20",
+        "a.inline-block.text-left.py-1 \"Privacy Policy\" 106×32",
+        "a.inline-block.text-left.py-1 \"Terms & Conditions\" 147×32"
+      ]
+    },
+    "edgeText": [],
+    "fixed": [
+      "nav.fixed.top-0.left-0 \"HomePackagesServicesGiveawayReviewsAbout\" fixed 430×100 @(0,0)",
+      "a.fixed.bottom-28.right-6 \"Chat on WhatsApp\" fixed 56×56 @(350,764)",
+      "button.fixed.bottom-6.right-6 \"Chat with Airola assistant\" fixed 64×64 @(342,844)"
+    ],
+    "images": [
+      "/Final_logo-removebg-preview.png → no srcset, oversized 453px for 110px slot, not WebP/AVIF"
+    ],
+    "fields": [],
+    "heroCta": {
+      "top": 1407,
+      "bottom": 1467,
+      "visible": false
+    },
+    "h1": {
+      "fontSize": "36px",
+      "height": 80
+    }
+  },
+  "/page-that-does-not-exist@430": {
+    "scrollWidth": 430,
+    "innerWidth": 430,
+    "overflow": [],
+    "smallBody": {
+      "count": 0,
+      "examples": []
+    },
+    "tinyText": [],
+    "smallTargets": {
+      "count": 13,
+      "examples": [
+        "a.inline-block.text-left.py-1 \"Home\" 45×32",
+        "a.inline-block.text-left.py-1 \"Packages\" 74×32",
+        "a.inline-block.text-left.py-1 \"Services\" 66×32",
+        "a.inline-block.text-left.py-1 \"Giveaway\" 74×32",
+        "a.inline-block.text-left.py-1 \"About\" 45×32",
+        "a.inline-block.text-left.py-1 \"Reviews\" 63×32",
+        "a.inline-block.text-left.py-1 \"Contact\" 59×32",
+        "a.hover:text-white.transition-colors \"contact@airola.co.uk\" 160×20",
+        "a.hover:text-white.transition-colors \"+44 7925 123219\" 131×20",
+        "a.hover:text-white.transition-colors \"WhatsApp us\" 101×20",
+        "a.inline-block.text-left.py-1 \"Privacy Policy\" 106×32",
+        "a.inline-block.text-left.py-1 \"Terms & Conditions\" 147×32"
+      ]
+    },
+    "edgeText": [],
+    "fixed": [
+      "nav.fixed.top-0.left-0 \"HomePackagesServicesGiveawayReviewsAbout\" fixed 430×100 @(0,0)",
+      "a.fixed.bottom-28.right-6 \"Chat on WhatsApp\" fixed 56×56 @(350,764)",
+      "button.fixed.bottom-6.right-6 \"Chat with Airola assistant\" fixed 64×64 @(342,844)"
+    ],
+    "images": [
+      "/Final_logo-removebg-preview.png → no srcset, oversized 453px for 110px slot, not WebP/AVIF"
+    ],
+    "fields": [],
+    "heroCta": null,
+    "h1": {
+      "fontSize": "30px",
+      "height": 36
+    }
+  },
+  "/@768": {
+    "scrollWidth": 768,
+    "innerWidth": 768,
+    "overflow": [],
+    "smallBody": {
+      "count": 17,
+      "examples": [
+        "p.mt-5.text-sm.text-white/90 \"No payment now · No contract · First-cle\" 14px",
+        "p.mt-6.text-sm.text-white/90 \"Prefer a message? WhatsApp us (opens in \" 14px",
+        "p.text-slate-300.text-sm.leading-relaxed \"Full guest-ready reset between check-out\" 14px",
+        "p.text-slate-300.text-sm.leading-relaxed \"Every room, photographed and sent before\" 14px",
+        "p.text-slate-300.text-sm.leading-relaxed \"Reviews protected. Nothing left to chanc\" 14px",
+        "p.text-slate-500.text-sm.leading-relaxed \"We keep our promises, provide upfront ti\" 14px"
+      ]
+    },
+    "tinyText": [],
+    "smallTargets": {
+      "count": 15,
+      "examples": [
+        "a.text-center.flex.items-center \"Airola home\" 34×32",
+        "a.inline-block.text-center.px-5 \"Close by? Ask us\" 159×42",
+        "a.inline-block.text-left.py-1 \"Home\" 45×32",
+        "a.inline-block.text-left.py-1 \"Packages\" 74×32",
+        "a.inline-block.text-left.py-1 \"Services\" 66×32",
+        "a.inline-block.text-left.py-1 \"Giveaway\" 74×32",
+        "a.inline-block.text-left.py-1 \"About\" 45×32",
+        "a.inline-block.text-left.py-1 \"Reviews\" 63×32",
+        "a.inline-block.text-left.py-1 \"Contact\" 59×32",
+        "a.hover:text-white.transition-colors \"contact@airola.co.uk\" 160×20",
+        "a.hover:text-white.transition-colors \"+44 7925 123219\" 131×20",
+        "a.hover:text-white.transition-colors \"WhatsApp us\" 101×20"
+      ]
+    },
+    "edgeText": [
+      "h2.text-3xl.font-bold.text-slate-900 \"Still have questions?\"",
+      "p.text-slate-600.text-lg.mb-8 \"Speak to our team today.\""
+    ],
+    "fixed": [
+      "nav.fixed.top-0.left-0 \"HomePackagesServicesGiveawayReviewsAbout\" fixed 768×100 @(0,0)",
+      "a.fixed.bottom-28.right-6 \"Chat on WhatsApp\" fixed 56×56 @(688,856)",
+      "button.fixed.bottom-6.right-6 \"Chat with Airola assistant\" fixed 64×64 @(680,936)"
+    ],
+    "images": [
+      "/Final_logo-removebg-preview.png → no srcset, oversized 453px for 34px slot, not WebP/AVIF",
+      "/hero-bg.jpg → no srcset, not WebP/AVIF",
+      "/why-choose.jpg → no srcset, not WebP/AVIF",
+      "/how-works.jpg → no srcset, not WebP/AVIF"
+    ],
+    "fields": [],
+    "heroCta": {
+      "top": 618,
+      "bottom": 678,
+      "visible": true
+    },
+    "h1": {
+      "fontSize": "72px",
+      "height": 270
+    }
+  },
+  "/pricing@768": {
+    "scrollWidth": 768,
+    "innerWidth": 768,
+    "overflow": [],
+    "smallBody": {
+      "count": 16,
+      "examples": [
+        "p.text-slate-600.text-sm.mt-2 \"£35 per turnover when you book every tur\" 14px",
+        "p.text-slate-500.text-sm.mt-2 \"The full guest-ready reset, with proof.\" 14px",
+        "span.text-slate-600.text-sm.leading-snug \"Full property turnover: kitchen, bathroo\" 14px",
+        "span.text-slate-600.text-sm.leading-snug \"Photo confirmation after every clean\" 14px",
+        "span.text-slate-600.text-sm.leading-snug \"Priority booking & faster response\" 14px",
+        "span.text-slate-600.text-sm.leading-snug \"No contract, no emergency fees\" 14px"
+      ]
+    },
+    "tinyText": [],
+    "smallTargets": {
+      "count": 15,
+      "examples": [
+        "button.w-11.h-11.flex \"Go back\" 20×44",
+        "a.text-center.flex.items-center \"Airola home\" 48×43",
+        "a.inline-block.text-left.py-1 \"Home\" 45×32",
+        "a.inline-block.text-left.py-1 \"Packages\" 74×32",
+        "a.inline-block.text-left.py-1 \"Services\" 66×32",
+        "a.inline-block.text-left.py-1 \"Giveaway\" 74×32",
+        "a.inline-block.text-left.py-1 \"About\" 45×32",
+        "a.inline-block.text-left.py-1 \"Reviews\" 63×32",
+        "a.inline-block.text-left.py-1 \"Contact\" 59×32",
+        "a.hover:text-white.transition-colors \"contact@airola.co.uk\" 160×20",
+        "a.hover:text-white.transition-colors \"+44 7925 123219\" 131×20",
+        "a.hover:text-white.transition-colors \"WhatsApp us\" 101×20"
+      ]
+    },
+    "edgeText": [],
+    "fixed": [
+      "nav.fixed.top-0.left-0 \"HomePackagesServicesGiveawayReviewsAbout\" fixed 768×100 @(0,0)",
+      "a.fixed.bottom-28.right-6 \"Chat on WhatsApp\" fixed 56×56 @(688,856)",
+      "button.fixed.bottom-6.right-6 \"Chat with Airola assistant\" fixed 64×64 @(680,936)"
+    ],
+    "images": [
+      "/Final_logo-removebg-preview.png → no srcset, oversized 453px for 48px slot, not WebP/AVIF"
+    ],
+    "fields": [],
+    "heroCta": {
+      "top": 2784,
+      "bottom": 2852,
+      "visible": false
+    },
+    "h1": {
+      "fontSize": "48px",
+      "height": 48
+    }
+  },
+  "/quote@768": {
+    "scrollWidth": 768,
+    "innerWidth": 768,
+    "overflow": [],
+    "smallBody": {
+      "count": 3,
+      "examples": [
+        "span. \"Standard Turnover (1 bed, 1 bath)\" 14px",
+        "span. \"Photo proof after every clean\" 14px",
+        "p.text-xs.text-slate-400.leading-relaxed \"No payment now. We confirm your final pr\" 12px"
+      ]
+    },
+    "tinyText": [],
+    "smallTargets": {
+      "count": 16,
+      "examples": [
+        "button.w-11.h-11.flex \"Go back\" 20×44",
+        "a.text-center.flex.items-center \"Airola home\" 48×43",
+        "a.text-sm.font-bold.text-slate-500 \"Prefer WhatsApp? Message us\" 233×20",
+        "a.inline-block.text-left.py-1 \"Home\" 45×32",
+        "a.inline-block.text-left.py-1 \"Packages\" 74×32",
+        "a.inline-block.text-left.py-1 \"Services\" 66×32",
+        "a.inline-block.text-left.py-1 \"Giveaway\" 74×32",
+        "a.inline-block.text-left.py-1 \"About\" 45×32",
+        "a.inline-block.text-left.py-1 \"Reviews\" 63×32",
+        "a.inline-block.text-left.py-1 \"Contact\" 59×32",
+        "a.hover:text-white.transition-colors \"contact@airola.co.uk\" 160×20",
+        "a.hover:text-white.transition-colors \"+44 7925 123219\" 131×20"
+      ]
+    },
+    "edgeText": [],
+    "fixed": [
+      "nav.fixed.top-0.left-0 \"HomePackagesServicesGiveawayReviewsAbout\" fixed 768×100 @(0,0)",
+      "div.bg-slate-900.rounded-[3rem].p-10 \"Your PriceStandard Turnover (1 bed, 1 ba\" sticky 720×436 @(24,1504)",
+      "a.fixed.bottom-28.right-6 \"Chat on WhatsApp\" fixed 56×56 @(688,856)",
+      "button.fixed.bottom-6.right-6 \"Chat with Airola assistant\" fixed 64×64 @(680,936)"
+    ],
+    "images": [
+      "/Final_logo-removebg-preview.png → no srcset, oversized 453px for 48px slot, not WebP/AVIF"
+    ],
+    "fields": [],
+    "heroCta": null,
+    "h1": {
+      "fontSize": "36px",
+      "height": 40
+    }
+  },
+  "/about-us@768": {
+    "scrollWidth": 768,
+    "innerWidth": 768,
+    "overflow": [],
+    "smallBody": {
+      "count": 6,
+      "examples": [
+        "p.text-slate-500.text-sm.leading-relaxed \"Full guest-ready reset between every che\" 14px",
+        "p.text-slate-500.text-sm.leading-relaxed \"Photos to your WhatsApp before your gues\" 14px",
+        "p.text-slate-500.text-sm.leading-relaxed \"Fresh linen and hotel-style beds.\" 14px",
+        "p.text-slate-500.text-sm.leading-relaxed \"Every dish, surface and appliance guest-\" 14px",
+        "p.text-slate-500.text-sm.leading-relaxed \"Toilet paper, soap and basics topped up \" 14px",
+        "p.text-slate-500.text-sm.leading-relaxed \"Same-day rescue for our recurring client\" 14px"
+      ]
+    },
+    "tinyText": [],
+    "smallTargets": {
+      "count": 15,
+      "examples": [
+        "button.w-11.h-11.flex \"Go back\" 20×44",
+        "a.text-center.flex.items-center \"Airola home\" 48×43",
+        "a.inline-block.text-left.py-1 \"Home\" 45×32",
+        "a.inline-block.text-left.py-1 \"Packages\" 74×32",
+        "a.inline-block.text-left.py-1 \"Services\" 66×32",
+        "a.inline-block.text-left.py-1 \"Giveaway\" 74×32",
+        "a.inline-block.text-left.py-1 \"About\" 45×32",
+        "a.inline-block.text-left.py-1 \"Reviews\" 63×32",
+        "a.inline-block.text-left.py-1 \"Contact\" 59×32",
+        "a.hover:text-white.transition-colors \"contact@airola.co.uk\" 160×20",
+        "a.hover:text-white.transition-colors \"+44 7925 123219\" 131×20",
+        "a.hover:text-white.transition-colors \"WhatsApp us\" 101×20"
+      ]
+    },
+    "edgeText": [],
+    "fixed": [
+      "nav.fixed.top-0.left-0 \"HomePackagesServicesGiveawayReviewsAbout\" fixed 768×100 @(0,0)",
+      "a.fixed.bottom-28.right-6 \"Chat on WhatsApp\" fixed 56×56 @(688,856)",
+      "button.fixed.bottom-6.right-6 \"Chat with Airola assistant\" fixed 64×64 @(680,936)"
+    ],
+    "images": [
+      "/Final_logo-removebg-preview.png → no srcset, oversized 453px for 48px slot, not WebP/AVIF",
+      "/why-choose.jpg → no srcset, not WebP/AVIF"
+    ],
+    "fields": [],
+    "heroCta": null,
+    "h1": {
+      "fontSize": "48px",
+      "height": 120
+    }
+  },
+  "/contact@768": {
+    "scrollWidth": 768,
+    "innerWidth": 768,
+    "overflow": [],
+    "smallBody": {
+      "count": 0,
+      "examples": []
+    },
+    "tinyText": [],
+    "smallTargets": {
+      "count": 15,
+      "examples": [
+        "button.w-11.h-11.flex \"Go back\" 20×44",
+        "a.text-center.flex.items-center \"Airola home\" 48×43",
+        "a.inline-block.text-left.py-1 \"Home\" 45×32",
+        "a.inline-block.text-left.py-1 \"Packages\" 74×32",
+        "a.inline-block.text-left.py-1 \"Services\" 66×32",
+        "a.inline-block.text-left.py-1 \"Giveaway\" 74×32",
+        "a.inline-block.text-left.py-1 \"About\" 45×32",
+        "a.inline-block.text-left.py-1 \"Reviews\" 63×32",
+        "a.inline-block.text-left.py-1 \"Contact\" 59×32",
+        "a.hover:text-white.transition-colors \"contact@airola.co.uk\" 160×20",
+        "a.hover:text-white.transition-colors \"+44 7925 123219\" 131×20",
+        "a.hover:text-white.transition-colors \"WhatsApp us\" 101×20"
+      ]
+    },
+    "edgeText": [],
+    "fixed": [
+      "nav.fixed.top-0.left-0 \"HomePackagesServicesGiveawayReviewsAbout\" fixed 768×100 @(0,0)",
+      "a.fixed.bottom-28.right-6 \"Chat on WhatsApp\" fixed 56×56 @(688,856)",
+      "button.fixed.bottom-6.right-6 \"Chat with Airola assistant\" fixed 64×64 @(680,936)"
+    ],
+    "images": [
+      "/Final_logo-removebg-preview.png → no srcset, oversized 453px for 48px slot, not WebP/AVIF"
+    ],
+    "fields": [],
+    "heroCta": null,
+    "h1": {
+      "fontSize": "48px",
+      "height": 48
+    }
+  },
+  "/giveaway@768": {
+    "scrollWidth": 768,
+    "innerWidth": 768,
+    "overflow": [],
+    "smallBody": {
+      "count": 1,
+      "examples": [
+        "p.text-sm.text-slate-600.text-center \"One entry per host. Limited to propertie\" 14px"
+      ]
+    },
+    "tinyText": [],
+    "smallTargets": {
+      "count": 15,
+      "examples": [
+        "button.w-11.h-11.flex \"Go back\" 20×44",
+        "a.text-center.flex.items-center \"Airola home\" 48×43",
+        "a.inline-block.text-left.py-1 \"Home\" 45×32",
+        "a.inline-block.text-left.py-1 \"Packages\" 74×32",
+        "a.inline-block.text-left.py-1 \"Services\" 66×32",
+        "a.inline-block.text-left.py-1 \"Giveaway\" 74×32",
+        "a.inline-block.text-left.py-1 \"About\" 45×32",
+        "a.inline-block.text-left.py-1 \"Reviews\" 63×32",
+        "a.inline-block.text-left.py-1 \"Contact\" 59×32",
+        "a.hover:text-white.transition-colors \"contact@airola.co.uk\" 160×20",
+        "a.hover:text-white.transition-colors \"+44 7925 123219\" 131×20",
+        "a.hover:text-white.transition-colors \"WhatsApp us\" 101×20"
+      ]
+    },
+    "edgeText": [],
+    "fixed": [
+      "nav.fixed.top-0.left-0 \"HomePackagesServicesGiveawayReviewsAbout\" fixed 768×100 @(0,0)",
+      "a.fixed.bottom-28.right-6 \"Chat on WhatsApp\" fixed 56×56 @(688,856)",
+      "button.fixed.bottom-6.right-6 \"Chat with Airola assistant\" fixed 64×64 @(680,936)"
+    ],
+    "images": [
+      "/Final_logo-removebg-preview.png → no srcset, oversized 453px for 48px slot, not WebP/AVIF"
+    ],
+    "fields": [
+      "input#name.w-full.p-4.bg-slate-50 \"\" → no autocomplete",
+      "input#phone.w-full.p-4.bg-slate-50 \"\" → no autocomplete",
+      "input#email.w-full.p-4.bg-slate-50 \"\" → no autocomplete"
+    ],
+    "heroCta": null,
+    "h1": {
+      "fontSize": "60px",
+      "height": 120
+    }
+  },
+  "/legal@768": {
+    "scrollWidth": 768,
+    "innerWidth": 768,
+    "overflow": [],
+    "smallBody": {
+      "count": 0,
+      "examples": []
+    },
+    "tinyText": [],
+    "smallTargets": {
+      "count": 15,
+      "examples": [
+        "button.w-11.h-11.flex \"Go back\" 20×44",
+        "a.text-center.flex.items-center \"Airola home\" 48×43",
+        "a.inline-block.text-left.py-1 \"Home\" 45×32",
+        "a.inline-block.text-left.py-1 \"Packages\" 74×32",
+        "a.inline-block.text-left.py-1 \"Services\" 66×32",
+        "a.inline-block.text-left.py-1 \"Giveaway\" 74×32",
+        "a.inline-block.text-left.py-1 \"About\" 45×32",
+        "a.inline-block.text-left.py-1 \"Reviews\" 63×32",
+        "a.inline-block.text-left.py-1 \"Contact\" 59×32",
+        "a.hover:text-white.transition-colors \"contact@airola.co.uk\" 160×20",
+        "a.hover:text-white.transition-colors \"+44 7925 123219\" 131×20",
+        "a.hover:text-white.transition-colors \"WhatsApp us\" 101×20"
+      ]
+    },
+    "edgeText": [],
+    "fixed": [
+      "nav.fixed.top-0.left-0 \"HomePackagesServicesGiveawayReviewsAbout\" fixed 768×100 @(0,0)",
+      "a.fixed.bottom-28.right-6 \"Chat on WhatsApp\" fixed 56×56 @(688,856)",
+      "button.fixed.bottom-6.right-6 \"Chat with Airola assistant\" fixed 64×64 @(680,936)"
+    ],
+    "images": [
+      "/Final_logo-removebg-preview.png → no srcset, oversized 453px for 48px slot, not WebP/AVIF"
+    ],
+    "fields": [],
+    "heroCta": null,
+    "h1": {
+      "fontSize": "48px",
+      "height": 48
+    }
+  },
+  "/testimonials@768": {
+    "scrollWidth": 768,
+    "innerWidth": 768,
+    "overflow": [],
+    "smallBody": {
+      "count": 3,
+      "examples": [
+        "p#review-displayName-hint.text-sm.text-slate-600.mb-2 \"First name and initial is fine, e.g. Sam\" 14px",
+        "p#review-body-count.mt-2.text-sm.text-slate-600 \"0 / 600 characters (at least 20)\" 14px",
+        "p#review-email-hint.text-sm.text-slate-600.mb-2 \"Never shown publicly. Used only to verif\" 14px"
+      ]
+    },
+    "tinyText": [],
+    "smallTargets": {
+      "count": 15,
+      "examples": [
+        "button.w-11.h-11.flex \"Go back\" 20×44",
+        "a.text-center.flex.items-center \"Airola home\" 48×43",
+        "a.inline-block.text-left.py-1 \"Home\" 45×32",
+        "a.inline-block.text-left.py-1 \"Packages\" 74×32",
+        "a.inline-block.text-left.py-1 \"Services\" 66×32",
+        "a.inline-block.text-left.py-1 \"Giveaway\" 74×32",
+        "a.inline-block.text-left.py-1 \"About\" 45×32",
+        "a.inline-block.text-left.py-1 \"Reviews\" 63×32",
+        "a.inline-block.text-left.py-1 \"Contact\" 59×32",
+        "a.hover:text-white.transition-colors \"contact@airola.co.uk\" 160×20",
+        "a.hover:text-white.transition-colors \"+44 7925 123219\" 131×20",
+        "a.hover:text-white.transition-colors \"WhatsApp us\" 101×20"
+      ]
+    },
+    "edgeText": [],
+    "fixed": [
+      "nav.fixed.top-0.left-0 \"HomePackagesServicesGiveawayReviewsAbout\" fixed 768×100 @(0,0)",
+      "a.fixed.bottom-28.right-6 \"Chat on WhatsApp\" fixed 56×56 @(688,856)",
+      "button.fixed.bottom-6.right-6 \"Chat with Airola assistant\" fixed 64×64 @(680,936)"
+    ],
+    "images": [
+      "/Final_logo-removebg-preview.png → no srcset, oversized 453px for 48px slot, not WebP/AVIF"
+    ],
+    "fields": [],
+    "heroCta": null,
+    "h1": {
+      "fontSize": "48px",
+      "height": 48
+    }
+  },
+  "/offer@768": {
+    "scrollWidth": 768,
+    "innerWidth": 768,
+    "overflow": [],
+    "smallBody": {
+      "count": 3,
+      "examples": [
+        "li. \"Cannot be combined with other offers.\" 14px",
+        "li. \"Booking confirmed when the 50% deposit i\" 14px",
+        "li. \"Airola reserves the right to withdraw th\" 14px"
+      ]
+    },
+    "tinyText": [],
+    "smallTargets": {
+      "count": 15,
+      "examples": [
+        "button.w-11.h-11.flex \"Go back\" 20×44",
+        "a.text-center.flex.items-center \"Airola home\" 48×43",
+        "a.inline-block.text-left.py-1 \"Home\" 45×32",
+        "a.inline-block.text-left.py-1 \"Packages\" 74×32",
+        "a.inline-block.text-left.py-1 \"Services\" 66×32",
+        "a.inline-block.text-left.py-1 \"Giveaway\" 74×32",
+        "a.inline-block.text-left.py-1 \"About\" 45×32",
+        "a.inline-block.text-left.py-1 \"Reviews\" 63×32",
+        "a.inline-block.text-left.py-1 \"Contact\" 59×32",
+        "a.hover:text-white.transition-colors \"contact@airola.co.uk\" 160×20",
+        "a.hover:text-white.transition-colors \"+44 7925 123219\" 131×20",
+        "a.hover:text-white.transition-colors \"WhatsApp us\" 101×20"
+      ]
+    },
+    "edgeText": [],
+    "fixed": [
+      "nav.fixed.top-0.left-0 \"HomePackagesServicesGiveawayReviewsAbout\" fixed 768×100 @(0,0)",
+      "a.fixed.bottom-28.right-6 \"Chat on WhatsApp\" fixed 56×56 @(688,856)",
+      "button.fixed.bottom-6.right-6 \"Chat with Airola assistant\" fixed 64×64 @(680,936)"
+    ],
+    "images": [
+      "/Final_logo-removebg-preview.png → no srcset, oversized 453px for 48px slot, not WebP/AVIF"
+    ],
+    "fields": [],
+    "heroCta": null,
+    "h1": {
+      "fontSize": "60px",
+      "height": 120
+    }
+  },
+  "/login@768": {
+    "scrollWidth": 768,
+    "innerWidth": 768,
+    "overflow": [],
+    "smallBody": {
+      "count": 1,
+      "examples": [
+        "span. \"Encrypted authentication & UK-hosted dat\" 12px"
+      ]
+    },
+    "tinyText": [],
+    "smallTargets": {
+      "count": 16,
+      "examples": [
+        "button.w-11.h-11.flex \"Go back\" 20×44",
+        "a.text-center.flex.items-center \"Airola home\" 48×43",
+        "button.absolute.right-4.top-1/2 \"Show password\" 28×28",
+        "a.inline-block.text-left.py-1 \"Home\" 45×32",
+        "a.inline-block.text-left.py-1 \"Packages\" 74×32",
+        "a.inline-block.text-left.py-1 \"Services\" 66×32",
+        "a.inline-block.text-left.py-1 \"Giveaway\" 74×32",
+        "a.inline-block.text-left.py-1 \"About\" 45×32",
+        "a.inline-block.text-left.py-1 \"Reviews\" 63×32",
+        "a.inline-block.text-left.py-1 \"Contact\" 59×32",
+        "a.hover:text-white.transition-colors \"contact@airola.co.uk\" 160×20",
+        "a.hover:text-white.transition-colors \"+44 7925 123219\" 131×20"
+      ]
+    },
+    "edgeText": [],
+    "fixed": [
+      "nav.fixed.top-0.left-0 \"HomePackagesServicesGiveawayReviewsAbout\" fixed 768×100 @(0,0)",
+      "a.fixed.bottom-28.right-6 \"Chat on WhatsApp\" fixed 56×56 @(688,856)",
+      "button.fixed.bottom-6.right-6 \"Chat with Airola assistant\" fixed 64×64 @(680,936)"
+    ],
+    "images": [
+      "/Final_logo-removebg-preview.png → no srcset, oversized 453px for 48px slot, not WebP/AVIF"
+    ],
+    "fields": [
+      "input#login-email.w-full.pl-12.pr-4 \"\" → no autocomplete"
+    ],
+    "heroCta": null,
+    "h1": {
+      "fontSize": "30px",
+      "height": 36
+    }
+  },
+  "/areas/stratford@768": {
+    "scrollWidth": 768,
+    "innerWidth": 768,
+    "overflow": [],
+    "smallBody": {
+      "count": 2,
+      "examples": [
+        "p.text-slate-700.text-sm.leading-relaxed \"Full guest-ready reset: kitchen, bathroo\" 14px",
+        "p.text-slate-700.text-sm.leading-relaxed \"Everything in Standard plus linen change\" 14px"
+      ]
+    },
+    "tinyText": [],
+    "smallTargets": {
+      "count": 15,
+      "examples": [
+        "button.w-11.h-11.flex \"Go back\" 20×44",
+        "a.text-center.flex.items-center \"Airola home\" 48×43",
+        "a.inline-block.text-left.py-1 \"Home\" 45×32",
+        "a.inline-block.text-left.py-1 \"Packages\" 74×32",
+        "a.inline-block.text-left.py-1 \"Services\" 66×32",
+        "a.inline-block.text-left.py-1 \"Giveaway\" 74×32",
+        "a.inline-block.text-left.py-1 \"About\" 45×32",
+        "a.inline-block.text-left.py-1 \"Reviews\" 63×32",
+        "a.inline-block.text-left.py-1 \"Contact\" 59×32",
+        "a.hover:text-white.transition-colors \"contact@airola.co.uk\" 160×20",
+        "a.hover:text-white.transition-colors \"+44 7925 123219\" 131×20",
+        "a.hover:text-white.transition-colors \"WhatsApp us\" 101×20"
+      ]
+    },
+    "edgeText": [],
+    "fixed": [
+      "nav.fixed.top-0.left-0 \"HomePackagesServicesGiveawayReviewsAbout\" fixed 768×100 @(0,0)",
+      "a.fixed.bottom-28.right-6 \"Chat on WhatsApp\" fixed 56×56 @(688,856)",
+      "button.fixed.bottom-6.right-6 \"Chat with Airola assistant\" fixed 64×64 @(680,936)"
+    ],
+    "images": [
+      "/Final_logo-removebg-preview.png → no srcset, oversized 453px for 48px slot, not WebP/AVIF"
+    ],
+    "fields": [],
+    "heroCta": {
+      "top": 1060,
+      "bottom": 1122,
+      "visible": false
+    },
+    "h1": {
+      "fontSize": "48px",
+      "height": 96
+    }
+  },
+  "/page-that-does-not-exist@768": {
+    "scrollWidth": 768,
+    "innerWidth": 768,
+    "overflow": [],
+    "smallBody": {
+      "count": 0,
+      "examples": []
+    },
+    "tinyText": [],
+    "smallTargets": {
+      "count": 15,
+      "examples": [
+        "button.w-11.h-11.flex \"Go back\" 20×44",
+        "a.text-center.flex.items-center \"Airola home\" 48×43",
+        "a.inline-block.text-left.py-1 \"Home\" 45×32",
+        "a.inline-block.text-left.py-1 \"Packages\" 74×32",
+        "a.inline-block.text-left.py-1 \"Services\" 66×32",
+        "a.inline-block.text-left.py-1 \"Giveaway\" 74×32",
+        "a.inline-block.text-left.py-1 \"About\" 45×32",
+        "a.inline-block.text-left.py-1 \"Reviews\" 63×32",
+        "a.inline-block.text-left.py-1 \"Contact\" 59×32",
+        "a.hover:text-white.transition-colors \"contact@airola.co.uk\" 160×20",
+        "a.hover:text-white.transition-colors \"+44 7925 123219\" 131×20",
+        "a.hover:text-white.transition-colors \"WhatsApp us\" 101×20"
+      ]
+    },
+    "edgeText": [],
+    "fixed": [
+      "nav.fixed.top-0.left-0 \"HomePackagesServicesGiveawayReviewsAbout\" fixed 768×100 @(0,0)",
+      "a.fixed.bottom-28.right-6 \"Chat on WhatsApp\" fixed 56×56 @(688,856)",
+      "button.fixed.bottom-6.right-6 \"Chat with Airola assistant\" fixed 64×64 @(680,936)"
+    ],
+    "images": [
+      "/Final_logo-removebg-preview.png → no srcset, oversized 453px for 48px slot, not WebP/AVIF"
+    ],
+    "fields": [],
+    "heroCta": null,
+    "h1": {
+      "fontSize": "48px",
+      "height": 48
+    }
+  },
+  "/@1440": {
+    "scrollWidth": 1440,
+    "innerWidth": 1440,
+    "overflow": [],
+    "smallBody": {
+      "count": 17,
+      "examples": [
+        "p.mt-5.text-sm.text-white/90 \"No payment now · No contract · First-cle\" 14px",
+        "p.mt-6.text-sm.text-white/90 \"Prefer a message? WhatsApp us (opens in \" 14px",
+        "p.text-slate-300.text-sm.leading-relaxed \"Full guest-ready reset between check-out\" 14px",
+        "p.text-slate-300.text-sm.leading-relaxed \"Every room, photographed and sent before\" 14px",
+        "p.text-slate-300.text-sm.leading-relaxed \"Reviews protected. Nothing left to chanc\" 14px",
+        "p.text-slate-500.text-sm.leading-relaxed \"We keep our promises, provide upfront ti\" 14px"
+      ]
+    },
+    "tinyText": [],
+    "smallTargets": {
+      "count": 14,
+      "examples": [
+        "a.inline-block.text-center.px-5 \"Close by? Ask us\" 159×42",
+        "a.inline-block.text-left.py-1 \"Home\" 45×32",
+        "a.inline-block.text-left.py-1 \"Packages\" 74×32",
+        "a.inline-block.text-left.py-1 \"Services\" 66×32",
+        "a.inline-block.text-left.py-1 \"Giveaway\" 74×32",
+        "a.inline-block.text-left.py-1 \"About\" 45×32",
+        "a.inline-block.text-left.py-1 \"Reviews\" 63×32",
+        "a.inline-block.text-left.py-1 \"Contact\" 59×32",
+        "a.hover:text-white.transition-colors \"contact@airola.co.uk\" 160×20",
+        "a.hover:text-white.transition-colors \"+44 7925 123219\" 131×20",
+        "a.hover:text-white.transition-colors \"WhatsApp us\" 101×20",
+        "a.inline-block.text-left.py-1 \"Privacy Policy\" 106×32"
+      ]
+    },
+    "edgeText": [],
+    "fixed": [
+      "nav.fixed.top-0.left-0 \"HomePackagesServicesGiveawayReviewsAbout\" fixed 1440×100 @(0,0)",
+      "div.order-1.lg:order-2.lg:sticky \"SERVICESEverything Your Guests Expect - \" sticky 576×492 @(752,3009)",
+      "a.fixed.bottom-28.right-6 \"Chat on WhatsApp\" fixed 56×56 @(1360,732)",
+      "button.fixed.bottom-6.right-6 \"Chat with Airola assistant\" fixed 64×64 @(1352,812)"
+    ],
+    "images": [
+      "/Final_logo-removebg-preview.png → no srcset, not WebP/AVIF",
+      "/hero-bg.jpg → no srcset, not WebP/AVIF",
+      "/why-choose.jpg → no srcset, not WebP/AVIF",
+      "/how-works.jpg → no srcset, not WebP/AVIF"
+    ],
+    "fields": [],
+    "heroCta": {
+      "top": 528,
+      "bottom": 588,
+      "visible": true
+    },
+    "h1": {
+      "fontSize": "72px",
+      "height": 180
+    }
+  },
+  "/pricing@1440": {
+    "scrollWidth": 1440,
+    "innerWidth": 1440,
+    "overflow": [],
+    "smallBody": {
+      "count": 16,
+      "examples": [
+        "p.text-slate-600.text-sm.mt-2 \"£35 per turnover when you book every tur\" 14px",
+        "p.text-slate-500.text-sm.mt-2 \"The full guest-ready reset, with proof.\" 14px",
+        "span.text-slate-600.text-sm.leading-snug \"Full property turnover: kitchen, bathroo\" 14px",
+        "span.text-slate-600.text-sm.leading-snug \"Photo confirmation after every clean\" 14px",
+        "span.text-slate-600.text-sm.leading-snug \"Priority booking & faster response\" 14px",
+        "span.text-slate-600.text-sm.leading-snug \"No contract, no emergency fees\" 14px"
+      ]
+    },
+    "tinyText": [],
+    "smallTargets": {
+      "count": 13,
+      "examples": [
+        "a.inline-block.text-left.py-1 \"Home\" 45×32",
+        "a.inline-block.text-left.py-1 \"Packages\" 74×32",
+        "a.inline-block.text-left.py-1 \"Services\" 66×32",
+        "a.inline-block.text-left.py-1 \"Giveaway\" 74×32",
+        "a.inline-block.text-left.py-1 \"About\" 45×32",
+        "a.inline-block.text-left.py-1 \"Reviews\" 63×32",
+        "a.inline-block.text-left.py-1 \"Contact\" 59×32",
+        "a.hover:text-white.transition-colors \"contact@airola.co.uk\" 160×20",
+        "a.hover:text-white.transition-colors \"+44 7925 123219\" 131×20",
+        "a.hover:text-white.transition-colors \"WhatsApp us\" 101×20",
+        "a.inline-block.text-left.py-1 \"Privacy Policy\" 106×32",
+        "a.inline-block.text-left.py-1 \"Terms & Conditions\" 147×32"
+      ]
+    },
+    "edgeText": [],
+    "fixed": [
+      "nav.fixed.top-0.left-0 \"HomePackagesServicesGiveawayReviewsAbout\" fixed 1440×100 @(0,0)",
+      "a.fixed.bottom-28.right-6 \"Chat on WhatsApp\" fixed 56×56 @(1360,732)",
+      "button.fixed.bottom-6.right-6 \"Chat with Airola assistant\" fixed 64×64 @(1352,812)"
+    ],
+    "images": [
+      "/Final_logo-removebg-preview.png → no srcset, not WebP/AVIF"
+    ],
+    "fields": [],
+    "heroCta": {
+      "top": 2447,
+      "bottom": 2515,
+      "visible": false
+    },
+    "h1": {
+      "fontSize": "48px",
+      "height": 48
+    }
+  },
+  "/quote@1440": {
+    "scrollWidth": 1440,
+    "innerWidth": 1440,
+    "overflow": [],
+    "smallBody": {
+      "count": 3,
+      "examples": [
+        "span. \"Standard Turnover (1 bed, 1 bath)\" 14px",
+        "span. \"Photo proof after every clean\" 14px",
+        "p.text-xs.text-slate-400.leading-relaxed \"No payment now. We confirm your final pr\" 12px"
+      ]
+    },
+    "tinyText": [],
+    "smallTargets": {
+      "count": 14,
+      "examples": [
+        "a.text-sm.font-bold.text-slate-500 \"Prefer WhatsApp? Message us\" 233×20",
+        "a.inline-block.text-left.py-1 \"Home\" 45×32",
+        "a.inline-block.text-left.py-1 \"Packages\" 74×32",
+        "a.inline-block.text-left.py-1 \"Services\" 66×32",
+        "a.inline-block.text-left.py-1 \"Giveaway\" 74×32",
+        "a.inline-block.text-left.py-1 \"About\" 45×32",
+        "a.inline-block.text-left.py-1 \"Reviews\" 63×32",
+        "a.inline-block.text-left.py-1 \"Contact\" 59×32",
+        "a.hover:text-white.transition-colors \"contact@airola.co.uk\" 160×20",
+        "a.hover:text-white.transition-colors \"+44 7925 123219\" 131×20",
+        "a.hover:text-white.transition-colors \"WhatsApp us\" 101×20",
+        "a.inline-block.text-left.py-1 \"Privacy Policy\" 106×32"
+      ]
+    },
+    "edgeText": [],
+    "fixed": [
+      "nav.fixed.top-0.left-0 \"HomePackagesServicesGiveawayReviewsAbout\" fixed 1440×100 @(0,0)",
+      "div.bg-slate-900.rounded-[3rem].p-10 \"Your PriceStandard Turnover (1 bed, 1 ba\" sticky 244×574 @(1084,138)",
+      "a.fixed.bottom-28.right-6 \"Chat on WhatsApp\" fixed 56×56 @(1360,732)",
+      "button.fixed.bottom-6.right-6 \"Chat with Airola assistant\" fixed 64×64 @(1352,812)"
+    ],
+    "images": [
+      "/Final_logo-removebg-preview.png → no srcset, not WebP/AVIF"
+    ],
+    "fields": [],
+    "heroCta": null,
+    "h1": {
+      "fontSize": "36px",
+      "height": 40
+    }
+  },
+  "/about-us@1440": {
+    "scrollWidth": 1440,
+    "innerWidth": 1440,
+    "overflow": [],
+    "smallBody": {
+      "count": 6,
+      "examples": [
+        "p.text-slate-500.text-sm.leading-relaxed \"Full guest-ready reset between every che\" 14px",
+        "p.text-slate-500.text-sm.leading-relaxed \"Photos to your WhatsApp before your gues\" 14px",
+        "p.text-slate-500.text-sm.leading-relaxed \"Fresh linen and hotel-style beds.\" 14px",
+        "p.text-slate-500.text-sm.leading-relaxed \"Every dish, surface and appliance guest-\" 14px",
+        "p.text-slate-500.text-sm.leading-relaxed \"Toilet paper, soap and basics topped up \" 14px",
+        "p.text-slate-500.text-sm.leading-relaxed \"Same-day rescue for our recurring client\" 14px"
+      ]
+    },
+    "tinyText": [],
+    "smallTargets": {
+      "count": 13,
+      "examples": [
+        "a.inline-block.text-left.py-1 \"Home\" 45×32",
+        "a.inline-block.text-left.py-1 \"Packages\" 74×32",
+        "a.inline-block.text-left.py-1 \"Services\" 66×32",
+        "a.inline-block.text-left.py-1 \"Giveaway\" 74×32",
+        "a.inline-block.text-left.py-1 \"About\" 45×32",
+        "a.inline-block.text-left.py-1 \"Reviews\" 63×32",
+        "a.inline-block.text-left.py-1 \"Contact\" 59×32",
+        "a.hover:text-white.transition-colors \"contact@airola.co.uk\" 160×20",
+        "a.hover:text-white.transition-colors \"+44 7925 123219\" 131×20",
+        "a.hover:text-white.transition-colors \"WhatsApp us\" 101×20",
+        "a.inline-block.text-left.py-1 \"Privacy Policy\" 106×32",
+        "a.inline-block.text-left.py-1 \"Terms & Conditions\" 147×32"
+      ]
+    },
+    "edgeText": [],
+    "fixed": [
+      "nav.fixed.top-0.left-0 \"HomePackagesServicesGiveawayReviewsAbout\" fixed 1440×100 @(0,0)",
+      "a.fixed.bottom-28.right-6 \"Chat on WhatsApp\" fixed 56×56 @(1360,732)",
+      "button.fixed.bottom-6.right-6 \"Chat with Airola assistant\" fixed 64×64 @(1352,812)"
+    ],
+    "images": [
+      "/Final_logo-removebg-preview.png → no srcset, not WebP/AVIF",
+      "/why-choose.jpg → no srcset, not WebP/AVIF"
+    ],
+    "fields": [],
+    "heroCta": null,
+    "h1": {
+      "fontSize": "48px",
+      "height": 120
+    }
+  },
+  "/contact@1440": {
+    "scrollWidth": 1440,
+    "innerWidth": 1440,
+    "overflow": [],
+    "smallBody": {
+      "count": 0,
+      "examples": []
+    },
+    "tinyText": [],
+    "smallTargets": {
+      "count": 13,
+      "examples": [
+        "a.inline-block.text-left.py-1 \"Home\" 45×32",
+        "a.inline-block.text-left.py-1 \"Packages\" 74×32",
+        "a.inline-block.text-left.py-1 \"Services\" 66×32",
+        "a.inline-block.text-left.py-1 \"Giveaway\" 74×32",
+        "a.inline-block.text-left.py-1 \"About\" 45×32",
+        "a.inline-block.text-left.py-1 \"Reviews\" 63×32",
+        "a.inline-block.text-left.py-1 \"Contact\" 59×32",
+        "a.hover:text-white.transition-colors \"contact@airola.co.uk\" 160×20",
+        "a.hover:text-white.transition-colors \"+44 7925 123219\" 131×20",
+        "a.hover:text-white.transition-colors \"WhatsApp us\" 101×20",
+        "a.inline-block.text-left.py-1 \"Privacy Policy\" 106×32",
+        "a.inline-block.text-left.py-1 \"Terms & Conditions\" 147×32"
+      ]
+    },
+    "edgeText": [],
+    "fixed": [
+      "nav.fixed.top-0.left-0 \"HomePackagesServicesGiveawayReviewsAbout\" fixed 1440×100 @(0,0)",
+      "a.fixed.bottom-28.right-6 \"Chat on WhatsApp\" fixed 56×56 @(1360,732)",
+      "button.fixed.bottom-6.right-6 \"Chat with Airola assistant\" fixed 64×64 @(1352,812)"
+    ],
+    "images": [
+      "/Final_logo-removebg-preview.png → no srcset, not WebP/AVIF"
+    ],
+    "fields": [],
+    "heroCta": null,
+    "h1": {
+      "fontSize": "48px",
+      "height": 48
+    }
+  },
+  "/giveaway@1440": {
+    "scrollWidth": 1440,
+    "innerWidth": 1440,
+    "overflow": [],
+    "smallBody": {
+      "count": 1,
+      "examples": [
+        "p.text-sm.text-slate-600.text-center \"One entry per host. Limited to propertie\" 14px"
+      ]
+    },
+    "tinyText": [],
+    "smallTargets": {
+      "count": 13,
+      "examples": [
+        "a.inline-block.text-left.py-1 \"Home\" 45×32",
+        "a.inline-block.text-left.py-1 \"Packages\" 74×32",
+        "a.inline-block.text-left.py-1 \"Services\" 66×32",
+        "a.inline-block.text-left.py-1 \"Giveaway\" 74×32",
+        "a.inline-block.text-left.py-1 \"About\" 45×32",
+        "a.inline-block.text-left.py-1 \"Reviews\" 63×32",
+        "a.inline-block.text-left.py-1 \"Contact\" 59×32",
+        "a.hover:text-white.transition-colors \"contact@airola.co.uk\" 160×20",
+        "a.hover:text-white.transition-colors \"+44 7925 123219\" 131×20",
+        "a.hover:text-white.transition-colors \"WhatsApp us\" 101×20",
+        "a.inline-block.text-left.py-1 \"Privacy Policy\" 106×32",
+        "a.inline-block.text-left.py-1 \"Terms & Conditions\" 147×32"
+      ]
+    },
+    "edgeText": [],
+    "fixed": [
+      "nav.fixed.top-0.left-0 \"HomePackagesServicesGiveawayReviewsAbout\" fixed 1440×100 @(0,0)",
+      "a.fixed.bottom-28.right-6 \"Chat on WhatsApp\" fixed 56×56 @(1360,732)",
+      "button.fixed.bottom-6.right-6 \"Chat with Airola assistant\" fixed 64×64 @(1352,812)"
+    ],
+    "images": [
+      "/Final_logo-removebg-preview.png → no srcset, not WebP/AVIF"
+    ],
+    "fields": [
+      "input#name.w-full.p-4.bg-slate-50 \"\" → no autocomplete",
+      "input#phone.w-full.p-4.bg-slate-50 \"\" → no autocomplete",
+      "input#email.w-full.p-4.bg-slate-50 \"\" → no autocomplete"
+    ],
+    "heroCta": null,
+    "h1": {
+      "fontSize": "60px",
+      "height": 60
+    }
+  },
+  "/legal@1440": {
+    "scrollWidth": 1440,
+    "innerWidth": 1440,
+    "overflow": [],
+    "smallBody": {
+      "count": 0,
+      "examples": []
+    },
+    "tinyText": [],
+    "smallTargets": {
+      "count": 13,
+      "examples": [
+        "a.inline-block.text-left.py-1 \"Home\" 45×32",
+        "a.inline-block.text-left.py-1 \"Packages\" 74×32",
+        "a.inline-block.text-left.py-1 \"Services\" 66×32",
+        "a.inline-block.text-left.py-1 \"Giveaway\" 74×32",
+        "a.inline-block.text-left.py-1 \"About\" 45×32",
+        "a.inline-block.text-left.py-1 \"Reviews\" 63×32",
+        "a.inline-block.text-left.py-1 \"Contact\" 59×32",
+        "a.hover:text-white.transition-colors \"contact@airola.co.uk\" 160×20",
+        "a.hover:text-white.transition-colors \"+44 7925 123219\" 131×20",
+        "a.hover:text-white.transition-colors \"WhatsApp us\" 101×20",
+        "a.inline-block.text-left.py-1 \"Privacy Policy\" 106×32",
+        "a.inline-block.text-left.py-1 \"Terms & Conditions\" 147×32"
+      ]
+    },
+    "edgeText": [],
+    "fixed": [
+      "nav.fixed.top-0.left-0 \"HomePackagesServicesGiveawayReviewsAbout\" fixed 1440×100 @(0,0)",
+      "a.fixed.bottom-28.right-6 \"Chat on WhatsApp\" fixed 56×56 @(1360,732)",
+      "button.fixed.bottom-6.right-6 \"Chat with Airola assistant\" fixed 64×64 @(1352,812)"
+    ],
+    "images": [
+      "/Final_logo-removebg-preview.png → no srcset, not WebP/AVIF"
+    ],
+    "fields": [],
+    "heroCta": null,
+    "h1": {
+      "fontSize": "48px",
+      "height": 48
+    }
+  },
+  "/testimonials@1440": {
+    "scrollWidth": 1440,
+    "innerWidth": 1440,
+    "overflow": [],
+    "smallBody": {
+      "count": 3,
+      "examples": [
+        "p#review-displayName-hint.text-sm.text-slate-600.mb-2 \"First name and initial is fine, e.g. Sam\" 14px",
+        "p#review-body-count.mt-2.text-sm.text-slate-600 \"0 / 600 characters (at least 20)\" 14px",
+        "p#review-email-hint.text-sm.text-slate-600.mb-2 \"Never shown publicly. Used only to verif\" 14px"
+      ]
+    },
+    "tinyText": [],
+    "smallTargets": {
+      "count": 13,
+      "examples": [
+        "a.inline-block.text-left.py-1 \"Home\" 45×32",
+        "a.inline-block.text-left.py-1 \"Packages\" 74×32",
+        "a.inline-block.text-left.py-1 \"Services\" 66×32",
+        "a.inline-block.text-left.py-1 \"Giveaway\" 74×32",
+        "a.inline-block.text-left.py-1 \"About\" 45×32",
+        "a.inline-block.text-left.py-1 \"Reviews\" 63×32",
+        "a.inline-block.text-left.py-1 \"Contact\" 59×32",
+        "a.hover:text-white.transition-colors \"contact@airola.co.uk\" 160×20",
+        "a.hover:text-white.transition-colors \"+44 7925 123219\" 131×20",
+        "a.hover:text-white.transition-colors \"WhatsApp us\" 101×20",
+        "a.inline-block.text-left.py-1 \"Privacy Policy\" 106×32",
+        "a.inline-block.text-left.py-1 \"Terms & Conditions\" 147×32"
+      ]
+    },
+    "edgeText": [],
+    "fixed": [
+      "nav.fixed.top-0.left-0 \"HomePackagesServicesGiveawayReviewsAbout\" fixed 1440×100 @(0,0)",
+      "a.fixed.bottom-28.right-6 \"Chat on WhatsApp\" fixed 56×56 @(1360,732)",
+      "button.fixed.bottom-6.right-6 \"Chat with Airola assistant\" fixed 64×64 @(1352,812)"
+    ],
+    "images": [
+      "/Final_logo-removebg-preview.png → no srcset, not WebP/AVIF"
+    ],
+    "fields": [],
+    "heroCta": null,
+    "h1": {
+      "fontSize": "48px",
+      "height": 48
+    }
+  },
+  "/offer@1440": {
+    "scrollWidth": 1440,
+    "innerWidth": 1440,
+    "overflow": [],
+    "smallBody": {
+      "count": 3,
+      "examples": [
+        "li. \"Cannot be combined with other offers.\" 14px",
+        "li. \"Booking confirmed when the 50% deposit i\" 14px",
+        "li. \"Airola reserves the right to withdraw th\" 14px"
+      ]
+    },
+    "tinyText": [],
+    "smallTargets": {
+      "count": 13,
+      "examples": [
+        "a.inline-block.text-left.py-1 \"Home\" 45×32",
+        "a.inline-block.text-left.py-1 \"Packages\" 74×32",
+        "a.inline-block.text-left.py-1 \"Services\" 66×32",
+        "a.inline-block.text-left.py-1 \"Giveaway\" 74×32",
+        "a.inline-block.text-left.py-1 \"About\" 45×32",
+        "a.inline-block.text-left.py-1 \"Reviews\" 63×32",
+        "a.inline-block.text-left.py-1 \"Contact\" 59×32",
+        "a.hover:text-white.transition-colors \"contact@airola.co.uk\" 160×20",
+        "a.hover:text-white.transition-colors \"+44 7925 123219\" 131×20",
+        "a.hover:text-white.transition-colors \"WhatsApp us\" 101×20",
+        "a.inline-block.text-left.py-1 \"Privacy Policy\" 106×32",
+        "a.inline-block.text-left.py-1 \"Terms & Conditions\" 147×32"
+      ]
+    },
+    "edgeText": [],
+    "fixed": [
+      "nav.fixed.top-0.left-0 \"HomePackagesServicesGiveawayReviewsAbout\" fixed 1440×100 @(0,0)",
+      "a.fixed.bottom-28.right-6 \"Chat on WhatsApp\" fixed 56×56 @(1360,732)",
+      "button.fixed.bottom-6.right-6 \"Chat with Airola assistant\" fixed 64×64 @(1352,812)"
+    ],
+    "images": [
+      "/Final_logo-removebg-preview.png → no srcset, not WebP/AVIF"
+    ],
+    "fields": [],
+    "heroCta": null,
+    "h1": {
+      "fontSize": "60px",
+      "height": 120
+    }
+  },
+  "/login@1440": {
+    "scrollWidth": 1440,
+    "innerWidth": 1440,
+    "overflow": [],
+    "smallBody": {
+      "count": 1,
+      "examples": [
+        "span. \"Encrypted authentication & UK-hosted dat\" 12px"
+      ]
+    },
+    "tinyText": [],
+    "smallTargets": {
+      "count": 14,
+      "examples": [
+        "button.absolute.right-4.top-1/2 \"Show password\" 28×28",
+        "a.inline-block.text-left.py-1 \"Home\" 45×32",
+        "a.inline-block.text-left.py-1 \"Packages\" 74×32",
+        "a.inline-block.text-left.py-1 \"Services\" 66×32",
+        "a.inline-block.text-left.py-1 \"Giveaway\" 74×32",
+        "a.inline-block.text-left.py-1 \"About\" 45×32",
+        "a.inline-block.text-left.py-1 \"Reviews\" 63×32",
+        "a.inline-block.text-left.py-1 \"Contact\" 59×32",
+        "a.hover:text-white.transition-colors \"contact@airola.co.uk\" 160×20",
+        "a.hover:text-white.transition-colors \"+44 7925 123219\" 131×20",
+        "a.hover:text-white.transition-colors \"WhatsApp us\" 101×20",
+        "a.inline-block.text-left.py-1 \"Privacy Policy\" 106×32"
+      ]
+    },
+    "edgeText": [],
+    "fixed": [
+      "nav.fixed.top-0.left-0 \"HomePackagesServicesGiveawayReviewsAbout\" fixed 1440×100 @(0,0)",
+      "a.fixed.bottom-28.right-6 \"Chat on WhatsApp\" fixed 56×56 @(1360,732)",
+      "button.fixed.bottom-6.right-6 \"Chat with Airola assistant\" fixed 64×64 @(1352,812)"
+    ],
+    "images": [
+      "/Final_logo-removebg-preview.png → no srcset, not WebP/AVIF"
+    ],
+    "fields": [
+      "input#login-email.w-full.pl-12.pr-4 \"\" → no autocomplete"
+    ],
+    "heroCta": null,
+    "h1": {
+      "fontSize": "30px",
+      "height": 36
+    }
+  },
+  "/areas/stratford@1440": {
+    "scrollWidth": 1440,
+    "innerWidth": 1440,
+    "overflow": [],
+    "smallBody": {
+      "count": 2,
+      "examples": [
+        "p.text-slate-700.text-sm.leading-relaxed \"Full guest-ready reset: kitchen, bathroo\" 14px",
+        "p.text-slate-700.text-sm.leading-relaxed \"Everything in Standard plus linen change\" 14px"
+      ]
+    },
+    "tinyText": [],
+    "smallTargets": {
+      "count": 13,
+      "examples": [
+        "a.inline-block.text-left.py-1 \"Home\" 45×32",
+        "a.inline-block.text-left.py-1 \"Packages\" 74×32",
+        "a.inline-block.text-left.py-1 \"Services\" 66×32",
+        "a.inline-block.text-left.py-1 \"Giveaway\" 74×32",
+        "a.inline-block.text-left.py-1 \"About\" 45×32",
+        "a.inline-block.text-left.py-1 \"Reviews\" 63×32",
+        "a.inline-block.text-left.py-1 \"Contact\" 59×32",
+        "a.hover:text-white.transition-colors \"contact@airola.co.uk\" 160×20",
+        "a.hover:text-white.transition-colors \"+44 7925 123219\" 131×20",
+        "a.hover:text-white.transition-colors \"WhatsApp us\" 101×20",
+        "a.inline-block.text-left.py-1 \"Privacy Policy\" 106×32",
+        "a.inline-block.text-left.py-1 \"Terms & Conditions\" 147×32"
+      ]
+    },
+    "edgeText": [],
+    "fixed": [
+      "nav.fixed.top-0.left-0 \"HomePackagesServicesGiveawayReviewsAbout\" fixed 1440×100 @(0,0)",
+      "a.fixed.bottom-28.right-6 \"Chat on WhatsApp\" fixed 56×56 @(1360,732)",
+      "button.fixed.bottom-6.right-6 \"Chat with Airola assistant\" fixed 64×64 @(1352,812)"
+    ],
+    "images": [
+      "/Final_logo-removebg-preview.png → no srcset, not WebP/AVIF"
+    ],
+    "fields": [],
+    "heroCta": {
+      "top": 1011,
+      "bottom": 1073,
+      "visible": false
+    },
+    "h1": {
+      "fontSize": "48px",
+      "height": 96
+    }
+  },
+  "/page-that-does-not-exist@1440": {
+    "scrollWidth": 1440,
+    "innerWidth": 1440,
+    "overflow": [],
+    "smallBody": {
+      "count": 0,
+      "examples": []
+    },
+    "tinyText": [],
+    "smallTargets": {
+      "count": 13,
+      "examples": [
+        "a.inline-block.text-left.py-1 \"Home\" 45×32",
+        "a.inline-block.text-left.py-1 \"Packages\" 74×32",
+        "a.inline-block.text-left.py-1 \"Services\" 66×32",
+        "a.inline-block.text-left.py-1 \"Giveaway\" 74×32",
+        "a.inline-block.text-left.py-1 \"About\" 45×32",
+        "a.inline-block.text-left.py-1 \"Reviews\" 63×32",
+        "a.inline-block.text-left.py-1 \"Contact\" 59×32",
+        "a.hover:text-white.transition-colors \"contact@airola.co.uk\" 160×20",
+        "a.hover:text-white.transition-colors \"+44 7925 123219\" 131×20",
+        "a.hover:text-white.transition-colors \"WhatsApp us\" 101×20",
+        "a.inline-block.text-left.py-1 \"Privacy Policy\" 106×32",
+        "a.inline-block.text-left.py-1 \"Terms & Conditions\" 147×32"
+      ]
+    },
+    "edgeText": [],
+    "fixed": [
+      "nav.fixed.top-0.left-0 \"HomePackagesServicesGiveawayReviewsAbout\" fixed 1440×100 @(0,0)",
+      "a.fixed.bottom-28.right-6 \"Chat on WhatsApp\" fixed 56×56 @(1360,732)",
+      "button.fixed.bottom-6.right-6 \"Chat with Airola assistant\" fixed 64×64 @(1352,812)"
+    ],
+    "images": [
+      "/Final_logo-removebg-preview.png → no srcset, not WebP/AVIF"
+    ],
+    "fields": [],
+    "heroCta": null,
+    "h1": {
+      "fontSize": "48px",
+      "height": 48
+    }
+  },
+  "/@320": {
+    "scrollWidth": 320,
+    "innerWidth": 320,
+    "overflow": []
+  },
+  "/pricing@320": {
+    "scrollWidth": 320,
+    "innerWidth": 320,
+    "overflow": []
+  },
+  "/quote@320": {
+    "scrollWidth": 320,
+    "innerWidth": 320,
+    "overflow": []
+  },
+  "/about-us@320": {
+    "scrollWidth": 320,
+    "innerWidth": 320,
+    "overflow": []
+  },
+  "/contact@320": {
+    "scrollWidth": 320,
+    "innerWidth": 320,
+    "overflow": []
+  },
+  "/giveaway@320": {
+    "scrollWidth": 320,
+    "innerWidth": 320,
+    "overflow": []
+  },
+  "/legal@320": {
+    "scrollWidth": 320,
+    "innerWidth": 320,
+    "overflow": []
+  },
+  "/testimonials@320": {
+    "scrollWidth": 320,
+    "innerWidth": 320,
+    "overflow": []
+  },
+  "/offer@320": {
+    "scrollWidth": 320,
+    "innerWidth": 320,
+    "overflow": []
+  },
+  "/login@320": {
+    "scrollWidth": 320,
+    "innerWidth": 320,
+    "overflow": []
+  },
+  "/areas/stratford@320": {
+    "scrollWidth": 320,
+    "innerWidth": 320,
+    "overflow": []
+  },
+  "/page-that-does-not-exist@320": {
+    "scrollWidth": 320,
+    "innerWidth": 320,
+    "overflow": []
+  }
+}

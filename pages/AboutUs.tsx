@@ -4,6 +4,7 @@ import { Page } from '../types';
 import RouteLink from '../components/RouteLink';
 import IllustrativeLabel from '../components/IllustrativeLabel';
 import SafeImage from '../components/SafeImage';
+import { webpSet } from '../config/images';
 
 interface AboutUsProps {
   onNavigate: (page: Page) => void;
@@ -49,6 +50,8 @@ const AboutUs: React.FC<AboutUsProps> = ({ onNavigate }) => {
               <div className="absolute -inset-4 bg-[rgb(204,236,229)]/40 rounded-[3rem] blur-2xl"></div>
               <SafeImage
                 src="/why-choose.jpg"
+                webpSrcSet={webpSet('why-choose', [480, 800, 1200, 1600])}
+                sizes="(min-width: 1024px) 50vw, 100vw"
                 alt="Airola cleaning professionals at work"
                 width={1600}
                 height={1066}
