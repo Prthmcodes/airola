@@ -99,11 +99,13 @@ const inspect = () => {
     const r = img.getBoundingClientRect();
     const issues = [];
     if (!img.getAttribute('width') || !img.getAttribute('height')) issues.push('no width/height');
-    if (!img.srcset) issues.push('no srcset');
+    const source = img.closest('picture')?.querySelector('source[srcset]');
+    if (!img.srcset && !source) issues.push('no srcset');
     if (img.naturalWidth > r.width * Math.max(dpr, 2) * 1.5) issues.push(`oversized ${img.naturalWidth}px for ${Math.round(r.width)}px slot`);
     const belowFold = r.top + window.scrollY > vh;
     if (belowFold && img.loading !== 'lazy') issues.push('below fold, not lazy');
-    if (!/\.(webp|avif)/i.test(img.currentSrc)) issues.push('not WebP/AVIF');
+    const webp = /image\/(webp|avif)/.test(source?.getAttribute('type') || '') || /\.(webp|avif)/i.test(img.currentSrc);
+    if (!webp) issues.push('not WebP/AVIF');
     return issues.length ? `${img.getAttribute('src')} → ${issues.join(', ')}` : null;
   }).filter(Boolean);
 

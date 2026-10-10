@@ -230,7 +230,7 @@ const PricingPage: React.FC<PricingPageProps> = ({ onNavigate }) => {
               </div>
             </div>
           </div>
-          <p className="text-center text-xs text-slate-600 mt-4">Credits apply to future bookings only. Not redeemable for cash.</p>
+          <p className="text-center text-sm lg:text-xs text-slate-600 mt-4">Credits apply to future bookings only. Not redeemable for cash.</p>
         </div>
 
         {/* New Affordable Services Section */}
