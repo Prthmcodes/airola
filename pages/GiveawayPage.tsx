@@ -145,16 +145,16 @@ export const GiveawayPage: React.FC<GiveawayPageProps> = ({ onNavigate }) => {
           <div className="space-y-6">
             <div>
               <label htmlFor="name" className="block text-xs font-black text-slate-500 mb-3 uppercase tracking-[0.05em]">Name</label>
-              <input type="text" id="name" value={name} onChange={(e) => setName(e.target.value)} className={inputClass} required placeholder="Your name" />
+              <input type="text" id="name" autoComplete="name" value={name} onChange={(e) => setName(e.target.value)} className={inputClass} required placeholder="Your name" />
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               <div>
                 <label htmlFor="phone" className="block text-xs font-black text-slate-500 mb-3 uppercase tracking-[0.05em]">Phone</label>
-                <input type="tel" id="phone" aria-invalid={error === CONTACT_MISSING} aria-describedby={error === CONTACT_MISSING ? 'giveaway-error' : undefined} value={phone} onChange={(e) => setPhone(e.target.value)} className={inputClass} placeholder="Your phone number" />
+                <input type="tel" id="phone" autoComplete="tel" aria-invalid={error === CONTACT_MISSING} aria-describedby={error === CONTACT_MISSING ? 'giveaway-error' : undefined} value={phone} onChange={(e) => setPhone(e.target.value)} className={inputClass} placeholder="Your phone number" />
               </div>
               <div>
                 <label htmlFor="email" className="block text-xs font-black text-slate-500 mb-3 uppercase tracking-[0.05em]">Email</label>
-                <input type="email" id="email" aria-invalid={error === CONTACT_MISSING} aria-describedby={error === CONTACT_MISSING ? 'giveaway-error' : undefined} value={email} onChange={(e) => setEmail(e.target.value)} className={inputClass} placeholder="Your email address" />
+                <input type="email" id="email" autoComplete="email" aria-invalid={error === CONTACT_MISSING} aria-describedby={error === CONTACT_MISSING ? 'giveaway-error' : undefined} value={email} onChange={(e) => setEmail(e.target.value)} className={inputClass} placeholder="Your email address" />
               </div>
             </div>
             <div>

@@ -260,28 +260,28 @@ const QuotePage: React.FC<QuotePageProps> = ({ quote, setQuote, onNavigate, user
                       <label htmlFor="quote-name" className="block text-xs font-black text-slate-500 mb-3 uppercase tracking-[0.05em]">Your Name</label>
                       <div className="relative">
                         <User className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
-                        <input id="quote-name" aria-invalid={showFieldErrors && !quote.ownerName} aria-describedby={showFieldErrors && !quote.ownerName ? 'quote-error' : undefined} type="text" value={quote.ownerName || ''} onChange={(e) => setQuote({ ...quote, ownerName: e.target.value })} placeholder="e.g. John Doe" className={inputClass} required />
+                        <input id="quote-name" autoComplete="name" aria-invalid={showFieldErrors && !quote.ownerName} aria-describedby={showFieldErrors && !quote.ownerName ? 'quote-error' : undefined} type="text" value={quote.ownerName || ''} onChange={(e) => setQuote({ ...quote, ownerName: e.target.value })} placeholder="e.g. John Doe" className={inputClass} required />
                       </div>
                     </div>
                     <div>
                       <label htmlFor="quote-email" className="block text-xs font-black text-slate-500 mb-3 uppercase tracking-[0.05em]">Email</label>
                       <div className="relative">
                         <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
-                        <input id="quote-email" aria-invalid={showFieldErrors && emailInvalid} aria-describedby={showFieldErrors && emailInvalid ? 'quote-error' : undefined} type="email" value={quote.ownerEmail || ''} onChange={(e) => setQuote({ ...quote, ownerEmail: e.target.value })} placeholder="e.g. john@example.com" className={inputClass} required />
+                        <input id="quote-email" autoComplete="email" aria-invalid={showFieldErrors && emailInvalid} aria-describedby={showFieldErrors && emailInvalid ? 'quote-error' : undefined} type="email" value={quote.ownerEmail || ''} onChange={(e) => setQuote({ ...quote, ownerEmail: e.target.value })} placeholder="e.g. john@example.com" className={inputClass} required />
                       </div>
                     </div>
                     <div>
                       <label htmlFor="quote-phone" className="block text-xs font-black text-slate-500 mb-3 uppercase tracking-[0.05em]">Mobile</label>
                       <div className="relative">
                         <Phone className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
-                        <input id="quote-phone" aria-invalid={showFieldErrors && !quote.ownerPhone} aria-describedby={showFieldErrors && !quote.ownerPhone ? 'quote-error' : undefined} type="tel" value={quote.ownerPhone || ''} onChange={(e) => setQuote({ ...quote, ownerPhone: e.target.value })} placeholder="+44 7700 900000" className={inputClass} required />
+                        <input id="quote-phone" autoComplete="tel" aria-invalid={showFieldErrors && !quote.ownerPhone} aria-describedby={showFieldErrors && !quote.ownerPhone ? 'quote-error' : undefined} type="tel" value={quote.ownerPhone || ''} onChange={(e) => setQuote({ ...quote, ownerPhone: e.target.value })} placeholder="+44 7700 900000" className={inputClass} required />
                       </div>
                     </div>
                     <div>
                       <label htmlFor="quote-address" className="block text-xs font-black text-slate-500 mb-3 uppercase tracking-[0.05em]">Property Address</label>
                       <div className="relative">
                         <MapPin className="absolute left-4 top-4 w-5 h-5 text-slate-400" />
-                        <textarea id="quote-address" aria-invalid={showFieldErrors && !quote.address} aria-describedby={showFieldErrors && !quote.address ? 'quote-error' : undefined} value={quote.address || ''} onChange={(e) => setQuote({ ...quote, address: e.target.value })} placeholder="Street address and postcode" className={`${inputClass} min-h-[90px]`} required />
+                        <textarea id="quote-address" autoComplete="street-address" aria-invalid={showFieldErrors && !quote.address} aria-describedby={showFieldErrors && !quote.address ? 'quote-error' : undefined} value={quote.address || ''} onChange={(e) => setQuote({ ...quote, address: e.target.value })} placeholder="Street address and postcode" className={`${inputClass} min-h-[90px]`} required />
                       </div>
                     </div>
                   </div>
