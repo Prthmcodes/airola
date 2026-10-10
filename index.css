@@ -45,11 +45,14 @@ h1, h2, h3, .price {
   0%, 100% { transform: translateX(0); }
   50% { transform: translateX(15px); }
 }
-.animate-pan-lr {
-  animation: pan-left-right 4s ease-in-out infinite;
-}
-.animate-pan-rl {
-  animation: pan-right-left 4s ease-in-out infinite;
+/* Sideways sway only where there's room for it; on phones it pushed cards into the screen edge */
+@media (width >= 48rem) {
+  .animate-pan-lr {
+    animation: pan-left-right 4s ease-in-out infinite;
+  }
+  .animate-pan-rl {
+    animation: pan-right-left 4s ease-in-out infinite;
+  }
 }
 
 /* Entrance animations */
