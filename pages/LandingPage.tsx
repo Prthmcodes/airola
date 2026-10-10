@@ -79,7 +79,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ onNavigate }) => {
   return (
     <div className="bg-[rgb(249,239,239)]">
       {/* Hero Section */}
-      <section className="on-dark relative min-h-[80svh] flex items-center pt-24 pb-32 overflow-hidden">
+      <section className="on-dark relative min-h-[80svh] flex items-center pt-10 pb-16 sm:pt-24 sm:pb-32 overflow-hidden">
         {/* Background Image with Overlay */}
         <div className="absolute inset-0 z-0 bg-gradient-to-br from-[#2D6E5F] to-[#3D8D7A]">
           <SafeImage 
@@ -97,16 +97,16 @@ const LandingPage: React.FC<LandingPageProps> = ({ onNavigate }) => {
         </div>
         
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-          <h1 className="text-5xl md:text-7xl font-extrabold text-white mb-6 tracking-tight leading-tight drop-shadow-lg animate-fade-up">
+          <h1 className="text-[clamp(2.125rem,7.5vw+0.5rem,3rem)] md:text-7xl font-extrabold text-white mb-4 sm:mb-6 tracking-tight leading-tight drop-shadow-lg animate-fade-up">
             Flawless Airbnb Turnovers <br className="hidden md:block" />
             {reducedMotion ? (
-              <span className="text-[rgb(172,216,206)]">Every Check-Out.</span>
+              <span className="text-[rgb(172,216,206)] whitespace-nowrap">Every Check-Out.</span>
             ) : (
               <>
                 {/* Screen readers get one stable phrase instead of the retyping animation */}
                 <span className="sr-only">Every Check-Out.</span>
                 {/* The invisible copy of the longest phrase reserves its size, so the typing never shifts the layout */}
-                <span aria-hidden="true" className="inline-grid">
+                <span aria-hidden="true" className="inline-grid whitespace-nowrap">
                   <span className="invisible col-start-1 row-start-1">Every Check-Out.|</span>
                   <span className="col-start-1 row-start-1">
                     <TypeAnimation
@@ -126,7 +126,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ onNavigate }) => {
               </>
             )}
           </h1>
-          <p className="text-xl text-slate-100 mb-10 max-w-2xl mx-auto leading-relaxed opacity-90 animate-fade-up fade-delay-1">
+          <p className="text-lg sm:text-xl text-slate-100 mb-8 sm:mb-10 max-w-2xl mx-auto leading-relaxed opacity-90 animate-fade-up fade-delay-1">
             Turnover cleaning for Airbnb hosts in East London. We clean, restock and send you photo proof after every job, so you never stress about check-in day again.
           </p>
           <div className="flex flex-col sm:flex-row justify-center items-center gap-4 animate-fade-up fade-delay-2">
