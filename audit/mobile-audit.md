@@ -1,0 +1,23 @@
+# Airola mobile audit (before)
+
+Audited 10 Oct 2026 on the production build (`npm run build`, prerendered pages served with Vercel-style routing) using `scripts/mobile-audit.mjs` (Puppeteer). Pages: `/`, `/pricing`, `/quote`, `/about-us`, `/contact`, `/giveaway`, `/legal`, `/testimonials`, `/offer`, `/login`, `/areas/stratford` and an unknown URL (404). Sizes: 360×800, 390×844, 430×932, 768×1024, 1440×900, plus a 320px overflow check. Screenshots: `audit/before/` (full page, one per page per size). Raw measurements: `audit/before/findings.json`.
+
+**Already fine:** viewport meta present and correct on every page; no horizontal scroll at 320–768px; hamburger menu opens, closes on Escape and doesn't cover the page (449px tall); all images have width/height and below-the-fold images lazy-load; fonts use `font-display: swap` and are preloaded; no console errors (apart from the testimonials query, which fails until that migration is applied).
+
+| # | Issue | Page / selector | Width affected | Severity | Planned fix |
+|---|---|---|---|---|---|
+| 1 | Floating WhatsApp (56px) and chat (64px) buttons sit on top of content: they cover the hero "Get My Price in 60 Seconds" button and text, pricing card text, the "4 bathrooms" option on /quote and the About page buttons | All pages · `a[aria-label="Chat on WhatsApp"]`, chat launcher | 360–768 | High | Mobile-only sticky bottom bar (Get a Quote + WhatsApp + Call + Chat) with safe-area padding and a spacer so it never covers the footer; hide the floating buttons below 768px |
+| 2 | Hero headline is 48px at all phone widths, splitting "Every Check-Out." as "Check- / Out."; with a bottom bar the main CTA would drop below the fold at 360×800 (CTA bottom 773px) | `/` hero `h1`, `section.min-h-[80vh]` | 360–430 | High | Fluid `clamp()` headline size, smaller top padding and intro text on phones, `min-h-[80svh]` instead of `80vh` |
+| 3 | Cards squeezed by nested padding: "How Airola Works" titles wrap one word per line ("1. Submit / Your / Property / Details"); values cards and service cards have ~150–200px text columns | `/` `#services` cards, "How Airola Works" cards, values cards (`p-8` inside `p-8`) | 360–430 | High | Mobile-first padding and icon sizes (`p-5 sm:p-8 md:p-16`, smaller icons and gaps below 640px) |
+| 4 | Body copy at 14px (`text-sm`) in cards, lists, pricing features, hero sub-lines (17 instances on home, 16 on pricing) | Shared: Tailwind `text-sm` | 360–768 | Med | Shared fix: `--text-sm` = 16px below 1024px (desktop unchanged) |
+| 5 | Footer links are 32px tall (quick links) or 20px (contact links); one long single column | `footer a` | All widths | Med | 44px minimum link height; two-column link layout on phones |
+| 6 | "Most popular" pricing card is scaled to 105% with an 8px ring, so it ends 8px from the screen edges | `/pricing` recommended card `scale-105` | 360–430 | Med | Only scale from 768px up |
+| 7 | One-off / every-turnover toggles: labels wrap awkwardly around a 56×32px switch | `/pricing`, `/quote` `#pricing-toggle` | 360–430 | Med | Wrapping, centred layout; 44px tap area on the switch |
+| 8 | Quote add-ons: title and price fight for one narrow column; price sidebar runs label into price ("1 bath)£45") | `/quote` add-on buttons, sidebar line items | 360–430 | Med | Let title/price wrap; add a gap between label and price |
+| 9 | Images not responsive: logo PNG 453px wide shown at 110px (134 KB); hero JPG 1252px for a 360px screen; section photos 1600px JPGs for ~330px slots; no `srcset`/`sizes`, no WebP | Navbar logo, hero, why-choose, how-works, About photo | All widths | Med | Generate WebP variants (same artwork), add `srcset`/`sizes` via `<picture>` with the original as fallback |
+| 10 | Missing `autocomplete` on giveaway name/phone/email and login email; quote contact fields have none | `/giveaway` form, `/login`, `/quote` step 2 | All | Low | Add `name`, `email`, `tel`, `street-address` autocomplete |
+| 11 | "Still have questions?" text touches the screen edge (no side gutter) | `/` last section | 360–768 | Low | Add 16px side padding |
+| 12 | "Why Airola" check icons are off-centre (`mr-5` plus `mx-auto`) | `/` why-choose list | All widths | Low | Remove the stray right margin |
+| 13 | Values cards sway left/right (`animate-pan-*`) and get clipped near the edge on phones | `/` values cards | 360–430 | Low | Run the sway animation only from 768px up |
+| 14 | Chat panel height uses `100vh`, which on mobile browsers includes the hidden toolbar area | Chat panel | 360–430 | Low | Use `100dvh` |
+| 15 | Long words/URLs have no wrapping rule | Global | All | Low | `overflow-wrap: break-word` on body |
