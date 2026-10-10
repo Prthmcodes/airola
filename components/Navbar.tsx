@@ -60,15 +60,23 @@ const Navbar: React.FC<NavbarProps> = ({ currentPage, user, onNavigate, onLogout
               </button>
             )}
             <RouteLink page={Page.LANDING} onNavigate={onNavigate} className="flex items-center cursor-pointer rounded-xl" aria-label="Airola home">
-              <img
-                src="/Final_logo-removebg-preview.png"
-                alt=""
-                width={453}
-                height={367}
-                loading="lazy"
-                decoding="async"
-                className="w-[110px] md:w-[160px] h-auto transition-transform duration-300 ease-in-out hover:scale-105 p-3"
-              />
+              {/* Same logo artwork, resized to WebP for the 110px/160px slot; PNG stays as the fallback */}
+              <picture className="contents">
+                <source
+                  type="image/webp"
+                  srcSet="/images/logo-220.webp 220w, /images/logo-320.webp 320w, /images/logo-453.webp 453w"
+                  sizes="(min-width: 768px) 160px, 110px"
+                />
+                <img
+                  src="/Final_logo-removebg-preview.png"
+                  alt=""
+                  width={453}
+                  height={367}
+                  loading="lazy"
+                  decoding="async"
+                  className="w-[110px] md:w-[160px] h-auto transition-transform duration-300 ease-in-out hover:scale-105 p-3"
+                />
+              </picture>
             </RouteLink>
           </div>
 
