@@ -8,7 +8,7 @@ interface BonusPageProps {
 
 export const BonusPage: React.FC<BonusPageProps> = ({ onNavigate }) => {
   return (
-    <div className="bg-[rgb(249,239,239)] text-gray-900 min-h-screen flex items-center justify-center text-center px-4">
+    <div className="bg-[rgb(249,239,239)] text-gray-900 min-h-svh flex items-center justify-center text-center px-4">
       <div>
         <h1 className="text-5xl font-bold mb-4">You're In! 🎉</h1>
         <p className="text-xl mb-2">Thanks for entering the giveaway — we'll contact the winners directly.</p>

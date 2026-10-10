@@ -88,7 +88,7 @@ export const GiveawayPage: React.FC<GiveawayPageProps> = ({ onNavigate }) => {
   ];
 
   return (
-    <div className="bg-[rgb(249,239,239)] min-h-screen py-12">
+    <div className="bg-[rgb(249,239,239)] min-h-svh py-12">
       <div className="max-w-5xl mx-auto px-4">
         <RouteLink page={Page.LANDING} onNavigate={onNavigate} className="flex items-center min-h-[44px] text-slate-600 mb-10 hover:text-[#2D6E5F] transition-colors font-bold text-sm">
           <ChevronLeft className="w-4 h-4 mr-1" /> Back to Home

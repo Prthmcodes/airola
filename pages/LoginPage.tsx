@@ -55,7 +55,7 @@ const LoginPage: React.FC<LoginPageProps> = ({ onLogin, onNavigate }) => {
 
   if (needsConfirmation) {
     return (
-      <div className="min-h-[calc(100vh-4rem)] flex items-center justify-center p-4 bg-slate-50/50">
+      <div className="min-h-[calc(100svh-4rem)] flex items-center justify-center p-4 bg-slate-50/50">
         <div className="max-w-md w-full bg-white rounded-[2.5rem] shadow-2xl p-8 md:p-12 border border-slate-100 text-center">
           <div className="inline-flex items-center justify-center w-20 h-20 rounded-[1.5rem] mb-6 bg-[rgb(235,247,244)] text-[rgb(61,141,122)]">
             <MailCheck className="w-10 h-10" />
@@ -77,7 +77,7 @@ const LoginPage: React.FC<LoginPageProps> = ({ onLogin, onNavigate }) => {
   }
 
   return (
-    <div className="min-h-[calc(100vh-4rem)] flex items-center justify-center p-4 bg-slate-50/50">
+    <div className="min-h-[calc(100svh-4rem)] flex items-center justify-center p-4 bg-slate-50/50">
       <div className="max-w-md w-full">
         <div className="bg-white rounded-[2.5rem] shadow-2xl p-8 md:p-12 border border-slate-100">
           <div className="text-center mb-10">

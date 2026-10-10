@@ -161,7 +161,7 @@ const ChatBot: React.FC<ChatBotProps> = ({ onNavigate }) => {
 
       {/* Panel */}
       {open && (
-        <div ref={panelRef} role="dialog" aria-modal="true" aria-labelledby="chat-title" className="fixed bottom-6 right-6 z-[110] w-[calc(100vw-3rem)] max-w-sm bg-white rounded-[2rem] shadow-2xl border border-slate-200 flex flex-col overflow-hidden" style={{ height: 'min(560px, calc(100vh - 8rem))' }}>
+        <div ref={panelRef} role="dialog" aria-modal="true" aria-labelledby="chat-title" className="fixed bottom-6 right-6 z-[110] w-[calc(100vw-3rem)] max-w-sm bg-white rounded-[2rem] shadow-2xl border border-slate-200 flex flex-col overflow-hidden" style={{ height: 'min(560px, calc(100dvh - 8rem))' }}>
           <div className="on-dark bg-slate-900 text-white p-5 flex items-center justify-between shrink-0">
             <div className="flex items-center gap-3">
               <div className="w-9 h-9 bg-[rgb(61,141,122)] rounded-xl flex items-center justify-center">

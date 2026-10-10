@@ -79,7 +79,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ onNavigate }) => {
   return (
     <div className="bg-[rgb(249,239,239)]">
       {/* Hero Section */}
-      <section className="on-dark relative min-h-[80vh] flex items-center pt-24 pb-32 overflow-hidden">
+      <section className="on-dark relative min-h-[80svh] flex items-center pt-24 pb-32 overflow-hidden">
         {/* Background Image with Overlay */}
         <div className="absolute inset-0 z-0 bg-gradient-to-br from-[#2D6E5F] to-[#3D8D7A]">
           <SafeImage 

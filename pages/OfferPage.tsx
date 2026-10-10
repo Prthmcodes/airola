@@ -15,7 +15,7 @@ const steps = [
 
 const OfferPage: React.FC = () => {
   return (
-    <div className="bg-[rgb(249,239,239)] min-h-screen py-8 md:py-12">
+    <div className="bg-[rgb(249,239,239)] min-h-svh py-8 md:py-12">
       <div className="max-w-3xl mx-auto px-4">
         <div className="text-center mb-8 md:mb-10">
           <p className="inline-flex items-center px-4 py-2 rounded-full bg-[rgb(61,141,122)]/10 text-[rgb(45,110,95)] text-xs font-black uppercase tracking-widest mb-4 md:mb-6">
