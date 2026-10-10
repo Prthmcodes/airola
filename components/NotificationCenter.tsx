@@ -1,5 +1,6 @@
 
-import React from 'react';
+import React, { useRef } from 'react';
+import { useFocusTrap } from './useFocusTrap';
 import { AirolaNotification, UserRole, User } from '../types';
 import { X, Mail, ShieldCheck, CheckCircle2, Clock, Trash2, ArrowRight, ExternalLink, Phone } from 'lucide-react';
 
@@ -28,6 +29,9 @@ const NotificationCenter: React.FC<NotificationCenterProps> = ({
     .filter(n => n.recipientRole === userRole)
     .sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime());
 
+  const panelRef = useRef<HTMLDivElement>(null);
+  useFocusTrap(isOpen, panelRef, onClose);
+
   if (!isOpen) return null;
 
   return (
@@ -39,14 +43,14 @@ const NotificationCenter: React.FC<NotificationCenterProps> = ({
       />
       
       {/* Sidebar Panel */}
-      <div className="relative w-full max-w-lg bg-white h-full shadow-2xl flex flex-col">
-        <div className="p-6 border-b border-slate-100 flex items-center justify-between bg-slate-900 text-white">
+      <div ref={panelRef} role="dialog" aria-modal="true" aria-labelledby="notifications-title" className="relative w-full max-w-lg bg-white h-full shadow-2xl flex flex-col">
+        <div className="on-dark p-6 border-b border-slate-100 flex items-center justify-between bg-slate-900 text-white">
           <div className="flex items-center space-x-3">
             <Mail className="w-6 h-6 text-[rgb(106,176,160)]" />
-            <h2 className="text-xl font-bold tracking-tight italic">Airola Mailbox<span className="text-[rgb(106,176,160)]">.</span></h2>
+            <h2 id="notifications-title" className="text-xl font-bold tracking-tight italic">Airola Mailbox<span className="text-[rgb(106,176,160)]">.</span></h2>
           </div>
-          <button onClick={onClose} className="p-2 hover:bg-white/10 rounded-xl transition-colors hover:shadow-[0_0_20px_rgba(255,255,255,0.7)]">
-            <X className="w-6 h-6" />
+          <button onClick={onClose} aria-label="Close notifications" className="w-11 h-11 flex items-center justify-center hover:bg-white/10 rounded-xl transition-colors hover:shadow-[0_0_20px_rgba(255,255,255,0.7)]">
+            <X className="w-6 h-6" aria-hidden="true" />
           </button>
         </div>
 

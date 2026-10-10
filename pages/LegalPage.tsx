@@ -4,7 +4,7 @@ const LegalPage: React.FC = () => {
   return (
     <div className="max-w-3xl mx-auto px-4 py-16 text-slate-700">
       <h1 className="text-4xl md:text-5xl font-black text-slate-900 mb-4">Privacy, Terms &amp; Cookies</h1>
-      <p className="text-slate-500 mb-12">Last updated: {new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}</p>
+      <p className="text-slate-600 mb-12">Last updated: {new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}</p>
 
       <section className="mb-12">
         <h2 className="text-2xl font-bold text-slate-900 mb-4">Privacy Policy</h2>
@@ -21,7 +21,7 @@ const LegalPage: React.FC = () => {
         </p>
         <p className="mb-4 leading-relaxed">
           Under UK GDPR you have the right to access, correct, or request deletion of your personal data at any time.
-          To exercise these rights, email <a href="mailto:contact@airola.co.uk" className="text-[rgb(61,141,122)] font-bold hover:underline">contact@airola.co.uk</a> and
+          To exercise these rights, email <a href="mailto:contact@airola.co.uk" className="text-[#2D6E5F] font-bold hover:underline">contact@airola.co.uk</a> and
           we will respond within 30 days.
         </p>
       </section>
@@ -39,6 +39,7 @@ const LegalPage: React.FC = () => {
           entry is limited to hosts with properties in our London service area. We reserve the right to decline service
           for properties that cannot be verified.
         </p>
+        {/* [CONFIRM: active public liability policy] */}
         <p className="mb-4 leading-relaxed">
           Airola is fully insured. Any damage claims must be reported within 48 hours of the completed clean.
         </p>

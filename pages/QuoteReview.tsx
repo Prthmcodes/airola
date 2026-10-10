@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { Page, QuoteData, CleaningTask, User } from '../types';
+import RouteLink from '../components/RouteLink';
 import { db } from '../db';
 import { appendToSheet } from '../sheets';
+import { safePrice, PRICE_FALLBACK_TEXT, clearQuoteDraft, quoteWhatsappLink } from '../utils/quoteSafety';
 import { CheckCircle2, Send, MessageSquare, ShieldCheck, User as UserIcon, Phone } from 'lucide-react';
 
 interface QuoteReviewProps {
@@ -10,6 +12,8 @@ interface QuoteReviewProps {
   onNavigate: (page: Page) => void;
   user: User;
 }
+
+const SEND_FAILED = "We couldn't send that. Please try again, or message us on WhatsApp";
 
 const QuoteReview: React.FC<QuoteReviewProps> = ({ quote, setQuote, onNavigate, user }) => {
   const [isSent, setIsSent] = useState(false);
@@ -83,7 +87,7 @@ const QuoteReview: React.FC<QuoteReviewProps> = ({ quote, setQuote, onNavigate, 
         // Guest request — stored securely, visible only to the admin team
         const ok = await db.submitQuoteRequest(quote);
         if (!ok) {
-          setError('Something went wrong sending your request. Please try again or contact us on WhatsApp.');
+          setError(SEND_FAILED);
           return;
         }
       }
@@ -105,13 +109,14 @@ const QuoteReview: React.FC<QuoteReviewProps> = ({ quote, setQuote, onNavigate, 
         quote.notes,
       ]);
 
+      clearQuoteDraft();
       setIsSent(true);
       if (user.isLoggedIn) {
         setTimeout(() => onNavigate(Page.DASHBOARD), 3000);
       }
     } catch (e) {
       console.error(e);
-      setError('Something went wrong sending your request. Please try again.');
+      setError(SEND_FAILED);
     } finally {
       setIsSubmitting(false);
     }
@@ -124,7 +129,7 @@ const QuoteReview: React.FC<QuoteReviewProps> = ({ quote, setQuote, onNavigate, 
           <CheckCircle2 className="w-16 h-16" />
         </div>
         <h1 className="text-4xl font-bold text-slate-900 mb-4">{user.isLoggedIn ? 'Booking Requested!' : 'Quote Sent!'}</h1>
-        <p className="text-xl text-slate-500 mb-8">
+        <p className="text-xl text-slate-600 mb-8">
           {user.isLoggedIn
             ? 'Your property has been registered and your first clean is being scheduled.'
             : "Your quote has been sent to our team. We'll be in touch with you shortly."}
@@ -137,12 +142,9 @@ const QuoteReview: React.FC<QuoteReviewProps> = ({ quote, setQuote, onNavigate, 
           </div>
         ) : (
           <div className="space-y-4">
-            <button
-              onClick={() => onNavigate(Page.LANDING)}
-              className="w-full py-4 bg-[rgb(61,141,122)] text-white rounded-2xl font-bold hover:bg-[rgb(45,110,95)] transition-all shadow-lg"
-            >
+            <RouteLink page={Page.LANDING} onNavigate={onNavigate} className="w-full py-4 bg-[#2D6E5F] text-white rounded-2xl font-bold hover:bg-[#245A4E] transition-all shadow-lg">
               Back to Home
-            </button>
+            </RouteLink>
           </div>
         )}
       </div>
@@ -156,17 +158,21 @@ const QuoteReview: React.FC<QuoteReviewProps> = ({ quote, setQuote, onNavigate, 
     <div className="max-w-4xl mx-auto px-4 py-12">
       <div className="mb-10 text-center">
         <h1 className="text-4xl font-bold text-slate-900 mb-4">Final Confirmation</h1>
-        <p className="text-slate-500">Review your details before sending your {user.isLoggedIn ? 'booking request' : 'quote'}.</p>
+        <p className="text-slate-600">Review your details before sending your {user.isLoggedIn ? 'booking request' : 'quote'}.</p>
       </div>
 
       <div className="bg-white rounded-[2.5rem] overflow-hidden border border-slate-100 shadow-2xl">
-        <div className="bg-[rgb(61,141,122)] p-8 text-white">
+        <div className="bg-[#2D6E5F] p-8 text-white">
           <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
             <div>
-              <p className="text-[rgb(204,236,229)] text-sm font-bold uppercase tracking-widest mb-1">Quote Total</p>
-              <h2 className="text-5xl font-black">£{quote.totalPrice || quote.basePrice}<span className="text-xl text-[rgb(172,216,206)] font-medium ml-1">/ clean</span></h2>
+              <p className="text-[rgb(204,236,229)] text-sm font-bold uppercase tracking-[0.05em] mb-1">Quote Total</p>
+              <h2 className="text-5xl font-black">
+                {safePrice(quote.totalPrice || quote.basePrice) !== null
+                  ? <>£{quote.totalPrice || quote.basePrice}<span className="text-xl text-[rgb(204,236,229)] font-medium ml-1">/ clean</span></>
+                  : <span className="text-2xl">{PRICE_FALLBACK_TEXT}</span>}
+              </h2>
             </div>
-            <div className="bg-white/20 backdrop-blur px-6 py-3 rounded-2xl">
+            <div className="bg-[#245A4E] px-6 py-3 rounded-2xl">
               <span className="font-bold">{quote.frequency === 'one-time' ? 'One-time' : 'Recurring Service'}</span>
             </div>
           </div>
@@ -174,26 +180,26 @@ const QuoteReview: React.FC<QuoteReviewProps> = ({ quote, setQuote, onNavigate, 
 
         <div className="p-8 md:p-12">
           <div className="mb-12">
-            <h3 className="text-sm font-bold text-slate-400 uppercase tracking-widest mb-6">Contact Information</h3>
+            <h3 className="text-sm font-bold text-slate-500 uppercase tracking-[0.05em] mb-6">Contact Information</h3>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div className="flex items-center p-4 bg-[rgb(235,247,244)]/50 rounded-2xl border border-[rgb(204,236,229)]">
                 <UserIcon className="w-5 h-5 mr-3 text-[rgb(61,141,122)]" />
                 <div>
-                  <p className="text-[10px] font-black text-slate-400 uppercase tracking-wider">{user.isLoggedIn ? 'Authenticated Host' : 'Full Name'}</p>
+                  <p className="text-xs font-black text-slate-600 uppercase tracking-wider">{user.isLoggedIn ? 'Authenticated Host' : 'Full Name'}</p>
                   <p className="font-bold text-slate-900 truncate max-w-[120px]">{effectiveName}</p>
                 </div>
               </div>
               <div className="flex items-center p-4 bg-slate-50 rounded-2xl border border-slate-100">
                 <MessageSquare className="w-5 h-5 mr-3 text-[rgb(61,141,122)]" />
                 <div>
-                  <p className="text-[10px] font-black text-slate-400 uppercase tracking-wider">Email Address</p>
+                  <p className="text-xs font-black text-slate-500 uppercase tracking-wider">Email Address</p>
                   <p className="font-bold text-slate-900 truncate max-w-[120px]">{effectiveEmail}</p>
                 </div>
               </div>
               <div className="flex items-center p-4 bg-slate-50 rounded-2xl border border-slate-100">
                 <Phone className="w-5 h-5 mr-3 text-[rgb(61,141,122)]" />
                 <div>
-                  <p className="text-[10px] font-black text-slate-400 uppercase tracking-wider">Contact Number</p>
+                  <p className="text-xs font-black text-slate-500 uppercase tracking-wider">Contact Number</p>
                   <p className="font-bold text-slate-900">{quote.ownerPhone || 'Not specified'}</p>
                 </div>
               </div>
@@ -202,7 +208,7 @@ const QuoteReview: React.FC<QuoteReviewProps> = ({ quote, setQuote, onNavigate, 
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-12">
             <div>
-              <h3 className="text-sm font-bold text-slate-400 uppercase tracking-widest mb-6">Service Details</h3>
+              <h3 className="text-sm font-bold text-slate-500 uppercase tracking-[0.05em] mb-6">Service Details</h3>
               <ul className="space-y-4">
                 <li className="flex items-center justify-between p-4 bg-slate-50 rounded-2xl">
                   <span className="text-slate-600">Property Nickname</span>
@@ -221,31 +227,40 @@ const QuoteReview: React.FC<QuoteReviewProps> = ({ quote, setQuote, onNavigate, 
               </ul>
             </div>
             <div>
-              <h3 className="text-sm font-bold text-slate-400 uppercase tracking-widest mb-6">Selected Add-Ons</h3>
+              <h3 className="text-sm font-bold text-slate-500 uppercase tracking-[0.05em] mb-6">Selected Add-Ons</h3>
               <div className="flex flex-wrap gap-2">
                 {quote.toiletries.length > 0 ? quote.toiletries.map(item => (
                   <span key={item} className="px-4 py-2 bg-[rgb(235,247,244)] text-[rgb(45,110,95)] rounded-full text-sm font-bold border border-[rgb(204,236,229)]">
                     {getAddonName(item)}
                   </span>
-                )) : <p className="text-slate-400 italic">No extras selected.</p>}
+                )) : <p className="text-slate-500 italic">No extras selected.</p>}
               </div>
             </div>
           </div>
 
           {error && (
-            <div className="mb-6 p-4 bg-red-50 border border-red-100 rounded-2xl text-red-600 text-sm font-bold">
-              {error}
+            <div role="alert" className="mb-6 p-4 bg-red-50 border border-red-100 rounded-2xl text-red-700 text-sm font-bold">
+              <p>{error}</p>
+              {/* Carries everything they entered, so the enquiry isn't lost */}
+              <a
+                href={quoteWhatsappLink(quote, effectiveName)}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-3 inline-flex items-center min-h-[44px] px-5 py-2 rounded-xl bg-[#2D6E5F] text-white hover:bg-[#245A4E]"
+              >
+                Send these details on WhatsApp<span className="sr-only"> (opens in a new tab)</span>
+              </a>
             </div>
           )}
 
           <div className="flex flex-col sm:flex-row items-center justify-between gap-6 pt-8 border-t border-slate-100">
-            <button onClick={() => onNavigate(Page.QUOTE)} className="w-full sm:w-auto px-8 py-4 text-slate-600 font-bold hover:bg-slate-50 rounded-2xl transition-colors">
+            <RouteLink page={Page.QUOTE} onNavigate={onNavigate} className="w-full sm:w-auto px-8 py-4 text-slate-600 font-bold hover:bg-slate-50 rounded-2xl transition-colors">
               Edit Details
-            </button>
+            </RouteLink>
             <button
               onClick={handleSend}
               disabled={isSubmitting}
-              className={`w-full sm:w-auto px-12 py-5 bg-[rgb(61,141,122)] text-white rounded-2xl font-extrabold text-xl hover:bg-[rgb(45,110,95)] transition-all shadow-xl flex items-center justify-center ${isSubmitting ? 'opacity-70 cursor-not-allowed' : ''}`}
+              className={`w-full sm:w-auto px-12 py-5 bg-[#2D6E5F] text-white rounded-2xl font-extrabold text-xl hover:bg-[#245A4E] transition-all shadow-xl flex items-center justify-center ${isSubmitting ? 'opacity-70 cursor-not-allowed' : ''}`}
             >
               {isSubmitting ? 'Sending…' : user.isLoggedIn ? 'Confirm Booking Request' : 'Send Quote'} <Send className="ml-3 w-6 h-6" />
             </button>

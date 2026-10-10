@@ -1,15 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { Page } from '../types';
+import RouteLink from '../components/RouteLink';
 import { db } from '../db';
 import { appendToSheet } from '../sheets';
 import { Trophy, Gift, Star, ChevronLeft } from 'lucide-react';
+import { GIVEAWAY_OPEN, GIVEAWAY_CLOSES_AT } from '../config/promos';
+import { whatsappWithText } from '../components/ContactOptions';
+
+const SEND_FAILED = "We couldn't send that. Please try again, or message us on WhatsApp";
+const CONTACT_MISSING = 'Please enter either a phone number or an email address.';
 
 interface GiveawayPageProps {
   onNavigate: (page: Page) => void;
 }
-
-// Set the real end date of the giveaway here.
-const GIVEAWAY_ENDS_AT = new Date('2026-08-15T23:59:59+01:00');
 
 export const GiveawayPage: React.FC<GiveawayPageProps> = ({ onNavigate }) => {
   const [name, setName] = useState('');
@@ -19,12 +22,13 @@ export const GiveawayPage: React.FC<GiveawayPageProps> = ({ onNavigate }) => {
   const [exclusiveOffers, setExclusiveOffers] = useState(false);
   const [timeLeft, setTimeLeft] = useState({ d: 0, h: 0, m: 0, s: 0, closed: false });
   const [error, setError] = useState('');
+  const [sendFailed, setSendFailed] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
     const tick = () => {
-      const distance = GIVEAWAY_ENDS_AT.getTime() - Date.now();
-      if (distance < 0) {
+      const distance = GIVEAWAY_CLOSES_AT.getTime() - Date.now();
+      if (!GIVEAWAY_OPEN || distance < 0) {
         setTimeLeft({ d: 0, h: 0, m: 0, s: 0, closed: true });
         return;
       }
@@ -44,13 +48,14 @@ export const GiveawayPage: React.FC<GiveawayPageProps> = ({ onNavigate }) => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
+    setSendFailed(false);
 
     if (timeLeft.closed) {
       setError('Entries have closed. Follow us for the next giveaway!');
       return;
     }
     if (!phone && !email) {
-      setError('Please enter either a phone number or an email address.');
+      setError(CONTACT_MISSING);
       return;
     }
 
@@ -58,17 +63,23 @@ export const GiveawayPage: React.FC<GiveawayPageProps> = ({ onNavigate }) => {
     try {
       const result = await db.submitGiveaway({ name, mobile: phone, email, experience, wantsOffers: exclusiveOffers });
       if (!result.success) {
-        setError('Something went wrong. Please try again.');
+        setError(SEND_FAILED);
+        setSendFailed(true);
         return;
       }
       appendToSheet('Sheet2', [new Date().toISOString(), name, phone, email, experience, exclusiveOffers ? 'Yes' : 'No']);
       onNavigate(Page.BONUS);
+    } catch (e) {
+      // Network or unexpected failure: keep the form filled and offer WhatsApp instead.
+      console.error(e);
+      setError(SEND_FAILED);
+      setSendFailed(true);
     } finally {
       setIsSubmitting(false);
     }
   };
 
-  const inputClass = "w-full p-4 bg-slate-50 border border-slate-200 rounded-2xl focus:outline-none focus:ring-4 focus:ring-[rgb(106,176,160)]/10 focus:border-[rgb(106,176,160)] transition-all font-medium text-slate-900 placeholder:text-slate-400";
+  const inputClass = "w-full p-4 bg-slate-50 border border-slate-200 rounded-2xl focus:outline-none focus:ring-4 focus:ring-[rgb(106,176,160)]/10 focus:border-[rgb(106,176,160)] transition-all font-medium text-slate-900 placeholder:text-slate-500";
 
   const prizes = [
     { icon: <Trophy className="w-7 h-7" />, label: 'Grand Prize', title: '£1 Full Turnover', sub: 'Worth up to £65' },
@@ -79,16 +90,16 @@ export const GiveawayPage: React.FC<GiveawayPageProps> = ({ onNavigate }) => {
   return (
     <div className="bg-[rgb(249,239,239)] min-h-screen py-12">
       <div className="max-w-5xl mx-auto px-4">
-        <button onClick={() => onNavigate(Page.LANDING)} className="flex items-center text-slate-500 mb-10 hover:text-[rgb(61,141,122)] transition-colors font-bold text-sm">
+        <RouteLink page={Page.LANDING} onNavigate={onNavigate} className="flex items-center min-h-[44px] text-slate-600 mb-10 hover:text-[#2D6E5F] transition-colors font-bold text-sm">
           <ChevronLeft className="w-4 h-4 mr-1" /> Back to Home
-        </button>
+        </RouteLink>
 
         <div className="text-center mb-12">
-          <div className="inline-flex items-center px-4 py-2 rounded-full bg-[rgb(61,141,122)]/10 text-[rgb(45,110,95)] text-xs font-black uppercase tracking-widest mb-6">
+          <div className="inline-flex items-center px-4 py-2 rounded-full bg-[rgb(61,141,122)]/10 text-[rgb(45,110,95)] text-xs font-black uppercase tracking-[0.05em] mb-6">
             <Trophy className="w-4 h-4 mr-2 text-[rgb(61,141,122)]" /> Launch Giveaway
           </div>
           <h1 className="text-4xl md:text-6xl font-black text-slate-900 mb-6 tracking-tight">
-            Win a <span className="text-[rgb(61,141,122)]">£1</span> Guest-Ready Turnover
+            Win a <span className="text-[#2D6E5F]">£1</span> Guest-Ready Turnover
           </h1>
           <p className="text-xl text-slate-600 max-w-2xl mx-auto leading-relaxed">
             Exclusively for Airbnb and short-let hosts in East London. Tell us about your worst turnover experience, and we'll make sure it never happens again.
@@ -107,8 +118,8 @@ export const GiveawayPage: React.FC<GiveawayPageProps> = ({ onNavigate }) => {
               { v: timeLeft.s, l: 'Secs' },
             ].map(t => (
               <div key={t.l} className="w-20 sm:w-24 bg-white rounded-2xl border border-[rgb(204,236,229)] shadow-md py-4 text-center">
-                <p className="text-3xl sm:text-4xl font-black text-[rgb(61,141,122)] tabular-nums">{String(t.v).padStart(2, '0')}</p>
-                <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mt-1">{t.l}</p>
+                <p className="text-3xl sm:text-4xl font-black text-[#2D6E5F] tabular-nums">{String(t.v).padStart(2, '0')}</p>
+                <p className="text-xs font-black text-slate-500 uppercase tracking-[0.05em] mt-1">{t.l}</p>
               </div>
             ))
           )}
@@ -117,11 +128,11 @@ export const GiveawayPage: React.FC<GiveawayPageProps> = ({ onNavigate }) => {
         {/* Prizes */}
         <div className="grid md:grid-cols-3 gap-6 mb-14">
           {prizes.map((p, i) => (
-            <div key={i} className={`p-8 rounded-[2rem] text-center border transition-all hover:-translate-y-1 hover:shadow-xl ${i === 0 ? 'bg-[rgb(61,141,122)] text-white border-[rgb(61,141,122)] shadow-xl' : 'bg-white text-slate-900 border-slate-100 shadow-md'}`}>
+            <div key={i} className={`p-8 rounded-[2rem] text-center border transition-all hover:-translate-y-1 hover:shadow-xl ${i === 0 ? 'bg-[#2D6E5F] text-white border-[rgb(61,141,122)] shadow-xl' : 'bg-white text-slate-900 border-slate-100 shadow-md'}`}>
               <div className={`w-14 h-14 mx-auto rounded-2xl flex items-center justify-center mb-4 ${i === 0 ? 'bg-white/15 text-white' : 'bg-[rgb(235,247,244)] text-[rgb(61,141,122)]'}`}>
                 {p.icon}
               </div>
-              <p className={`text-[10px] font-black uppercase tracking-widest mb-2 ${i === 0 ? 'text-[rgb(172,216,206)]' : 'text-[rgb(61,141,122)]'}`}>{p.label}</p>
+              <p className={`text-xs font-black uppercase tracking-[0.05em] mb-2 ${i === 0 ? 'text-[rgb(204,236,229)]' : 'text-[#2D6E5F]'}`}>{p.label}</p>
               <h2 className="text-2xl font-black mb-1">{p.title}</h2>
               <p className={`text-sm ${i === 0 ? 'text-[rgb(204,236,229)]' : 'text-slate-500'}`}>{p.sub}</p>
             </div>
@@ -133,40 +144,50 @@ export const GiveawayPage: React.FC<GiveawayPageProps> = ({ onNavigate }) => {
           <h2 className="text-2xl font-black text-slate-900 mb-8">Enter in 30 seconds</h2>
           <div className="space-y-6">
             <div>
-              <label htmlFor="name" className="block text-xs font-black text-slate-400 mb-3 uppercase tracking-[0.2em]">Name</label>
+              <label htmlFor="name" className="block text-xs font-black text-slate-500 mb-3 uppercase tracking-[0.05em]">Name</label>
               <input type="text" id="name" value={name} onChange={(e) => setName(e.target.value)} className={inputClass} required placeholder="Your name" />
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               <div>
-                <label htmlFor="phone" className="block text-xs font-black text-slate-400 mb-3 uppercase tracking-[0.2em]">Phone</label>
-                <input type="tel" id="phone" value={phone} onChange={(e) => setPhone(e.target.value)} className={inputClass} placeholder="Your phone number" />
+                <label htmlFor="phone" className="block text-xs font-black text-slate-500 mb-3 uppercase tracking-[0.05em]">Phone</label>
+                <input type="tel" id="phone" aria-invalid={error === CONTACT_MISSING} aria-describedby={error === CONTACT_MISSING ? 'giveaway-error' : undefined} value={phone} onChange={(e) => setPhone(e.target.value)} className={inputClass} placeholder="Your phone number" />
               </div>
               <div>
-                <label htmlFor="email" className="block text-xs font-black text-slate-400 mb-3 uppercase tracking-[0.2em]">Email</label>
-                <input type="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} className={inputClass} placeholder="Your email address" />
+                <label htmlFor="email" className="block text-xs font-black text-slate-500 mb-3 uppercase tracking-[0.05em]">Email</label>
+                <input type="email" id="email" aria-invalid={error === CONTACT_MISSING} aria-describedby={error === CONTACT_MISSING ? 'giveaway-error' : undefined} value={email} onChange={(e) => setEmail(e.target.value)} className={inputClass} placeholder="Your email address" />
               </div>
             </div>
             <div>
-              <label htmlFor="experience" className="block text-xs font-black text-slate-400 mb-3 uppercase tracking-[0.2em]">Your worst turnover story</label>
+              <label htmlFor="experience" className="block text-xs font-black text-slate-500 mb-3 uppercase tracking-[0.05em]">Your worst turnover story</label>
               <textarea id="experience" value={experience} onChange={(e) => setExperience(e.target.value)} className={`${inputClass} min-h-[110px]`} placeholder="Cleaner cancelled an hour before check-in? Tell us..." rows={4} />
             </div>
-            <label className="flex items-center text-sm font-medium text-slate-600 cursor-pointer">
-              <input type="checkbox" checked={exclusiveOffers} onChange={(e) => setExclusiveOffers(e.target.checked)} className="mr-3 w-4 h-4 accent-[rgb(61,141,122)]" />
+            <label className="flex items-center min-h-[44px] text-sm font-medium text-slate-600 cursor-pointer">
+              <input type="checkbox" checked={exclusiveOffers} onChange={(e) => setExclusiveOffers(e.target.checked)} className="mr-3 w-5 h-5 accent-[#2D6E5F]" />
               Send me exclusive host offers
             </label>
 
             {error && (
-              <div className="p-4 bg-red-50 border border-red-100 rounded-2xl text-red-600 text-sm font-bold">
-                {error}
+              <div id="giveaway-error" role="alert" className="p-4 bg-red-50 border border-red-100 rounded-2xl text-red-700 text-sm font-bold">
+                <p>{error}</p>
+                {sendFailed && (
+                  <a
+                    href={whatsappWithText(`Hi Airola, I tried to enter the giveaway on your website but it didn't go through. Name: ${name || '-'}`)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-3 inline-flex items-center min-h-[44px] px-5 py-2 rounded-xl bg-[#2D6E5F] text-white hover:bg-[#245A4E]"
+                  >
+                    Message us on WhatsApp<span className="sr-only"> (opens in a new tab)</span>
+                  </a>
+                )}
               </div>
             )}
 
-            <button type="submit" disabled={isSubmitting || timeLeft.closed} className={`w-full py-5 bg-[rgb(61,141,122)] text-white rounded-2xl font-black text-lg hover:bg-[rgb(45,110,95)] transition-all shadow-xl ${(isSubmitting || timeLeft.closed) ? 'opacity-60 cursor-not-allowed' : ''}`}>
+            <button type="submit" disabled={isSubmitting || timeLeft.closed} className={`w-full py-5 bg-[#2D6E5F] text-white rounded-2xl font-black text-lg hover:bg-[#245A4E] transition-all shadow-xl ${(isSubmitting || timeLeft.closed) ? 'opacity-60 cursor-not-allowed' : ''}`}>
               {timeLeft.closed ? 'Entries Closed' : isSubmitting ? 'Submitting…' : 'Enter the Giveaway'}
             </button>
           </div>
         </form>
-        <p className="text-sm text-slate-400 text-center mt-8">One entry per host. Limited to properties in our East London service area. Winners contacted directly.</p>
+        <p className="text-sm text-slate-600 text-center mt-8">One entry per host. Limited to properties in our East London service area. Winners contacted directly.</p>
       </div>
     </div>
   );

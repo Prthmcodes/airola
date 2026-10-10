@@ -1,5 +1,5 @@
 import { createClient, Session } from '@supabase/supabase-js';
-import { Property, CleaningTask, Cleaner, AirolaNotification, User, QuoteData } from './types';
+import { Property, CleaningTask, Cleaner, AirolaNotification, User, QuoteData, Testimonial, TestimonialSubmission, AdminTestimonial, TestimonialStatus } from './types';
 
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL as string;
 const supabaseKey = import.meta.env.VITE_SUPABASE_ANON_KEY as string;
@@ -384,6 +384,72 @@ class AirolaDatabase {
     if (error) { console.error(error); return { success: false }; }
     return { success: true };
   }
+
+  // ---------- Testimonials ----------
+  // Public reads go through the testimonials_public view (approved rows only, no email).
+
+  async getApprovedTestimonials(limit?: number): Promise<Testimonial[]> {
+    let query = supabase
+      .from('testimonials_public')
+      .select('id, created_at, display_name, area, rating, body, verified')
+      .order('created_at', { ascending: false });
+    if (limit) query = query.limit(limit);
+    const { data, error } = await query;
+    if (error) throw error;
+    return (data || []).map(mapTestimonial);
+  }
+
+  // Inserts only the form fields; the database sets status 'pending' and verified false.
+  // No .select() afterwards: visitors can't read the table back.
+  async submitTestimonial(t: TestimonialSubmission): Promise<{ success: boolean; duplicate?: boolean }> {
+    const { error } = await supabase.from('testimonials').insert({
+      display_name: t.displayName.trim(),
+      area: t.area?.trim() || null,
+      rating: t.rating,
+      body: t.body.trim(),
+      email: t.email.trim(),
+      consent: t.consent,
+    });
+    if (error) {
+      console.error(error);
+      return { success: false, duplicate: error.code === '23505' };
+    }
+    return { success: true };
+  }
+
+  async getAllTestimonials(): Promise<AdminTestimonial[]> {
+    const { data, error } = await supabase
+      .from('testimonials')
+      .select('id, created_at, display_name, area, rating, body, verified, email, status, admin_note')
+      .order('created_at', { ascending: false });
+    if (error) throw error;
+    return (data || []).map(row => ({
+      ...mapTestimonial(row),
+      email: row.email,
+      status: row.status as TestimonialStatus,
+      adminNote: row.admin_note ?? undefined,
+    }));
+  }
+
+  // Moderation only: the review text itself is never editable.
+  async moderateTestimonial(id: string, changes: { status?: TestimonialStatus; verified?: boolean; adminNote?: string }): Promise<void> {
+    const payload: Record<string, unknown> = {};
+    if (changes.status) payload.status = changes.status;
+    if (changes.verified !== undefined) payload.verified = changes.verified;
+    if (changes.adminNote !== undefined) payload.admin_note = changes.adminNote.trim() || null;
+    const { error } = await supabase.from('testimonials').update(payload).eq('id', id);
+    if (error) throw error;
+  }
 }
+
+const mapTestimonial = (row: any): Testimonial => ({
+  id: row.id,
+  createdAt: row.created_at,
+  displayName: row.display_name,
+  area: row.area ?? undefined,
+  rating: row.rating,
+  body: row.body,
+  verified: !!row.verified,
+});
 
 export const db = new AirolaDatabase();
