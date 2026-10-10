@@ -1,11 +1,20 @@
 import React, { useState } from 'react';
-import { db } from '../db';
+import { db, type TestimonialSubmitFailure } from '../db';
 import { StarInput } from './StarRating';
 import { whatsappWithText } from './ContactOptions';
 
 const BODY_MIN = 20;
 const BODY_MAX = 600;
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+// What the visitor sees for each kind of failure. Their review stays in the form either way.
+const SEND_FAILED: Record<TestimonialSubmitFailure, string> = {
+  duplicate: "You've already sent a review today. Thank you! If you need to change it, message us on WhatsApp.",
+  invalid: "Something in the form didn't pass our checks. Please check your name, review length and the consent box, then try again.",
+  unavailable: "Our review form isn't accepting reviews right now. Your review is still here: send it to us on WhatsApp and we'll add it for you.",
+  network: "We couldn't reach our server. Please check your connection and try again, or send your review on WhatsApp.",
+  unknown: "We couldn't send your review. Please try again, or send it to us on WhatsApp.",
+};
 
 type Field = 'displayName' | 'area' | 'rating' | 'body' | 'email' | 'consent';
 
@@ -60,18 +69,14 @@ const TestimonialForm: React.FC<{ onSubmitted?: () => void }> = ({ onSubmitted }
     try {
       const result = await db.submitTestimonial({ displayName, area, rating, body, email, consent });
       if (!result.success) {
-        setSendError(
-          result.duplicate
-            ? "You've already sent a review today. Thank you! If you need to change it, message us on WhatsApp."
-            : "We couldn't send your review. Please try again, or send it to us on WhatsApp."
-        );
+        setSendError(SEND_FAILED[result.reason ?? 'unknown']);
         return;
       }
       setSent(true);
       onSubmitted?.();
     } catch (err) {
-      console.error(err);
-      setSendError("We couldn't send your review. Please try again, or send it to us on WhatsApp.");
+      console.error('[testimonials] submit threw:', err);
+      setSendError(SEND_FAILED.network);
     } finally {
       setIsSubmitting(false);
     }

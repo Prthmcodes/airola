@@ -401,7 +401,7 @@ class AirolaDatabase {
 
   // Inserts only the form fields; the database sets status 'pending' and verified false.
   // No .select() afterwards: visitors can't read the table back.
-  async submitTestimonial(t: TestimonialSubmission): Promise<{ success: boolean; duplicate?: boolean }> {
+  async submitTestimonial(t: TestimonialSubmission): Promise<{ success: boolean; reason?: TestimonialSubmitFailure }> {
     const { error } = await supabase.from('testimonials').insert({
       display_name: t.displayName.trim(),
       area: t.area?.trim() || null,
@@ -411,8 +411,10 @@ class AirolaDatabase {
       consent: t.consent,
     });
     if (error) {
-      console.error(error);
-      return { success: false, duplicate: error.code === '23505' };
+      const reason = testimonialFailure(error);
+      // The real error, for the browser console and error monitoring. Never includes the email.
+      console.error(`[testimonials] insert failed (${reason}): ${JSON.stringify({ code: error.code, message: error.message, details: error.details, hint: error.hint })}`);
+      return { success: false, reason };
     }
     return { success: true };
   }
@@ -441,6 +443,20 @@ class AirolaDatabase {
     if (error) throw error;
   }
 }
+
+export type TestimonialSubmitFailure = 'duplicate' | 'invalid' | 'unavailable' | 'network' | 'unknown';
+
+// Sorts a Supabase/PostgREST error into something the form can explain to the visitor.
+const testimonialFailure = (error: { code?: string; message?: string }): TestimonialSubmitFailure => {
+  switch (error.code) {
+    case '23505': return 'duplicate';               // one review per email per day
+    case '23514': case '22001': case '23502': return 'invalid'; // check, length or not-null constraint
+    case 'PGRST205': case '42P01':                  // table missing (migration not applied)
+    case '42501': return 'unavailable';             // permissions/RLS
+  }
+  if (!error.code && /fetch|network/i.test(error.message || '')) return 'network';
+  return 'unknown';
+};
 
 const mapTestimonial = (row: any): Testimonial => ({
   id: row.id,
