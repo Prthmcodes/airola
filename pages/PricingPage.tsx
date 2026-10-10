@@ -95,9 +95,9 @@ const PricingPage: React.FC<PricingPageProps> = ({ onNavigate }) => {
           <p className="text-xl text-slate-600 max-w-2xl mx-auto">Prices below are for a 1-bedroom property. Add £20 per extra bedroom. Your exact price is confirmed before we clean.</p>
         </div>
 
-        <div className="flex justify-center items-center space-x-4 mb-8">
-          <span className={`font-medium ${!isMonthly ? 'text-slate-900' : 'text-slate-600'}`}>One-Off Clean</span>
-          <label htmlFor="pricing-toggle" className="relative inline-flex items-center cursor-pointer">
+        <div className="grid grid-cols-[1fr_auto_1fr] items-center gap-3 mb-8 sm:flex sm:justify-center sm:gap-0 sm:space-x-4">
+          <span className={`font-medium text-right sm:text-left ${!isMonthly ? 'text-slate-900' : 'text-slate-600'}`}>One-Off Clean</span>
+          <label htmlFor="pricing-toggle" className="relative inline-flex items-center cursor-pointer p-1.5 -m-1.5">
             <input type="checkbox" id="pricing-toggle" aria-label="Show prices for booking every turnover (save £10 per clean)" className="sr-only peer" checked={isMonthly} onChange={() => setIsMonthly(!isMonthly)} />
             <div className="w-14 h-8 bg-slate-200 rounded-full peer peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-[#2D6E5F] peer-focus-visible:outline-solid peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-1 after:left-[4px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all peer-checked:bg-[rgb(61,141,122)] hover:shadow-[0_0_10px_rgba(61,141,122,0.3)]"></div>
           </label>
@@ -115,9 +115,9 @@ const PricingPage: React.FC<PricingPageProps> = ({ onNavigate }) => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12 items-stretch max-w-4xl mx-auto">
           {packages.map((pkg, i) => (
-            <div key={i} className={`group relative p-8 rounded-[3rem] border transition-all duration-500 hover:scale-[1.05] hover:-translate-y-4 hover:shadow-[0_40px_80px_rgba(61,141,122,0.15)] flex flex-col ${
+            <div key={i} className={`group relative p-6 sm:p-8 rounded-[3rem] border transition-all duration-500 md:hover:scale-[1.05] md:hover:-translate-y-4 hover:shadow-[0_40px_80px_rgba(61,141,122,0.15)] flex flex-col ${
               pkg.recommended 
-                ? 'bg-white border-[rgb(172,216,206)] shadow-[0_32px_64px_-12px_rgba(61,141,122,0.25)] scale-105 z-10 ring-8 ring-[rgb(235,247,244)] py-12' 
+                ? 'bg-white border-[rgb(172,216,206)] shadow-[0_32px_64px_-12px_rgba(61,141,122,0.25)] md:scale-105 z-10 ring-4 md:ring-8 ring-[rgb(235,247,244)] py-10 sm:py-12' 
                 : 'bg-white border-slate-100 shadow-lg hover:border-[rgb(172,216,206)]/50'
             }`}>
               {pkg.badge && (
