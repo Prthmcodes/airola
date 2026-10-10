@@ -36,11 +36,11 @@ const TestimonialsPage: React.FC = () => {
       </header>
 
       {status === 'loading' && <p role="status" className="text-center text-slate-600 mb-12">Loading reviews…</p>}
-      {status === 'error' && (
-        <p role="status" className="text-center text-slate-700 mb-12">We couldn't load reviews right now. Please try again later.</p>
-      )}
-      {status === 'ready' && count === 0 && (
-        <p className="text-center text-lg text-slate-700 mb-12">No reviews yet. If we've cleaned for you, we'd love an honest review.</p>
+      {/* Space kept for reviews: until the first is approved (or if they can't load), invite one instead. */}
+      {status !== 'loading' && count === 0 && (
+        <div className="bg-white rounded-[2rem] border border-dashed border-[rgb(172,216,206)] p-8 sm:p-10 text-center max-w-2xl mx-auto mb-12">
+          <p className="text-lg text-slate-700">We're new, so there are no reviews here yet. If we've cleaned for you, we'd love an honest one below.</p>
+        </div>
       )}
       {count > 0 && (
         <section aria-labelledby="reviews-heading" className="mb-16">

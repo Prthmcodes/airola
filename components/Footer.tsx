@@ -1,6 +1,7 @@
 import React from 'react';
 import { Page } from '../types';
 import RouteLink from './RouteLink';
+import { isGiveawayOpen } from '../config/promos';
 
 const Footer: React.FC<{ onNavigate: (page: Page) => void }> = ({ onNavigate }) => {
   // Real links (<a href>) so crawlers can follow them
@@ -39,7 +40,7 @@ const Footer: React.FC<{ onNavigate: (page: Page) => void }> = ({ onNavigate }) 
               {link(Page.LANDING, 'Home')}
               {link(Page.PRICING, 'Packages')}
               {link(Page.LANDING, 'Services', 'services')}
-              {link(Page.GIVEAWAY, 'Giveaway')}
+              {isGiveawayOpen() && link(Page.GIVEAWAY, 'Giveaway')}
               {link(Page.ABOUT_US, 'About')}
               {link(Page.TESTIMONIALS, 'Reviews')}
               {link(Page.CONTACT, 'Contact')}

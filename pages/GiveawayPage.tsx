@@ -3,12 +3,23 @@ import { Page } from '../types';
 import RouteLink from '../components/RouteLink';
 import { db } from '../db';
 import { appendToSheet } from '../sheets';
-import { Trophy, Gift, Star, ChevronLeft } from 'lucide-react';
-import { GIVEAWAY_OPEN, GIVEAWAY_CLOSES_AT } from '../config/promos';
+import { Trophy, Gift, Star, ChevronLeft, ChevronDown } from 'lucide-react';
+import {
+  GIVEAWAY_STARTS_AT, GIVEAWAY_ENDS_AT, GIVEAWAY_PROMOTER, GIVEAWAY_DRAW_METHOD, GIVEAWAY_PRIZE_VALID_DAYS,
+  INSTAGRAM_HANDLE, isGiveawayOpen, formatUkDate,
+} from '../config/promos';
 import { whatsappWithText } from '../components/ContactOptions';
 
 const SEND_FAILED = "We couldn't send that. Please try again, or message us on WhatsApp";
-const CONTACT_MISSING = 'Please enter either a phone number or an email address.';
+const NAME_MISSING = 'Please enter your name.';
+const EMAIL_INVALID ='Please enter a valid email address.';
+const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+
+const OPENS = formatUkDate(GIVEAWAY_STARTS_AT);
+const CLOSES = formatUkDate(GIVEAWAY_ENDS_AT);
+
+type Phase = 'upcoming' | 'open' | 'closed';
+const phaseAt = (now: Date): Phase => (now < GIVEAWAY_STARTS_AT ? 'upcoming' : isGiveawayOpen(now) ? 'open' : 'closed');
 
 interface GiveawayPageProps {
   onNavigate: (page: Page) => void;
@@ -20,24 +31,24 @@ export const GiveawayPage: React.FC<GiveawayPageProps> = ({ onNavigate }) => {
   const [email, setEmail] = useState('');
   const [experience, setExperience] = useState('');
   const [exclusiveOffers, setExclusiveOffers] = useState(false);
-  const [timeLeft, setTimeLeft] = useState({ d: 0, h: 0, m: 0, s: 0, closed: false });
+  const [phase, setPhase] = useState<Phase>(() => phaseAt(new Date()));
+  const [timeLeft, setTimeLeft] = useState({ d: 0, h: 0, m: 0, s: 0 });
   const [error, setError] = useState('');
   const [sendFailed, setSendFailed] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
     const tick = () => {
-      const distance = GIVEAWAY_CLOSES_AT.getTime() - Date.now();
-      if (!GIVEAWAY_OPEN || distance < 0) {
-        setTimeLeft({ d: 0, h: 0, m: 0, s: 0, closed: true });
-        return;
-      }
+      const now = new Date();
+      const current = phaseAt(now);
+      setPhase(current);
+      if (current !== 'open') return;
+      const distance = GIVEAWAY_ENDS_AT.getTime() - now.getTime();
       setTimeLeft({
         d: Math.floor(distance / (1000 * 60 * 60 * 24)),
         h: Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
         m: Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)),
         s: Math.floor((distance % (1000 * 60)) / 1000),
-        closed: false
       });
     };
     tick();
@@ -50,12 +61,17 @@ export const GiveawayPage: React.FC<GiveawayPageProps> = ({ onNavigate }) => {
     setError('');
     setSendFailed(false);
 
-    if (timeLeft.closed) {
-      setError('Entries have closed. Follow us for the next giveaway!');
+    const current = phaseAt(new Date());
+    if (current !== 'open') {
+      setError(current === 'upcoming' ? `Entries open ${OPENS}.` : 'Entries have closed. Follow us for the next giveaway!');
       return;
     }
-    if (!phone && !email) {
-      setError(CONTACT_MISSING);
+    if (!name.trim()) {
+      setError(NAME_MISSING);
+      return;
+    }
+    if (!EMAIL_PATTERN.test(email.trim())) {
+      setError(EMAIL_INVALID);
       return;
     }
 
@@ -80,9 +96,11 @@ export const GiveawayPage: React.FC<GiveawayPageProps> = ({ onNavigate }) => {
   };
 
   const inputClass = "w-full p-4 bg-slate-50 border border-slate-200 rounded-2xl focus:outline-none focus:ring-4 focus:ring-[rgb(106,176,160)]/10 focus:border-[rgb(106,176,160)] transition-all font-medium text-slate-900 placeholder:text-slate-500";
+  const labelClass = "block text-xs font-black text-slate-500 mb-3 uppercase tracking-[0.05em]";
+  const linkClass = "font-bold text-[#2D6E5F] underline underline-offset-2 hover:text-[#245A4E]";
 
   const prizes = [
-    { icon: <Trophy className="w-7 h-7" />, label: 'Grand Prize', title: '£1 Full Turnover', sub: 'Worth up to £65' },
+    { icon: <Trophy className="w-7 h-7" />, label: 'Grand Prize', title: '£1 Full Turnover', sub: 'Standard Turnover for a 1-2 bedroom property, worth up to £65. Winner pays £1.' },
     { icon: <Gift className="w-7 h-7" />, label: 'Runner-Up', title: '£25 Credit', sub: 'Towards any clean' },
     { icon: <Star className="w-7 h-7" />, label: '3rd Prize', title: '£15 Credit', sub: 'Towards any clean' },
   ];
@@ -102,14 +120,20 @@ export const GiveawayPage: React.FC<GiveawayPageProps> = ({ onNavigate }) => {
             Win a <span className="text-[#2D6E5F]">£1</span> Guest-Ready Turnover
           </h1>
           <p className="text-xl text-slate-600 max-w-2xl mx-auto leading-relaxed">
-            Exclusively for Airbnb and short-let hosts in East London. Tell us about your worst turnover experience, and we'll make sure it never happens again.
+            Exclusively for Airbnb and short-let hosts in East London. Tell us about your worst turnover experience, or just enter your details, and you could win. Free to enter.
           </p>
         </div>
 
         {/* Countdown */}
+        <p className="text-center font-bold text-slate-700 mb-4">
+          {phase === 'upcoming' ? `Opens ${OPENS}` : `Closes ${CLOSES}`}
+          <span className="font-medium text-slate-600"> (UK time)</span>
+        </p>
         <div className="flex justify-center gap-3 sm:gap-4 mb-14">
-          {timeLeft.closed ? (
+          {phase === 'closed' ? (
             <div className="px-8 py-4 bg-slate-900 text-white rounded-2xl font-black text-xl">Entries closed</div>
+          ) : phase === 'upcoming' ? (
+            <div className="px-8 py-4 bg-white text-slate-900 border border-[rgb(204,236,229)] rounded-2xl font-black text-xl">Opening soon</div>
           ) : (
             [
               { v: timeLeft.d, l: 'Days' },
@@ -140,30 +164,30 @@ export const GiveawayPage: React.FC<GiveawayPageProps> = ({ onNavigate }) => {
         </div>
 
         {/* Entry form */}
-        <form onSubmit={handleSubmit} className="bg-white p-8 md:p-12 rounded-[2.5rem] shadow-2xl border border-slate-100 max-w-2xl mx-auto">
+        <form onSubmit={handleSubmit} noValidate className="bg-white p-8 md:p-12 rounded-[2.5rem] shadow-2xl border border-slate-100 max-w-2xl mx-auto">
           <h2 className="text-2xl font-black text-slate-900 mb-8">Enter in 30 seconds</h2>
-          <div className="space-y-6">
+          <fieldset disabled={phase !== 'open'} className="space-y-6 min-w-0">
             <div>
-              <label htmlFor="name" className="block text-xs font-black text-slate-500 mb-3 uppercase tracking-[0.05em]">Name</label>
-              <input type="text" id="name" autoComplete="name" value={name} onChange={(e) => setName(e.target.value)} className={inputClass} required placeholder="Your name" />
+              <label htmlFor="name" className={labelClass}>Name <span aria-hidden="true">*</span></label>
+              <input type="text" id="name" autoComplete="name" aria-invalid={error === NAME_MISSING} aria-describedby={error === NAME_MISSING ? 'giveaway-error' : undefined} value={name} onChange={(e) => setName(e.target.value)} className={inputClass} required placeholder="Your name" />
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               <div>
-                <label htmlFor="phone" className="block text-xs font-black text-slate-500 mb-3 uppercase tracking-[0.05em]">Phone</label>
-                <input type="tel" id="phone" autoComplete="tel" aria-invalid={error === CONTACT_MISSING} aria-describedby={error === CONTACT_MISSING ? 'giveaway-error' : undefined} value={phone} onChange={(e) => setPhone(e.target.value)} className={inputClass} placeholder="Your phone number" />
+                <label htmlFor="email" className={labelClass}>Email <span aria-hidden="true">*</span></label>
+                <input type="email" id="email" autoComplete="email" required aria-invalid={error === EMAIL_INVALID} aria-describedby={error === EMAIL_INVALID ? 'giveaway-error' : undefined} value={email} onChange={(e) => setEmail(e.target.value)} className={inputClass} placeholder="Your email address" />
               </div>
               <div>
-                <label htmlFor="email" className="block text-xs font-black text-slate-500 mb-3 uppercase tracking-[0.05em]">Email</label>
-                <input type="email" id="email" autoComplete="email" aria-invalid={error === CONTACT_MISSING} aria-describedby={error === CONTACT_MISSING ? 'giveaway-error' : undefined} value={email} onChange={(e) => setEmail(e.target.value)} className={inputClass} placeholder="Your email address" />
+                <label htmlFor="phone" className={labelClass}>Phone (optional)</label>
+                <input type="tel" id="phone" autoComplete="tel" value={phone} onChange={(e) => setPhone(e.target.value)} className={inputClass} placeholder="Your phone number" />
               </div>
             </div>
             <div>
-              <label htmlFor="experience" className="block text-xs font-black text-slate-500 mb-3 uppercase tracking-[0.05em]">Your worst turnover story</label>
+              <label htmlFor="experience" className={labelClass}>Your worst turnover story (optional)</label>
               <textarea id="experience" value={experience} onChange={(e) => setExperience(e.target.value)} className={`${inputClass} min-h-[110px]`} placeholder="Cleaner cancelled an hour before check-in? Tell us..." rows={4} />
             </div>
             <label className="flex items-center min-h-[44px] text-sm font-medium text-slate-600 cursor-pointer">
-              <input type="checkbox" checked={exclusiveOffers} onChange={(e) => setExclusiveOffers(e.target.checked)} className="mr-3 w-5 h-5 accent-[#2D6E5F]" />
-              Send me exclusive host offers
+              <input type="checkbox" checked={exclusiveOffers} onChange={(e) => setExclusiveOffers(e.target.checked)} className="mr-3 w-5 h-5 shrink-0 accent-[#2D6E5F]" />
+              Send me exclusive host offers. You can unsubscribe at any time.
             </label>
 
             {error && (
@@ -182,12 +206,37 @@ export const GiveawayPage: React.FC<GiveawayPageProps> = ({ onNavigate }) => {
               </div>
             )}
 
-            <button type="submit" disabled={isSubmitting || timeLeft.closed} className={`w-full py-5 bg-[#2D6E5F] text-white rounded-2xl font-black text-lg hover:bg-[#245A4E] transition-all shadow-xl ${(isSubmitting || timeLeft.closed) ? 'opacity-60 cursor-not-allowed' : ''}`}>
-              {timeLeft.closed ? 'Entries Closed' : isSubmitting ? 'Submitting…' : 'Enter the Giveaway'}
+            <button type="submit" disabled={isSubmitting} className={`w-full py-5 bg-[#2D6E5F] text-white rounded-2xl font-black text-lg hover:bg-[#245A4E] transition-all shadow-xl disabled:opacity-60 disabled:cursor-not-allowed`}>
+              {phase === 'closed' ? 'Entries Closed' : phase === 'upcoming' ? 'Opening soon' : isSubmitting ? 'Submitting…' : 'Enter the Giveaway'}
             </button>
-          </div>
+          </fieldset>
+          <p className="text-sm text-slate-600 text-center mt-6">
+            One entry per person. By entering you agree to the terms below and our{' '}
+            <RouteLink page={Page.LEGAL} onNavigate={onNavigate} className={linkClass}>Privacy Policy</RouteLink>.
+          </p>
         </form>
-        <p className="text-sm text-slate-600 text-center mt-8">One entry per host. Limited to properties in our East London service area. Winners contacted directly.</p>
+
+        {/* Terms */}
+        <details open className="group bg-white rounded-[2rem] border border-slate-100 shadow-md max-w-2xl mx-auto mt-8">
+          <summary className="flex items-center justify-between gap-4 min-h-[44px] px-6 sm:px-8 py-5 cursor-pointer list-none [&::-webkit-details-marker]:hidden font-black text-slate-900 text-lg">
+            Giveaway terms
+            <ChevronDown className="w-5 h-5 shrink-0 transition-transform group-open:rotate-180" aria-hidden="true" />
+          </summary>
+          <ol className="list-decimal pl-10 pr-6 sm:pr-8 pb-8 space-y-3 text-sm text-slate-700 leading-relaxed">
+            <li>Promoter: {GIVEAWAY_PROMOTER}.</li>
+            <li>Free to enter, no purchase necessary. Open to people aged 18+ who host or manage a short-let in Airola's East London service area (Stratford, Royal Wharf, Canary Wharf, Canning Town, Hackney Wick, Bow, Mile End, Leyton).</li>
+            <li>Opens {OPENS}, closes {CLOSES}, UK time. One entry per person across all routes.</li>
+            <li>Entry routes: this form, or follow @{INSTAGRAM_HANDLE} on Instagram and comment TURNOVER on the giveaway post.</li>
+            <li>Winners are chosen by {GIVEAWAY_DRAW_METHOD} and contacted by email, phone or Instagram message within 3 days of closing. If a winner does not reply within 7 days, another is drawn. Winners are announced on @{INSTAGRAM_HANDLE}.</li>
+            <li>Prizes: 1 × Standard Turnover for a 1-2 bedroom property for £1 (worth up to £65); 1 × £25 credit; 1 × £15 credit, each towards a booking. Valid for {GIVEAWAY_PRIZE_VALID_DAYS} days, subject to availability. No cash alternative. Not transferable.</li>
+            <li>
+              Your details are used to run the giveaway and, only if you tick the box, to send host offers. See the{' '}
+              <RouteLink page={Page.LEGAL} onNavigate={onNavigate} className={linkClass}>Privacy Policy</RouteLink>.
+            </li>
+            <li>This promotion is not sponsored, endorsed or administered by Instagram. Entrants release Instagram from any liability.</li>
+            <li>The promoter may amend or withdraw the giveaway if circumstances outside its control require it.</li>
+          </ol>
+        </details>
       </div>
     </div>
   );
