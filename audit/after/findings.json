@@ -1,0 +1,1934 @@
+{
+  "/@360": {
+    "scrollWidth": 360,
+    "innerWidth": 360,
+    "overflow": [],
+    "smallBody": {
+      "count": 0,
+      "examples": []
+    },
+    "tinyText": [],
+    "smallTargets": {
+      "count": 0,
+      "examples": []
+    },
+    "edgeText": [],
+    "fixed": [
+      "nav.fixed.top-0.left-0 \"HomePackagesServicesGiveawayReviewsAbout\" fixed 360×100 @(0,0)",
+      "div.md:hidden.fixed.inset-x-0 \"Get a Quote\" fixed 360×73 @(0,727)"
+    ],
+    "images": [],
+    "fields": [],
+    "heroCta": {
+      "top": 456,
+      "bottom": 516,
+      "visible": true
+    },
+    "h1": {
+      "fontSize": "35px",
+      "height": 131
+    },
+    "mobileMenu": {
+      "open": true,
+      "height": 449,
+      "coversViewport": false,
+      "closesOnEscape": true
+    }
+  },
+  "/pricing@360": {
+    "scrollWidth": 360,
+    "innerWidth": 360,
+    "overflow": [],
+    "smallBody": {
+      "count": 0,
+      "examples": []
+    },
+    "tinyText": [],
+    "smallTargets": {
+      "count": 0,
+      "examples": []
+    },
+    "edgeText": [],
+    "fixed": [
+      "nav.fixed.top-0.left-0 \"HomePackagesServicesGiveawayReviewsAbout\" fixed 360×100 @(0,0)",
+      "div.md:hidden.fixed.inset-x-0 \"Get a Quote\" fixed 360×73 @(0,727)"
+    ],
+    "images": [],
+    "fields": [],
+    "heroCta": {
+      "top": 4399,
+      "bottom": 4467,
+      "visible": false
+    },
+    "h1": {
+      "fontSize": "36px",
+      "height": 80
+    }
+  },
+  "/quote@360": {
+    "scrollWidth": 360,
+    "innerWidth": 360,
+    "overflow": [],
+    "smallBody": {
+      "count": 0,
+      "examples": []
+    },
+    "tinyText": [],
+    "smallTargets": {
+      "count": 0,
+      "examples": []
+    },
+    "edgeText": [],
+    "fixed": [
+      "nav.fixed.top-0.left-0 \"HomePackagesServicesGiveawayReviewsAbout\" fixed 360×100 @(0,0)",
+      "div.bg-slate-900.rounded-[3rem].p-10 \"Your PriceStandard Turnover (1 bed, 1 ba\" sticky 328×576 @(16,2615)",
+      "div.md:hidden.fixed.inset-x-0 \"WhatsApp (opens in a new tab)\" fixed 360×73 @(0,727)"
+    ],
+    "images": [],
+    "fields": [],
+    "heroCta": null,
+    "h1": {
+      "fontSize": "36px",
+      "height": 40
+    }
+  },
+  "/about-us@360": {
+    "scrollWidth": 360,
+    "innerWidth": 360,
+    "overflow": [],
+    "smallBody": {
+      "count": 0,
+      "examples": []
+    },
+    "tinyText": [],
+    "smallTargets": {
+      "count": 0,
+      "examples": []
+    },
+    "edgeText": [],
+    "fixed": [
+      "nav.fixed.top-0.left-0 \"HomePackagesServicesGiveawayReviewsAbout\" fixed 360×100 @(0,0)",
+      "div.md:hidden.fixed.inset-x-0 \"Get a Quote\" fixed 360×73 @(0,727)"
+    ],
+    "images": [],
+    "fields": [],
+    "heroCta": null,
+    "h1": {
+      "fontSize": "36px",
+      "height": 135
+    }
+  },
+  "/contact@360": {
+    "scrollWidth": 360,
+    "innerWidth": 360,
+    "overflow": [],
+    "smallBody": {
+      "count": 0,
+      "examples": []
+    },
+    "tinyText": [],
+    "smallTargets": {
+      "count": 0,
+      "examples": []
+    },
+    "edgeText": [],
+    "fixed": [
+      "nav.fixed.top-0.left-0 \"HomePackagesServicesGiveawayReviewsAbout\" fixed 360×100 @(0,0)",
+      "div.md:hidden.fixed.inset-x-0 \"Get a Quote\" fixed 360×73 @(0,727)"
+    ],
+    "images": [],
+    "fields": [],
+    "heroCta": null,
+    "h1": {
+      "fontSize": "36px",
+      "height": 40
+    }
+  },
+  "/giveaway@360": {
+    "scrollWidth": 360,
+    "innerWidth": 360,
+    "overflow": [],
+    "smallBody": {
+      "count": 0,
+      "examples": []
+    },
+    "tinyText": [],
+    "smallTargets": {
+      "count": 0,
+      "examples": []
+    },
+    "edgeText": [],
+    "fixed": [
+      "nav.fixed.top-0.left-0 \"HomePackagesServicesGiveawayReviewsAbout\" fixed 360×100 @(0,0)",
+      "div.md:hidden.fixed.inset-x-0 \"Get a Quote\" fixed 360×73 @(0,727)"
+    ],
+    "images": [],
+    "fields": [],
+    "heroCta": null,
+    "h1": {
+      "fontSize": "36px",
+      "height": 80
+    }
+  },
+  "/legal@360": {
+    "scrollWidth": 360,
+    "innerWidth": 360,
+    "overflow": [],
+    "smallBody": {
+      "count": 0,
+      "examples": []
+    },
+    "tinyText": [],
+    "smallTargets": {
+      "count": 0,
+      "examples": []
+    },
+    "edgeText": [],
+    "fixed": [
+      "nav.fixed.top-0.left-0 \"HomePackagesServicesGiveawayReviewsAbout\" fixed 360×100 @(0,0)",
+      "div.md:hidden.fixed.inset-x-0 \"Get a Quote\" fixed 360×73 @(0,727)"
+    ],
+    "images": [],
+    "fields": [],
+    "heroCta": null,
+    "h1": {
+      "fontSize": "36px",
+      "height": 80
+    }
+  },
+  "/testimonials@360": {
+    "scrollWidth": 360,
+    "innerWidth": 360,
+    "overflow": [],
+    "smallBody": {
+      "count": 0,
+      "examples": []
+    },
+    "tinyText": [],
+    "smallTargets": {
+      "count": 0,
+      "examples": []
+    },
+    "edgeText": [],
+    "fixed": [
+      "nav.fixed.top-0.left-0 \"HomePackagesServicesGiveawayReviewsAbout\" fixed 360×100 @(0,0)",
+      "div.md:hidden.fixed.inset-x-0 \"Get a Quote\" fixed 360×73 @(0,727)"
+    ],
+    "images": [],
+    "fields": [],
+    "heroCta": null,
+    "h1": {
+      "fontSize": "36px",
+      "height": 80
+    }
+  },
+  "/offer@360": {
+    "scrollWidth": 360,
+    "innerWidth": 360,
+    "overflow": [],
+    "smallBody": {
+      "count": 0,
+      "examples": []
+    },
+    "tinyText": [],
+    "smallTargets": {
+      "count": 0,
+      "examples": []
+    },
+    "edgeText": [],
+    "fixed": [
+      "nav.fixed.top-0.left-0 \"HomePackagesServicesGiveawayReviewsAbout\" fixed 360×100 @(0,0)",
+      "div.md:hidden.fixed.inset-x-0 \"Get a Quote\" fixed 360×73 @(0,727)"
+    ],
+    "images": [],
+    "fields": [],
+    "heroCta": null,
+    "h1": {
+      "fontSize": "36px",
+      "height": 120
+    }
+  },
+  "/login@360": {
+    "scrollWidth": 360,
+    "innerWidth": 360,
+    "overflow": [],
+    "smallBody": {
+      "count": 1,
+      "examples": [
+        "span. \"Encrypted authentication & UK-hosted dat\" 12px"
+      ]
+    },
+    "tinyText": [],
+    "smallTargets": {
+      "count": 0,
+      "examples": []
+    },
+    "edgeText": [],
+    "fixed": [
+      "nav.fixed.top-0.left-0 \"HomePackagesServicesGiveawayReviewsAbout\" fixed 360×100 @(0,0)",
+      "div.md:hidden.fixed.inset-x-0 \"Get a Quote\" fixed 360×73 @(0,727)"
+    ],
+    "images": [],
+    "fields": [],
+    "heroCta": null,
+    "h1": {
+      "fontSize": "30px",
+      "height": 36
+    }
+  },
+  "/areas/stratford@360": {
+    "scrollWidth": 360,
+    "innerWidth": 360,
+    "overflow": [],
+    "smallBody": {
+      "count": 0,
+      "examples": []
+    },
+    "tinyText": [],
+    "smallTargets": {
+      "count": 0,
+      "examples": []
+    },
+    "edgeText": [],
+    "fixed": [
+      "nav.fixed.top-0.left-0 \"HomePackagesServicesGiveawayReviewsAbout\" fixed 360×100 @(0,0)",
+      "div.md:hidden.fixed.inset-x-0 \"Get a Quote\" fixed 360×73 @(0,727)"
+    ],
+    "images": [],
+    "fields": [],
+    "heroCta": {
+      "top": 1618,
+      "bottom": 1678,
+      "visible": false
+    },
+    "h1": {
+      "fontSize": "36px",
+      "height": 120
+    }
+  },
+  "/page-that-does-not-exist@360": {
+    "scrollWidth": 360,
+    "innerWidth": 360,
+    "overflow": [],
+    "smallBody": {
+      "count": 0,
+      "examples": []
+    },
+    "tinyText": [],
+    "smallTargets": {
+      "count": 0,
+      "examples": []
+    },
+    "edgeText": [],
+    "fixed": [
+      "nav.fixed.top-0.left-0 \"HomePackagesServicesGiveawayReviewsAbout\" fixed 360×100 @(0,0)",
+      "div.md:hidden.fixed.inset-x-0 \"Get a Quote\" fixed 360×73 @(0,727)"
+    ],
+    "images": [],
+    "fields": [],
+    "heroCta": null,
+    "h1": {
+      "fontSize": "30px",
+      "height": 72
+    }
+  },
+  "/@390": {
+    "scrollWidth": 390,
+    "innerWidth": 390,
+    "overflow": [],
+    "smallBody": {
+      "count": 0,
+      "examples": []
+    },
+    "tinyText": [],
+    "smallTargets": {
+      "count": 0,
+      "examples": []
+    },
+    "edgeText": [],
+    "fixed": [
+      "nav.fixed.top-0.left-0 \"HomePackagesServicesGiveawayReviewsAbout\" fixed 390×100 @(0,0)",
+      "div.md:hidden.fixed.inset-x-0 \"Get a Quote\" fixed 390×73 @(0,771)"
+    ],
+    "images": [],
+    "fields": [],
+    "heroCta": {
+      "top": 435,
+      "bottom": 495,
+      "visible": true
+    },
+    "h1": {
+      "fontSize": "37.25px",
+      "height": 140
+    },
+    "mobileMenu": {
+      "open": true,
+      "height": 449,
+      "coversViewport": false,
+      "closesOnEscape": true
+    }
+  },
+  "/pricing@390": {
+    "scrollWidth": 390,
+    "innerWidth": 390,
+    "overflow": [],
+    "smallBody": {
+      "count": 0,
+      "examples": []
+    },
+    "tinyText": [],
+    "smallTargets": {
+      "count": 0,
+      "examples": []
+    },
+    "edgeText": [],
+    "fixed": [
+      "nav.fixed.top-0.left-0 \"HomePackagesServicesGiveawayReviewsAbout\" fixed 390×100 @(0,0)",
+      "div.md:hidden.fixed.inset-x-0 \"Get a Quote\" fixed 390×73 @(0,771)"
+    ],
+    "images": [],
+    "fields": [],
+    "heroCta": {
+      "top": 4176,
+      "bottom": 4244,
+      "visible": false
+    },
+    "h1": {
+      "fontSize": "36px",
+      "height": 80
+    }
+  },
+  "/quote@390": {
+    "scrollWidth": 390,
+    "innerWidth": 390,
+    "overflow": [],
+    "smallBody": {
+      "count": 0,
+      "examples": []
+    },
+    "tinyText": [],
+    "smallTargets": {
+      "count": 0,
+      "examples": []
+    },
+    "edgeText": [],
+    "fixed": [
+      "nav.fixed.top-0.left-0 \"HomePackagesServicesGiveawayReviewsAbout\" fixed 390×100 @(0,0)",
+      "div.bg-slate-900.rounded-[3rem].p-10 \"Your PriceStandard Turnover (1 bed, 1 ba\" sticky 358×550 @(16,2471)",
+      "div.md:hidden.fixed.inset-x-0 \"WhatsApp (opens in a new tab)\" fixed 390×73 @(0,771)"
+    ],
+    "images": [],
+    "fields": [],
+    "heroCta": null,
+    "h1": {
+      "fontSize": "36px",
+      "height": 40
+    }
+  },
+  "/about-us@390": {
+    "scrollWidth": 390,
+    "innerWidth": 390,
+    "overflow": [],
+    "smallBody": {
+      "count": 0,
+      "examples": []
+    },
+    "tinyText": [],
+    "smallTargets": {
+      "count": 0,
+      "examples": []
+    },
+    "edgeText": [],
+    "fixed": [
+      "nav.fixed.top-0.left-0 \"HomePackagesServicesGiveawayReviewsAbout\" fixed 390×100 @(0,0)",
+      "div.md:hidden.fixed.inset-x-0 \"Get a Quote\" fixed 390×73 @(0,771)"
+    ],
+    "images": [],
+    "fields": [],
+    "heroCta": null,
+    "h1": {
+      "fontSize": "36px",
+      "height": 90
+    }
+  },
+  "/contact@390": {
+    "scrollWidth": 390,
+    "innerWidth": 390,
+    "overflow": [],
+    "smallBody": {
+      "count": 0,
+      "examples": []
+    },
+    "tinyText": [],
+    "smallTargets": {
+      "count": 0,
+      "examples": []
+    },
+    "edgeText": [],
+    "fixed": [
+      "nav.fixed.top-0.left-0 \"HomePackagesServicesGiveawayReviewsAbout\" fixed 390×100 @(0,0)",
+      "div.md:hidden.fixed.inset-x-0 \"Get a Quote\" fixed 390×73 @(0,771)"
+    ],
+    "images": [],
+    "fields": [],
+    "heroCta": null,
+    "h1": {
+      "fontSize": "36px",
+      "height": 40
+    }
+  },
+  "/giveaway@390": {
+    "scrollWidth": 390,
+    "innerWidth": 390,
+    "overflow": [],
+    "smallBody": {
+      "count": 0,
+      "examples": []
+    },
+    "tinyText": [],
+    "smallTargets": {
+      "count": 0,
+      "examples": []
+    },
+    "edgeText": [],
+    "fixed": [
+      "nav.fixed.top-0.left-0 \"HomePackagesServicesGiveawayReviewsAbout\" fixed 390×100 @(0,0)",
+      "div.md:hidden.fixed.inset-x-0 \"Get a Quote\" fixed 390×73 @(0,771)"
+    ],
+    "images": [],
+    "fields": [],
+    "heroCta": null,
+    "h1": {
+      "fontSize": "36px",
+      "height": 80
+    }
+  },
+  "/legal@390": {
+    "scrollWidth": 390,
+    "innerWidth": 390,
+    "overflow": [],
+    "smallBody": {
+      "count": 0,
+      "examples": []
+    },
+    "tinyText": [],
+    "smallTargets": {
+      "count": 0,
+      "examples": []
+    },
+    "edgeText": [],
+    "fixed": [
+      "nav.fixed.top-0.left-0 \"HomePackagesServicesGiveawayReviewsAbout\" fixed 390×100 @(0,0)",
+      "div.md:hidden.fixed.inset-x-0 \"Get a Quote\" fixed 390×73 @(0,771)"
+    ],
+    "images": [],
+    "fields": [],
+    "heroCta": null,
+    "h1": {
+      "fontSize": "36px",
+      "height": 80
+    }
+  },
+  "/testimonials@390": {
+    "scrollWidth": 390,
+    "innerWidth": 390,
+    "overflow": [],
+    "smallBody": {
+      "count": 0,
+      "examples": []
+    },
+    "tinyText": [],
+    "smallTargets": {
+      "count": 0,
+      "examples": []
+    },
+    "edgeText": [],
+    "fixed": [
+      "nav.fixed.top-0.left-0 \"HomePackagesServicesGiveawayReviewsAbout\" fixed 390×100 @(0,0)",
+      "div.md:hidden.fixed.inset-x-0 \"Get a Quote\" fixed 390×73 @(0,771)"
+    ],
+    "images": [],
+    "fields": [],
+    "heroCta": null,
+    "h1": {
+      "fontSize": "36px",
+      "height": 80
+    }
+  },
+  "/offer@390": {
+    "scrollWidth": 390,
+    "innerWidth": 390,
+    "overflow": [],
+    "smallBody": {
+      "count": 0,
+      "examples": []
+    },
+    "tinyText": [],
+    "smallTargets": {
+      "count": 0,
+      "examples": []
+    },
+    "edgeText": [],
+    "fixed": [
+      "nav.fixed.top-0.left-0 \"HomePackagesServicesGiveawayReviewsAbout\" fixed 390×100 @(0,0)",
+      "div.md:hidden.fixed.inset-x-0 \"Get a Quote\" fixed 390×73 @(0,771)"
+    ],
+    "images": [],
+    "fields": [],
+    "heroCta": null,
+    "h1": {
+      "fontSize": "36px",
+      "height": 120
+    }
+  },
+  "/login@390": {
+    "scrollWidth": 390,
+    "innerWidth": 390,
+    "overflow": [],
+    "smallBody": {
+      "count": 1,
+      "examples": [
+        "span. \"Encrypted authentication & UK-hosted dat\" 12px"
+      ]
+    },
+    "tinyText": [],
+    "smallTargets": {
+      "count": 0,
+      "examples": []
+    },
+    "edgeText": [],
+    "fixed": [
+      "nav.fixed.top-0.left-0 \"HomePackagesServicesGiveawayReviewsAbout\" fixed 390×100 @(0,0)",
+      "div.md:hidden.fixed.inset-x-0 \"Get a Quote\" fixed 390×73 @(0,771)"
+    ],
+    "images": [],
+    "fields": [],
+    "heroCta": null,
+    "h1": {
+      "fontSize": "30px",
+      "height": 36
+    }
+  },
+  "/areas/stratford@390": {
+    "scrollWidth": 390,
+    "innerWidth": 390,
+    "overflow": [],
+    "smallBody": {
+      "count": 0,
+      "examples": []
+    },
+    "tinyText": [],
+    "smallTargets": {
+      "count": 0,
+      "examples": []
+    },
+    "edgeText": [],
+    "fixed": [
+      "nav.fixed.top-0.left-0 \"HomePackagesServicesGiveawayReviewsAbout\" fixed 390×100 @(0,0)",
+      "div.md:hidden.fixed.inset-x-0 \"Get a Quote\" fixed 390×73 @(0,771)"
+    ],
+    "images": [],
+    "fields": [],
+    "heroCta": {
+      "top": 1592,
+      "bottom": 1652,
+      "visible": false
+    },
+    "h1": {
+      "fontSize": "36px",
+      "height": 120
+    }
+  },
+  "/page-that-does-not-exist@390": {
+    "scrollWidth": 390,
+    "innerWidth": 390,
+    "overflow": [],
+    "smallBody": {
+      "count": 0,
+      "examples": []
+    },
+    "tinyText": [],
+    "smallTargets": {
+      "count": 0,
+      "examples": []
+    },
+    "edgeText": [],
+    "fixed": [
+      "nav.fixed.top-0.left-0 \"HomePackagesServicesGiveawayReviewsAbout\" fixed 390×100 @(0,0)",
+      "div.md:hidden.fixed.inset-x-0 \"Get a Quote\" fixed 390×73 @(0,771)"
+    ],
+    "images": [],
+    "fields": [],
+    "heroCta": null,
+    "h1": {
+      "fontSize": "30px",
+      "height": 72
+    }
+  },
+  "/@430": {
+    "scrollWidth": 430,
+    "innerWidth": 430,
+    "overflow": [],
+    "smallBody": {
+      "count": 0,
+      "examples": []
+    },
+    "tinyText": [],
+    "smallTargets": {
+      "count": 0,
+      "examples": []
+    },
+    "edgeText": [],
+    "fixed": [
+      "nav.fixed.top-0.left-0 \"HomePackagesServicesGiveawayReviewsAbout\" fixed 430×100 @(0,0)",
+      "div.md:hidden.fixed.inset-x-0 \"Get a Quote\" fixed 430×73 @(0,859)"
+    ],
+    "images": [],
+    "fields": [],
+    "heroCta": {
+      "top": 446,
+      "bottom": 506,
+      "visible": true
+    },
+    "h1": {
+      "fontSize": "40.25px",
+      "height": 151
+    },
+    "mobileMenu": {
+      "open": true,
+      "height": 449,
+      "coversViewport": false,
+      "closesOnEscape": true
+    }
+  },
+  "/pricing@430": {
+    "scrollWidth": 430,
+    "innerWidth": 430,
+    "overflow": [],
+    "smallBody": {
+      "count": 0,
+      "examples": []
+    },
+    "tinyText": [],
+    "smallTargets": {
+      "count": 0,
+      "examples": []
+    },
+    "edgeText": [],
+    "fixed": [
+      "nav.fixed.top-0.left-0 \"HomePackagesServicesGiveawayReviewsAbout\" fixed 430×100 @(0,0)",
+      "div.md:hidden.fixed.inset-x-0 \"Get a Quote\" fixed 430×73 @(0,859)"
+    ],
+    "images": [],
+    "fields": [],
+    "heroCta": {
+      "top": 3902,
+      "bottom": 3970,
+      "visible": false
+    },
+    "h1": {
+      "fontSize": "36px",
+      "height": 40
+    }
+  },
+  "/quote@430": {
+    "scrollWidth": 430,
+    "innerWidth": 430,
+    "overflow": [],
+    "smallBody": {
+      "count": 0,
+      "examples": []
+    },
+    "tinyText": [],
+    "smallTargets": {
+      "count": 0,
+      "examples": []
+    },
+    "edgeText": [],
+    "fixed": [
+      "nav.fixed.top-0.left-0 \"HomePackagesServicesGiveawayReviewsAbout\" fixed 430×100 @(0,0)",
+      "div.bg-slate-900.rounded-[3rem].p-10 \"Your PriceStandard Turnover (1 bed, 1 ba\" sticky 398×502 @(16,2351)",
+      "div.md:hidden.fixed.inset-x-0 \"WhatsApp (opens in a new tab)\" fixed 430×73 @(0,859)"
+    ],
+    "images": [],
+    "fields": [],
+    "heroCta": null,
+    "h1": {
+      "fontSize": "36px",
+      "height": 40
+    }
+  },
+  "/about-us@430": {
+    "scrollWidth": 430,
+    "innerWidth": 430,
+    "overflow": [],
+    "smallBody": {
+      "count": 0,
+      "examples": []
+    },
+    "tinyText": [],
+    "smallTargets": {
+      "count": 0,
+      "examples": []
+    },
+    "edgeText": [],
+    "fixed": [
+      "nav.fixed.top-0.left-0 \"HomePackagesServicesGiveawayReviewsAbout\" fixed 430×100 @(0,0)",
+      "div.md:hidden.fixed.inset-x-0 \"Get a Quote\" fixed 430×73 @(0,859)"
+    ],
+    "images": [],
+    "fields": [],
+    "heroCta": null,
+    "h1": {
+      "fontSize": "36px",
+      "height": 90
+    }
+  },
+  "/contact@430": {
+    "scrollWidth": 430,
+    "innerWidth": 430,
+    "overflow": [],
+    "smallBody": {
+      "count": 0,
+      "examples": []
+    },
+    "tinyText": [],
+    "smallTargets": {
+      "count": 0,
+      "examples": []
+    },
+    "edgeText": [],
+    "fixed": [
+      "nav.fixed.top-0.left-0 \"HomePackagesServicesGiveawayReviewsAbout\" fixed 430×100 @(0,0)",
+      "div.md:hidden.fixed.inset-x-0 \"Get a Quote\" fixed 430×73 @(0,859)"
+    ],
+    "images": [],
+    "fields": [],
+    "heroCta": null,
+    "h1": {
+      "fontSize": "36px",
+      "height": 40
+    }
+  },
+  "/giveaway@430": {
+    "scrollWidth": 430,
+    "innerWidth": 430,
+    "overflow": [],
+    "smallBody": {
+      "count": 0,
+      "examples": []
+    },
+    "tinyText": [],
+    "smallTargets": {
+      "count": 0,
+      "examples": []
+    },
+    "edgeText": [],
+    "fixed": [
+      "nav.fixed.top-0.left-0 \"HomePackagesServicesGiveawayReviewsAbout\" fixed 430×100 @(0,0)",
+      "div.md:hidden.fixed.inset-x-0 \"Get a Quote\" fixed 430×73 @(0,859)"
+    ],
+    "images": [],
+    "fields": [],
+    "heroCta": null,
+    "h1": {
+      "fontSize": "36px",
+      "height": 80
+    }
+  },
+  "/legal@430": {
+    "scrollWidth": 430,
+    "innerWidth": 430,
+    "overflow": [],
+    "smallBody": {
+      "count": 0,
+      "examples": []
+    },
+    "tinyText": [],
+    "smallTargets": {
+      "count": 0,
+      "examples": []
+    },
+    "edgeText": [],
+    "fixed": [
+      "nav.fixed.top-0.left-0 \"HomePackagesServicesGiveawayReviewsAbout\" fixed 430×100 @(0,0)",
+      "div.md:hidden.fixed.inset-x-0 \"Get a Quote\" fixed 430×73 @(0,859)"
+    ],
+    "images": [],
+    "fields": [],
+    "heroCta": null,
+    "h1": {
+      "fontSize": "36px",
+      "height": 80
+    }
+  },
+  "/testimonials@430": {
+    "scrollWidth": 430,
+    "innerWidth": 430,
+    "overflow": [],
+    "smallBody": {
+      "count": 0,
+      "examples": []
+    },
+    "tinyText": [],
+    "smallTargets": {
+      "count": 0,
+      "examples": []
+    },
+    "edgeText": [],
+    "fixed": [
+      "nav.fixed.top-0.left-0 \"HomePackagesServicesGiveawayReviewsAbout\" fixed 430×100 @(0,0)",
+      "div.md:hidden.fixed.inset-x-0 \"Get a Quote\" fixed 430×73 @(0,859)"
+    ],
+    "images": [],
+    "fields": [],
+    "heroCta": null,
+    "h1": {
+      "fontSize": "36px",
+      "height": 80
+    }
+  },
+  "/offer@430": {
+    "scrollWidth": 430,
+    "innerWidth": 430,
+    "overflow": [],
+    "smallBody": {
+      "count": 0,
+      "examples": []
+    },
+    "tinyText": [],
+    "smallTargets": {
+      "count": 0,
+      "examples": []
+    },
+    "edgeText": [],
+    "fixed": [
+      "nav.fixed.top-0.left-0 \"HomePackagesServicesGiveawayReviewsAbout\" fixed 430×100 @(0,0)",
+      "div.md:hidden.fixed.inset-x-0 \"Get a Quote\" fixed 430×73 @(0,859)"
+    ],
+    "images": [],
+    "fields": [],
+    "heroCta": null,
+    "h1": {
+      "fontSize": "36px",
+      "height": 80
+    }
+  },
+  "/login@430": {
+    "scrollWidth": 430,
+    "innerWidth": 430,
+    "overflow": [],
+    "smallBody": {
+      "count": 1,
+      "examples": [
+        "span. \"Encrypted authentication & UK-hosted dat\" 12px"
+      ]
+    },
+    "tinyText": [],
+    "smallTargets": {
+      "count": 0,
+      "examples": []
+    },
+    "edgeText": [],
+    "fixed": [
+      "nav.fixed.top-0.left-0 \"HomePackagesServicesGiveawayReviewsAbout\" fixed 430×100 @(0,0)",
+      "div.md:hidden.fixed.inset-x-0 \"Get a Quote\" fixed 430×73 @(0,859)"
+    ],
+    "images": [],
+    "fields": [],
+    "heroCta": null,
+    "h1": {
+      "fontSize": "30px",
+      "height": 36
+    }
+  },
+  "/areas/stratford@430": {
+    "scrollWidth": 430,
+    "innerWidth": 430,
+    "overflow": [],
+    "smallBody": {
+      "count": 0,
+      "examples": []
+    },
+    "tinyText": [],
+    "smallTargets": {
+      "count": 0,
+      "examples": []
+    },
+    "edgeText": [],
+    "fixed": [
+      "nav.fixed.top-0.left-0 \"HomePackagesServicesGiveawayReviewsAbout\" fixed 430×100 @(0,0)",
+      "div.md:hidden.fixed.inset-x-0 \"Get a Quote\" fixed 430×73 @(0,859)"
+    ],
+    "images": [],
+    "fields": [],
+    "heroCta": {
+      "top": 1472,
+      "bottom": 1532,
+      "visible": false
+    },
+    "h1": {
+      "fontSize": "36px",
+      "height": 80
+    }
+  },
+  "/page-that-does-not-exist@430": {
+    "scrollWidth": 430,
+    "innerWidth": 430,
+    "overflow": [],
+    "smallBody": {
+      "count": 0,
+      "examples": []
+    },
+    "tinyText": [],
+    "smallTargets": {
+      "count": 0,
+      "examples": []
+    },
+    "edgeText": [],
+    "fixed": [
+      "nav.fixed.top-0.left-0 \"HomePackagesServicesGiveawayReviewsAbout\" fixed 430×100 @(0,0)",
+      "div.md:hidden.fixed.inset-x-0 \"Get a Quote\" fixed 430×73 @(0,859)"
+    ],
+    "images": [],
+    "fields": [],
+    "heroCta": null,
+    "h1": {
+      "fontSize": "30px",
+      "height": 36
+    }
+  },
+  "/@768": {
+    "scrollWidth": 768,
+    "innerWidth": 768,
+    "overflow": [],
+    "smallBody": {
+      "count": 0,
+      "examples": []
+    },
+    "tinyText": [],
+    "smallTargets": {
+      "count": 0,
+      "examples": []
+    },
+    "edgeText": [],
+    "fixed": [
+      "nav.fixed.top-0.left-0 \"HomePackagesServicesGiveawayReviewsAbout\" fixed 768×100 @(0,0)",
+      "a.fixed.bottom-28.right-6 \"Chat on WhatsApp\" fixed 56×56 @(688,856)",
+      "button.fixed.bottom-6.right-6 \"Chat with Airola assistant\" fixed 64×64 @(680,936)"
+    ],
+    "images": [],
+    "fields": [],
+    "heroCta": {
+      "top": 618,
+      "bottom": 678,
+      "visible": true
+    },
+    "h1": {
+      "fontSize": "72px",
+      "height": 270
+    }
+  },
+  "/pricing@768": {
+    "scrollWidth": 768,
+    "innerWidth": 768,
+    "overflow": [],
+    "smallBody": {
+      "count": 0,
+      "examples": []
+    },
+    "tinyText": [],
+    "smallTargets": {
+      "count": 0,
+      "examples": []
+    },
+    "edgeText": [],
+    "fixed": [
+      "nav.fixed.top-0.left-0 \"HomePackagesServicesGiveawayReviewsAbout\" fixed 768×100 @(0,0)",
+      "a.fixed.bottom-28.right-6 \"Chat on WhatsApp\" fixed 56×56 @(688,856)",
+      "button.fixed.bottom-6.right-6 \"Chat with Airola assistant\" fixed 64×64 @(680,936)"
+    ],
+    "images": [],
+    "fields": [],
+    "heroCta": {
+      "top": 2926,
+      "bottom": 2994,
+      "visible": false
+    },
+    "h1": {
+      "fontSize": "48px",
+      "height": 48
+    }
+  },
+  "/quote@768": {
+    "scrollWidth": 768,
+    "innerWidth": 768,
+    "overflow": [],
+    "smallBody": {
+      "count": 0,
+      "examples": []
+    },
+    "tinyText": [],
+    "smallTargets": {
+      "count": 0,
+      "examples": []
+    },
+    "edgeText": [],
+    "fixed": [
+      "nav.fixed.top-0.left-0 \"HomePackagesServicesGiveawayReviewsAbout\" fixed 768×100 @(0,0)",
+      "div.bg-slate-900.rounded-[3rem].p-10 \"Your PriceStandard Turnover (1 bed, 1 ba\" sticky 720×450 @(24,1613)",
+      "a.fixed.bottom-28.right-6 \"Chat on WhatsApp\" fixed 56×56 @(688,856)",
+      "button.fixed.bottom-6.right-6 \"Chat with Airola assistant\" fixed 64×64 @(680,936)"
+    ],
+    "images": [],
+    "fields": [],
+    "heroCta": null,
+    "h1": {
+      "fontSize": "36px",
+      "height": 40
+    }
+  },
+  "/about-us@768": {
+    "scrollWidth": 768,
+    "innerWidth": 768,
+    "overflow": [],
+    "smallBody": {
+      "count": 0,
+      "examples": []
+    },
+    "tinyText": [],
+    "smallTargets": {
+      "count": 0,
+      "examples": []
+    },
+    "edgeText": [],
+    "fixed": [
+      "nav.fixed.top-0.left-0 \"HomePackagesServicesGiveawayReviewsAbout\" fixed 768×100 @(0,0)",
+      "a.fixed.bottom-28.right-6 \"Chat on WhatsApp\" fixed 56×56 @(688,856)",
+      "button.fixed.bottom-6.right-6 \"Chat with Airola assistant\" fixed 64×64 @(680,936)"
+    ],
+    "images": [],
+    "fields": [],
+    "heroCta": null,
+    "h1": {
+      "fontSize": "48px",
+      "height": 120
+    }
+  },
+  "/contact@768": {
+    "scrollWidth": 768,
+    "innerWidth": 768,
+    "overflow": [],
+    "smallBody": {
+      "count": 0,
+      "examples": []
+    },
+    "tinyText": [],
+    "smallTargets": {
+      "count": 0,
+      "examples": []
+    },
+    "edgeText": [],
+    "fixed": [
+      "nav.fixed.top-0.left-0 \"HomePackagesServicesGiveawayReviewsAbout\" fixed 768×100 @(0,0)",
+      "a.fixed.bottom-28.right-6 \"Chat on WhatsApp\" fixed 56×56 @(688,856)",
+      "button.fixed.bottom-6.right-6 \"Chat with Airola assistant\" fixed 64×64 @(680,936)"
+    ],
+    "images": [],
+    "fields": [],
+    "heroCta": null,
+    "h1": {
+      "fontSize": "48px",
+      "height": 48
+    }
+  },
+  "/giveaway@768": {
+    "scrollWidth": 768,
+    "innerWidth": 768,
+    "overflow": [],
+    "smallBody": {
+      "count": 0,
+      "examples": []
+    },
+    "tinyText": [],
+    "smallTargets": {
+      "count": 0,
+      "examples": []
+    },
+    "edgeText": [],
+    "fixed": [
+      "nav.fixed.top-0.left-0 \"HomePackagesServicesGiveawayReviewsAbout\" fixed 768×100 @(0,0)",
+      "a.fixed.bottom-28.right-6 \"Chat on WhatsApp\" fixed 56×56 @(688,856)",
+      "button.fixed.bottom-6.right-6 \"Chat with Airola assistant\" fixed 64×64 @(680,936)"
+    ],
+    "images": [],
+    "fields": [],
+    "heroCta": null,
+    "h1": {
+      "fontSize": "60px",
+      "height": 120
+    }
+  },
+  "/legal@768": {
+    "scrollWidth": 768,
+    "innerWidth": 768,
+    "overflow": [],
+    "smallBody": {
+      "count": 0,
+      "examples": []
+    },
+    "tinyText": [],
+    "smallTargets": {
+      "count": 0,
+      "examples": []
+    },
+    "edgeText": [],
+    "fixed": [
+      "nav.fixed.top-0.left-0 \"HomePackagesServicesGiveawayReviewsAbout\" fixed 768×100 @(0,0)",
+      "a.fixed.bottom-28.right-6 \"Chat on WhatsApp\" fixed 56×56 @(688,856)",
+      "button.fixed.bottom-6.right-6 \"Chat with Airola assistant\" fixed 64×64 @(680,936)"
+    ],
+    "images": [],
+    "fields": [],
+    "heroCta": null,
+    "h1": {
+      "fontSize": "48px",
+      "height": 48
+    }
+  },
+  "/testimonials@768": {
+    "scrollWidth": 768,
+    "innerWidth": 768,
+    "overflow": [],
+    "smallBody": {
+      "count": 0,
+      "examples": []
+    },
+    "tinyText": [],
+    "smallTargets": {
+      "count": 0,
+      "examples": []
+    },
+    "edgeText": [],
+    "fixed": [
+      "nav.fixed.top-0.left-0 \"HomePackagesServicesGiveawayReviewsAbout\" fixed 768×100 @(0,0)",
+      "a.fixed.bottom-28.right-6 \"Chat on WhatsApp\" fixed 56×56 @(688,856)",
+      "button.fixed.bottom-6.right-6 \"Chat with Airola assistant\" fixed 64×64 @(680,936)"
+    ],
+    "images": [],
+    "fields": [],
+    "heroCta": null,
+    "h1": {
+      "fontSize": "48px",
+      "height": 48
+    }
+  },
+  "/offer@768": {
+    "scrollWidth": 768,
+    "innerWidth": 768,
+    "overflow": [],
+    "smallBody": {
+      "count": 0,
+      "examples": []
+    },
+    "tinyText": [],
+    "smallTargets": {
+      "count": 0,
+      "examples": []
+    },
+    "edgeText": [],
+    "fixed": [
+      "nav.fixed.top-0.left-0 \"HomePackagesServicesGiveawayReviewsAbout\" fixed 768×100 @(0,0)",
+      "a.fixed.bottom-28.right-6 \"Chat on WhatsApp\" fixed 56×56 @(688,856)",
+      "button.fixed.bottom-6.right-6 \"Chat with Airola assistant\" fixed 64×64 @(680,936)"
+    ],
+    "images": [],
+    "fields": [],
+    "heroCta": null,
+    "h1": {
+      "fontSize": "60px",
+      "height": 120
+    }
+  },
+  "/login@768": {
+    "scrollWidth": 768,
+    "innerWidth": 768,
+    "overflow": [],
+    "smallBody": {
+      "count": 1,
+      "examples": [
+        "span. \"Encrypted authentication & UK-hosted dat\" 12px"
+      ]
+    },
+    "tinyText": [],
+    "smallTargets": {
+      "count": 0,
+      "examples": []
+    },
+    "edgeText": [],
+    "fixed": [
+      "nav.fixed.top-0.left-0 \"HomePackagesServicesGiveawayReviewsAbout\" fixed 768×100 @(0,0)",
+      "a.fixed.bottom-28.right-6 \"Chat on WhatsApp\" fixed 56×56 @(688,856)",
+      "button.fixed.bottom-6.right-6 \"Chat with Airola assistant\" fixed 64×64 @(680,936)"
+    ],
+    "images": [],
+    "fields": [],
+    "heroCta": null,
+    "h1": {
+      "fontSize": "30px",
+      "height": 36
+    }
+  },
+  "/areas/stratford@768": {
+    "scrollWidth": 768,
+    "innerWidth": 768,
+    "overflow": [],
+    "smallBody": {
+      "count": 0,
+      "examples": []
+    },
+    "tinyText": [],
+    "smallTargets": {
+      "count": 0,
+      "examples": []
+    },
+    "edgeText": [],
+    "fixed": [
+      "nav.fixed.top-0.left-0 \"HomePackagesServicesGiveawayReviewsAbout\" fixed 768×100 @(0,0)",
+      "a.fixed.bottom-28.right-6 \"Chat on WhatsApp\" fixed 56×56 @(688,856)",
+      "button.fixed.bottom-6.right-6 \"Chat with Airola assistant\" fixed 64×64 @(680,936)"
+    ],
+    "images": [],
+    "fields": [],
+    "heroCta": {
+      "top": 1070,
+      "bottom": 1132,
+      "visible": false
+    },
+    "h1": {
+      "fontSize": "48px",
+      "height": 96
+    }
+  },
+  "/page-that-does-not-exist@768": {
+    "scrollWidth": 768,
+    "innerWidth": 768,
+    "overflow": [],
+    "smallBody": {
+      "count": 0,
+      "examples": []
+    },
+    "tinyText": [],
+    "smallTargets": {
+      "count": 0,
+      "examples": []
+    },
+    "edgeText": [],
+    "fixed": [
+      "nav.fixed.top-0.left-0 \"HomePackagesServicesGiveawayReviewsAbout\" fixed 768×100 @(0,0)",
+      "a.fixed.bottom-28.right-6 \"Chat on WhatsApp\" fixed 56×56 @(688,856)",
+      "button.fixed.bottom-6.right-6 \"Chat with Airola assistant\" fixed 64×64 @(680,936)"
+    ],
+    "images": [],
+    "fields": [],
+    "heroCta": null,
+    "h1": {
+      "fontSize": "48px",
+      "height": 48
+    }
+  },
+  "/@1440": {
+    "scrollWidth": 1440,
+    "innerWidth": 1440,
+    "overflow": [],
+    "smallBody": {
+      "count": 17,
+      "examples": [
+        "p.mt-5.text-sm.text-white/90 \"No payment now · No contract · First-cle\" 14px",
+        "p.mt-6.text-sm.text-white/90 \"Prefer a message? WhatsApp us (opens in \" 14px",
+        "p.text-slate-300.text-sm.leading-relaxed \"Full guest-ready reset between check-out\" 14px",
+        "p.text-slate-300.text-sm.leading-relaxed \"Every room, photographed and sent before\" 14px",
+        "p.text-slate-300.text-sm.leading-relaxed \"Reviews protected. Nothing left to chanc\" 14px",
+        "p.text-slate-500.text-sm.leading-relaxed \"We keep our promises, provide upfront ti\" 14px"
+      ]
+    },
+    "tinyText": [],
+    "smallTargets": {
+      "count": 14,
+      "examples": [
+        "a.inline-block.text-center.px-5 \"Close by? Ask us\" 159×42",
+        "a.inline-flex.items-center.min-h-[44px] \"Home\" 45×32",
+        "a.inline-flex.items-center.min-h-[44px] \"Packages\" 74×32",
+        "a.inline-flex.items-center.min-h-[44px] \"Services\" 66×32",
+        "a.inline-flex.items-center.min-h-[44px] \"Giveaway\" 74×32",
+        "a.inline-flex.items-center.min-h-[44px] \"About\" 45×32",
+        "a.inline-flex.items-center.min-h-[44px] \"Reviews\" 63×32",
+        "a.inline-flex.items-center.min-h-[44px] \"Contact\" 59×32",
+        "a.inline-flex.items-center.min-h-[44px] \"contact@airola.co.uk\" 160×20",
+        "a.inline-flex.items-center.min-h-[44px] \"+44 7925 123219\" 131×20",
+        "a.inline-flex.items-center.min-h-[44px] \"WhatsApp us\" 101×20",
+        "a.inline-flex.items-center.min-h-[44px] \"Privacy Policy\" 106×32"
+      ]
+    },
+    "edgeText": [],
+    "fixed": [
+      "nav.fixed.top-0.left-0 \"HomePackagesServicesGiveawayReviewsAbout\" fixed 1440×100 @(0,0)",
+      "div.order-1.lg:order-2.lg:sticky \"SERVICESEverything Your Guests Expect - \" sticky 576×492 @(752,3009)",
+      "a.fixed.bottom-28.right-6 \"Chat on WhatsApp\" fixed 56×56 @(1360,732)",
+      "button.fixed.bottom-6.right-6 \"Chat with Airola assistant\" fixed 64×64 @(1352,812)"
+    ],
+    "images": [],
+    "fields": [],
+    "heroCta": {
+      "top": 528,
+      "bottom": 588,
+      "visible": true
+    },
+    "h1": {
+      "fontSize": "72px",
+      "height": 180
+    }
+  },
+  "/pricing@1440": {
+    "scrollWidth": 1440,
+    "innerWidth": 1440,
+    "overflow": [],
+    "smallBody": {
+      "count": 16,
+      "examples": [
+        "p.text-slate-600.text-sm.mt-2 \"£35 per turnover when you book every tur\" 14px",
+        "p.text-slate-500.text-sm.mt-2 \"The full guest-ready reset, with proof.\" 14px",
+        "span.text-slate-600.text-sm.leading-snug \"Full property turnover: kitchen, bathroo\" 14px",
+        "span.text-slate-600.text-sm.leading-snug \"Photo confirmation after every clean\" 14px",
+        "span.text-slate-600.text-sm.leading-snug \"Priority booking & faster response\" 14px",
+        "span.text-slate-600.text-sm.leading-snug \"No contract, no emergency fees\" 14px"
+      ]
+    },
+    "tinyText": [],
+    "smallTargets": {
+      "count": 13,
+      "examples": [
+        "a.inline-flex.items-center.min-h-[44px] \"Home\" 45×32",
+        "a.inline-flex.items-center.min-h-[44px] \"Packages\" 74×32",
+        "a.inline-flex.items-center.min-h-[44px] \"Services\" 66×32",
+        "a.inline-flex.items-center.min-h-[44px] \"Giveaway\" 74×32",
+        "a.inline-flex.items-center.min-h-[44px] \"About\" 45×32",
+        "a.inline-flex.items-center.min-h-[44px] \"Reviews\" 63×32",
+        "a.inline-flex.items-center.min-h-[44px] \"Contact\" 59×32",
+        "a.inline-flex.items-center.min-h-[44px] \"contact@airola.co.uk\" 160×20",
+        "a.inline-flex.items-center.min-h-[44px] \"+44 7925 123219\" 131×20",
+        "a.inline-flex.items-center.min-h-[44px] \"WhatsApp us\" 101×20",
+        "a.inline-flex.items-center.min-h-[44px] \"Privacy Policy\" 106×32",
+        "a.inline-flex.items-center.min-h-[44px] \"Terms & Conditions\" 147×32"
+      ]
+    },
+    "edgeText": [],
+    "fixed": [
+      "nav.fixed.top-0.left-0 \"HomePackagesServicesGiveawayReviewsAbout\" fixed 1440×100 @(0,0)",
+      "a.fixed.bottom-28.right-6 \"Chat on WhatsApp\" fixed 56×56 @(1360,732)",
+      "button.fixed.bottom-6.right-6 \"Chat with Airola assistant\" fixed 64×64 @(1352,812)"
+    ],
+    "images": [],
+    "fields": [],
+    "heroCta": {
+      "top": 2447,
+      "bottom": 2515,
+      "visible": false
+    },
+    "h1": {
+      "fontSize": "48px",
+      "height": 48
+    }
+  },
+  "/quote@1440": {
+    "scrollWidth": 1440,
+    "innerWidth": 1440,
+    "overflow": [],
+    "smallBody": {
+      "count": 3,
+      "examples": [
+        "span. \"Standard Turnover (1 bed, 1 bath)\" 14px",
+        "span. \"Photo proof after every clean\" 14px",
+        "p.text-sm.lg:text-xs.text-slate-400 \"No payment now. We confirm your final pr\" 12px"
+      ]
+    },
+    "tinyText": [],
+    "smallTargets": {
+      "count": 13,
+      "examples": [
+        "a.inline-flex.items-center.min-h-[44px] \"Home\" 45×32",
+        "a.inline-flex.items-center.min-h-[44px] \"Packages\" 74×32",
+        "a.inline-flex.items-center.min-h-[44px] \"Services\" 66×32",
+        "a.inline-flex.items-center.min-h-[44px] \"Giveaway\" 74×32",
+        "a.inline-flex.items-center.min-h-[44px] \"About\" 45×32",
+        "a.inline-flex.items-center.min-h-[44px] \"Reviews\" 63×32",
+        "a.inline-flex.items-center.min-h-[44px] \"Contact\" 59×32",
+        "a.inline-flex.items-center.min-h-[44px] \"contact@airola.co.uk\" 160×20",
+        "a.inline-flex.items-center.min-h-[44px] \"+44 7925 123219\" 131×20",
+        "a.inline-flex.items-center.min-h-[44px] \"WhatsApp us\" 101×20",
+        "a.inline-flex.items-center.min-h-[44px] \"Privacy Policy\" 106×32",
+        "a.inline-flex.items-center.min-h-[44px] \"Terms & Conditions\" 147×32"
+      ]
+    },
+    "edgeText": [],
+    "fixed": [
+      "nav.fixed.top-0.left-0 \"HomePackagesServicesGiveawayReviewsAbout\" fixed 1440×100 @(0,0)",
+      "div.bg-slate-900.rounded-[3rem].p-10 \"Your PriceStandard Turnover (1 bed, 1 ba\" sticky 244×574 @(1084,138)",
+      "a.fixed.bottom-28.right-6 \"Chat on WhatsApp\" fixed 56×56 @(1360,732)",
+      "button.fixed.bottom-6.right-6 \"Chat with Airola assistant\" fixed 64×64 @(1352,812)"
+    ],
+    "images": [],
+    "fields": [],
+    "heroCta": null,
+    "h1": {
+      "fontSize": "36px",
+      "height": 40
+    }
+  },
+  "/about-us@1440": {
+    "scrollWidth": 1440,
+    "innerWidth": 1440,
+    "overflow": [],
+    "smallBody": {
+      "count": 6,
+      "examples": [
+        "p.text-slate-500.text-sm.leading-relaxed \"Full guest-ready reset between every che\" 14px",
+        "p.text-slate-500.text-sm.leading-relaxed \"Photos to your WhatsApp before your gues\" 14px",
+        "p.text-slate-500.text-sm.leading-relaxed \"Fresh linen and hotel-style beds.\" 14px",
+        "p.text-slate-500.text-sm.leading-relaxed \"Every dish, surface and appliance guest-\" 14px",
+        "p.text-slate-500.text-sm.leading-relaxed \"Toilet paper, soap and basics topped up \" 14px",
+        "p.text-slate-500.text-sm.leading-relaxed \"Same-day rescue for our recurring client\" 14px"
+      ]
+    },
+    "tinyText": [],
+    "smallTargets": {
+      "count": 13,
+      "examples": [
+        "a.inline-flex.items-center.min-h-[44px] \"Home\" 45×32",
+        "a.inline-flex.items-center.min-h-[44px] \"Packages\" 74×32",
+        "a.inline-flex.items-center.min-h-[44px] \"Services\" 66×32",
+        "a.inline-flex.items-center.min-h-[44px] \"Giveaway\" 74×32",
+        "a.inline-flex.items-center.min-h-[44px] \"About\" 45×32",
+        "a.inline-flex.items-center.min-h-[44px] \"Reviews\" 63×32",
+        "a.inline-flex.items-center.min-h-[44px] \"Contact\" 59×32",
+        "a.inline-flex.items-center.min-h-[44px] \"contact@airola.co.uk\" 160×20",
+        "a.inline-flex.items-center.min-h-[44px] \"+44 7925 123219\" 131×20",
+        "a.inline-flex.items-center.min-h-[44px] \"WhatsApp us\" 101×20",
+        "a.inline-flex.items-center.min-h-[44px] \"Privacy Policy\" 106×32",
+        "a.inline-flex.items-center.min-h-[44px] \"Terms & Conditions\" 147×32"
+      ]
+    },
+    "edgeText": [],
+    "fixed": [
+      "nav.fixed.top-0.left-0 \"HomePackagesServicesGiveawayReviewsAbout\" fixed 1440×100 @(0,0)",
+      "a.fixed.bottom-28.right-6 \"Chat on WhatsApp\" fixed 56×56 @(1360,732)",
+      "button.fixed.bottom-6.right-6 \"Chat with Airola assistant\" fixed 64×64 @(1352,812)"
+    ],
+    "images": [],
+    "fields": [],
+    "heroCta": null,
+    "h1": {
+      "fontSize": "48px",
+      "height": 120
+    }
+  },
+  "/contact@1440": {
+    "scrollWidth": 1440,
+    "innerWidth": 1440,
+    "overflow": [],
+    "smallBody": {
+      "count": 0,
+      "examples": []
+    },
+    "tinyText": [],
+    "smallTargets": {
+      "count": 13,
+      "examples": [
+        "a.inline-flex.items-center.min-h-[44px] \"Home\" 45×32",
+        "a.inline-flex.items-center.min-h-[44px] \"Packages\" 74×32",
+        "a.inline-flex.items-center.min-h-[44px] \"Services\" 66×32",
+        "a.inline-flex.items-center.min-h-[44px] \"Giveaway\" 74×32",
+        "a.inline-flex.items-center.min-h-[44px] \"About\" 45×32",
+        "a.inline-flex.items-center.min-h-[44px] \"Reviews\" 63×32",
+        "a.inline-flex.items-center.min-h-[44px] \"Contact\" 59×32",
+        "a.inline-flex.items-center.min-h-[44px] \"contact@airola.co.uk\" 160×20",
+        "a.inline-flex.items-center.min-h-[44px] \"+44 7925 123219\" 131×20",
+        "a.inline-flex.items-center.min-h-[44px] \"WhatsApp us\" 101×20",
+        "a.inline-flex.items-center.min-h-[44px] \"Privacy Policy\" 106×32",
+        "a.inline-flex.items-center.min-h-[44px] \"Terms & Conditions\" 147×32"
+      ]
+    },
+    "edgeText": [],
+    "fixed": [
+      "nav.fixed.top-0.left-0 \"HomePackagesServicesGiveawayReviewsAbout\" fixed 1440×100 @(0,0)",
+      "a.fixed.bottom-28.right-6 \"Chat on WhatsApp\" fixed 56×56 @(1360,732)",
+      "button.fixed.bottom-6.right-6 \"Chat with Airola assistant\" fixed 64×64 @(1352,812)"
+    ],
+    "images": [],
+    "fields": [],
+    "heroCta": null,
+    "h1": {
+      "fontSize": "48px",
+      "height": 48
+    }
+  },
+  "/giveaway@1440": {
+    "scrollWidth": 1440,
+    "innerWidth": 1440,
+    "overflow": [],
+    "smallBody": {
+      "count": 1,
+      "examples": [
+        "p.text-sm.text-slate-600.text-center \"One entry per host. Limited to propertie\" 14px"
+      ]
+    },
+    "tinyText": [],
+    "smallTargets": {
+      "count": 13,
+      "examples": [
+        "a.inline-flex.items-center.min-h-[44px] \"Home\" 45×32",
+        "a.inline-flex.items-center.min-h-[44px] \"Packages\" 74×32",
+        "a.inline-flex.items-center.min-h-[44px] \"Services\" 66×32",
+        "a.inline-flex.items-center.min-h-[44px] \"Giveaway\" 74×32",
+        "a.inline-flex.items-center.min-h-[44px] \"About\" 45×32",
+        "a.inline-flex.items-center.min-h-[44px] \"Reviews\" 63×32",
+        "a.inline-flex.items-center.min-h-[44px] \"Contact\" 59×32",
+        "a.inline-flex.items-center.min-h-[44px] \"contact@airola.co.uk\" 160×20",
+        "a.inline-flex.items-center.min-h-[44px] \"+44 7925 123219\" 131×20",
+        "a.inline-flex.items-center.min-h-[44px] \"WhatsApp us\" 101×20",
+        "a.inline-flex.items-center.min-h-[44px] \"Privacy Policy\" 106×32",
+        "a.inline-flex.items-center.min-h-[44px] \"Terms & Conditions\" 147×32"
+      ]
+    },
+    "edgeText": [],
+    "fixed": [
+      "nav.fixed.top-0.left-0 \"HomePackagesServicesGiveawayReviewsAbout\" fixed 1440×100 @(0,0)",
+      "a.fixed.bottom-28.right-6 \"Chat on WhatsApp\" fixed 56×56 @(1360,732)",
+      "button.fixed.bottom-6.right-6 \"Chat with Airola assistant\" fixed 64×64 @(1352,812)"
+    ],
+    "images": [],
+    "fields": [],
+    "heroCta": null,
+    "h1": {
+      "fontSize": "60px",
+      "height": 60
+    }
+  },
+  "/legal@1440": {
+    "scrollWidth": 1440,
+    "innerWidth": 1440,
+    "overflow": [],
+    "smallBody": {
+      "count": 0,
+      "examples": []
+    },
+    "tinyText": [],
+    "smallTargets": {
+      "count": 13,
+      "examples": [
+        "a.inline-flex.items-center.min-h-[44px] \"Home\" 45×32",
+        "a.inline-flex.items-center.min-h-[44px] \"Packages\" 74×32",
+        "a.inline-flex.items-center.min-h-[44px] \"Services\" 66×32",
+        "a.inline-flex.items-center.min-h-[44px] \"Giveaway\" 74×32",
+        "a.inline-flex.items-center.min-h-[44px] \"About\" 45×32",
+        "a.inline-flex.items-center.min-h-[44px] \"Reviews\" 63×32",
+        "a.inline-flex.items-center.min-h-[44px] \"Contact\" 59×32",
+        "a.inline-flex.items-center.min-h-[44px] \"contact@airola.co.uk\" 160×20",
+        "a.inline-flex.items-center.min-h-[44px] \"+44 7925 123219\" 131×20",
+        "a.inline-flex.items-center.min-h-[44px] \"WhatsApp us\" 101×20",
+        "a.inline-flex.items-center.min-h-[44px] \"Privacy Policy\" 106×32",
+        "a.inline-flex.items-center.min-h-[44px] \"Terms & Conditions\" 147×32"
+      ]
+    },
+    "edgeText": [],
+    "fixed": [
+      "nav.fixed.top-0.left-0 \"HomePackagesServicesGiveawayReviewsAbout\" fixed 1440×100 @(0,0)",
+      "a.fixed.bottom-28.right-6 \"Chat on WhatsApp\" fixed 56×56 @(1360,732)",
+      "button.fixed.bottom-6.right-6 \"Chat with Airola assistant\" fixed 64×64 @(1352,812)"
+    ],
+    "images": [],
+    "fields": [],
+    "heroCta": null,
+    "h1": {
+      "fontSize": "48px",
+      "height": 48
+    }
+  },
+  "/testimonials@1440": {
+    "scrollWidth": 1440,
+    "innerWidth": 1440,
+    "overflow": [],
+    "smallBody": {
+      "count": 3,
+      "examples": [
+        "p#review-displayName-hint.text-sm.text-slate-600.mb-2 \"First name and initial is fine, e.g. Sam\" 14px",
+        "p#review-body-count.mt-2.text-sm.text-slate-600 \"0 / 600 characters (at least 20)\" 14px",
+        "p#review-email-hint.text-sm.text-slate-600.mb-2 \"Never shown publicly. Used only to verif\" 14px"
+      ]
+    },
+    "tinyText": [],
+    "smallTargets": {
+      "count": 13,
+      "examples": [
+        "a.inline-flex.items-center.min-h-[44px] \"Home\" 45×32",
+        "a.inline-flex.items-center.min-h-[44px] \"Packages\" 74×32",
+        "a.inline-flex.items-center.min-h-[44px] \"Services\" 66×32",
+        "a.inline-flex.items-center.min-h-[44px] \"Giveaway\" 74×32",
+        "a.inline-flex.items-center.min-h-[44px] \"About\" 45×32",
+        "a.inline-flex.items-center.min-h-[44px] \"Reviews\" 63×32",
+        "a.inline-flex.items-center.min-h-[44px] \"Contact\" 59×32",
+        "a.inline-flex.items-center.min-h-[44px] \"contact@airola.co.uk\" 160×20",
+        "a.inline-flex.items-center.min-h-[44px] \"+44 7925 123219\" 131×20",
+        "a.inline-flex.items-center.min-h-[44px] \"WhatsApp us\" 101×20",
+        "a.inline-flex.items-center.min-h-[44px] \"Privacy Policy\" 106×32",
+        "a.inline-flex.items-center.min-h-[44px] \"Terms & Conditions\" 147×32"
+      ]
+    },
+    "edgeText": [],
+    "fixed": [
+      "nav.fixed.top-0.left-0 \"HomePackagesServicesGiveawayReviewsAbout\" fixed 1440×100 @(0,0)",
+      "a.fixed.bottom-28.right-6 \"Chat on WhatsApp\" fixed 56×56 @(1360,732)",
+      "button.fixed.bottom-6.right-6 \"Chat with Airola assistant\" fixed 64×64 @(1352,812)"
+    ],
+    "images": [],
+    "fields": [],
+    "heroCta": null,
+    "h1": {
+      "fontSize": "48px",
+      "height": 48
+    }
+  },
+  "/offer@1440": {
+    "scrollWidth": 1440,
+    "innerWidth": 1440,
+    "overflow": [],
+    "smallBody": {
+      "count": 3,
+      "examples": [
+        "li. \"Cannot be combined with other offers.\" 14px",
+        "li. \"Booking confirmed when the 50% deposit i\" 14px",
+        "li. \"Airola reserves the right to withdraw th\" 14px"
+      ]
+    },
+    "tinyText": [],
+    "smallTargets": {
+      "count": 13,
+      "examples": [
+        "a.inline-flex.items-center.min-h-[44px] \"Home\" 45×32",
+        "a.inline-flex.items-center.min-h-[44px] \"Packages\" 74×32",
+        "a.inline-flex.items-center.min-h-[44px] \"Services\" 66×32",
+        "a.inline-flex.items-center.min-h-[44px] \"Giveaway\" 74×32",
+        "a.inline-flex.items-center.min-h-[44px] \"About\" 45×32",
+        "a.inline-flex.items-center.min-h-[44px] \"Reviews\" 63×32",
+        "a.inline-flex.items-center.min-h-[44px] \"Contact\" 59×32",
+        "a.inline-flex.items-center.min-h-[44px] \"contact@airola.co.uk\" 160×20",
+        "a.inline-flex.items-center.min-h-[44px] \"+44 7925 123219\" 131×20",
+        "a.inline-flex.items-center.min-h-[44px] \"WhatsApp us\" 101×20",
+        "a.inline-flex.items-center.min-h-[44px] \"Privacy Policy\" 106×32",
+        "a.inline-flex.items-center.min-h-[44px] \"Terms & Conditions\" 147×32"
+      ]
+    },
+    "edgeText": [],
+    "fixed": [
+      "nav.fixed.top-0.left-0 \"HomePackagesServicesGiveawayReviewsAbout\" fixed 1440×100 @(0,0)",
+      "a.fixed.bottom-28.right-6 \"Chat on WhatsApp\" fixed 56×56 @(1360,732)",
+      "button.fixed.bottom-6.right-6 \"Chat with Airola assistant\" fixed 64×64 @(1352,812)"
+    ],
+    "images": [],
+    "fields": [],
+    "heroCta": null,
+    "h1": {
+      "fontSize": "60px",
+      "height": 120
+    }
+  },
+  "/login@1440": {
+    "scrollWidth": 1440,
+    "innerWidth": 1440,
+    "overflow": [],
+    "smallBody": {
+      "count": 1,
+      "examples": [
+        "span. \"Encrypted authentication & UK-hosted dat\" 12px"
+      ]
+    },
+    "tinyText": [],
+    "smallTargets": {
+      "count": 13,
+      "examples": [
+        "a.inline-flex.items-center.min-h-[44px] \"Home\" 45×32",
+        "a.inline-flex.items-center.min-h-[44px] \"Packages\" 74×32",
+        "a.inline-flex.items-center.min-h-[44px] \"Services\" 66×32",
+        "a.inline-flex.items-center.min-h-[44px] \"Giveaway\" 74×32",
+        "a.inline-flex.items-center.min-h-[44px] \"About\" 45×32",
+        "a.inline-flex.items-center.min-h-[44px] \"Reviews\" 63×32",
+        "a.inline-flex.items-center.min-h-[44px] \"Contact\" 59×32",
+        "a.inline-flex.items-center.min-h-[44px] \"contact@airola.co.uk\" 160×20",
+        "a.inline-flex.items-center.min-h-[44px] \"+44 7925 123219\" 131×20",
+        "a.inline-flex.items-center.min-h-[44px] \"WhatsApp us\" 101×20",
+        "a.inline-flex.items-center.min-h-[44px] \"Privacy Policy\" 106×32",
+        "a.inline-flex.items-center.min-h-[44px] \"Terms & Conditions\" 147×32"
+      ]
+    },
+    "edgeText": [],
+    "fixed": [
+      "nav.fixed.top-0.left-0 \"HomePackagesServicesGiveawayReviewsAbout\" fixed 1440×100 @(0,0)",
+      "a.fixed.bottom-28.right-6 \"Chat on WhatsApp\" fixed 56×56 @(1360,732)",
+      "button.fixed.bottom-6.right-6 \"Chat with Airola assistant\" fixed 64×64 @(1352,812)"
+    ],
+    "images": [],
+    "fields": [],
+    "heroCta": null,
+    "h1": {
+      "fontSize": "30px",
+      "height": 36
+    }
+  },
+  "/areas/stratford@1440": {
+    "scrollWidth": 1440,
+    "innerWidth": 1440,
+    "overflow": [],
+    "smallBody": {
+      "count": 2,
+      "examples": [
+        "p.text-slate-700.text-sm.leading-relaxed \"Full guest-ready reset: kitchen, bathroo\" 14px",
+        "p.text-slate-700.text-sm.leading-relaxed \"Everything in Standard plus linen change\" 14px"
+      ]
+    },
+    "tinyText": [],
+    "smallTargets": {
+      "count": 13,
+      "examples": [
+        "a.inline-flex.items-center.min-h-[44px] \"Home\" 45×32",
+        "a.inline-flex.items-center.min-h-[44px] \"Packages\" 74×32",
+        "a.inline-flex.items-center.min-h-[44px] \"Services\" 66×32",
+        "a.inline-flex.items-center.min-h-[44px] \"Giveaway\" 74×32",
+        "a.inline-flex.items-center.min-h-[44px] \"About\" 45×32",
+        "a.inline-flex.items-center.min-h-[44px] \"Reviews\" 63×32",
+        "a.inline-flex.items-center.min-h-[44px] \"Contact\" 59×32",
+        "a.inline-flex.items-center.min-h-[44px] \"contact@airola.co.uk\" 160×20",
+        "a.inline-flex.items-center.min-h-[44px] \"+44 7925 123219\" 131×20",
+        "a.inline-flex.items-center.min-h-[44px] \"WhatsApp us\" 101×20",
+        "a.inline-flex.items-center.min-h-[44px] \"Privacy Policy\" 106×32",
+        "a.inline-flex.items-center.min-h-[44px] \"Terms & Conditions\" 147×32"
+      ]
+    },
+    "edgeText": [],
+    "fixed": [
+      "nav.fixed.top-0.left-0 \"HomePackagesServicesGiveawayReviewsAbout\" fixed 1440×100 @(0,0)",
+      "a.fixed.bottom-28.right-6 \"Chat on WhatsApp\" fixed 56×56 @(1360,732)",
+      "button.fixed.bottom-6.right-6 \"Chat with Airola assistant\" fixed 64×64 @(1352,812)"
+    ],
+    "images": [],
+    "fields": [],
+    "heroCta": {
+      "top": 1011,
+      "bottom": 1073,
+      "visible": false
+    },
+    "h1": {
+      "fontSize": "48px",
+      "height": 96
+    }
+  },
+  "/page-that-does-not-exist@1440": {
+    "scrollWidth": 1440,
+    "innerWidth": 1440,
+    "overflow": [],
+    "smallBody": {
+      "count": 0,
+      "examples": []
+    },
+    "tinyText": [],
+    "smallTargets": {
+      "count": 13,
+      "examples": [
+        "a.inline-flex.items-center.min-h-[44px] \"Home\" 45×32",
+        "a.inline-flex.items-center.min-h-[44px] \"Packages\" 74×32",
+        "a.inline-flex.items-center.min-h-[44px] \"Services\" 66×32",
+        "a.inline-flex.items-center.min-h-[44px] \"Giveaway\" 74×32",
+        "a.inline-flex.items-center.min-h-[44px] \"About\" 45×32",
+        "a.inline-flex.items-center.min-h-[44px] \"Reviews\" 63×32",
+        "a.inline-flex.items-center.min-h-[44px] \"Contact\" 59×32",
+        "a.inline-flex.items-center.min-h-[44px] \"contact@airola.co.uk\" 160×20",
+        "a.inline-flex.items-center.min-h-[44px] \"+44 7925 123219\" 131×20",
+        "a.inline-flex.items-center.min-h-[44px] \"WhatsApp us\" 101×20",
+        "a.inline-flex.items-center.min-h-[44px] \"Privacy Policy\" 106×32",
+        "a.inline-flex.items-center.min-h-[44px] \"Terms & Conditions\" 147×32"
+      ]
+    },
+    "edgeText": [],
+    "fixed": [
+      "nav.fixed.top-0.left-0 \"HomePackagesServicesGiveawayReviewsAbout\" fixed 1440×100 @(0,0)",
+      "a.fixed.bottom-28.right-6 \"Chat on WhatsApp\" fixed 56×56 @(1360,732)",
+      "button.fixed.bottom-6.right-6 \"Chat with Airola assistant\" fixed 64×64 @(1352,812)"
+    ],
+    "images": [],
+    "fields": [],
+    "heroCta": null,
+    "h1": {
+      "fontSize": "48px",
+      "height": 48
+    }
+  },
+  "/@320": {
+    "scrollWidth": 320,
+    "innerWidth": 320,
+    "overflow": []
+  },
+  "/pricing@320": {
+    "scrollWidth": 320,
+    "innerWidth": 320,
+    "overflow": []
+  },
+  "/quote@320": {
+    "scrollWidth": 320,
+    "innerWidth": 320,
+    "overflow": []
+  },
+  "/about-us@320": {
+    "scrollWidth": 320,
+    "innerWidth": 320,
+    "overflow": []
+  },
+  "/contact@320": {
+    "scrollWidth": 320,
+    "innerWidth": 320,
+    "overflow": []
+  },
+  "/giveaway@320": {
+    "scrollWidth": 320,
+    "innerWidth": 320,
+    "overflow": []
+  },
+  "/legal@320": {
+    "scrollWidth": 320,
+    "innerWidth": 320,
+    "overflow": []
+  },
+  "/testimonials@320": {
+    "scrollWidth": 320,
+    "innerWidth": 320,
+    "overflow": []
+  },
+  "/offer@320": {
+    "scrollWidth": 320,
+    "innerWidth": 320,
+    "overflow": []
+  },
+  "/login@320": {
+    "scrollWidth": 320,
+    "innerWidth": 320,
+    "overflow": []
+  },
+  "/areas/stratford@320": {
+    "scrollWidth": 320,
+    "innerWidth": 320,
+    "overflow": []
+  },
+  "/page-that-does-not-exist@320": {
+    "scrollWidth": 320,
+    "innerWidth": 320,
+    "overflow": []
+  }
+}
