@@ -3,6 +3,7 @@ import { Testimonial } from '../types';
 import { db } from '../db';
 import TestimonialCard from '../components/TestimonialCard';
 import TestimonialForm from '../components/TestimonialForm';
+import TestimonialPreview, { isSamplePreview } from '../components/TestimonialPreview';
 
 // The summary line only appears once there are enough reviews for an average to mean something.
 const SUMMARY_MIN_REVIEWS = 3;
@@ -36,8 +37,15 @@ const TestimonialsPage: React.FC = () => {
       </header>
 
       {status === 'loading' && <p role="status" className="text-center text-slate-600 mb-12">Loading reviews…</p>}
+      {/* Dev-only layout preview (?preview=1); stripped from production builds */}
+      {import.meta.env.DEV && isSamplePreview() && (
+        <section aria-label="Sample reviews (development preview)" className="mb-16">
+          <TestimonialPreview />
+        </section>
+      )}
+
       {/* Space kept for reviews: until the first is approved (or if they can't load), invite one instead. */}
-      {status !== 'loading' && count === 0 && (
+      {status !== 'loading' && count === 0 && !(import.meta.env.DEV && isSamplePreview()) && (
         <div className="bg-white rounded-[2rem] border border-dashed border-[rgb(172,216,206)] p-8 sm:p-10 text-center max-w-2xl mx-auto mb-12">
           <p className="text-lg text-slate-700">We're new, so there are no reviews here yet. If we've cleaned for you, we'd love an honest one below.</p>
         </div>
