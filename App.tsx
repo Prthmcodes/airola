@@ -12,6 +12,7 @@ import AboutUs from './pages/AboutUs';
 import ContactPage from './pages/ContactPage';
 import LegalPage from './pages/LegalPage';
 import OfferPage from './pages/OfferPage';
+import Thanks10Page from './pages/Thanks10Page';
 import NotFound from './pages/NotFound';
 import AreaPage from './pages/AreaPage';
 import TestimonialsPage from './pages/TestimonialsPage';
@@ -233,6 +234,7 @@ const App: React.FC = () => {
       case Page.CONTACT: return <ContactPage />;
       case Page.LEGAL: return <LegalPage />;
       case Page.OFFER: return <OfferPage />;
+      case Page.THANKS10: return <Thanks10Page />;
       case Page.NOT_FOUND: return <NotFound onNavigate={navigate} />;
       case Page.TESTIMONIALS: return <TestimonialsPage />;
       case Page.AREA_STRATFORD: return <AreaPage area={AREA_PAGES.stratford} onNavigate={navigate} />;

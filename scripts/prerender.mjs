@@ -16,7 +16,7 @@ import { join, extname, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { spawnSync } from 'node:child_process';
 
-// Public, indexable routes only. Never add /dashboard, /admin, /login, /add-property, /quote/review or /offer.
+// Public, indexable routes only. Never add /dashboard, /admin, /login, /add-property, /quote/review, /offer or /thanks10.
 const ROUTES = ['/', '/pricing', '/quote', '/about-us', '/contact', '/giveaway', '/legal', '/testimonials'];
 
 const DIST = join(dirname(fileURLToPath(import.meta.url)), '..', 'dist');
