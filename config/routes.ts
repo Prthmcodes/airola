@@ -36,6 +36,7 @@ export const PAGE_META: Record<Page, PageMeta> = {
   [Page.THANKS]: { path: '/thanks', title: 'Thank You | Airola', description: 'Thanks from Airola.' },
   [Page.NOT_FOUND]: { path: '/404', title: 'Page Not Found | Airola', description: 'This page could not be found.', noindex: true },
   [Page.OFFER]: { path: '/offer', title: '10% Off Your First Turnover Clean | Airola', description: 'Web offer: 10% off your first Airbnb turnover clean in East London with code WEB10. From £45, photo proof every clean.', noindex: true },
+  [Page.THANKS10]: { path: '/thanks10', title: '10% Off Your Next Clean | Airola', description: 'A thank-you for your review: 10% off your next Airbnb turnover clean with code THANKS10.', noindex: true },
   // Area pages stay noindex until every [CONFIRM] in config/areas.ts is filled in.
   [Page.AREA_STRATFORD]: { ...AREA_PAGES.stratford.meta, noindex: areaNeedsConfirmation(AREA_PAGES.stratford) },
   [Page.AREA_CANARY_WHARF]: { ...AREA_PAGES['canary-wharf'].meta, noindex: areaNeedsConfirmation(AREA_PAGES['canary-wharf']) },

@@ -3,6 +3,7 @@
     { "source": "/((?!assets/|.*\\..*).*)", "destination": "/index.html" }
   ],
   "headers": [
-    { "source": "/offer", "headers": [{ "key": "X-Robots-Tag", "value": "noindex, nofollow" }] }
+    { "source": "/offer", "headers": [{ "key": "X-Robots-Tag", "value": "noindex, nofollow" }] },
+    { "source": "/thanks10", "headers": [{ "key": "X-Robots-Tag", "value": "noindex, nofollow" }] }
   ]
 }

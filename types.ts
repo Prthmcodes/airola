@@ -15,6 +15,7 @@ export enum Page {
   CONTACT = 'contact',
   LEGAL = 'legal',
   OFFER = 'offer',
+  THANKS10 = 'thanks10',
   NOT_FOUND = 'not_found',
   AREA_STRATFORD = 'area_stratford',
   AREA_CANARY_WHARF = 'area_canary_wharf',
