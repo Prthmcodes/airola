@@ -120,15 +120,21 @@ const main = async () => {
       try {
         // Static headline instead of the typing animation. Third-party calls are blocked, except reads of
         // approved reviews (GET on the public view), so snapshots show the reviews published at build time.
+        // The read is cross-origin with auth headers, so Chrome sends a CORS preflight (OPTIONS) first; it must pass too.
         await page.emulateMediaFeatures([{ name: 'prefers-reduced-motion', value: 'reduce' }]);
         await page.setRequestInterception(true);
         page.on('request', req => {
-          const allowed = req.url().startsWith(origin) || (req.method() === 'GET' && req.url().includes('/rest/v1/testimonials_public'));
+          const isReviewsRead = ['GET', 'OPTIONS'].includes(req.method()) && req.url().includes('/rest/v1/testimonials_public');
+          const allowed = req.url().startsWith(origin) || isReviewsRead;
           return allowed ? req.continue() : req.abort();
         });
 
         await page.goto(origin + route, { waitUntil: 'networkidle0', timeout: TIMEOUT_MS });
         await page.waitForSelector('main h1', { timeout: TIMEOUT_MS });
+        // Reviews load after first paint; wait for them to settle so validate() sees the final state.
+        if (route === '/testimonials') {
+          await page.waitForFunction(() => !document.querySelector('main')?.textContent.includes('Loading reviews'), { timeout: TIMEOUT_MS }).catch(() => {});
+        }
 
         if (route === '/') {
           await page.evaluate(() => {

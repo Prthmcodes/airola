@@ -1,9 +1,7 @@
 import { Page } from '../types';
 import { AREA_PAGES, areaNeedsConfirmation } from './areas';
 
-// [CONFIRM: canonical host] The live site currently 308-redirects airola.co.uk -> www.airola.co.uk.
-// Canonicals, og:url and the sitemap should point at the host that actually serves the page:
-// either make the apex domain primary in Vercel, or change this to 'https://www.airola.co.uk'.
+// Canonical host: the apex domain (non-www) serves the site directly. Canonicals, og:url and the sitemap all use it.
 export const SITE_URL = 'https://airola.co.uk';
 export const DEFAULT_OG_IMAGE = `${SITE_URL}/hero-bg.jpg`;
 
@@ -24,9 +22,9 @@ export const PAGE_META: Record<Page, PageMeta> = {
   [Page.REVIEW]: { path: '/quote/review', title: 'Review Your Quote | Airola', description: 'Confirm your Airbnb turnover cleaning quote.', noindex: true },
   [Page.GIVEAWAY]: { path: '/giveaway', title: 'Win a £1 Turnover Clean | Airola Giveaway', description: 'East London Airbnb hosts: enter free to win a full guest-ready turnover clean for £1. Closes Saturday 7 November 2026.' },
   [Page.ABOUT_US]: { path: '/about-us', title: 'About Airola | Airbnb Turnover Cleaners in East London', description: 'Airola is an East London team that does one thing: short-let turnovers, with photo proof to your WhatsApp after every clean.' },
-  [Page.TESTIMONIALS]: { path: '/testimonials', title: 'Host Reviews | Airola Airbnb Cleaning East London', description: 'Read reviews from East London Airbnb hosts, and leave your own.' },
+  [Page.TESTIMONIALS]: { path: '/testimonials', title: 'Airbnb Host Reviews | Airola', description: "Reviews from East London Airbnb hosts on Airola's turnover cleaning, with photo proof after every clean. Cleaned with us? Leave your own review." },
   [Page.CONTACT]: { path: '/contact', title: 'Contact Airola | Airbnb Cleaning East London', description: 'Get in touch: WhatsApp, phone or email. Serving Stratford, Royal Wharf, Canary Wharf and nearby.' },
-  [Page.LEGAL]: { path: '/legal', title: 'Privacy, Terms & Cookies | Airola', description: 'Airola privacy policy, terms and conditions, and cookie policy.' },
+  [Page.LEGAL]: { path: '/legal', title: 'Terms, Privacy and Giveaway Rules | Airola', description: "Airola's terms and conditions, privacy policy, cookie policy and giveaway rules for our Airbnb turnover cleaning service in East London." },
   [Page.LOGIN]: { path: '/login', title: 'Host Login | Airola', description: 'Log in to manage your Airbnb turnover cleans.', noindex: true },
   [Page.DASHBOARD]: { path: '/dashboard', title: 'Host Hub | Airola', description: 'Manage your properties and turnover cleans.', noindex: true },
   [Page.ADMIN_DASHBOARD]: { path: '/admin', title: 'Command Center | Airola', description: 'Airola operations dashboard.', noindex: true },
