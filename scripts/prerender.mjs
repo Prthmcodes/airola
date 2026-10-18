@@ -7,8 +7,9 @@
 // On Vercel, the build image (Amazon Linux 2023) lacks some libraries Chrome needs. If the first launch
 // fails there, the script installs them with dnf and retries once.
 //
-// Failsafe: any failure prints a warning and exits 0, so the plain SPA build in dist/ still deploys.
-// A route is only written if its snapshot rendered properly (H1 present, no error page, valid JSON-LD).
+// Fails the build (exit 1) if Puppeteer or Chrome is unavailable, or if any route doesn't render properly
+// (H1 present, no error page, valid JSON-LD, its own <title> and canonical). Nothing is written unless every
+// route passes, so a broken build never ships the bare SPA shell in place of real pages.
 
 import { createServer } from 'node:http';
 import { readFile, writeFile, mkdir, stat } from 'node:fs/promises';
@@ -59,10 +60,9 @@ const MIME = {
   '.txt': 'text/plain; charset=utf-8', '.xml': 'application/xml', '.ico': 'image/x-icon',
 };
 
-// Whole-run failures fall back to the SPA build; a single skipped route just serves the SPA shell.
-const warn = (msg, err, scope = 'Continuing with the plain SPA build.') =>
-  console.warn(`\n[prerender] WARNING: ${msg}${err ? `\n  ${err.stack || err}` : ''}\n[prerender] ${scope}\n`);
-const ROUTE_FALLBACK = 'This route will be served by the SPA shell instead.';
+const headTag = (html, re) => html.match(re)?.[1]?.trim() || null;
+const titleOf = html => headTag(html, /<title>([^<]*)<\/title>/i);
+const canonicalOf = html => headTag(html, /<link rel="canonical" href="([^"]*)"/i);
 
 // Serves dist/ like Vercel: real files first, everything else falls back to the original SPA shell.
 const startServer = shell =>
@@ -86,8 +86,12 @@ const startServer = shell =>
   });
 
 // Checks a snapshot is safe to publish.
-const validate = html => {
+const validate = (html, route) => {
   if (!/<h1[\s>]/i.test(html)) return 'no <h1> in snapshot';
+  if (!titleOf(html)) return 'no <title>';
+  const canonical = canonicalOf(html);
+  if (!canonical) return 'no canonical link';
+  if (new URL(canonical).pathname !== route) return `canonical is ${canonical}, expected path ${route}`;
   if (html.includes('Something went wrong on our side') || html.includes("This page didn't load")) return 'error page rendered';
   if (html.includes('Loading reviews') || html.includes("couldn't load reviews")) return 'reviews did not load';
   for (const [, json] of html.matchAll(/<script type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/g)) {
@@ -101,15 +105,14 @@ const main = async () => {
   try {
     puppeteer = (await import('puppeteer')).default;
   } catch (err) {
-    warn('puppeteer is not installed (npm install puppeteer --save-dev).', err);
-    return;
+    throw new Error('puppeteer is not installed (npm install puppeteer --save-dev).', { cause: err });
   }
 
   const shell = await readFile(join(DIST, 'index.html'), 'utf8');
   const server = await startServer(shell);
   const origin = `http://127.0.0.1:${server.address().port}`;
   let browser;
-  const written = [];
+  const failures = [];
 
   try {
     browser = await launchBrowser(puppeteer);
@@ -117,6 +120,9 @@ const main = async () => {
 
     for (const route of ROUTES) {
       const page = await browser.newPage();
+      // Uncaught app errors (e.g. a missing VITE_ env var) explain why a route rendered no <h1>.
+      const pageErrors = [];
+      page.on('pageerror', err => pageErrors.push(String(err?.message || err)));
       try {
         // Static headline instead of the typing animation. Third-party calls are blocked, except reads of
         // approved reviews (GET on the public view), so snapshots show the reviews published at build time.
@@ -163,26 +169,38 @@ const main = async () => {
         }
 
         const html = '<!DOCTYPE html>\n' + (await page.evaluate(() => document.documentElement.outerHTML));
-        const problem = validate(html);
-        if (problem) warn(`skipping ${route}: ${problem}`, null, ROUTE_FALLBACK);
+        const problem = validate(html, route);
+        if (problem) failures.push({ route, reason: problem, pageErrors });
         else snapshots.set(route, html);
       } catch (err) {
-        warn(`could not render ${route}`, err, ROUTE_FALLBACK);
+        failures.push({ route, reason: String(err?.message || err), pageErrors });
       } finally {
         await page.close();
       }
     }
 
-    // Home last: dist/index.html is only replaced once its own snapshot succeeded.
+    if (failures.length) {
+      const lines = failures.map(f =>
+        `  ${f.route}: ${f.reason}${f.pageErrors.length ? `\n    page errors: ${[...new Set(f.pageErrors)].join(' | ')}` : ''}`);
+      throw new Error(`${failures.length} of ${ROUTES.length} routes failed to prerender:\n${lines.join('\n')}`);
+    }
+
+    const titles = ROUTES.map(r => titleOf(snapshots.get(r)));
+    const dupes = [...new Set(titles.filter((t, i) => titles.indexOf(t) !== i))];
+    if (dupes.length) throw new Error(`duplicate <title> across routes: ${dupes.join(', ')}`);
+
+    // Home last: dist/index.html is the shell every other route was rendered from.
     for (const route of [...ROUTES.filter(r => r !== '/'), '/']) {
-      const html = snapshots.get(route);
-      if (!html) continue;
       const out = route === '/' ? join(DIST, 'index.html') : join(DIST, route, 'index.html');
       await mkdir(dirname(out), { recursive: true });
-      await writeFile(out, html);
-      written.push(route);
+      await writeFile(out, snapshots.get(route));
     }
-    console.log(`[prerender] Wrote static HTML for: ${written.join(', ') || '(none)'}`);
+
+    console.log(`[prerender] Wrote static HTML for all ${ROUTES.length} routes:`);
+    for (const route of ROUTES) {
+      const html = snapshots.get(route);
+      console.log(`[prerender]   ${route.padEnd(14)} ${titleOf(html)}  ->  ${canonicalOf(html)}`);
+    }
   } finally {
     await browser?.close().catch(() => {});
     server.close();
@@ -190,5 +208,8 @@ const main = async () => {
 };
 
 main()
-  .catch(err => warn('prerender failed.', err))
-  .finally(() => process.exit(0));
+  .then(() => process.exit(0))
+  .catch(err => {
+    console.error(`\n[prerender] BUILD FAILED: ${err.stack || err}\n`);
+    process.exit(1);
+  });
