@@ -34,6 +34,7 @@ const Navbar: React.FC<NavbarProps> = ({ currentPage, user, onNavigate, onLogout
   const links: { label: string; page: Page; hash?: string; after?: () => void; wideOnly?: boolean }[] = [
     { label: 'Home', page: Page.LANDING },
     { label: 'Packages', page: Page.PRICING },
+    { label: 'Blog', page: Page.BLOG },
     { label: 'Services', page: Page.LANDING, hash: 'services', after: scrollToServices },
     { label: 'Giveaway', page: Page.GIVEAWAY },
     { label: 'Reviews', page: Page.TESTIMONIALS, wideOnly: true },
@@ -80,7 +81,8 @@ const Navbar: React.FC<NavbarProps> = ({ currentPage, user, onNavigate, onLogout
           </div>
 
           {/* Desktop nav */}
-          <div className="hidden lg:flex items-center space-x-8">
+          {/* Tighter gaps below 1280px so every label, Log In and Get a Quote stay on one line */}
+          <div className="hidden lg:flex items-center space-x-5 xl:space-x-8 whitespace-nowrap">
             {links.map(link => (
               <RouteLink
                 key={link.label}
