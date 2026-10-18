@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { Page } from '../types';
 import RouteLink from '../components/RouteLink';
-import { Sparkles, Calendar, ShoppingBag, CheckCircle, Star, ArrowRight, Gift, Trophy, Armchair, Shield, MessageCircle, Plus, Minus, Clock, Camera, MapPin, Instagram } from 'lucide-react';
+import { Sparkles, Calendar, ShoppingBag, CheckCircle, Star, ArrowRight, Gift, Trophy, Armchair, Shield, MessageCircle, Plus, Minus, Clock, Camera, MapPin, Instagram, PoundSterling, House } from 'lucide-react';
 import { TypeAnimation } from 'react-type-animation';
 import { GIVEAWAY_ENDS_AT, isGiveawayOpen, formatUkDate, INSTAGRAM_URL, INSTAGRAM_DM_URL } from '../config/promos';
 import IllustrativeLabel from '../components/IllustrativeLabel';
@@ -13,6 +13,8 @@ import TestimonialCard from '../components/TestimonialCard';
 import TestimonialPreview, { isSamplePreview } from '../components/TestimonialPreview';
 import { db } from '../db';
 import { Testimonial } from '../types';
+
+const whyLinkClass = 'inline-block text-left font-bold text-[#2D6E5F] underline underline-offset-2 hover:text-[#245A4E] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#2D6E5F] rounded-sm';
 
 // True when the visitor has asked their OS for less motion.
 const usePrefersReducedMotion = () => {
@@ -171,6 +173,60 @@ const LandingPage: React.FC<LandingPageProps> = ({ onNavigate }) => {
               DM @airola.uk<span className="sr-only"> on Instagram (opens in a new tab)</span>
             </a>
           </p>
+        </div>
+      </section>
+
+      {/* Why Airola: five plain facts, each already stated elsewhere on the site */}
+      <section aria-labelledby="why-airola-heading" className="pt-16 pb-4 bg-[rgb(249,239,239)]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 id="why-airola-heading" className="text-3xl md:text-4xl font-black text-slate-900 mb-10 text-center">
+            Why <span className="text-[#2D6E5F]">Airola</span>
+          </h2>
+          <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
+            {[
+              {
+                icon: PoundSterling,
+                title: 'Prices shown upfront',
+                desc: 'From £45 for a 1-bed, plus £20 per extra bedroom. No emergency fees, and your final price is confirmed before we clean.',
+                link: <RouteLink page={Page.PRICING} onNavigate={onNavigate} className={whyLinkClass}>See our prices</RouteLink>,
+              },
+              {
+                icon: Camera,
+                title: 'Photo proof after every clean',
+                desc: 'Photos of each room go straight to your WhatsApp before your guest arrives.',
+              },
+              {
+                icon: House,
+                title: 'Airbnb turnovers only',
+                desc: 'Built for short-let hosts in East London. No domestic or office cleaning, just guest-ready resets.',
+              },
+              {
+                icon: Clock,
+                title: 'Instant quote in about 60 seconds',
+                desc: 'Choose your bedrooms, package and add-ons and see your price straight away. No payment now.',
+                link: <RouteLink page={Page.QUOTE} onNavigate={onNavigate} className={whyLinkClass}>Get your price</RouteLink>,
+              },
+              {
+                icon: MessageCircle,
+                title: 'Message us on WhatsApp',
+                desc: 'Got a question about your property? Send us a message for a quick answer.',
+                link: (
+                  <a href="https://wa.me/447925123219" target="_blank" rel="noopener noreferrer" className={whyLinkClass}>
+                    WhatsApp us<span className="sr-only"> (opens in a new tab)</span>
+                  </a>
+                ),
+              },
+            ].map(({ icon: Icon, title, desc, link }) => (
+              <li key={title} className="bg-white rounded-3xl p-6 border border-[#f5f4f1] shadow-sm flex flex-col">
+                <div className="w-12 h-12 bg-gradient-to-br from-[rgb(235,247,244)] to-[rgb(204,236,229)] rounded-2xl flex items-center justify-center mb-4 shadow-sm">
+                  <Icon className="w-6 h-6 text-[rgb(61,141,122)]" aria-hidden="true" />
+                </div>
+                <h3 className="text-lg font-bold text-slate-900 mb-2">{title}</h3>
+                <p className="text-slate-600 text-sm leading-relaxed">{desc}</p>
+                {link && <p className="mt-auto pt-4">{link}</p>}
+              </li>
+            ))}
+          </ul>
         </div>
       </section>
 
