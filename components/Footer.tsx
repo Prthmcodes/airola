@@ -43,6 +43,7 @@ const Footer: React.FC<{ onNavigate: (page: Page) => void }> = ({ onNavigate }) 
               {isGiveawayOpen() && link(Page.GIVEAWAY, 'Giveaway')}
               {link(Page.ABOUT_US, 'About')}
               {link(Page.TESTIMONIALS, 'Reviews')}
+              {link(Page.BLOG, 'Blog')}
               {link(Page.CONTACT, 'Contact')}
             </ul>
           </div>

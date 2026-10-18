@@ -16,6 +16,9 @@ import Thanks10Page from './pages/Thanks10Page';
 import NotFound from './pages/NotFound';
 import AreaPage from './pages/AreaPage';
 import TestimonialsPage from './pages/TestimonialsPage';
+import BlogIndex from './pages/BlogIndex';
+import BlogPost from './pages/BlogPost';
+import { BLOG_POSTS } from './content/blog';
 import ErrorBoundary from './components/ErrorBoundary';
 import { PAGE_META, canonicalUrl, DEFAULT_OG_IMAGE } from './config/routes';
 import { AREA_PAGES } from './config/areas';
@@ -213,6 +216,8 @@ const App: React.FC = () => {
   };
 
   const renderPage = () => {
+    const blogPost = BLOG_POSTS.find(p => p.page === currentPage);
+    if (blogPost) return <BlogPost post={blogPost} onNavigate={navigate} />;
     switch (currentPage) {
       case Page.LANDING: return <LandingPage onNavigate={navigate} />;
       case Page.LOGIN: return user.isLoggedIn
@@ -237,6 +242,7 @@ const App: React.FC = () => {
       case Page.THANKS10: return <Thanks10Page />;
       case Page.NOT_FOUND: return <NotFound onNavigate={navigate} />;
       case Page.TESTIMONIALS: return <TestimonialsPage />;
+      case Page.BLOG: return <BlogIndex onNavigate={navigate} />;
       case Page.AREA_STRATFORD: return <AreaPage area={AREA_PAGES.stratford} onNavigate={navigate} />;
       case Page.AREA_CANARY_WHARF: return <AreaPage area={AREA_PAGES['canary-wharf']} onNavigate={navigate} />;
       case Page.AREA_ROYAL_WHARF: return <AreaPage area={AREA_PAGES['royal-wharf']} onNavigate={navigate} />;

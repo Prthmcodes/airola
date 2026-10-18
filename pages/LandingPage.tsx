@@ -353,7 +353,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ onNavigate }) => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div className="text-left">
               <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-8 leading-tight">
-                Why Airola: <br></br>Built for<span className="text-[#2D6E5F]"> Hosts,</span> Not Households
+                Made for<span className="text-[#2D6E5F]"> Hosts,</span> Not Households
               </h2>
               <p className="text-base text-slate-600 leading-relaxed font-medium mb-8">
                 We're not a regular cleaning company. Airola is built for short-let hosts in East London who need reliability, speed and consistency. No long contracts. No confusing pricing. Just clean, guest-ready homes with photo proof every time.

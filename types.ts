@@ -20,7 +20,13 @@ export enum Page {
   AREA_STRATFORD = 'area_stratford',
   AREA_CANARY_WHARF = 'area_canary_wharf',
   AREA_ROYAL_WHARF = 'area_royal_wharf',
-  TESTIMONIALS = 'testimonials'
+  TESTIMONIALS = 'testimonials',
+  BLOG = 'blog',
+  BLOG_COST = 'blog_cost',
+  BLOG_CHECKLIST = 'blog_checklist',
+  BLOG_DURATION = 'blog_duration',
+  BLOG_SAME_DAY = 'blog_same_day',
+  BLOG_PHOTO_PROOF = 'blog_photo_proof'
 }
 
 export type UserRole = 'owner' | 'admin';

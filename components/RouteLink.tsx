@@ -15,7 +15,7 @@ interface RouteLinkProps extends Omit<React.AnchorHTMLAttributes<HTMLAnchorEleme
 // Replaces <button onClick={() => onNavigate(...)}> without changing how it looks: buttons default
 // to inline-block and centred text, so those are added unless the classes already set them.
 const RouteLink: React.FC<RouteLinkProps> = ({ page, onNavigate, hash, afterNavigate, className = '', onClick, children, ...rest }) => {
-  const display = /(^|\s)(flex|inline-flex|block|inline-block|grid|hidden)(\s|$)/.test(className) ? '' : 'inline-block ';
+  const display = /(^|\s)(flex|inline-flex|block|inline-block|inline|grid|hidden)(\s|$)/.test(className) ? '' : 'inline-block ';
   const align = /(^|\s)text-(left|right|center)(\s|$)/.test(className) ? '' : 'text-center ';
   return (
     <a

@@ -18,7 +18,15 @@ import { fileURLToPath } from 'node:url';
 import { spawnSync } from 'node:child_process';
 
 // Public, indexable routes only. Never add /dashboard, /admin, /login, /add-property, /quote/review, /offer or /thanks10.
-const ROUTES = ['/', '/pricing', '/quote', '/about-us', '/contact', '/giveaway', '/legal', '/testimonials'];
+const ROUTES = [
+  '/', '/pricing', '/quote', '/about-us', '/contact', '/giveaway', '/legal', '/testimonials',
+  '/blog',
+  '/blog/airbnb-turnover-cleaning-cost-london',
+  '/blog/airbnb-turnover-cleaning-checklist',
+  '/blog/how-long-does-an-airbnb-turnover-clean-take',
+  '/blog/same-day-airbnb-turnover-preparation',
+  '/blog/photo-proof-after-cleaning-airbnb',
+];
 
 const DIST = join(dirname(fileURLToPath(import.meta.url)), '..', 'dist');
 const TIMEOUT_MS = 30000;

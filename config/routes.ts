@@ -1,5 +1,12 @@
 import { Page } from '../types';
 import { AREA_PAGES, areaNeedsConfirmation } from './areas';
+import { BLOG_INDEX_META, BLOG_POSTS } from '../content/blog';
+
+const blogPostMeta = (page: Page) => {
+  const post = BLOG_POSTS.find(p => p.page === page);
+  if (!post) throw new Error(`No blog post in content/blog.ts for ${page}`);
+  return post.meta;
+};
 
 // Canonical host: the apex domain (non-www) serves the site directly. Canonicals, og:url and the sitemap all use it.
 export const SITE_URL = 'https://airola.co.uk';
@@ -39,6 +46,12 @@ export const PAGE_META: Record<Page, PageMeta> = {
   [Page.AREA_STRATFORD]: { ...AREA_PAGES.stratford.meta, noindex: areaNeedsConfirmation(AREA_PAGES.stratford) },
   [Page.AREA_CANARY_WHARF]: { ...AREA_PAGES['canary-wharf'].meta, noindex: areaNeedsConfirmation(AREA_PAGES['canary-wharf']) },
   [Page.AREA_ROYAL_WHARF]: { ...AREA_PAGES['royal-wharf'].meta, noindex: areaNeedsConfirmation(AREA_PAGES['royal-wharf']) },
+  [Page.BLOG]: BLOG_INDEX_META,
+  [Page.BLOG_COST]: blogPostMeta(Page.BLOG_COST),
+  [Page.BLOG_CHECKLIST]: blogPostMeta(Page.BLOG_CHECKLIST),
+  [Page.BLOG_DURATION]: blogPostMeta(Page.BLOG_DURATION),
+  [Page.BLOG_SAME_DAY]: blogPostMeta(Page.BLOG_SAME_DAY),
+  [Page.BLOG_PHOTO_PROOF]: blogPostMeta(Page.BLOG_PHOTO_PROOF),
 };
 
 export const pathFor = (page: Page) => PAGE_META[page].path;
