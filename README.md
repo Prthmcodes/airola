@@ -26,5 +26,5 @@ Environment variables live in `.env` (Supabase URL/key, Apps Script URL + token)
 
 Quote and giveaway submissions are also appended to your Google Sheet as a backup log.
 The old public read endpoint has been removed for data protection. Install the updated
-script from `docs/google-apps-script.gs` and set the same secret token there and in
-`.env` (`VITE_SHEETS_TOKEN`) — change it from the default value.
+script from `docs/google-apps-script.gs` and set the same secret token there and in the
+`SHEETS_TOKEN` Vercel env var (server-only, read by `api/sheets.ts`) — change it from the default value.
