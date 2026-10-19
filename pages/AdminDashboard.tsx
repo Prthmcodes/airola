@@ -39,6 +39,8 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ onNavigate }) => {
 
   const [vettingTarget, setVettingTarget] = useState<{ type: 'task' | 'property', id: string } | null>(null);
   const [etaInputs, setEtaInputs] = useState<Record<string, string>>({});
+  const [propertyMessage, setPropertyMessage] = useState<{ ok: boolean; text: string } | null>(null);
+  const [deletingPropertyId, setDeletingPropertyId] = useState<string | null>(null);
 
   const loadData = async () => {
     setIsLoading(true);
@@ -102,6 +104,29 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ onNavigate }) => {
       } else {
         await db.deleteTask(task.id, 'AdminDashboard');
       }
+    }
+  };
+
+  const handleDeleteProperty = async (prop: Property) => {
+    setPropertyMessage(null);
+    const linkedJobsText = 'This property has linked jobs. Reject it instead.';
+    // Quick check against loaded tasks; db.deleteProperty re-checks the database before deleting.
+    if (tasks.some(t => t.propertyId === prop.id)) {
+      setPropertyMessage({ ok: false, text: linkedJobsText });
+      return;
+    }
+    if (!window.confirm(`Delete this property? This can't be undone.\n\n${prop.name}\n${prop.address}`)) return;
+
+    setDeletingPropertyId(prop.id);
+    const result = await db.deleteProperty(prop.id, 'AdminDashboard');
+    setDeletingPropertyId(null);
+    if (result === 'deleted') {
+      setProperties(prev => prev.filter(p => p.id !== prop.id));
+      setPropertyMessage({ ok: true, text: `Deleted ${prop.name}.` });
+    } else if (result === 'has_jobs') {
+      setPropertyMessage({ ok: false, text: linkedJobsText });
+    } else {
+      setPropertyMessage({ ok: false, text: `Could not delete ${prop.name}. Please try again.` });
     }
   };
 
@@ -413,6 +438,15 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ onNavigate }) => {
               </tbody>
             </table>
           ) : (
+            <>
+            {propertyMessage && (
+              <p
+                role={propertyMessage.ok ? 'status' : 'alert'}
+                className={`mx-8 mt-6 p-4 rounded-2xl border text-sm font-bold ${propertyMessage.ok ? 'bg-[rgb(235,247,244)] border-[rgb(204,236,229)] text-[rgb(45,110,95)]' : 'bg-red-50 border-red-100 text-red-700'}`}
+              >
+                {propertyMessage.text}
+              </p>
+            )}
             <table className="w-full text-left">
               <thead>
                 <tr className="bg-slate-50/50 text-slate-400 text-[10px] font-black uppercase tracking-widest border-b border-slate-50">
@@ -442,15 +476,26 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ onNavigate }) => {
                       </td>
                       <td className="px-8 py-8 font-bold text-xs text-slate-400">{prop.beds}B / {prop.baths}Ba</td>
                       <td className="px-8 py-8 text-right">
-                        <button onClick={() => setVettingTarget({ type: 'property', id: prop.id })} className="px-4 py-2 bg-slate-900 text-white rounded-xl text-[9px] font-black uppercase tracking-widest hover:bg-slate-800 transition-all">
-                          Verify Registry
-                        </button>
+                        <div className="flex justify-end items-center gap-2">
+                          <button onClick={() => setVettingTarget({ type: 'property', id: prop.id })} className="px-4 py-2 bg-slate-900 text-white rounded-xl text-[9px] font-black uppercase tracking-widest hover:bg-slate-800 transition-all">
+                            Verify Registry
+                          </button>
+                          <button
+                            onClick={() => handleDeleteProperty(prop)}
+                            disabled={deletingPropertyId === prop.id}
+                            aria-label={`Delete ${prop.name}`}
+                            className="px-4 py-2 text-red-500 hover:bg-red-50 rounded-xl text-[9px] font-black uppercase tracking-widest transition-all flex items-center disabled:opacity-50"
+                          >
+                            <Trash2 className="w-3 h-3 mr-1" /> Delete
+                          </button>
+                        </div>
                       </td>
                     </tr>
                   ))
                 )}
               </tbody>
             </table>
+            </>
           )}
         </div>
       </div>

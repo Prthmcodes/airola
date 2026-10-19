@@ -183,6 +183,24 @@ class AirolaDatabase {
     return result.data ? mapProperty(result.data) : null;
   }
 
+  // Admin only (RLS). Refuses while any cleaning task points at the property: the FK is
+  // ON DELETE SET NULL, so deleting would silently detach those jobs.
+  async deleteProperty(propertyId: string, source?: string): Promise<'deleted' | 'has_jobs' | 'error'> {
+    const { count, error: countError } = await supabase
+      .from('cleaning_tasks')
+      .select('id', { count: 'exact', head: true })
+      .eq('property_id', propertyId);
+    if (countError) { console.error(countError); return 'error'; }
+    if (count) return 'has_jobs';
+
+    // RLS filters a disallowed delete to zero rows instead of erroring, so check a row came back.
+    const { data, error } = await supabase.from('properties').delete().eq('id', propertyId).select('id');
+    if (error) { console.error(error); return 'error'; }
+    if (!data?.length) return 'error';
+    this.dispatchUpdate(source || 'properties');
+    return 'deleted';
+  }
+
   // ---------- Cleaning tasks ----------
 
   async getTasks(_ownerEmail?: string): Promise<CleaningTask[]> {
