@@ -1,5 +1,5 @@
 
-import React, { useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useFocusTrap } from './useFocusTrap';
 import { AirolaNotification, UserRole, User } from '../types';
 import { X, Mail, ShieldCheck, CheckCircle2, Clock, Trash2, ArrowRight, ExternalLink, Phone } from 'lucide-react';
@@ -11,7 +11,9 @@ interface NotificationCenterProps {
   userRole: UserRole;
   user?: User; // Pass current user for email filtering
   onMarkRead: (id: string) => void;
+  onMarkAllRead: (ids: string[]) => void;
   onDelete: (id: string) => void;
+  onViewDetails: (note: AirolaNotification) => Promise<boolean>;
 }
 
 const NotificationCenter: React.FC<NotificationCenterProps> = ({ 
@@ -21,7 +23,9 @@ const NotificationCenter: React.FC<NotificationCenterProps> = ({
   userRole, 
   user,
   onMarkRead, 
-  onDelete 
+  onMarkAllRead,
+  onDelete,
+  onViewDetails
 }) => {
   // The database only returns notifications this user is allowed to see;
   // filter by role for safety and sort newest first.
@@ -31,6 +35,22 @@ const NotificationCenter: React.FC<NotificationCenterProps> = ({
 
   const panelRef = useRef<HTMLDivElement>(null);
   useFocusTrap(isOpen, panelRef, onClose);
+
+  // Opening the mailbox marks everything in it as read (clearing the badge), but items that were
+  // unread when it opened keep their unread look until it's closed.
+  const [unreadAtOpen, setUnreadAtOpen] = useState<Set<string>>(new Set());
+  const [unavailableId, setUnavailableId] = useState<string | null>(null);
+  useEffect(() => {
+    if (!isOpen) { setUnavailableId(null); setUnreadAtOpen(new Set()); return; }
+    const ids = filtered.filter(n => !n.read).map(n => n.id);
+    setUnreadAtOpen(new Set(ids));
+    if (ids.length) onMarkAllRead(ids);
+  }, [isOpen]);
+
+  const viewDetails = async (note: AirolaNotification) => {
+    setUnavailableId(null);
+    if (!(await onViewDetails(note))) setUnavailableId(note.id);
+  };
 
   if (!isOpen) return null;
 
@@ -64,11 +84,13 @@ const NotificationCenter: React.FC<NotificationCenterProps> = ({
               <p className="text-slate-500 text-sm font-medium leading-relaxed">Notifications regarding availability requests, booking confirmations, and cleaning completions will appear here.</p>
             </div>
           ) : (
-            filtered.map((note) => (
+            filtered.map((note) => {
+              const unread = !note.read || unreadAtOpen.has(note.id);
+              return (
               <div 
                 key={note.id} 
                 className={`bg-white rounded-[2rem] border transition-all hover:shadow-lg overflow-hidden ${
-                  note.read ? 'border-slate-100 opacity-75' : 'border-[rgb(172,216,206)] ring-2 ring-[rgb(235,247,244)]'
+                  !unread ? 'border-slate-100 opacity-75' : 'border-[rgb(172,216,206)] ring-2 ring-[rgb(235,247,244)]'
                 }`}
                 onClick={() => onMarkRead(note.id)}
               >
@@ -91,8 +113,8 @@ const NotificationCenter: React.FC<NotificationCenterProps> = ({
                         <p className="text-[11px] text-slate-400 font-medium">{new Date(note.timestamp).toLocaleString()}</p>
                       </div>
                     </div>
-                    {!note.read && (
-                      <div className="w-2.5 h-2.5 bg-[rgb(106,176,160)] rounded-full"></div>
+                    {unread && (
+                      <div className="w-2.5 h-2.5 bg-[rgb(106,176,160)] rounded-full" aria-label="Unread"></div>
                     )}
                   </div>
 
@@ -108,13 +130,17 @@ const NotificationCenter: React.FC<NotificationCenterProps> = ({
                     >
                       <Trash2 className="w-3.5 h-3.5 mr-1" /> Archive
                     </button>
-                    <button className="text-xs font-black text-[rgb(61,141,122)] uppercase tracking-widest hover:text-[rgb(45,110,95)] flex items-center hover:drop-shadow-[0_0_5px_rgba(172,216,206,0.7)]">
+                    <button onClick={(e) => { e.stopPropagation(); viewDetails(note); }} className="text-xs font-black text-[rgb(61,141,122)] uppercase tracking-widest hover:text-[rgb(45,110,95)] flex items-center hover:drop-shadow-[0_0_5px_rgba(172,216,206,0.7)]">
                       View details <ArrowRight className="w-3.5 h-3.5 ml-1" />
                     </button>
                   </div>
+                  {unavailableId === note.id && (
+                    <p role="alert" className="mt-3 text-xs font-bold text-red-600">This booking is no longer available.</p>
+                  )}
                 </div>
               </div>
-            ))
+              );
+            })
           )}
         </div>
 

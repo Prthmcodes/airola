@@ -88,6 +88,8 @@ const App: React.FC = () => {
   const [user, setUser] = useState<User>(GUEST_USER);
   const [notifications, setNotifications] = useState<AirolaNotification[]>([]);
   const [showNotifications, setShowNotifications] = useState(false);
+  // Task the admin dashboard should open, set by a notification's "View details"
+  const [focusTaskId, setFocusTaskId] = useState<string | null>(null);
   // Restore an in-progress quote after a reload so the visitor doesn't lose what they entered.
   const [currentQuote, setCurrentQuote] = useState<QuoteData>(() => ({ ...initialQuote, ...loadQuoteDraft() }));
 
@@ -200,10 +202,37 @@ const App: React.FC = () => {
     setNotifications(await db.getNotifications(user.role));
   };
 
-  const deleteNotification = async (id: string) => {
-    await db.deleteNotification(id);
-    setNotifications(await db.getNotifications(user.role));
+  // Mailbox opened: persist read for what it shows and clear the badge straight away.
+  const markNotificationsRead = async (ids: string[]) => {
+    setNotifications(prev => prev.map(n => ids.includes(n.id) ? { ...n, read: true } : n));
+    if (!(await db.markNotificationsRead(ids))) setNotifications(await db.getNotifications(user.role));
   };
+
+  const deleteNotification = async (id: string) => {
+    setNotifications(prev => prev.filter(n => n.id !== id));
+    if (!(await db.deleteNotification(id))) setNotifications(await db.getNotifications(user.role));
+  };
+
+  // "View details": admins go to the booking in the Task Pipeline, hosts to their dashboard.
+  // Returns false when the booking can't be found, so the mailbox can say so.
+  const viewNotificationDetails = async (note: AirolaNotification): Promise<boolean> => {
+    if (user.role !== 'admin') {
+      setShowNotifications(false);
+      navigate(Page.DASHBOARD);
+      return true;
+    }
+    const ref = note.body.match(/Reference:\s*(REQ-[A-Z0-9]+)/i)?.[1];
+    const taskId = ref ? await db.getTaskIdByRef(ref) : null;
+    if (!taskId) return false;
+    setFocusTaskId(taskId);
+    setShowNotifications(false);
+    navigate(Page.ADMIN_DASHBOARD);
+    return true;
+  };
+
+  // Host notifications addressed to an admin's own account (e.g. from a test booking) aren't shown
+  // in the admin mailbox, so they mustn't count towards the badge either.
+  const mailboxNotifications = notifications.filter(n => n.recipientRole === user.role);
 
   const withAuth = (component: React.ReactNode, requiredRole?: UserRole) => {
     if (!user.isLoggedIn) {
@@ -222,11 +251,11 @@ const App: React.FC = () => {
       case Page.LANDING: return <LandingPage onNavigate={navigate} />;
       case Page.LOGIN: return user.isLoggedIn
         ? (user.role === 'admin'
-            ? <AdminDashboard onNavigate={navigate} />
+            ? <AdminDashboard onNavigate={navigate} focusTaskId={focusTaskId} onFocusHandled={() => setFocusTaskId(null)} />
             : <OwnerDashboard user={user} onNavigate={navigate} onSelectQuote={setCurrentQuote} />)
         : <LoginPage onLogin={handleLogin} onNavigate={navigate} />;
       case Page.DASHBOARD: return withAuth(<OwnerDashboard user={user} onNavigate={navigate} onSelectQuote={setCurrentQuote} />, 'owner');
-      case Page.ADMIN_DASHBOARD: return withAuth(<AdminDashboard onNavigate={navigate} />, 'admin');
+      case Page.ADMIN_DASHBOARD: return withAuth(<AdminDashboard onNavigate={navigate} focusTaskId={focusTaskId} onFocusHandled={() => setFocusTaskId(null)} />, 'admin');
       case Page.STAFF_MANAGEMENT: return withAuth(<StaffManagementPage onNavigate={navigate} />, 'admin');
       case Page.QUOTE: return <QuotePage quote={currentQuote} setQuote={setCurrentQuote} onNavigate={navigate} user={user} />;
       case Page.ADD_PROPERTY: return withAuth(<AddPropertyPage onNavigate={navigate} user={user} />, 'owner');
@@ -270,7 +299,7 @@ const App: React.FC = () => {
         onNavigate={navigate}
         onLogout={handleLogout}
         onGoBack={goBack}
-        notifications={notifications}
+        notifications={mailboxNotifications}
         onToggleNotifications={() => setShowNotifications(!showNotifications)}
       />
       <main id="main" tabIndex={-1} className="flex-grow pt-[90px] focus:outline-none">
@@ -286,10 +315,12 @@ const App: React.FC = () => {
       <NotificationCenter
         isOpen={showNotifications}
         onClose={() => setShowNotifications(false)}
-        notifications={notifications}
+        notifications={mailboxNotifications}
         userRole={user.role}
         user={user}
         onMarkRead={markNotificationRead}
+        onMarkAllRead={markNotificationsRead}
+        onViewDetails={viewNotificationDetails}
         onDelete={deleteNotification}
       />
       <aside aria-label="Contact shortcuts">

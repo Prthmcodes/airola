@@ -26,9 +26,12 @@ import {
 
 interface AdminDashboardProps {
   onNavigate: (page: Page) => void;
+  // Task to open in the Task Pipeline (from a notification's "View details"), cleared once shown
+  focusTaskId?: string | null;
+  onFocusHandled?: () => void;
 }
 
-const AdminDashboard: React.FC<AdminDashboardProps> = ({ onNavigate }) => {
+const AdminDashboard: React.FC<AdminDashboardProps> = ({ onNavigate, focusTaskId, onFocusHandled }) => {
   const [tasks, setTasks] = useState<CleaningTask[]>([]);
   const [properties, setProperties] = useState<Property[]>([]);
   const [staff, setStaff] = useState<Cleaner[]>([]);
@@ -69,6 +72,17 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ onNavigate }) => {
     window.addEventListener('storage_update', handleStorageChange);
     return () => window.removeEventListener('storage_update', handleStorageChange);
   }, []);
+
+  // Waits until the task is in the loaded list, then opens and scrolls to it.
+  useEffect(() => {
+    if (!focusTaskId || !tasks.some(t => t.id === focusTaskId)) return;
+    setActiveTab('tasks');
+    setSearch('');
+    setExpandedTaskId(focusTaskId);
+    onFocusHandled?.();
+    requestAnimationFrame(() =>
+      document.getElementById(`task-${focusTaskId}`)?.scrollIntoView({ behavior: 'smooth', block: 'center' }));
+  }, [focusTaskId, tasks]);
 
   const handleUpdateVerification = async (target: { type: 'task' | 'property', id: string }, status: 'verified' | 'rejected') => {
     if (target.type === 'task') {
@@ -322,7 +336,7 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ onNavigate }) => {
                 {visibleTasks.length === 0 ? (<tr><td colSpan={7} className="px-8 py-20 text-center text-slate-300 font-bold">{q ? 'No tasks match your search.' : 'No active cleaning tasks.'}</td></tr>) : (
                   visibleTasks.map((task) => (
                     <React.Fragment key={task.id}>
-                      <tr onClick={() => setExpandedTaskId(expandedTaskId === task.id ? null : task.id)} className={`hover:bg-slate-50/80 transition-all cursor-pointer ${expandedTaskId === task.id ? 'bg-[rgb(235,247,244)]/30' : ''}`}>
+                      <tr id={`task-${task.id}`} onClick={() => setExpandedTaskId(expandedTaskId === task.id ? null : task.id)} className={`hover:bg-slate-50/80 transition-all cursor-pointer ${expandedTaskId === task.id ? 'bg-[rgb(235,247,244)]/30' : ''}`}>
                         <td className="px-8 py-8 font-mono text-[10px] font-bold text-slate-400">{task.ref || task.id.slice(0, 8)}</td>
                         <td className="px-8 py-8"><div className="flex items-center space-x-3"><div className="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-slate-400"><UserIcon className="w-4 h-4" /></div><div><p className="font-bold text-slate-900 text-sm">{task.ownerName}</p><p className="text-[10px] text-slate-400 font-medium">{task.ownerEmail}</p></div></div></td>
                         <td className="px-8 py-8"><p className="font-bold text-slate-900 text-sm">{task.propertyName}</p><div className="flex items-center text-[10px] text-slate-400 mt-1"><MapPin className="w-3 h-3 mr-1" /> {task.propertyAddress}</div></td>

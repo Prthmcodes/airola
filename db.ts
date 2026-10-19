@@ -383,10 +383,28 @@ class AirolaDatabase {
     this.dispatchUpdate('notifications');
   }
 
-  async deleteNotification(id: string): Promise<void> {
-    const { error } = await supabase.from('notifications').delete().eq('id', id);
+  // RLS turns a disallowed update/delete into zero rows rather than an error, so both report
+  // success only when every row came back.
+  async markNotificationsRead(ids: string[]): Promise<boolean> {
+    if (!ids.length) return true;
+    const { data, error } = await supabase.from('notifications').update({ read: true }).in('id', ids).select('id');
     if (error) console.error(error);
     this.dispatchUpdate('notifications');
+    return !error && data?.length === ids.length;
+  }
+
+  async deleteNotification(id: string): Promise<boolean> {
+    const { data, error } = await supabase.from('notifications').delete().eq('id', id).select('id');
+    if (error) console.error(error);
+    this.dispatchUpdate('notifications');
+    return !error && data?.length === 1;
+  }
+
+  // Booking notifications carry the task's reference (REQ-XXXXXX) in their body.
+  async getTaskIdByRef(ref: string): Promise<string | null> {
+    const { data, error } = await supabase.from('cleaning_tasks').select('id').eq('ref', ref).maybeSingle();
+    if (error) { console.error(error); return null; }
+    return data?.id ?? null;
   }
 
   // ---------- Giveaway ----------
