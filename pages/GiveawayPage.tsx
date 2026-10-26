@@ -228,6 +228,7 @@ export const GiveawayPage: React.FC<GiveawayPageProps> = ({ onNavigate }) => {
             <li>Opens {OPENS}, closes {CLOSES}, UK time. One entry per person across all routes.</li>
             <li>Entry routes: this form, or follow @{INSTAGRAM_HANDLE} on Instagram and comment TURNOVER on the giveaway post.</li>
             <li>Winners are chosen by {GIVEAWAY_DRAW_METHOD} and contacted by email, phone or Instagram message within 3 days of closing. If a winner does not reply within 7 days, another is drawn. Winners are announced on @{INSTAGRAM_HANDLE}.</li>
+            <li>The name of the winners is available on request by emailing contact@airola.co.uk. Winners' names will only be published with their permission.</li>
             <li>Prizes: 1 × Standard Turnover for a 1-2 bedroom property for £1 (worth up to £65); 1 × £25 credit; 1 × £15 credit, each towards a booking. Valid for {GIVEAWAY_PRIZE_VALID_DAYS} days, subject to availability. No cash alternative. Not transferable.</li>
             <li>
               Your details are used to run the giveaway and, only if you tick the box, to send host offers. See the{' '}

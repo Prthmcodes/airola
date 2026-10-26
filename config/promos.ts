@@ -4,7 +4,7 @@
 export const GIVEAWAY_STARTS_AT = new Date('2026-10-10T00:00:00+01:00');
 export const GIVEAWAY_ENDS_AT = new Date('2026-11-07T23:59:00+00:00');
 
-export const GIVEAWAY_PROMOTER = 'Airola, contact@airola.co.uk';
+export const GIVEAWAY_PROMOTER = 'Nandni Thakur trading as Airola, 44 Aylmer Road, Dagenham, RM8 3LP, United Kingdom, contact@airola.co.uk';
 export const GIVEAWAY_DRAW_METHOD = 'a random draw from all valid entries, made with a computer random-number generator';
 export const GIVEAWAY_PRIZE_VALID_DAYS = 60;
 

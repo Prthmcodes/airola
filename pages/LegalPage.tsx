@@ -12,11 +12,14 @@ const LegalPage: React.FC = () => {
           Airola ("we", "us") provides turnover cleaning services for short-let hosts in London, UK. When you request a
           quote, enter a giveaway, or create an account, we collect the personal information you provide: your name,
           email address, phone number, property address, and any notes you choose to share (such as access instructions).
+          The data controller is Nandni Thakur trading as Airola, 44 Aylmer Road, Dagenham, RM8 3LP, United Kingdom
+          (contact@airola.co.uk).
         </p>
         <p className="mb-4 leading-relaxed">
           We use this information solely to provide and schedule cleaning services, respond to your enquiries, and — if
-          you opt in — send you offers. We do not sell your data. Your data is stored securely on infrastructure hosted
-          in the United Kingdom and is only accessible to our operations team. Cleaning staff receive only the details
+          you opt in — send you offers. We do not sell your data. Your data is stored with our service providers (Supabase,
+          Google, Vercel and Stripe), who may process it outside the UK under appropriate safeguards, and only authorised
+          team members have access to it. Cleaning staff receive only the details
           needed to complete a job.
         </p>
         <p className="mb-4 leading-relaxed">
@@ -36,7 +39,10 @@ const LegalPage: React.FC = () => {
         </p>
         <p className="mb-4 leading-relaxed">
           Loyalty credits and giveaway prizes apply to future bookings only and are not redeemable for cash. Giveaway
-          entry is limited to hosts with properties in our London service area. We reserve the right to decline service
+          entry is open to people who host or manage a short-let in Airola's East London service area. Giveaway
+          promoter: Nandni Thakur trading as Airola, 44 Aylmer Road, Dagenham, RM8 3LP, United Kingdom,
+          contact@airola.co.uk. The name of the winners is available on request by emailing contact@airola.co.uk.
+          Winners' names will only be published with their permission. We reserve the right to decline service
           for properties that cannot be verified.
         </p>
         {/* [CONFIRM: active public liability policy] */}
