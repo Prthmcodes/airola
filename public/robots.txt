@@ -6,5 +6,6 @@ Disallow: /admin/team
 Disallow: /login
 Disallow: /add-property
 Disallow: /quote/review
+Disallow: /api/
 
 Sitemap: https://airola.co.uk/sitemap.xml

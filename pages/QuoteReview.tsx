@@ -3,6 +3,7 @@ import { Page, QuoteData, CleaningTask, User } from '../types';
 import RouteLink from '../components/RouteLink';
 import { db } from '../db';
 import { appendToSheet } from '../sheets';
+import { notifyNewQuote } from '../notifyQuote';
 import { safePrice, PRICE_FALLBACK_TEXT, clearQuoteDraft, quoteWhatsappLink } from '../utils/quoteSafety';
 import { CheckCircle2, Send, MessageSquare, ShieldCheck, User as UserIcon, Phone } from 'lucide-react';
 
@@ -36,6 +37,7 @@ const QuoteReview: React.FC<QuoteReviewProps> = ({ quote, setQuote, onNavigate, 
     const effectiveName = user.isLoggedIn ? user.name : quote.ownerName || 'Guest';
     const effectivePhone = user.isLoggedIn ? (user.phone || quote.ownerPhone) : quote.ownerPhone;
     const finalPrice = quote.totalPrice || quote.basePrice;
+    let ref: string | undefined;
 
     try {
       if (user.isLoggedIn) {
@@ -73,6 +75,7 @@ const QuoteReview: React.FC<QuoteReviewProps> = ({ quote, setQuote, onNavigate, 
           notes: quote.notes,
         };
         const savedTask = await db.saveTask(newTask);
+        ref = savedTask?.ref;
 
         // Notify the admin team
         await db.addNotification({
@@ -91,6 +94,23 @@ const QuoteReview: React.FC<QuoteReviewProps> = ({ quote, setQuote, onNavigate, 
           return;
         }
       }
+
+      // Email + phone alert to the team (fire-and-forget, never blocks or errors the submission)
+      notifyNewQuote({
+        name: effectiveName,
+        email: effectiveEmail,
+        phone: effectivePhone || '',
+        propertyName: quote.propertyName || '',
+        address: quote.address || '',
+        beds: quote.beds,
+        baths: quote.baths,
+        cleaningType: quote.cleaningType,
+        frequency: quote.frequency,
+        addOns: quote.toiletries,
+        price: safePrice(finalPrice),
+        notes: quote.notes || '',
+        ...(ref ? { ref } : {}),
+      });
 
       // Backup log to Google Sheets (write-only)
       await appendToSheet('Sheet1', [
