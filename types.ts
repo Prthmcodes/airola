@@ -26,7 +26,8 @@ export enum Page {
   BLOG_CHECKLIST = 'blog_checklist',
   BLOG_DURATION = 'blog_duration',
   BLOG_SAME_DAY = 'blog_same_day',
-  BLOG_PHOTO_PROOF = 'blog_photo_proof'
+  BLOG_PHOTO_PROOF = 'blog_photo_proof',
+  BLOG_CLEANING_FEE = 'blog_cleaning_fee'
 }
 
 export type UserRole = 'owner' | 'admin';

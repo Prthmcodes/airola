@@ -35,12 +35,102 @@ export const BLOG_INDEX_META = {
   description: 'Practical guides for Airbnb and short-let hosts in East London: turnover cleaning costs, checklists, timings, same-day turnovers and photo proof.',
 };
 
-const post = (p: Omit<BlogPost, 'meta' | 'datePublished'> & { metaTitle: string; description: string }): BlogPost => {
-  const { metaTitle, description, ...rest } = p;
-  return { ...rest, datePublished: BLOG_DATE, meta: { path: `/blog/${p.slug}`, title: metaTitle, description } };
+// datePublished defaults to BLOG_DATE (the first five posts); later posts pass their own.
+const post = (p: Omit<BlogPost, 'meta' | 'datePublished'> & { metaTitle: string; description: string; datePublished?: string }): BlogPost => {
+  const { metaTitle, description, datePublished = BLOG_DATE, ...rest } = p;
+  return { ...rest, datePublished, meta: { path: `/blog/${p.slug}`, title: metaTitle, description } };
 };
 
 export const BLOG_POSTS: BlogPost[] = [
+  // Newest first: the blog index lists posts in this order.
+  post({
+    page: Page.BLOG_CLEANING_FEE,
+    slug: 'airbnb-cleaning-fee',
+    title: 'How much cleaning fee should an Airbnb host charge?',
+    metaTitle: 'Airbnb Cleaning Fee: How Much to Charge | Airola',
+    description: 'How to set your Airbnb cleaning fee: what it should cover, why property size and layout matter, and how to work out what each turnover really costs you.',
+    datePublished: '2026-11-04',
+    intro: [
+      "A cleaning fee is a one-off charge added to a booking to cover getting your property ready for the next guest. Set it too low and you pay for part of every turnover yourself. Set it without a clear reason and guests may question it.",
+      "There is no single right number. The fee that works for you depends on your property and what each turnover really costs. Here is how to work out your own figure.",
+    ],
+    sections: [
+      {
+        heading: 'What a cleaning fee should cover',
+        blocks: [
+          { type: 'p', text: "Your cleaning fee should reflect the full cost of a turnover, not just the time someone spends cleaning. Most turnovers involve four kinds of cost:" },
+          {
+            type: 'ul',
+            items: [
+              'Cleaning time. Resetting the kitchen, bathroom, bedrooms and floors, plus a check for damage or anything missing.',
+              'Linen and laundry. Changing beds and towels, then washing and drying them, whether you do it yourself or pay someone else.',
+              'Restocking. Replacing toilet roll, hand soap, dish soap, bin liners and any extras you leave for guests.',
+              'Supplies. Cleaning products, cloths and equipment, which wear out over time.',
+            ],
+          },
+          { type: 'p', text: "If you only price the first item, the others quietly come out of your nightly earnings. Our [Airbnb turnover cleaning checklist](/blog/airbnb-turnover-cleaning-checklist) sets out the tasks involved, room by room." },
+        ],
+      },
+      {
+        heading: 'Why property size and layout matter',
+        blocks: [
+          { type: 'p', text: "A cleaning fee that suits a studio will not suit a three-bedroom flat. Each extra bedroom adds a bed to change and more linen to wash, and each extra bathroom adds one of the most detailed jobs in any turnover." },
+          { type: 'p', text: "Layout matters too. A property over several floors, or one with a balcony or lots of hard floors to mop, usually takes longer to reset than a compact flat with the same number of bedrooms. Building access and where the bins are kept can also add time. These are typical differences, and the most reliable guide is how long turnovers actually take at your property." },
+        ],
+      },
+      {
+        heading: 'How to work out your own cleaning cost',
+        blocks: [
+          { type: 'p', text: "Start from what one turnover costs you, then decide how much of that to pass on to guests:" },
+          {
+            type: 'ul',
+            items: [
+              'Price the clean itself. If you use a cleaner, this is their charge per turnover. If you clean yourself, put a fair value on the time it typically takes.',
+              'Add laundry for every bed and set of towels.',
+              'Add restocking. Note what you spend on guest essentials over a month and divide it by the number of turnovers in that month.',
+              'Add a share of supplies, including replacing worn towels and linen.',
+              'Check it against real turnovers. After a few stays, compare your estimate with what you actually spent, and adjust.',
+            ],
+          },
+          { type: 'p', text: "A fixed price per clean makes this easier, because the biggest part of the sum stays the same every booking. Airola turnovers start from £45 for a 1-bed, and our [pricing page](/pricing) shows exactly how the price changes with bedrooms, packages and add-ons. For what drives that price, see [what Airbnb turnover cleaning costs in London](/blog/airbnb-turnover-cleaning-cost-london)." },
+        ],
+      },
+      {
+        heading: 'A separate fee or part of the nightly rate?',
+        blocks: [
+          { type: 'p', text: "Some hosts charge a separate cleaning fee and some build cleaning into the nightly rate. A separate fee covers the turnover whatever the length of stay. Building it into the rate can make a listing look simpler, but check that the rate still covers the clean on your shortest bookings." },
+          { type: 'p', text: "How cleaning fees are shown to guests, and any rules about them, are set by Airbnb and can change. Check Airbnb's current guidance for hosts before you set or change your fee." },
+        ],
+      },
+      {
+        heading: 'Why a clear fee builds guest trust',
+        blocks: [
+          { type: 'p', text: "Guests are more comfortable paying a cleaning fee when they can see what it pays for. A fee that fits the size of the property and matches the standard guests find on arrival feels fair. A fee that seems high for a small flat, or a property that is not properly clean, invites questions and can show up in reviews." },
+          {
+            type: 'ul',
+            items: [
+              'Say in your listing what guests can expect, such as fresh linen, clean towels and restocked essentials.',
+              'Keep check-out requests short and reasonable, so guests do not feel they are cleaning as well as paying for it.',
+            ],
+          },
+        ],
+      },
+      {
+        heading: 'Know your turnover cost before you set the fee',
+        blocks: [
+          { type: 'p', text: "If Airola cleans for you, your price is confirmed before we clean, so you can set your fee knowing what each turnover costs. You can [get your price in about 60 seconds](/quote) by choosing your bedrooms, package and any add-ons." },
+        ],
+      },
+    ],
+    faq: [
+      { q: 'Should my cleaning fee be the same for every booking?', a: 'Many hosts use one fee because it is simpler, but longer stays can leave more to clean. Check Airbnb\'s current guidance on the fee options available to you.' },
+      { q: 'Can I ask guests to tidy up if I charge a cleaning fee?', a: 'You can, but keep requests short, such as leaving keys in an agreed place and putting rubbish in the bin. Long check-out chores on top of a cleaning fee can feel unfair.' },
+      { q: 'How often should I review my cleaning fee?', a: 'Whenever your costs change, for example if you switch cleaner or add linen changes. It also helps to compare it with your actual turnover costs every few months.' },
+      { q: 'Does Airola include linen changes?', a: 'Linen change and bed making are part of Guest-Ready Plus. With Standard Turnover we stage the beds, and you can add a linen change when you get your quote.' },
+    ],
+    related: ['airbnb-turnover-cleaning-cost-london', 'airbnb-turnover-cleaning-checklist'],
+  }),
+
   post({
     page: Page.BLOG_COST,
     slug: 'airbnb-turnover-cleaning-cost-london',
@@ -124,7 +214,7 @@ export const BLOG_POSTS: BlogPost[] = [
       { q: 'Do I pay when I request a quote?', a: 'No. There is no payment when you get your price, and your final price is confirmed before we clean.' },
       { q: 'Which areas do you cover?', a: 'We focus on East London, including Stratford, Royal Wharf, Canary Wharf, Canning Town, Hackney Wick, Bow, Mile End and Leyton.' },
     ],
-    related: ['airbnb-turnover-cleaning-checklist', 'how-long-does-an-airbnb-turnover-clean-take'],
+    related: ['airbnb-cleaning-fee', 'airbnb-turnover-cleaning-checklist'],
   }),
 
   post({

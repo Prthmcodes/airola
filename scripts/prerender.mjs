@@ -26,6 +26,7 @@ const ROUTES = [
   '/blog/how-long-does-an-airbnb-turnover-clean-take',
   '/blog/same-day-airbnb-turnover-preparation',
   '/blog/photo-proof-after-cleaning-airbnb',
+  '/blog/airbnb-cleaning-fee',
 ];
 
 const DIST = join(dirname(fileURLToPath(import.meta.url)), '..', 'dist');

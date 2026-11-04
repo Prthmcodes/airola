@@ -52,6 +52,7 @@ export const PAGE_META: Record<Page, PageMeta> = {
   [Page.BLOG_DURATION]: blogPostMeta(Page.BLOG_DURATION),
   [Page.BLOG_SAME_DAY]: blogPostMeta(Page.BLOG_SAME_DAY),
   [Page.BLOG_PHOTO_PROOF]: blogPostMeta(Page.BLOG_PHOTO_PROOF),
+  [Page.BLOG_CLEANING_FEE]: blogPostMeta(Page.BLOG_CLEANING_FEE),
 };
 
 export const pathFor = (page: Page) => PAGE_META[page].path;
