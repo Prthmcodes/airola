@@ -1,5 +1,6 @@
 import { QuoteData } from '../types';
 import { whatsappWithText } from '../components/ContactOptions';
+import { ADD_ON_NAMES, tierName } from '../config/pricing';
 
 // ---------- Price safety ----------
 
@@ -58,20 +59,13 @@ export const clearQuoteDraft = () => {
 
 // ---------- WhatsApp fallback ----------
 
-const ADD_ON_NAMES: Record<string, string> = {
-  essentials: 'Essentials Restocking',
-  linen: 'Linen Change',
-  dishwashing: 'Dishwashing',
-  appliance: 'Fridge & Microwave',
-};
-
 // Pre-filled WhatsApp message carrying what the visitor already entered, so nothing is lost if sending fails.
 export const quoteWhatsappLink = (quote: QuoteData, name?: string) => {
   const lines = [
     "Hi Airola, I tried to send a quote request on your website but it didn't go through. My details:",
     `Name: ${name || quote.ownerName || '-'}`,
     `Bedrooms: ${quote.beds}`,
-    `Package: ${quote.cleaningType === 'premium' ? 'Guest-Ready Plus' : 'Standard Turnover'} (${quote.frequency === 'recurring' ? 'every turnover' : 'one-off'})`,
+    `Package: ${tierName(quote.cleaningType)} (first clean)`,
     `Add-ons: ${quote.toiletries.length ? quote.toiletries.map(id => ADD_ON_NAMES[id] || id).join(', ') : 'none'}`,
     `Area: ${quote.address || '-'}`,
   ];

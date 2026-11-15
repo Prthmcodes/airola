@@ -10,7 +10,7 @@ const SHEETS_TOKEN = process.env.SHEETS_TOKEN;
 // The only rows the site writes, with their exact column counts.
 const SHEETS: Record<string, { columns: number }> = {
   Sheet1: { columns: 13 }, // quote request (pages/QuoteReview.tsx)
-  Sheet2: { columns: 6 }, // giveaway entry (pages/GiveawayPage.tsx)
+  Sheet2: { columns: 9 }, // giveaway entry (pages/GiveawayPage.tsx)
 };
 
 const MAX_BODY_BYTES = 32 * 1024;

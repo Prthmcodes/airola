@@ -3,6 +3,7 @@ import { Camera, Check } from 'lucide-react';
 import { Page } from '../types';
 import RouteLink from '../components/RouteLink';
 import { AreaPage as AreaPageData, isPlaceholder } from '../config/areas';
+import { TIER_NAMES, tierPrice, EXTRA_BEDROOM, EVERY_TURNOVER_RULE } from '../config/pricing';
 
 interface AreaPageProps {
   area: AreaPageData;
@@ -11,8 +12,8 @@ interface AreaPageProps {
 
 // Same prices and inclusions as /pricing and /quote.
 const SERVICES = [
-  { name: 'Standard Turnover', price: 'From £45', detail: 'Full guest-ready reset: kitchen, bathroom and floors, bed staging, damage and low-stock check.' },
-  { name: 'Guest-Ready Plus', price: 'From £79', detail: 'Everything in Standard plus linen change, dishwashing and a pre-check-in double inspection.' },
+  { name: TIER_NAMES.standard, price: `From £${tierPrice('standard')}`, detail: 'Full turnover of kitchen, bathroom and floors, linen change and bed making with your clean linen, bins emptied, damage and low-stock check.' },
+  { name: TIER_NAMES.premium, price: `From £${tierPrice('premium')}`, detail: 'Everything in Standard plus dishwashing and kitchen reset, inside fridge and microwave, essentials restocked from your supplies, priority booking and a pre-check-in double inspection.' },
 ];
 
 const AreaPage: React.FC<AreaPageProps> = ({ area, onNavigate }) => {
@@ -49,8 +50,8 @@ const AreaPage: React.FC<AreaPageProps> = ({ area, onNavigate }) => {
         </div>
         <ul className="mt-6 space-y-2 text-slate-700">
           {[
-            'Prices are for a 1-bedroom property. Add £20 per extra bedroom.',
-            'Book every turnover and save £10 per clean. No contract.',
+            `Prices are for a 1-bedroom property. Add £${EXTRA_BEDROOM} per extra bedroom.`,
+            `${EVERY_TURNOVER_RULE} No contract.`,
             'Your exact price is confirmed before we clean.',
           ].map(line => (
             <li key={line} className="flex items-start">

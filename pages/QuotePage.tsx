@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Page, QuoteData, User as UserType } from '../types';
 import { safePrice, PRICE_FALLBACK_TEXT } from '../utils/quoteSafety';
+import { STANDARD_ADD_ONS, TIER_NAMES, tierName, tierPrice, everyTurnoverPrice, EVERY_TURNOVER_RULE, EVERY_TURNOVER_WINDOW_DAYS } from '../config/pricing';
 import {
   ChevronRight, ChevronLeft, Sparkles, CheckCircle, Calendar as CalendarIcon,
   Link as LinkIcon, MapPin, ClipboardList, User, Phone, Mail, Shield, Star, Check,
-  Package, BedDouble, UtensilsCrossed, Refrigerator, MessageCircle, Info
+  Package, UtensilsCrossed, Refrigerator, MessageCircle, Info
 } from 'lucide-react';
 
 interface QuotePageProps {
@@ -21,21 +22,20 @@ const QuotePage: React.FC<QuotePageProps> = ({ quote, setQuote, onNavigate, user
   const emailInvalid = !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(quote.ownerEmail || '');
   const totalSteps = 2;
 
-  const addOns = [
-    { id: 'essentials', icon: <Package className="w-6 h-6" />, name: 'Essentials Restocking', priceText: '£10', price: 10, description: 'Toilet paper, hand soap, dish soap, bin liners' },
-    { id: 'linen', icon: <BedDouble className="w-6 h-6" />, name: 'Linen Change', priceText: 'From £15', price: 15, description: 'Fresh linen, priced per bed' },
-    { id: 'dishwashing', icon: <UtensilsCrossed className="w-6 h-6" />, name: 'Dishwashing', priceText: '£10', price: 10, description: 'Complete kitchenware reset' },
-    { id: 'appliance', icon: <Refrigerator className="w-6 h-6" />, name: 'Fridge & Microwave', priceText: '£10', price: 10, description: 'Deep interior clean' }
-  ];
-
-  // Base prices are for a 1-bedroom property; +£20 per additional bedroom.
-  // Hosts who book every turnover (recurring) save £10 per clean. No membership fee.
-  const TIER_BASE: Record<string, number> = { starter: 39, standard: 45, premium: 79 };
-
-  const tierPrice = (tier: string) => {
-    const beds = Math.max(1, quote.beds || 1);
-    return (TIER_BASE[tier] ?? 45) + 20 * (beds - 1) - (quote.frequency === 'recurring' ? 10 : 0);
+  // Paid add-ons exist for Standard Turnover only; Premium Turnover already includes all of them.
+  const ADD_ON_ICONS: Record<string, React.ReactNode> = {
+    essentials: <Package className="w-6 h-6" />,
+    dishwashing: <UtensilsCrossed className="w-6 h-6" />,
+    appliance: <Refrigerator className="w-6 h-6" />,
   };
+  const addOns = STANDARD_ADD_ONS.map(a => ({ ...a, icon: ADD_ON_ICONS[a.id], priceText: `£${a.price}` }));
+  const showAddOns = quote.cleaningType === 'standard';
+  // Only add-ons that exist and apply to the chosen package (drops e.g. a stale 'linen' from an old draft).
+  const activeAddOns = showAddOns ? quote.toiletries.filter(id => addOns.some(a => a.id === id)) : [];
+
+  // A quote is always for a first clean, so the total is always the one-off price.
+  const beds = Math.max(1, quote.beds || 1);
+  const priceFor = (tier: string) => tierPrice(tier, beds);
 
   // Pre-fill host info when logged in
   useEffect(() => {
@@ -49,15 +49,17 @@ const QuotePage: React.FC<QuotePageProps> = ({ quote, setQuote, onNavigate, user
     }
   }, [user.isLoggedIn, user.name, user.email, user.phone]);
 
-  // Live price
+  // Live price. Also keeps the saved quote consistent: one-off frequency, and only add-ons that apply.
   useEffect(() => {
-    const price = tierPrice(quote.cleaningType);
-    const addOnsTotal = quote.toiletries.reduce((total, addonId) => {
-      const addon = addOns.find(a => a.id === addonId);
-      if (addonId === 'linen' && addon) return total + addon.price * (quote.beds || 1);
-      return total + (addon ? addon.price : 0);
-    }, 0);
-    setQuote(prev => ({ ...prev, basePrice: price, totalPrice: price + addOnsTotal }));
+    const price = priceFor(quote.cleaningType);
+    const addOnsTotal = activeAddOns.reduce((total, addonId) => total + (addOns.find(a => a.id === addonId)?.price ?? 0), 0);
+    setQuote(prev => ({
+      ...prev,
+      frequency: 'one-time',
+      toiletries: activeAddOns.length === prev.toiletries.length ? prev.toiletries : activeAddOns,
+      basePrice: price,
+      totalPrice: price + addOnsTotal,
+    }));
   }, [quote.cleaningType, quote.toiletries, quote.beds, quote.frequency]);
 
   const toggleAddon = (id: string) => {
@@ -160,21 +162,11 @@ const QuotePage: React.FC<QuotePageProps> = ({ quote, setQuote, onNavigate, user
 
                 {/* Tier */}
                 <div>
-                  <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
-                    <h2 className="text-2xl font-bold text-slate-900">Choose Your Clean</h2>
-                    <div className="grid grid-cols-[1fr_auto_1fr] items-center gap-3 sm:flex sm:gap-0 sm:space-x-3">
-                      <span className={`text-sm font-medium text-right sm:text-left ${quote.frequency === 'one-time' ? 'text-slate-900' : 'text-slate-500'}`}>One-off</span>
-                      <label htmlFor="pricing-toggle" className="relative inline-flex items-center cursor-pointer before:absolute before:-inset-1.5 before:content-['']">
-                        <input type="checkbox" id="pricing-toggle" aria-label="Book every turnover (save £10 per clean)" className="sr-only peer" checked={quote.frequency === 'recurring'} onChange={(e) => setQuote({ ...quote, frequency: e.target.checked ? 'recurring' : 'one-time' })} />
-                        <div className="w-14 h-8 bg-slate-200 rounded-full peer peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-[#2D6E5F] peer-focus-visible:outline-solid peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-1 after:left-[4px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all peer-checked:bg-[rgb(61,141,122)]"></div>
-                      </label>
-                      <span className={`text-sm font-medium ${quote.frequency === 'recurring' ? 'text-slate-900' : 'text-slate-500'}`}>Every turnover (save £10)</span>
-                    </div>
-                  </div>
+                  <h2 className="text-2xl font-bold text-slate-900 mb-6">Choose Your Clean</h2>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                     {[
-                      { id: 'standard', name: 'Standard Turnover', icon: <Sparkles className="w-6 h-6" />, desc: 'Full guest-ready reset with photo confirmation, damage check and bed staging.' },
-                      { id: 'premium', name: 'Guest-Ready Plus', icon: <Star className="w-6 h-6" />, desc: 'Everything in Standard plus linen change, dishwashing and pre-check-in double inspection. Fully hands-off.' }
+                      { id: 'standard', name: TIER_NAMES.standard, icon: <Sparkles className="w-6 h-6" />, desc: 'Full turnover of kitchen, bathroom and floors, linen change and bed making with your clean linen, bins emptied, damage and low-stock check, and photo confirmation.' },
+                      { id: 'premium', name: TIER_NAMES.premium, icon: <Star className="w-6 h-6" />, desc: 'Everything in Standard plus dishwashing and kitchen reset, inside fridge and microwave, essentials restocked from your supplies, priority booking and a pre-check-in double inspection.' }
                     ].map((pkg) => (
                       <button
                         key={pkg.id}
@@ -193,7 +185,7 @@ const QuotePage: React.FC<QuotePageProps> = ({ quote, setQuote, onNavigate, user
                           {pkg.icon}
                         </div>
                         <h3 className="text-lg font-black text-slate-900 mb-1">{pkg.name}</h3>
-                        <p className="price text-2xl text-[#2D6E5F] mb-2">{safePrice(tierPrice(pkg.id)) !== null ? `£${tierPrice(pkg.id)}` : <span className="text-base">{PRICE_FALLBACK_TEXT}</span>}</p>
+                        <p className="price text-2xl text-[#2D6E5F] mb-2">{safePrice(priceFor(pkg.id)) !== null ? `£${priceFor(pkg.id)}` : <span className="text-base">{PRICE_FALLBACK_TEXT}</span>}</p>
                         <p className="text-slate-600 text-sm lg:text-xs font-medium leading-relaxed">{pkg.desc}</p>
                         {quote.cleaningType === pkg.id && (
                           <div className="absolute top-5 right-5 bg-[#2D6E5F] text-white p-1 rounded-full">
@@ -203,19 +195,20 @@ const QuotePage: React.FC<QuotePageProps> = ({ quote, setQuote, onNavigate, user
                       </button>
                     ))}
                   </div>
-                  {quote.frequency === 'recurring' && (
-                    <p className="mt-4 text-xs text-slate-500 font-medium flex items-center">
-                      <Info className="w-4 h-4 mr-2 text-[rgb(61,141,122)]" /> Book every turnover with us and save £10 per clean, with priority scheduling and no emergency call-out fees. No membership charge. Cancel anytime.
-                    </p>
-                  )}
+                  {/* Information only: nothing here changes the first-clean total. */}
+                  <p className="mt-4 text-sm text-slate-600 font-medium flex items-start">
+                    <Info className="w-4 h-4 mr-2 mt-0.5 shrink-0 text-[rgb(61,141,122)]" aria-hidden="true" />
+                    <span>Price from your second clean: £{everyTurnoverPrice(quote.cleaningType, beds)}. {EVERY_TURNOVER_RULE}</span>
+                  </p>
                 </div>
 
-                {/* Add-ons */}
+                {/* Add-ons: Standard Turnover only */}
+                {showAddOns ? (
                 <div>
                   <h2 className="text-2xl font-bold mb-2 text-slate-900">Add-Ons <span className="text-sm font-medium text-slate-500">(optional)</span></h2>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-6">
                     {addOns.map(addon => {
-                      const selected = quote.toiletries.includes(addon.id);
+                      const selected = activeAddOns.includes(addon.id);
                       return (
                         <button
                           key={addon.id}
@@ -248,6 +241,11 @@ const QuotePage: React.FC<QuotePageProps> = ({ quote, setQuote, onNavigate, user
                     })}
                   </div>
                 </div>
+                ) : (
+                  <p className="text-sm text-slate-600 font-medium">
+                    {TIER_NAMES.premium} already includes dishwashing, inside fridge and microwave, and essentials restocking, so there are no add-ons to choose.
+                  </p>
+                )}
               </div>
             )}
 
@@ -343,26 +341,18 @@ const QuotePage: React.FC<QuotePageProps> = ({ quote, setQuote, onNavigate, user
 
               <div className="flex justify-between gap-4 lg:gap-0 text-slate-400 font-medium text-sm">
                 <span>
-                  {quote.cleaningType === 'premium' ? 'Guest-Ready Plus' : 'Standard Turnover'} ({quote.beds} bed{quote.beds > 1 ? 's' : ''}, {quote.baths} bath{quote.baths > 1 ? 's' : ''})
+                  {tierName(quote.cleaningType)} ({quote.beds} bed{quote.beds > 1 ? 's' : ''}, {quote.baths} bath{quote.baths > 1 ? 's' : ''})
                 </span>
                 <span className="price text-white">{safePrice(quote.basePrice) !== null ? `£${quote.basePrice}` : '–'}</span>
               </div>
 
-              {quote.frequency === 'recurring' && (
-                <div className="flex justify-between text-[rgb(106,176,160)] font-medium text-sm">
-                  <span>Recurring turnover discount</span>
-                  <span>−£10 applied</span>
-                </div>
-              )}
-
-              {quote.toiletries.map(addonId => {
+              {activeAddOns.map(addonId => {
                 const addon = addOns.find(a => a.id === addonId);
                 if (!addon) return null;
-                const actualPrice = addon.id === 'linen' ? addon.price * (quote.beds || 1) : addon.price;
                 return (
                   <div key={addonId} className="flex justify-between gap-4 lg:gap-0 text-slate-400 font-medium text-xs">
-                    <span>{addon.name} {addon.id === 'linen' && `(${quote.beds} bed${quote.beds > 1 ? 's' : ''})`}</span>
-                    <span className="price text-white">£{actualPrice}</span>
+                    <span>{addon.name}</span>
+                    <span className="price text-white">£{addon.price}</span>
                   </div>
                 );
               })}
@@ -370,11 +360,14 @@ const QuotePage: React.FC<QuotePageProps> = ({ quote, setQuote, onNavigate, user
 
             <div className="border-t border-white/10 pt-8 mb-8">
               <div className="flex justify-between items-end">
-                <span className="text-slate-400 font-bold uppercase text-xs tracking-[0.05em]">Per Turnover</span>
+                <span className="text-slate-400 font-bold uppercase text-xs tracking-[0.05em]">First Clean</span>
                 {safePrice(quote.totalPrice) !== null
                   ? <span className="price text-5xl text-[rgb(106,176,160)]">£{quote.totalPrice}</span>
                   : <span className="text-lg font-bold text-[rgb(106,176,160)] text-right">{PRICE_FALLBACK_TEXT}</span>}
               </div>
+              <p className="mt-3 text-xs text-slate-400 font-medium">
+                From your second clean, {tierName(quote.cleaningType)} is £{everyTurnoverPrice(quote.cleaningType, beds)} when booked within {EVERY_TURNOVER_WINDOW_DAYS} days of your last clean at the same property.
+              </p>
             </div>
 
             <div className="p-6 bg-white/5 rounded-3xl border border-white/5 space-y-4">

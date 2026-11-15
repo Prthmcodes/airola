@@ -1,8 +1,12 @@
 // Promotions switchboard. The giveaway opens and closes itself from these dates (UK time, with the
 // Europe/London offset written out: +01:00 in British Summer Time, +00:00 after the clocks go back).
-// Keep supabase/migrations/20261009000000_giveaway_close_guard.sql in step when the dates change.
-export const GIVEAWAY_STARTS_AT = new Date('2026-10-10T00:00:00+01:00');
-export const GIVEAWAY_ENDS_AT = new Date('2026-11-07T23:59:00+00:00');
+// Keep the close guard in step when the dates change: currently
+// supabase/migrations/20261115000000_giveaway_relaunch.sql (the 2026-10-09 migration holds the first giveaway's dates).
+export const GIVEAWAY_STARTS_AT = new Date('2026-11-16T00:00:00+00:00');
+export const GIVEAWAY_ENDS_AT = new Date('2026-12-13T23:59:00+00:00');
+// Stored with every entry so each giveaway's entries stay separate. Entries from the first giveaway
+// (10 Oct to 7 Nov 2026) have no campaign value.
+export const GIVEAWAY_CAMPAIGN = 'giveaway-2026-11';
 
 export const GIVEAWAY_PROMOTER = 'Nandni Thakur trading as Airola, 44 Aylmer Road, Dagenham, RM8 3LP, United Kingdom, contact@airola.co.uk';
 export const GIVEAWAY_DRAW_METHOD = 'a random draw from all valid entries, made with a computer random-number generator';

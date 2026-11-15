@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { CleaningTask } from '../types';
 import { Zap, MessageCircle, Clock, Gift, Copy, Check, TrendingUp, Star, RotateCcw } from 'lucide-react';
+import { REBOOK_CREDIT, REBOOK_RULE, REBOOK_WINDOW_DAYS, tierName } from '../config/pricing';
 
 // Paste your Google review link here once your Google Business Profile is live.
 const GOOGLE_REVIEW_LINK = '';
@@ -33,11 +34,14 @@ const ActionQueue: React.FC<ActionQueueProps> = ({ tasks, onTaskUpdate }) => {
     t.confirmationSent && !t.reminderSent && (t.paymentStatus ?? 'unpaid') !== 'paid'
   );
 
-  // 3. Completed jobs within the 10-day loyalty window, offer not yet sent
+  // 3. A client's first completed clean, still inside the rebook-credit window, offer not yet sent
+  const completedCount = (ownerId?: string) =>
+    ownerId ? manageable.filter(x => x.ownerId === ownerId && x.status === 'completed').length : 0;
   const rebooks = manageable.filter(t => {
     if (t.status !== 'completed' || t.rebookOfferSent || !t.completedAt) return false;
+    if (completedCount(t.ownerId) !== 1) return false;
     const age = now - new Date(t.completedAt).getTime();
-    return age >= 0 && age <= 10 * DAY_MS;
+    return age >= 0 && age <= REBOOK_WINDOW_DAYS * DAY_MS;
   });
 
   // Group completed jobs by client for lifecycle triggers
@@ -70,13 +74,13 @@ const ActionQueue: React.FC<ActionQueueProps> = ({ tasks, onTaskUpdate }) => {
   });
 
   const confirmationMsg = (t: CleaningTask) =>
-    `Hi ${firstName(t.ownerName)}, confirming your clean: ${t.propertyAddress}, ${t.scheduledAt || 'date TBC'}, ${t.type === 'premium' ? 'Guest-Ready Plus' : 'Standard Turnover'}, ${t.beds} bed — £${t.price}. Includes photo confirmation after the clean. 50% (£${Math.round(t.price / 2)}) to book. Reply YES to confirm.`;
+    `Hi ${firstName(t.ownerName)}, confirming your clean: ${t.propertyAddress}, ${t.scheduledAt || 'date TBC'}, ${tierName(t.type)}, ${t.beds} bed — £${t.price}. Includes photo confirmation after the clean. 50% (£${Math.round(t.price / 2)}) to book. Reply YES to confirm.`;
 
   const reminderMsg = (t: CleaningTask) =>
     `Hi ${firstName(t.ownerName)}, quick nudge — just need the ${(t.paymentStatus === 'deposit_paid') ? 'balance' : 'booking payment'} for the clean at ${t.propertyAddress} (£${t.price} total). Want me to hold the slot?`;
 
   const rebookMsg = (t: CleaningTask) =>
-    `Hi ${firstName(t.ownerName)}, glad the turnover at ${t.propertyName} went well! Reminder: book your next clean within 10 days and you get £25 credit towards it. Want me to pencil in your next changeover?`;
+    `Hi ${firstName(t.ownerName)}, glad the turnover at ${t.propertyName} went well! Reminder: ${REBOOK_RULE.replace('Rebook', 'rebook')} Want me to pencil in your next changeover?`;
 
   const reviewMsg = (t: CleaningTask) =>
     GOOGLE_REVIEW_LINK
@@ -84,7 +88,7 @@ const ActionQueue: React.FC<ActionQueueProps> = ({ tasks, onTaskUpdate }) => {
       : `Hi ${firstName(t.ownerName)}, glad the turnovers at ${t.propertyName} are running smoothly! Quick favour: would you mind sending a line or two about how it's been? We'd love to use it as a review. Thank you!`;
 
   const winbackMsg = (t: CleaningTask) =>
-    `Hi ${firstName(t.ownerName)}, it's been a little while since your last clean at ${t.propertyName}. If your current setup ever slips, we've got you covered — and there's £10 off your next turnover to get you back on the calendar. Want me to pencil one in?`;
+    `Hi ${firstName(t.ownerName)}, it's been a little while since your last clean at ${t.propertyName}. If your current setup ever slips, we've got you covered. Want me to pencil one in?`;
 
   const sendAction = (t: CleaningTask, msg: string, flag: 'confirmationSent' | 'reminderSent' | 'rebookOfferSent' | 'reviewRequestSent' | 'winbackSent') => {
     window.open(waLink(t.ownerPhone, msg), '_blank', 'noopener');
@@ -117,7 +121,7 @@ const ActionQueue: React.FC<ActionQueueProps> = ({ tasks, onTaskUpdate }) => {
   const groups = [
     { title: 'Send booking confirmation', icon: <MessageCircle className="w-4 h-4" />, items: confirmations, msg: confirmationMsg, flag: 'confirmationSent' as const, color: 'text-[rgb(61,141,122)] bg-[rgb(235,247,244)]' },
     { title: 'Chase payment', icon: <Clock className="w-4 h-4" />, items: reminders, msg: reminderMsg, flag: 'reminderSent' as const, color: 'text-amber-700 bg-amber-50' },
-    { title: 'Send £25 rebooking offer', icon: <Gift className="w-4 h-4" />, items: rebooks, msg: rebookMsg, flag: 'rebookOfferSent' as const, color: 'text-[rgb(61,141,122)] bg-[rgb(235,247,244)]' },
+    { title: `Send £${REBOOK_CREDIT} rebooking offer`, icon: <Gift className="w-4 h-4" />, items: rebooks, msg: rebookMsg, flag: 'rebookOfferSent' as const, color: 'text-[rgb(61,141,122)] bg-[rgb(235,247,244)]' },
     { title: 'Ask for a review (3+ cleans done)', icon: <Star className="w-4 h-4" />, items: reviewAsks, msg: reviewMsg, flag: 'reviewRequestSent' as const, color: 'text-yellow-700 bg-yellow-50' },
     { title: 'Win back quiet client (30+ days)', icon: <RotateCcw className="w-4 h-4" />, items: winbacks, msg: winbackMsg, flag: 'winbackSent' as const, color: 'text-slate-600 bg-slate-100' },
   ];

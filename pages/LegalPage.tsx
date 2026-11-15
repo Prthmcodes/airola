@@ -1,4 +1,5 @@
 import React from 'react';
+import { EVERY_TURNOVER_RULE, REBOOK_RULE, REBOOK_NOT_COMBINED, ONE_OFFER_RULE } from '../config/pricing';
 
 const LegalPage: React.FC = () => {
   return (
@@ -34,13 +35,15 @@ const LegalPage: React.FC = () => {
         <p className="mb-4 leading-relaxed">
           Quotes shown on this site are estimates based on the information you provide; the final price is confirmed
           before any service takes place. There are no long-term contracts. Bookings can be cancelled or rescheduled
-          by contacting us. The recurring turnover discount applies while you book every turnover with us; there is no
-          membership fee and the arrangement can be ended at any time.
+          by contacting us.
         </p>
         <p className="mb-4 leading-relaxed">
-          Loyalty credits and giveaway prizes apply to future bookings only and are not redeemable for cash. Giveaway
-          entry is open to people who host or manage a short-let in Airola's East London service area. Giveaway
-          promoter: Nandni Thakur trading as Airola, 44 Aylmer Road, Dagenham, RM8 3LP, United Kingdom,
+          Every-turnover rate: {EVERY_TURNOVER_RULE} First rebook credit: {REBOOK_RULE} {REBOOK_NOT_COMBINED}{' '}
+          {ONE_OFFER_RULE}
+        </p>
+        <p className="mb-4 leading-relaxed">
+          Giveaway prizes cannot be exchanged for cash, combined with other offers or transferred. The full giveaway
+          terms are on the giveaway page. Giveaway promoter: Nandni Thakur trading as Airola, 44 Aylmer Road, Dagenham, RM8 3LP, United Kingdom,
           contact@airola.co.uk. The name of the winners is available on request by emailing contact@airola.co.uk.
           Winners' names will only be published with their permission. We reserve the right to decline service
           for properties that cannot be verified.

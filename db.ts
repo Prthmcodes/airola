@@ -409,15 +409,27 @@ class AirolaDatabase {
 
   // ---------- Giveaway ----------
 
-  async submitGiveaway(data: { name: string; mobile: string; email: string; experience: string; wantsOffers?: boolean }): Promise<{ success: boolean }> {
+  // The database stamps the campaign (see supabase/migrations/20261115000000_giveaway_relaunch.sql);
+  // it is sent here too so the insert still records it if the trigger is ever missing.
+  async submitGiveaway(data: {
+    name: string; mobile: string; email: string; area: string; experience: string;
+    termsAccepted: boolean; wantsOffers: boolean; storyPublishOk: boolean; campaign: string;
+  }): Promise<{ success: boolean; duplicate?: boolean }> {
     const { error } = await supabase.from('giveaway_entries').insert({
       name: data.name,
       phone: data.mobile || null,
-      email: data.email || null,
+      email: data.email,
+      area: data.area,
       experience: data.experience || null,
-      wants_offers: data.wantsOffers ?? false,
+      terms_accepted: data.termsAccepted,
+      wants_offers: data.wantsOffers,
+      story_publish_ok: data.storyPublishOk,
+      campaign: data.campaign,
     });
-    if (error) { console.error(error); return { success: false }; }
+    if (error) {
+      console.error(error);
+      return { success: false, duplicate: error.code === '23505' };
+    }
     return { success: true };
   }
 

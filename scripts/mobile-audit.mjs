@@ -13,7 +13,7 @@ const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const DIST = join(ROOT, 'dist');
 const OUT = join(ROOT, process.argv[2] || 'audit/before');
 
-const PAGES = ['/', '/pricing', '/quote', '/about-us', '/contact', '/giveaway', '/legal', '/testimonials', '/offer', '/login', '/areas/stratford', '/page-that-does-not-exist'];
+const PAGES = ['/', '/pricing', '/quote', '/about-us', '/contact', '/giveaway', '/legal', '/testimonials', '/login', '/areas/stratford', '/page-that-does-not-exist'];
 const SIZES = [
   { w: 360, h: 800 }, { w: 390, h: 844 }, { w: 430, h: 932 }, { w: 768, h: 1024 }, { w: 1440, h: 900 },
 ];

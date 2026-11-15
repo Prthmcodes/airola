@@ -5,6 +5,7 @@ import { db } from '../db';
 import { appendToSheet } from '../sheets';
 import { notifyNewQuote } from '../notifyQuote';
 import { safePrice, PRICE_FALLBACK_TEXT, clearQuoteDraft, quoteWhatsappLink } from '../utils/quoteSafety';
+import { ADD_ON_NAMES, tierName } from '../config/pricing';
 import { CheckCircle2, Send, MessageSquare, ShieldCheck, User as UserIcon, Phone } from 'lucide-react';
 
 interface QuoteReviewProps {
@@ -21,14 +22,7 @@ const QuoteReview: React.FC<QuoteReviewProps> = ({ quote, setQuote, onNavigate, 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState('');
 
-  const addOns = [
-    { id: 'essentials', name: 'Essentials Restocking' },
-    { id: 'linen', name: 'Linen Change' },
-    { id: 'dishwashing', name: 'Dishwashing' },
-    { id: 'appliance', name: 'Fridge & Microwave' }
-  ];
-
-  const getAddonName = (id: string) => addOns.find(a => a.id === id)?.name || id;
+  const getAddonName = (id: string) => ADD_ON_NAMES[id] || id;
 
   const handleSend = async () => {
     setIsSubmitting(true);
@@ -193,7 +187,7 @@ const QuoteReview: React.FC<QuoteReviewProps> = ({ quote, setQuote, onNavigate, 
               </h2>
             </div>
             <div className="bg-[#245A4E] px-6 py-3 rounded-2xl">
-              <span className="font-bold">{quote.frequency === 'one-time' ? 'One-time' : 'Recurring Service'}</span>
+              <span className="font-bold">First clean, one-off price</span>
             </div>
           </div>
         </div>
@@ -235,15 +229,13 @@ const QuoteReview: React.FC<QuoteReviewProps> = ({ quote, setQuote, onNavigate, 
                   <span className="font-bold text-slate-900 truncate max-w-[150px]">{quote.propertyName || '—'}</span>
                 </li>
                 <li className="flex items-center justify-between p-4 bg-slate-50 rounded-2xl">
+                  <span className="text-slate-600">Package</span>
+                  <span className="font-bold text-slate-900">{tierName(quote.cleaningType)}</span>
+                </li>
+                <li className="flex items-center justify-between p-4 bg-slate-50 rounded-2xl">
                   <span className="text-slate-600">Property Size</span>
                   <span className="font-bold text-slate-900">{quote.beds} Bed, {quote.baths} Bath</span>
                 </li>
-                {quote.frequency === 'recurring' && (
-                  <li className="flex items-center justify-between p-4 bg-slate-50 rounded-2xl">
-                    <span className="text-slate-600">Service Plan</span>
-                    <span className="font-bold text-slate-900">Every turnover (£10 off applied)</span>
-                  </li>
-                )}
               </ul>
             </div>
             <div>

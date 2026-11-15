@@ -5,6 +5,7 @@ import RouteLink from '../components/RouteLink';
 import { Sparkles, Calendar, ShoppingBag, CheckCircle, Star, ArrowRight, Gift, Trophy, Armchair, Shield, MessageCircle, Plus, Minus, Clock, Camera, MapPin, Instagram, PoundSterling, House } from 'lucide-react';
 import { TypeAnimation } from 'react-type-animation';
 import { GIVEAWAY_ENDS_AT, isGiveawayOpen, formatUkDate, INSTAGRAM_URL, INSTAGRAM_DM_URL } from '../config/promos';
+import { EVERY_TURNOVER_RULE, REBOOK_RULE, ONE_OFFER_RULE } from '../config/pricing';
 import IllustrativeLabel from '../components/IllustrativeLabel';
 import { SITE_IMAGES } from '../config/images';
 import SafeImage from '../components/SafeImage';
@@ -50,19 +51,19 @@ const FAQS = [
   },
   {
     q: "What is included in a standard turnover clean?",
-    a: "Full property reset including kitchen and bathroom cleaning, surface sanitisation, bed making, waste removal and final staging. Linen change and restocking can be added or included depending on your plan."
+    a: "A Standard Turnover covers a full turnover of the kitchen, bathroom and floors, a linen change and bed making using your clean linen, emptying the bins, a damage and low-stock check, and photo confirmation after every clean. Premium Turnover adds dishwashing and a kitchen reset, inside the fridge and microwave, restocking essentials from your supplies, priority booking and a pre-check-in double inspection."
   },
   {
     q: "Do you offer discounts for regular cleans?",
-    a: "Yes. Book every turnover with us and you save £10 on each clean, get priority scheduling in busy periods, and pay no emergency call-out fees. There is no membership charge and no contract. Cancel anytime."
+    a: `Yes. ${EVERY_TURNOVER_RULE} ${REBOOK_RULE} ${ONE_OFFER_RULE} There is no contract.`
   },
   {
     q: "Do you handle emergency same-day cleans?",
-    a: "Yes. We offer emergency turnaround services subject to availability. Recurring clients get reduced or waived emergency fees."
+    a: "Yes. We offer emergency turnaround services subject to availability. Premium Turnover includes priority booking and faster response."
   },
   {
     q: "Do you bring your own supplies?",
-    a: "Yes. Our team arrives fully equipped. Essentials restocking can be added to your plan or managed under Auto Restock."
+    a: "Yes. Our team arrives fully equipped with cleaning supplies. Premium Turnover includes restocking guest essentials from your supplies, and essentials restocking is available as an add-on with Standard Turnover."
   }
 ];
 
@@ -416,7 +417,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ onNavigate }) => {
                 },
                 { 
                   title: "Linen Change & Bed Making", 
-                  desc: "Bed stripping, fresh linen fitted and beds staged. If your property has a washing machine we can wash sheets and towels on site. We don't offer an off-site laundry service.",
+                  desc: "Bed stripping, your clean linen fitted and beds made, included in both packages. If your property has a washing machine we can wash sheets and towels on site. We don't offer an off-site laundry service.",
                   icon: <Shield className="w-6 h-6" />,
                 },
                 { 
@@ -426,12 +427,12 @@ const LandingPage: React.FC<LandingPageProps> = ({ onNavigate }) => {
                 },
                 { 
                   title: "Kitchen Reset", 
-                  desc: "Full kitchen reset including surface sanitisation, bin disposal and dishwashing. Fridge & microwave deep clean available as add-ons.",
+                  desc: "Surface sanitisation and bins emptied on every clean. Dishwashing and a kitchen reset, plus inside the fridge and microwave, are included in Premium Turnover or available as add-ons with Standard Turnover.",
                   icon: <Armchair className="w-6 h-6" /> ,
                 },
                 {
                   title: "Emergency Cleans",
-                  desc: "Rapid-response cleaning support for our recurring turnover clients when plans fall apart. Subject to availability.",
+                  desc: "Rapid-response cleaning support when plans fall apart. Subject to availability.",
                   icon: <Armchair className="w-6 h-6" /> ,
                 },
                 {
@@ -494,7 +495,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ onNavigate }) => {
                     },
                     {
                       title: "2. Select Your Turnover Plan",
-                      desc: "Book a one-off clean at the standard rate. Book every turnover to save £10 per clean.",
+                      desc: "Choose Standard or Premium Turnover. Your first clean is at the one-off price, and from your second clean you save £5 per clean when you book within 30 days of your last one.",
                       icon: <ShoppingBag className="w-6 h-6" />
                     },
                     {
@@ -617,13 +618,13 @@ const LandingPage: React.FC<LandingPageProps> = ({ onNavigate }) => {
             {giveawayOpen ? (
             <div className="relative z-10 max-w-xl">
               <div className="inline-flex items-center px-4 py-2 rounded-full bg-[rgb(61,141,122)]/10 text-[rgb(45,110,95)] text-xs font-black uppercase tracking-[0.05em] mb-6">
-                <Trophy className="w-4 h-4 mr-2 text-[rgb(61,141,122)]" /> Launch Giveaway
+                <Trophy className="w-4 h-4 mr-2 text-[rgb(61,141,122)]" /> Host Giveaway
               </div>
               <h2 className="text-3xl md:text-4xl font-black mb-6 tracking-tight">
-                Win a <span className="text-[#2D6E5F]">£1 turnover clean</span>
+                Win a <span className="text-[#2D6E5F]">free turnover clean</span>
               </h2>
               <p className="text-slate-600 text-lg mb-8 font-medium leading-relaxed">
-                East London hosts can enter free to win a full Standard Turnover for £1. Closes {formatUkDate(GIVEAWAY_ENDS_AT)}.
+                Airbnb and short-let hosts in the areas we serve can enter free to win a free Standard Turnover. No purchase needed. Closes {formatUkDate(GIVEAWAY_ENDS_AT)}.
               </p>
               <RouteLink page={Page.GIVEAWAY} onNavigate={onNavigate} className="flex items-center px-8 py-4 bg-[#2D6E5F] text-white rounded-2xl font-black text-lg hover:bg-[#245A4E] transition-all shadow-lg">
                 Enter the Giveaway <ArrowRight className="w-5 h-5 ml-2" />
@@ -655,11 +656,11 @@ const LandingPage: React.FC<LandingPageProps> = ({ onNavigate }) => {
             {giveawayOpen && (
             <div className="mt-12 md:mt-0 grid grid-cols-1 gap-4 relative z-10">
               <div className="bg-white/50 backdrop-blur-md p-4 rounded-2xl border border-[rgb(172,216,206)] shadow-md">
-                <p className="text-xs font-bold text-[#2D6E5F] uppercase tracking-wider mb-1">Grand Prize</p>
-                <p className="price text-2xl text-[rgb(45,110,95)]">£1 Clean</p>
+                <p className="text-xs font-bold text-[#2D6E5F] uppercase tracking-wider mb-1">1st Prize</p>
+                <p className="price text-2xl text-[rgb(45,110,95)]">Free Clean</p>
               </div>
               <div className="bg-white/50 backdrop-blur-md p-4 rounded-2xl border border-[rgb(172,216,206)] shadow-md">
-                <p className="text-xs font-bold text-[#2D6E5F] uppercase tracking-wider mb-1">Runner-Up</p>
+                <p className="text-xs font-bold text-[#2D6E5F] uppercase tracking-wider mb-1">2nd Prize</p>
                 <p className="price text-2xl text-slate-900">£25 Credit</p>
               </div>
               <div className="bg-white/50 backdrop-blur-md p-4 rounded-2xl border border-[rgb(172,216,206)] shadow-md">

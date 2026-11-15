@@ -3,6 +3,8 @@ import { Page } from '../types';
 import { MessageSquare, X, Send, Sparkles } from 'lucide-react';
 import { useFocusTrap } from './useFocusTrap';
 import { OPEN_CHAT_EVENT } from './MobileActionBar';
+import { TIER_NAMES, tierPrice, everyTurnoverPrice, EVERY_TURNOVER_SAVING, EVERY_TURNOVER_WINDOW_DAYS, REBOOK_RULE, ONE_OFFER_RULE } from '../config/pricing';
+import { isGiveawayOpen } from '../config/promos';
 
 interface ChatBotProps {
   onNavigate: (page: Page) => void;
@@ -12,10 +14,6 @@ interface Msg {
   from: 'bot' | 'user';
   text: string;
 }
-
-const TIER_BASE = { standard: 45, premium: 79 };
-const priceFor = (tier: 'standard' | 'premium', beds: number, recurring: boolean) =>
-  TIER_BASE[tier] + 20 * (Math.max(1, beds) - 1) - (recurring ? 10 : 0);
 
 const AREAS = 'Stratford, Royal Wharf, Canary Wharf, Canning Town, Hackney Wick, Bow, Mile End and Leyton';
 
@@ -58,11 +56,8 @@ const ChatBot: React.FC<ChatBotProps> = ({ onNavigate }) => {
   const defaultChips = ['Pricing', "What's included?", 'Where do you work?', 'Get a quote'];
 
   const priceReply = (beds: number) => {
-    const s = priceFor('standard', beds, false);
-    const sr = priceFor('standard', beds, true);
-    const p = priceFor('premium', beds, false);
     bot(
-      `For a ${beds}-bed property: Standard Turnover is £${s} one-off (£${sr} if we do every turnover), and Guest-Ready Plus is £${p}. Both include photo proof after the clean. Final price is confirmed before we clean — no payment upfront on the site.`,
+      `For a ${beds}-bed property: ${TIER_NAMES.standard} is £${tierPrice('standard', beds)} and ${TIER_NAMES.premium} is £${tierPrice('premium', beds)} for your first clean. From your second clean you save £${EVERY_TURNOVER_SAVING} per clean (£${everyTurnoverPrice('standard', beds)} and £${everyTurnoverPrice('premium', beds)}), as long as each clean is booked within ${EVERY_TURNOVER_WINDOW_DAYS} days of your last one at the same property. Both include photo proof after the clean. Final price is confirmed before we clean — no payment upfront on the site.`,
       ['Get a quote', "What's included?", 'Talk to a human']
     );
   };
@@ -90,7 +85,7 @@ const ChatBot: React.FC<ChatBotProps> = ({ onNavigate }) => {
     }
     if (/(includ|what.*(do|does)|service|clean.*what|package)/.test(q)) {
       bot(
-        'Every turnover includes a full guest-ready reset: kitchen, bathroom and floors, bed staging, a damage and low-stock check, and photos sent to your WhatsApp when we finish. Guest-Ready Plus adds linen change, dishwashing and a pre-check-in double inspection.',
+        `${TIER_NAMES.standard} covers the kitchen, bathroom and floors, a linen change and bed making with your clean linen, emptying the bins, a damage and low-stock check, and photos sent to your WhatsApp when we finish. ${TIER_NAMES.premium} adds dishwashing and a kitchen reset, inside the fridge and microwave, restocking essentials from your supplies, priority booking and a pre-check-in double inspection.`,
         ['Pricing', 'Photo proof?', 'Get a quote']
       );
       return;
@@ -111,14 +106,14 @@ const ChatBot: React.FC<ChatBotProps> = ({ onNavigate }) => {
     }
     if (/(linen|laundry|bedding|sheets|towels)/.test(q)) {
       bot(
-        'Yes — linen change and bed making is included in Guest-Ready Plus, or from £15 per bed as an add-on to any clean.',
+        `Yes — a linen change and bed making is included in both ${TIER_NAMES.standard} and ${TIER_NAMES.premium}, using your clean linen.`,
         ['Pricing', 'Get a quote']
       );
       return;
     }
     if (/(emergency|same.?day|urgent|asap|today|tomorrow)/.test(q)) {
       bot(
-        'We handle emergency and same-day cleans subject to availability, and recurring clients get priority. Fastest way is WhatsApp — tap below and we normally reply within minutes.',
+        `We handle emergency and same-day cleans subject to availability, and ${TIER_NAMES.premium} includes priority booking. Fastest way is WhatsApp — tap below and we normally reply within minutes.`,
         ['Talk to a human', 'Get a quote']
       );
       return;
@@ -133,8 +128,19 @@ const ChatBot: React.FC<ChatBotProps> = ({ onNavigate }) => {
       setTimeout(() => window.open('https://wa.me/447925123219', '_blank', 'noopener'), 600);
       return;
     }
-    if (/(giveaway|win|£1|prize)/.test(q)) {
-      bot("We're running a launch giveaway — win a full turnover clean for £1! Taking you to the entry page.", defaultChips);
+    if (/(discount|offer|deal|saving|save|credit|rebook|loyal)/.test(q)) {
+      bot(
+        `From your second clean you save £${EVERY_TURNOVER_SAVING} per clean, as long as each clean is booked within ${EVERY_TURNOVER_WINDOW_DAYS} days of your last one at the same property. ${REBOOK_RULE} ${ONE_OFFER_RULE}`,
+        ['Pricing', 'Get a quote']
+      );
+      return;
+    }
+    if (/(giveaway|win|prize|competition)/.test(q)) {
+      if (isGiveawayOpen()) {
+        bot("Our giveaway is open and free to enter: win a free Standard Turnover, or £25 or £15 cleaning credit. Taking you to the entry page.", defaultChips);
+      } else {
+        bot("Our giveaway isn't open right now. Taking you to the giveaway page for the dates and terms.", defaultChips);
+      }
       setTimeout(() => { setOpen(false); onNavigate(Page.GIVEAWAY); }, 900);
       return;
     }

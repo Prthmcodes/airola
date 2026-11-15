@@ -19,7 +19,6 @@ const RATE_LIMIT = { max: 5, windowMs: 10 * 60 * 1000 };
 
 const ADD_ON_NAMES: Record<string, string> = {
   essentials: 'Essentials Restocking',
-  linen: 'Linen Change',
   dishwashing: 'Dishwashing',
   appliance: 'Fridge & Microwave',
 };

@@ -1,9 +1,13 @@
-
-import React, { useState } from 'react';
+import React from 'react';
 import { Page, Package } from '../types';
 import RouteLink from '../components/RouteLink';
 import JsonLd from '../components/JsonLd';
 import { SITE_URL } from '../config/routes';
+import {
+  TIER_BASE, TIER_NAMES, TIER_FEATURES, EXTRA_BEDROOM, STANDARD_ADD_ONS, STANDARD_ADD_ONS_TOTAL, PREMIUM_DIFFERENCE,
+  EVERY_TURNOVER_SAVING, REBOOK_CREDIT, EVERY_TURNOVER_RULE, REBOOK_RULE, REBOOK_NOT_COMBINED, ONE_OFFER_RULE,
+  tierPrice, everyTurnoverPrice,
+} from '../config/pricing';
 import { Check, Info, ArrowRight } from 'lucide-react';
 
 interface PricingPageProps {
@@ -31,58 +35,43 @@ const PRICING_SCHEMA = {
     '@type': 'OfferCatalog',
     name: 'Turnover cleaning packages',
     itemListElement: [
-      offer('Standard Turnover', 45, 'One-off clean, price for a 1-bedroom property. Add £20 per extra bedroom.'),
-      offer('Guest-Ready Plus', 79, 'One-off clean, price for a 1-bedroom property. Add £20 per extra bedroom.'),
-      offer('Standard Turnover, every-turnover rate', 35, 'Per turnover for a 1-bedroom property when you book every turnover.'),
-      offer('Guest-Ready Plus, every-turnover rate', 69, 'Per turnover for a 1-bedroom property when you book every turnover.'),
-      offer('Extra bedroom', 20, 'Added per extra bedroom, on every package.'),
+      offer(TIER_NAMES.standard, TIER_BASE.standard, `One-off clean, price for a 1-bedroom property. Add £${EXTRA_BEDROOM} per extra bedroom.`),
+      offer(TIER_NAMES.premium, TIER_BASE.premium, `One-off clean, price for a 1-bedroom property. Add £${EXTRA_BEDROOM} per extra bedroom.`),
+      offer(`${TIER_NAMES.standard}, every-turnover rate`, everyTurnoverPrice('standard'), `Per clean for a 1-bedroom property from the second clean. ${EVERY_TURNOVER_RULE}`),
+      offer(`${TIER_NAMES.premium}, every-turnover rate`, everyTurnoverPrice('premium'), `Per clean for a 1-bedroom property from the second clean. ${EVERY_TURNOVER_RULE}`),
+      offer('Extra bedroom', EXTRA_BEDROOM, 'Added per extra bedroom, on every package.'),
     ],
   },
 };
 
+// What Premium's extras cost as Standard add-ons. Shown only when Premium is the better deal.
+// The total comes from STANDARD_ADD_ONS in config/pricing.ts.
+const PREMIUM_VALUE_LINE = STANDARD_ADD_ONS_TOTAL > PREMIUM_DIFFERENCE
+  ? `As add-ons to Standard, dishwashing, fridge and microwave interior, and essentials restocking cost £${STANDARD_ADD_ONS_TOTAL} in total. Premium Turnover includes all ${STANDARD_ADD_ONS.length} for £${PREMIUM_DIFFERENCE} more.`
+  : '';
+
 const PricingPage: React.FC<PricingPageProps> = ({ onNavigate }) => {
-  // Opens on one-off prices so the first prices shown match "From £45".
-  const [isMonthly, setIsMonthly] = useState(false);
-
-  // Shown under each price while the one-off rate is selected.
-  const everyTurnoverRate: Record<string, string> = {
-    'Standard Turnover': '£35 per turnover when you book every turnover',
-    'Guest-Ready Plus': '£69 per turnover when you book every turnover',
-  };
-
-  const packages: Package[] = [
+  const packages: (Package & { tier: 'standard' | 'premium' })[] = [
     {
-      name: "Standard Turnover",
-      recommended: true,
-      badge: "Most Popular",
-      price: isMonthly ? "£35" : "£45",
-      oldPrice: isMonthly ? "£45" : "",
+      tier: 'standard',
+      name: TIER_NAMES.standard,
+      price: `£${tierPrice('standard')}`,
       period: "/ clean",
       description: "The full guest-ready reset, with proof.",
-      features: [
-        "Full property turnover: kitchen, bathroom & floors",
-        "Photo confirmation after every clean",
-        "Damage & low-stock check",
-        "Bed staging",
-        "Priority booking & faster response",
-        "No contract, no emergency fees"
-      ],
-      buttonText: "Book This Clean",
+      features: TIER_FEATURES.standard,
+      buttonText: "Book Standard Turnover",
     },
     {
-      name: "Guest-Ready Plus",
-      price: isMonthly ? "£69" : "£79",
-      oldPrice: isMonthly ? "£79" : "",
+      tier: 'premium',
+      name: TIER_NAMES.premium,
+      recommended: true,
+      badge: "Recommended",
+      price: `£${tierPrice('premium')}`,
       period: "/ clean",
       description: "For a truly hands-off experience.",
-      features: [
-        "Everything in Standard Turnover",
-        "Linen change & bed making",
-        "Dishwashing & kitchen reset",
-        "Inside fridge and cupboards",
-        "Pre-check-in double inspection"
-      ],
+      features: TIER_FEATURES.premium,
       buttonText: "Get Premium Turnover",
+      smallText: PREMIUM_VALUE_LINE,
     }
   ];
 
@@ -92,26 +81,8 @@ const PricingPage: React.FC<PricingPageProps> = ({ onNavigate }) => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h1 className="text-4xl md:text-5xl font-extrabold text-slate-900 mb-6 tracking-tight">Simple, Honest Pricing</h1>
-          <p className="text-xl text-slate-600 max-w-2xl mx-auto">Prices below are for a 1-bedroom property. Add £20 per extra bedroom. Your exact price is confirmed before we clean.</p>
+          <p className="text-xl text-slate-600 max-w-2xl mx-auto">Prices below are for a 1-bedroom property. Add £{EXTRA_BEDROOM} per extra bedroom. Your exact price is confirmed before we clean.</p>
         </div>
-
-        <div className="grid grid-cols-[1fr_auto_1fr] items-center gap-3 mb-8 sm:flex sm:justify-center sm:gap-0 sm:space-x-4">
-          <span className={`font-medium text-right sm:text-left ${!isMonthly ? 'text-slate-900' : 'text-slate-600'}`}>One-Off Clean</span>
-          <label htmlFor="pricing-toggle" className="relative inline-flex items-center cursor-pointer before:absolute before:-inset-1.5 before:content-['']">
-            <input type="checkbox" id="pricing-toggle" aria-label="Show prices for booking every turnover (save £10 per clean)" className="sr-only peer" checked={isMonthly} onChange={() => setIsMonthly(!isMonthly)} />
-            <div className="w-14 h-8 bg-slate-200 rounded-full peer peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-[#2D6E5F] peer-focus-visible:outline-solid peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-1 after:left-[4px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all peer-checked:bg-[rgb(61,141,122)] hover:shadow-[0_0_10px_rgba(61,141,122,0.3)]"></div>
-          </label>
-          <span className={`font-medium ${isMonthly ? 'text-slate-900' : 'text-slate-600'}`}>Every Turnover (Save £10 per clean)</span>
-        </div>
-
-        {isMonthly && (
-          <div className="text-center mb-12">
-            <div className="inline-block bg-green-100 text-green-800 rounded-full px-4 py-2 text-sm font-bold mb-2">
-              Book every turnover with us — £10 off each clean
-            </div>
-            <p className="text-slate-600">No membership fee. No contract. Cancel anytime.</p>
-          </div>
-        )}
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12 items-stretch max-w-4xl mx-auto">
           {packages.map((pkg, i) => (
@@ -125,25 +96,15 @@ const PricingPage: React.FC<PricingPageProps> = ({ onNavigate }) => {
                   {pkg.badge}
                 </div>
               )}
-              {isMonthly && (
-                <div className="absolute top-8 right-8 bg-green-700 text-white px-3 py-1 rounded-full text-xs font-bold">
-                  Save £10
-                </div>
-              )}
               
               <h2 className="text-2xl font-bold text-slate-900 mb-2 group-hover:text-[#2D6E5F] transition-colors">{pkg.name}</h2>
               
               <div className="flex flex-col mb-6">
                 <div className="flex items-baseline group-hover:scale-105 transition-transform origin-left">
                   <span className="price text-4xl text-slate-900">{pkg.price}</span>
-                  {pkg.oldPrice && (
-                    <span className="price text-2xl text-slate-500 line-through ml-2">{pkg.oldPrice}</span>
-                  )}
                   <span className="text-slate-500 ml-2 font-medium">{pkg.period}</span>
                 </div>
-                {!isMonthly && everyTurnoverRate[pkg.name] && (
-                  <p className="text-slate-600 text-sm mt-2 font-medium">{everyTurnoverRate[pkg.name]}</p>
-                )}
+                <p className="text-slate-600 text-sm mt-2 font-medium">£{everyTurnoverPrice(pkg.tier)} per clean from your second clean, at the every-turnover rate</p>
                 {pkg.description && (
                   <p className="text-slate-500 text-sm mt-2 font-medium">{pkg.description}</p>
                 )}
@@ -159,6 +120,10 @@ const PricingPage: React.FC<PricingPageProps> = ({ onNavigate }) => {
                   </li>
                 ))}
               </ul>
+
+              {pkg.smallText && (
+                <p className="text-sm text-[rgb(45,110,95)] bg-[rgb(235,247,244)] rounded-2xl px-4 py-3 mb-6 font-medium leading-snug">{pkg.smallText}</p>
+              )}
 
               <div className="mt-auto">
                 <RouteLink page={Page.QUOTE} onNavigate={onNavigate} 
@@ -191,46 +156,38 @@ const PricingPage: React.FC<PricingPageProps> = ({ onNavigate }) => {
         </div>
 
         <p className="text-center mb-16 text-slate-600 text-sm">
-          Prices are for a 1-bedroom property. Add £20 per additional bedroom, on every package. A 2-bed Standard Turnover is £65.
+          Prices are for a 1-bedroom property. Add £{EXTRA_BEDROOM} per additional bedroom, on every package. A 2-bed Standard Turnover is £{tierPrice('standard', 2)}.
         </p>
 
-        {/* Win Your Money Back Section */}
+        {/* Discounts: exactly two, and only one applies per clean */}
         <div className="mb-32">
           <div className="max-w-4xl mx-auto bg-white rounded-[3rem] p-8 md:p-12 border border-slate-100 shadow-xl relative overflow-hidden group">
             <div className="absolute top-0 right-0 w-32 h-32 bg-[rgb(235,247,244)] rounded-full -mr-16 -mt-16 transition-transform duration-700 group-hover:scale-150"></div>
-            
+
             <div className="relative z-10">
               <div className="flex items-center space-x-3 mb-6">
                 <div className="bg-[rgb(61,141,122)] p-2 rounded-xl">
                   <Info className="w-6 h-6 text-white" />
                 </div>
-                <h2 className="text-3xl font-bold text-slate-900">Host Loyalty Reward</h2>
+                <h2 className="text-3xl font-bold text-slate-900">Savings for Returning Hosts</h2>
               </div>
-              
+
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div className="flex flex-col justify-center p-8 bg-slate-50 rounded-[2rem] border border-slate-100 transition-all hover:shadow-md hover:-translate-y-1 h-full">
-                  <div className="flex items-start space-x-4">
-                    <div className="price bg-white p-2 rounded-lg shadow-sm text-[#2D6E5F]">£25</div>
-                    <div>
-                      <div className="text-lg font-black mb-2">Loyalty Credit</div>
-                      <p className="text-slate-600 text-sm">Rebook within 10 days to get £25 Cleaning credit</p>
-                    </div>
-                  </div>
+                <div className="flex flex-col p-6 sm:p-8 bg-slate-50 rounded-[2rem] border border-slate-100 transition-all hover:shadow-md hover:-translate-y-1 h-full">
+                  <div className="price self-start bg-white px-3 py-2 rounded-lg shadow-sm text-[#2D6E5F] mb-4">£{EVERY_TURNOVER_SAVING} off per clean</div>
+                  <h3 className="text-lg font-black mb-2">Every-turnover rate</h3>
+                  <p className="text-slate-600 text-sm leading-relaxed">{EVERY_TURNOVER_RULE}</p>
                 </div>
 
-                <div className="bg-[#2D6E5F] rounded-[2rem] p-8 text-white flex flex-col justify-center items-center text-center relative overflow-hidden">
-                  <div className="absolute top-0 left-0 w-full h-full bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10"></div>
-                  <div className="relative z-10">
-                    <div className="text-lg font-black mb-2">Rewarding Consistent Hosts</div>
-                    <p className="text-[rgb(235,247,244)] text-sm leading-relaxed">
-                      We value long-term partnerships. That’s why returning hosts save more — automatically.
-                    </p>
-                  </div>
+                <div className="flex flex-col p-6 sm:p-8 bg-slate-50 rounded-[2rem] border border-slate-100 transition-all hover:shadow-md hover:-translate-y-1 h-full">
+                  <div className="price self-start bg-white px-3 py-2 rounded-lg shadow-sm text-[#2D6E5F] mb-4">£{REBOOK_CREDIT} off your second clean</div>
+                  <h3 className="text-lg font-black mb-2">First rebook credit</h3>
+                  <p className="text-slate-600 text-sm leading-relaxed">{REBOOK_RULE} {REBOOK_NOT_COMBINED}</p>
                 </div>
               </div>
             </div>
           </div>
-          <p className="text-center text-sm lg:text-xs text-slate-600 mt-4">Credits apply to future bookings only. Not redeemable for cash.</p>
+          <p className="text-center text-sm text-slate-600 mt-4">{ONE_OFFER_RULE}</p>
         </div>
 
         {/* New Affordable Services Section */}

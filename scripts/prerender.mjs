@@ -17,7 +17,7 @@ import { join, extname, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { spawnSync } from 'node:child_process';
 
-// Public, indexable routes only. Never add /dashboard, /admin, /login, /add-property, /quote/review, /offer or /thanks10.
+// Public, indexable routes only. Never add /dashboard, /admin, /login, /add-property or /quote/review.
 const ROUTES = [
   '/', '/pricing', '/quote', '/about-us', '/contact', '/giveaway', '/legal', '/testimonials',
   '/blog',
@@ -169,7 +169,7 @@ const main = async () => {
               link.setAttribute('fetchpriority', 'high');
               document.head.appendChild(link);
             }
-            // dist/index.html is also the fallback for every non-prerendered route (/login, /offer, unknown URLs).
+            // dist/index.html is also the fallback for every non-prerendered route (/login, unknown URLs).
             // Clear the home content there before first paint, so those routes never flash the home page.
             const guard = document.createElement('script');
             guard.textContent = "if(location.pathname!=='/'){var r=document.getElementById('root');if(r)r.innerHTML=''}";

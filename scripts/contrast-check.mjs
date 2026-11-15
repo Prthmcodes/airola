@@ -10,7 +10,7 @@ const PAIRS = [
   // Buttons and badges
   { fg: '#FFFFFF', bg: '#2D6E5F', kind: 'text', use: 'White text on action green (buttons, badges)' },
   { fg: '#FFFFFF', bg: '#245A4E', kind: 'text', use: 'White text on action green hover' },
-  { fg: '#FFFFFF', bg: '#15803D', kind: 'text', use: 'White text on green-700 ("Save £10" badge)' },
+  { fg: '#FFFFFF', bg: '#15803D', kind: 'text', use: 'White text on green-700' },
   { fg: '#FFFFFF', bg: '#3D8D7A', kind: 'ui', use: 'White icon on primary green (decorative tiles)' },
   // Footer
   { fg: '#CCECE5', bg: '#2D6E5F', kind: 'text', use: 'Footer body text' },

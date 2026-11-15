@@ -6,17 +6,30 @@ import { appendToSheet } from '../sheets';
 import { Trophy, Gift, Star, ChevronLeft, ChevronDown } from 'lucide-react';
 import {
   GIVEAWAY_STARTS_AT, GIVEAWAY_ENDS_AT, GIVEAWAY_PROMOTER, GIVEAWAY_DRAW_METHOD, GIVEAWAY_PRIZE_VALID_DAYS,
-  INSTAGRAM_HANDLE, isGiveawayOpen, formatUkDate,
+  GIVEAWAY_CAMPAIGN, INSTAGRAM_URL, INSTAGRAM_HANDLE, isGiveawayOpen, formatUkDate,
 } from '../config/promos';
+import { AREA_PAGES } from '../config/areas';
+import { TIER_NAMES, tierPrice } from '../config/pricing';
 import { whatsappWithText } from '../components/ContactOptions';
 
 const SEND_FAILED = "We couldn't send that. Please try again, or message us on WhatsApp";
+const ALREADY_ENTERED = "You've already entered this giveaway with that email address. Only one entry per person is allowed.";
 const NAME_MISSING = 'Please enter your name.';
-const EMAIL_INVALID ='Please enter a valid email address.';
+const EMAIL_INVALID = 'Please enter a valid email address.';
+const AREA_MISSING = 'Please choose the area your property is in.';
+const TERMS_MISSING = 'Please confirm you have read the terms and privacy notice and are 18 or over.';
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
 const OPENS = formatUkDate(GIVEAWAY_STARTS_AT);
 const CLOSES = formatUkDate(GIVEAWAY_ENDS_AT);
+
+// Eligible areas: the areas Airola serves, from config/areas.ts.
+const AREAS = Object.values(AREA_PAGES).map(a => a.name);
+const AREAS_TEXT = `${AREAS.slice(0, -1).join(', ')} and ${AREAS[AREAS.length - 1]}`;
+
+// 1st prize: a free Standard Turnover for up to 2 bedrooms.
+const FIRST_PRIZE_1_BED = tierPrice('standard', 1);
+const FIRST_PRIZE_2_BED = tierPrice('standard', 2);
 
 type Phase = 'upcoming' | 'open' | 'closed';
 const phaseAt = (now: Date): Phase => (now < GIVEAWAY_STARTS_AT ? 'upcoming' : isGiveawayOpen(now) ? 'open' : 'closed');
@@ -29,8 +42,12 @@ export const GiveawayPage: React.FC<GiveawayPageProps> = ({ onNavigate }) => {
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
   const [email, setEmail] = useState('');
+  const [area, setArea] = useState('');
   const [experience, setExperience] = useState('');
-  const [exclusiveOffers, setExclusiveOffers] = useState(false);
+  // None pre-ticked.
+  const [termsAccepted, setTermsAccepted] = useState(false);
+  const [wantsOffers, setWantsOffers] = useState(false);
+  const [storyPublishOk, setStoryPublishOk] = useState(false);
   const [phase, setPhase] = useState<Phase>(() => phaseAt(new Date()));
   const [timeLeft, setTimeLeft] = useState({ d: 0, h: 0, m: 0, s: 0 });
   const [error, setError] = useState('');
@@ -63,7 +80,7 @@ export const GiveawayPage: React.FC<GiveawayPageProps> = ({ onNavigate }) => {
 
     const current = phaseAt(new Date());
     if (current !== 'open') {
-      setError(current === 'upcoming' ? `Entries open ${OPENS}.` : 'Entries have closed. Follow us for the next giveaway!');
+      setError(current === 'upcoming' ? `Entries open ${OPENS}.` : 'Entries have closed.');
       return;
     }
     if (!name.trim()) {
@@ -74,16 +91,30 @@ export const GiveawayPage: React.FC<GiveawayPageProps> = ({ onNavigate }) => {
       setError(EMAIL_INVALID);
       return;
     }
+    if (!AREAS.includes(area)) {
+      setError(AREA_MISSING);
+      return;
+    }
+    if (!termsAccepted) {
+      setError(TERMS_MISSING);
+      return;
+    }
 
     setIsSubmitting(true);
     try {
-      const result = await db.submitGiveaway({ name, mobile: phone, email, experience, wantsOffers: exclusiveOffers });
+      const result = await db.submitGiveaway({
+        name: name.trim(), mobile: phone.trim(), email: email.trim(), area, experience,
+        termsAccepted, wantsOffers, storyPublishOk, campaign: GIVEAWAY_CAMPAIGN,
+      });
       if (!result.success) {
-        setError(SEND_FAILED);
-        setSendFailed(true);
+        setError(result.duplicate ? ALREADY_ENTERED : SEND_FAILED);
+        setSendFailed(!result.duplicate);
         return;
       }
-      appendToSheet('Sheet2', [new Date().toISOString(), name, phone, email, experience, exclusiveOffers ? 'Yes' : 'No']);
+      appendToSheet('Sheet2', [
+        new Date().toISOString(), name, phone, email, experience, wantsOffers ? 'Yes' : 'No',
+        area, storyPublishOk ? 'Yes' : 'No', GIVEAWAY_CAMPAIGN,
+      ]);
       onNavigate(Page.BONUS);
     } catch (e) {
       // Network or unexpected failure: keep the form filled and offer WhatsApp instead.
@@ -98,11 +129,13 @@ export const GiveawayPage: React.FC<GiveawayPageProps> = ({ onNavigate }) => {
   const inputClass = "w-full p-4 bg-slate-50 border border-slate-200 rounded-2xl focus:outline-none focus:ring-4 focus:ring-[rgb(106,176,160)]/10 focus:border-[rgb(106,176,160)] transition-all font-medium text-slate-900 placeholder:text-slate-500";
   const labelClass = "block text-xs font-black text-slate-500 mb-3 uppercase tracking-[0.05em]";
   const linkClass = "font-bold text-[#2D6E5F] underline underline-offset-2 hover:text-[#245A4E]";
+  const checkClass = "mr-3 mt-0.5 w-5 h-5 shrink-0 accent-[#2D6E5F]";
+  const describedBy = (msg: string) => (error === msg ? 'giveaway-error' : undefined);
 
   const prizes = [
-    { icon: <Trophy className="w-7 h-7" />, label: 'Grand Prize', title: '£1 Full Turnover', sub: 'Standard Turnover for a 1-2 bedroom property, worth up to £65. Winner pays £1.' },
-    { icon: <Gift className="w-7 h-7" />, label: 'Runner-Up', title: '£25 Credit', sub: 'Towards any clean' },
-    { icon: <Star className="w-7 h-7" />, label: '3rd Prize', title: '£15 Credit', sub: 'Towards any clean' },
+    { icon: <Trophy className="w-7 h-7" />, label: '1st Prize', title: 'Free Standard Turnover', sub: `For a property of up to 2 bedrooms, worth £${FIRST_PRIZE_1_BED} for a 1-bed or £${FIRST_PRIZE_2_BED} for a 2-bed` },
+    { icon: <Gift className="w-7 h-7" />, label: '2nd Prize', title: '£25 Credit', sub: 'Taken off the price of one booked clean' },
+    { icon: <Star className="w-7 h-7" />, label: '3rd Prize', title: '£15 Credit', sub: 'Taken off the price of one booked clean' },
   ];
 
   return (
@@ -114,19 +147,19 @@ export const GiveawayPage: React.FC<GiveawayPageProps> = ({ onNavigate }) => {
 
         <div className="text-center mb-12">
           <div className="inline-flex items-center px-4 py-2 rounded-full bg-[rgb(61,141,122)]/10 text-[rgb(45,110,95)] text-xs font-black uppercase tracking-[0.05em] mb-6">
-            <Trophy className="w-4 h-4 mr-2 text-[rgb(61,141,122)]" /> Launch Giveaway
+            <Trophy className="w-4 h-4 mr-2 text-[rgb(61,141,122)]" /> Host Giveaway
           </div>
           <h1 className="text-4xl md:text-6xl font-black text-slate-900 mb-6 tracking-tight">
-            Win a <span className="text-[#2D6E5F]">£1</span> Guest-Ready Turnover
+            Win a <span className="text-[#2D6E5F]">Free</span> Turnover Clean
           </h1>
           <p className="text-xl text-slate-600 max-w-2xl mx-auto leading-relaxed">
-            Exclusively for Airbnb and short-let hosts in East London. Tell us about your worst turnover experience, or just enter your details, and you could win. Free to enter.
+            For Airbnb and short-let hosts in {AREAS_TEXT}. Three winners, chosen by random draw. Free to enter: no purchase or payment at any stage.
           </p>
         </div>
 
         {/* Countdown */}
         <p className="text-center font-bold text-slate-700 mb-4">
-          {phase === 'upcoming' ? `Opens ${OPENS}` : `Closes ${CLOSES}`}
+          {phase === 'upcoming' ? `Opens ${OPENS}` : phase === 'open' ? `Closes ${CLOSES}` : `Closed ${CLOSES}`}
           <span className="font-medium text-slate-600"> (UK time)</span>
         </p>
         <div className="flex justify-center gap-3 sm:gap-4 mb-14">
@@ -158,23 +191,25 @@ export const GiveawayPage: React.FC<GiveawayPageProps> = ({ onNavigate }) => {
               </div>
               <p className={`text-xs font-black uppercase tracking-[0.05em] mb-2 ${i === 0 ? 'text-[rgb(204,236,229)]' : 'text-[#2D6E5F]'}`}>{p.label}</p>
               <h2 className="text-2xl font-black mb-1">{p.title}</h2>
-              <p className={`text-sm ${i === 0 ? 'text-[rgb(204,236,229)]' : 'text-slate-500'}`}>{p.sub}</p>
+              <p className={`text-sm ${i === 0 ? 'text-[rgb(204,236,229)]' : 'text-slate-600'}`}>{p.sub}</p>
             </div>
           ))}
         </div>
 
-        {/* Entry form */}
-        <form onSubmit={handleSubmit} noValidate className="bg-white p-8 md:p-12 rounded-[2.5rem] shadow-2xl border border-slate-100 max-w-2xl mx-auto">
-          <h2 className="text-2xl font-black text-slate-900 mb-8">Enter in 30 seconds</h2>
-          <fieldset disabled={phase !== 'open'} className="space-y-6 min-w-0">
+        {/* Entry form (open), or what happens next (closed / not yet open) */}
+        {phase === 'open' ? (
+        <form id="enter" onSubmit={handleSubmit} noValidate className="bg-white p-6 sm:p-8 md:p-12 rounded-[2.5rem] shadow-2xl border border-slate-100 max-w-2xl mx-auto">
+          <h2 className="text-2xl font-black text-slate-900 mb-2">Enter for free</h2>
+          <p className="text-sm text-slate-600 mb-8">One entry per person. Fields marked * are required.</p>
+          <fieldset disabled={isSubmitting} className="space-y-6 min-w-0">
             <div>
               <label htmlFor="name" className={labelClass}>Name <span aria-hidden="true">*</span></label>
-              <input type="text" id="name" autoComplete="name" aria-invalid={error === NAME_MISSING} aria-describedby={error === NAME_MISSING ? 'giveaway-error' : undefined} value={name} onChange={(e) => setName(e.target.value)} className={inputClass} required placeholder="Your name" />
+              <input type="text" id="name" autoComplete="name" required aria-invalid={error === NAME_MISSING} aria-describedby={describedBy(NAME_MISSING)} value={name} onChange={(e) => setName(e.target.value)} className={inputClass} placeholder="Your name" />
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               <div>
                 <label htmlFor="email" className={labelClass}>Email <span aria-hidden="true">*</span></label>
-                <input type="email" id="email" autoComplete="email" required aria-invalid={error === EMAIL_INVALID} aria-describedby={error === EMAIL_INVALID ? 'giveaway-error' : undefined} value={email} onChange={(e) => setEmail(e.target.value)} className={inputClass} placeholder="Your email address" />
+                <input type="email" id="email" autoComplete="email" required aria-invalid={error === EMAIL_INVALID || error === ALREADY_ENTERED} aria-describedby={describedBy(EMAIL_INVALID) || describedBy(ALREADY_ENTERED)} value={email} onChange={(e) => setEmail(e.target.value)} className={inputClass} placeholder="Your email address" />
               </div>
               <div>
                 <label htmlFor="phone" className={labelClass}>Phone (optional)</label>
@@ -182,13 +217,35 @@ export const GiveawayPage: React.FC<GiveawayPageProps> = ({ onNavigate }) => {
               </div>
             </div>
             <div>
-              <label htmlFor="experience" className={labelClass}>Your worst turnover story (optional)</label>
-              <textarea id="experience" value={experience} onChange={(e) => setExperience(e.target.value)} className={`${inputClass} min-h-[110px]`} placeholder="Cleaner cancelled an hour before check-in? Tell us..." rows={4} />
+              <label htmlFor="area" className={labelClass}>Area of your property <span aria-hidden="true">*</span></label>
+              <select id="area" required aria-invalid={error === AREA_MISSING} aria-describedby={describedBy(AREA_MISSING)} value={area} onChange={(e) => setArea(e.target.value)} className={inputClass}>
+                <option value="">Choose an area</option>
+                {AREAS.map(a => <option key={a} value={a}>{a}</option>)}
+              </select>
             </div>
-            <label className="flex items-center min-h-[44px] text-sm font-medium text-slate-600 cursor-pointer">
-              <input type="checkbox" checked={exclusiveOffers} onChange={(e) => setExclusiveOffers(e.target.checked)} className="mr-3 w-5 h-5 shrink-0 accent-[#2D6E5F]" />
-              Send me exclusive host offers. You can unsubscribe at any time.
-            </label>
+            <div>
+              <label htmlFor="experience" className={labelClass}>Your worst turnover story (optional)</label>
+              <textarea id="experience" aria-describedby="experience-note" value={experience} onChange={(e) => setExperience(e.target.value)} className={`${inputClass} min-h-[110px]`} placeholder="Cleaner cancelled an hour before check-in? Tell us..." rows={4} />
+              <p id="experience-note" className="mt-2 text-sm text-slate-600">Please do not name any person, company, address or listing.</p>
+            </div>
+
+            <div className="space-y-3">
+              <label className="flex items-start min-h-[44px] text-sm font-medium text-slate-700 cursor-pointer">
+                <input type="checkbox" required aria-invalid={error === TERMS_MISSING} aria-describedby={describedBy(TERMS_MISSING)} checked={termsAccepted} onChange={(e) => setTermsAccepted(e.target.checked)} className={checkClass} />
+                <span>
+                  I have read the <a href="#giveaway-terms" className={linkClass}>terms</a> and{' '}
+                  <RouteLink page={Page.LEGAL} onNavigate={onNavigate} className={linkClass}>privacy notice</RouteLink> and I am 18 or over. <span aria-hidden="true">*</span>
+                </span>
+              </label>
+              <label className="flex items-start min-h-[44px] text-sm font-medium text-slate-700 cursor-pointer">
+                <input type="checkbox" checked={wantsOffers} onChange={(e) => setWantsOffers(e.target.checked)} className={checkClass} />
+                <span>Email me host tips and offers from Airola. I can unsubscribe at any time. (optional)</span>
+              </label>
+              <label className="flex items-start min-h-[44px] text-sm font-medium text-slate-700 cursor-pointer">
+                <input type="checkbox" checked={storyPublishOk} onChange={(e) => setStoryPublishOk(e.target.checked)} className={checkClass} />
+                <span>Airola may publish an anonymised version of my story. (optional)</span>
+              </label>
+            </div>
 
             {error && (
               <div id="giveaway-error" role="alert" className="p-4 bg-red-50 border border-red-100 rounded-2xl text-red-700 text-sm font-bold">
@@ -206,35 +263,62 @@ export const GiveawayPage: React.FC<GiveawayPageProps> = ({ onNavigate }) => {
               </div>
             )}
 
-            <button type="submit" disabled={isSubmitting} className={`w-full py-5 bg-[#2D6E5F] text-white rounded-2xl font-black text-lg hover:bg-[#245A4E] transition-all shadow-xl disabled:opacity-60 disabled:cursor-not-allowed`}>
-              {phase === 'closed' ? 'Entries Closed' : phase === 'upcoming' ? 'Opening soon' : isSubmitting ? 'Submitting…' : 'Enter the Giveaway'}
+            <button type="submit" className="w-full py-5 bg-[#2D6E5F] text-white rounded-2xl font-black text-lg hover:bg-[#245A4E] transition-all shadow-xl disabled:opacity-60 disabled:cursor-not-allowed">
+              {isSubmitting ? 'Submitting…' : 'Enter the Giveaway'}
             </button>
           </fieldset>
-          <p className="text-sm text-slate-600 text-center mt-6">
-            One entry per person. By entering you agree to the terms below and our{' '}
-            <RouteLink page={Page.LEGAL} onNavigate={onNavigate} className={linkClass}>Privacy Policy</RouteLink>.
-          </p>
         </form>
+        ) : (
+        <div className="bg-white p-6 sm:p-8 md:p-12 rounded-[2.5rem] shadow-2xl border border-slate-100 max-w-2xl mx-auto text-center">
+          {phase === 'closed' ? (
+            <>
+              <h2 className="text-2xl font-black text-slate-900 mb-4">This giveaway has closed</h2>
+              <p className="text-slate-700 leading-relaxed mb-6">
+                Entries closed {CLOSES} (UK time). The draw takes place within 7 days of closing, and winners are contacted by email or phone within 3 days of the draw. Follow @{INSTAGRAM_HANDLE} to hear about the next one.
+              </p>
+            </>
+          ) : (
+            <>
+              <h2 className="text-2xl font-black text-slate-900 mb-4">Entries open soon</h2>
+              <p className="text-slate-700 leading-relaxed mb-6">
+                The entry form opens {OPENS} (UK time). Read the terms below in the meantime.
+              </p>
+            </>
+          )}
+          <a href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center min-h-[44px] px-6 py-3 bg-[#2D6E5F] text-white rounded-2xl font-bold hover:bg-[#245A4E] transition-colors">
+            Follow @{INSTAGRAM_HANDLE}<span className="sr-only"> (opens in a new tab)</span>
+          </a>
+        </div>
+        )}
 
         {/* Terms */}
-        <details open className="group bg-white rounded-[2rem] border border-slate-100 shadow-md max-w-2xl mx-auto mt-8">
+        <details id="giveaway-terms" open className="group bg-white rounded-[2rem] border border-slate-100 shadow-md max-w-2xl mx-auto mt-8 scroll-mt-28">
           <summary className="flex items-center justify-between gap-4 min-h-[44px] px-6 sm:px-8 py-5 cursor-pointer list-none [&::-webkit-details-marker]:hidden font-black text-slate-900 text-lg">
             Giveaway terms
             <ChevronDown className="w-5 h-5 shrink-0 transition-transform group-open:rotate-180" aria-hidden="true" />
           </summary>
           <ol className="list-decimal pl-10 pr-6 sm:pr-8 pb-8 space-y-3 text-sm text-slate-700 leading-relaxed">
             <li>Promoter: {GIVEAWAY_PROMOTER}.</li>
-            <li>Free to enter, no purchase necessary. Open to people aged 18+ who host or manage a short-let in Airola's East London service area (Stratford, Royal Wharf, Canary Wharf, Canning Town, Hackney Wick, Bow, Mile End, Leyton).</li>
-            <li>Opens {OPENS}, closes {CLOSES}, UK time. One entry per person across all routes.</li>
-            <li>Entry routes: this form, or follow @{INSTAGRAM_HANDLE} on Instagram and comment TURNOVER on the giveaway post.</li>
-            <li>Winners are chosen by {GIVEAWAY_DRAW_METHOD} and contacted by email, phone or Instagram message within 3 days of closing. If a winner does not reply within 7 days, another is drawn. Winners are announced on @{INSTAGRAM_HANDLE}.</li>
-            <li>The name of the winners is available on request by emailing contact@airola.co.uk. Winners' names will only be published with their permission.</li>
-            <li>Prizes: 1 × Standard Turnover for a 1-2 bedroom property for £1 (worth up to £65); 1 × £25 credit; 1 × £15 credit, each towards a booking. Valid for {GIVEAWAY_PRIZE_VALID_DAYS} days, subject to availability. No cash alternative. Not transferable.</li>
+            <li>How to enter: complete the entry form on this page. Entry is free. No purchase or payment is needed at any stage. One entry per person.</li>
+            <li>Who can enter: UK residents aged 18 or over who host an Airbnb or short-let in an area Airola serves ({AREAS_TEXT}). People who work for Airola and their households cannot enter.</li>
+            <li>The giveaway opens {OPENS} and closes {CLOSES}, UK time. Entries received outside these times are not accepted.</li>
             <li>
-              Your details are used to run the giveaway and, only if you tick the box, to send host offers. See the{' '}
-              <RouteLink page={Page.LEGAL} onNavigate={onNavigate} className={linkClass}>Privacy Policy</RouteLink>.
+              Prizes, for three winners:
+              <ul className="list-disc pl-5 mt-2 space-y-1">
+                <li>1st: one free {TIER_NAMES.standard} for a property of up to 2 bedrooms (worth £{FIRST_PRIZE_1_BED} for a 1-bed or £{FIRST_PRIZE_2_BED} for a 2-bed).</li>
+                <li>2nd: £25 cleaning credit.</li>
+                <li>3rd: £15 cleaning credit.</li>
+              </ul>
             </li>
-            <li>This promotion is not sponsored, endorsed or administered by Instagram. Entrants release Instagram from any liability.</li>
+            <li>Credits are taken off the price of one booked clean. A prize is claimed when the winner books a clean with Airola, within {GIVEAWAY_PRIZE_VALID_DAYS} days of being notified. The property must be in an area Airola serves ({AREAS_TEXT}). There is no cash alternative. Prizes cannot be combined with other offers or transferred.</li>
+            <li>The three winners are chosen by {GIVEAWAY_DRAW_METHOD}. The draw takes place within 7 days of the closing date.</li>
+            <li>Winners are contacted by email or phone within 3 days of the draw and have 7 days to reply. If a winner does not reply within 7 days, another winner is drawn.</li>
+            <li>Winners' names are not published without their consent. The name of the winners is available on request by emailing contact@airola.co.uk.</li>
+            <li>
+              Your details are used to run the giveaway. Only if you tick the boxes, we also email you host tips and offers, or publish an anonymised version of your story. See the{' '}
+              <RouteLink page={Page.LEGAL} onNavigate={onNavigate} className={linkClass}>privacy notice</RouteLink>.
+            </li>
+            <li>This promotion is in no way sponsored, endorsed or administered by, or associated with, Instagram, Facebook or Meta. By entering you release them from any liability.</li>
             <li>The promoter may amend or withdraw the giveaway if circumstances outside its control require it.</li>
           </ol>
         </details>

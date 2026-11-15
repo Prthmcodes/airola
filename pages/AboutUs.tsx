@@ -17,7 +17,7 @@ const AboutUs: React.FC<AboutUsProps> = ({ onNavigate }) => {
     { icon: <BedDouble className="w-7 h-7" />, title: 'Linen Change & Bed Staging', desc: 'Fresh linen and hotel-style beds.' },
     { icon: <UtensilsCrossed className="w-7 h-7" />, title: 'Dishwashing & Kitchen Reset', desc: 'Every dish, surface and appliance guest-ready.' },
     { icon: <Package className="w-7 h-7" />, title: 'Essentials Restocking', desc: 'Toilet paper, soap and basics topped up so guests never run out.' },
-    { icon: <Siren className="w-7 h-7" />, title: 'Emergency Cleans', desc: 'Same-day rescue for our recurring clients when plans fall apart. Subject to availability.' },
+    { icon: <Siren className="w-7 h-7" />, title: 'Emergency Cleans', desc: 'Same-day rescue when plans fall apart. Subject to availability.' },
   ];
 
   return (
