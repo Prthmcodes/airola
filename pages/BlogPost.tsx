@@ -60,7 +60,7 @@ const BlogPost: React.FC<BlogPostProps> = ({ post, onNavigate }) => {
           headline: post.title,
           description: post.meta.description,
           datePublished: post.datePublished,
-          dateModified: post.datePublished,
+          dateModified: post.dateModified ?? post.datePublished,
           inLanguage: 'en-GB',
           mainEntityOfPage: canonicalUrl(post.meta.path),
           author: { '@type': 'Organization', name: 'Airola', url: SITE_URL },
@@ -73,12 +73,28 @@ const BlogPost: React.FC<BlogPostProps> = ({ post, onNavigate }) => {
         }}
       />
 
+      {/* Built from the same faq array that renders below, so the two can't drift apart. */}
+      <JsonLd
+        data={{
+          '@context': 'https://schema.org',
+          '@type': 'FAQPage',
+          mainEntity: post.faq.map(item => ({
+            '@type': 'Question',
+            name: item.q,
+            acceptedAnswer: { '@type': 'Answer', text: item.a },
+          })),
+        }}
+      />
+
       <p className="mb-6 text-sm">
         <RouteLink page={Page.BLOG} onNavigate={onNavigate} className={LINK_CLASS}>Blog</RouteLink>
       </p>
       <h1 className="text-4xl md:text-5xl font-black text-slate-900 mb-4 leading-tight">{post.title}</h1>
       <p className="text-sm text-slate-600 mb-10">
         By Airola · <time dateTime={post.datePublished}>{formatBlogDate(post.datePublished)}</time>
+        {post.dateModified && post.dateModified !== post.datePublished && (
+          <> · Updated <time dateTime={post.dateModified}>{formatBlogDate(post.dateModified)}</time></>
+        )}
       </p>
 
       {post.intro.map(text => (
