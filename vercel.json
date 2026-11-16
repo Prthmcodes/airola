@@ -3,9 +3,13 @@
     { "source": "/offer", "destination": "/pricing", "permanent": true }
   ],
   "rewrites": [
-    { "source": "/((?!api/|assets/|.*\\..*).*)", "destination": "/index.html" }
+    { "source": "/dashboard", "destination": "/index.html" },
+    { "source": "/admin", "destination": "/index.html" },
+    { "source": "/admin/:path*", "destination": "/index.html" },
+    { "source": "/add-property", "destination": "/index.html" }
   ],
   "headers": [
-    { "source": "/api/(.*)", "headers": [{ "key": "X-Robots-Tag", "value": "noindex, nofollow" }, { "key": "Cache-Control", "value": "no-store" }] }
+    { "source": "/api/(.*)", "headers": [{ "key": "X-Robots-Tag", "value": "noindex, nofollow" }, { "key": "Cache-Control", "value": "no-store" }] },
+    { "source": "/(dashboard|admin|add-property|login|quote/review|thanks|giveaway/entered)(.*)", "headers": [{ "key": "X-Robots-Tag", "value": "noindex" }] }
   ]
 }

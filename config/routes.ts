@@ -1,6 +1,7 @@
 import { Page } from '../types';
 import { AREA_PAGES, areaNeedsConfirmation } from './areas';
 import { BLOG_INDEX_META, BLOG_POSTS } from '../content/blog';
+import { EXTRA_BEDROOM, tierPrice } from './pricing';
 
 const blogPostMeta = (page: Page) => {
   const post = BLOG_POSTS.find(p => p.page === page);
@@ -10,7 +11,9 @@ const blogPostMeta = (page: Page) => {
 
 // Canonical host: the apex domain (non-www) serves the site directly. Canonicals, og:url and the sitemap all use it.
 export const SITE_URL = 'https://airola.co.uk';
-export const DEFAULT_OG_IMAGE = `${SITE_URL}/hero-bg.jpg`;
+// Branded 1200x630 card (logo and brand colours), used for every page that has no image of its own.
+export const DEFAULT_OG_IMAGE = `${SITE_URL}/og-default.png`;
+export const DEFAULT_OG_IMAGE_ALT = 'Airola logo with the words Airbnb turnover cleaning, East London';
 
 export interface PageMeta {
   path: string;
@@ -24,21 +27,21 @@ export interface PageMeta {
 // SEO: every page gets a real URL, title and description (titles <= 60 chars, descriptions <= 155)
 export const PAGE_META: Record<Page, PageMeta> = {
   [Page.LANDING]: { path: '/', title: 'Airbnb Turnover Cleaning East London | Airola', description: 'Airbnb turnover cleaning in East London. Guest-ready resets with photo proof sent to your WhatsApp after every clean. Get your price in 60 seconds.', ogDescription: 'Flawless Airbnb turnovers, every check-out. Guest-ready cleaning, linen changes and restocking for short-let hosts in East London. Photo proof every clean.' },
-  [Page.PRICING]: { path: '/pricing', title: 'Airbnb Cleaning Prices, From £45 | Airola', description: 'Turnover cleans from £45 (1-bed), +£20 per extra bedroom. Save £5 a clean from your second clean. No contract, photo proof every clean.' },
-  [Page.QUOTE]: { path: '/quote', title: 'Get Your Turnover Clean Price in 60 Seconds | Airola', description: 'Instant price for your Airbnb turnover clean in East London. Choose bedrooms, package and add-ons. No payment now.' },
+  [Page.PRICING]: { path: '/pricing', title: 'Airbnb Cleaning Prices, From £45 | Airola', description: `Airbnb turnover cleaning prices in East London: Standard from £${tierPrice('standard')}, Premium from £${tierPrice('premium')} (1-bed), +£${EXTRA_BEDROOM} per extra bedroom. No contract, photo proof every clean.` },
+  [Page.QUOTE]: { path: '/quote', title: 'Get Your Turnover Clean Price in 60 Seconds | Airola', description: 'Instant price for your Airbnb turnover clean in East London. Choose bedrooms, package and add-ons and see your total in about 60 seconds. No payment now.' },
   [Page.REVIEW]: { path: '/quote/review', title: 'Review Your Quote | Airola', description: 'Confirm your Airbnb turnover cleaning quote.', noindex: true },
   [Page.GIVEAWAY]: { path: '/giveaway', title: 'Win a Free Turnover Clean | Airola Giveaway', description: 'Airbnb hosts in Stratford, Canary Wharf and Royal Wharf: enter free to win a free Standard Turnover or cleaning credit. Closes Sunday 13 December 2026.' },
-  [Page.ABOUT_US]: { path: '/about-us', title: 'About Airola | Airbnb Turnover Cleaners in East London', description: 'Airola is an East London team that does one thing: short-let turnovers, with photo proof to your WhatsApp after every clean.' },
+  [Page.ABOUT_US]: { path: '/about-us', title: 'About Airola | Airbnb Turnover Cleaners in East London', description: 'About Airola: an East London team that only does Airbnb and short-let turnover cleaning, with photo proof sent to your WhatsApp after every clean we do.' },
   [Page.TESTIMONIALS]: { path: '/testimonials', title: 'Airbnb Host Reviews | Airola', description: "Reviews from East London Airbnb hosts on Airola's turnover cleaning, with photo proof after every clean. Cleaned with us? Leave your own review." },
-  [Page.CONTACT]: { path: '/contact', title: 'Contact Airola | Airbnb Cleaning East London', description: 'Get in touch: WhatsApp, phone or email. Serving Stratford, Royal Wharf, Canary Wharf and nearby.' },
-  [Page.LEGAL]: { path: '/legal', title: 'Terms, Privacy and Giveaway Rules | Airola', description: "Airola's terms and conditions, privacy policy, cookie policy and giveaway rules for our Airbnb turnover cleaning service in East London." },
+  [Page.CONTACT]: { path: '/contact', title: 'Contact Airola | Airbnb Cleaning East London', description: 'Contact Airola about Airbnb turnover cleaning in East London by WhatsApp, phone or email. Serving Stratford, Royal Wharf, Canary Wharf and nearby areas.' },
+  [Page.LEGAL]: { path: '/legal', title: 'Terms, Privacy and Giveaway Rules | Airola', description: 'Airola terms and conditions, privacy policy, cookie policy and giveaway rules for our Airbnb and short-let turnover cleaning service in East London.' },
   [Page.LOGIN]: { path: '/login', title: 'Host Login | Airola', description: 'Log in to manage your Airbnb turnover cleans.', noindex: true },
   [Page.DASHBOARD]: { path: '/dashboard', title: 'Host Hub | Airola', description: 'Manage your properties and turnover cleans.', noindex: true },
   [Page.ADMIN_DASHBOARD]: { path: '/admin', title: 'Command Center | Airola', description: 'Airola operations dashboard.', noindex: true },
   [Page.STAFF_MANAGEMENT]: { path: '/admin/team', title: 'Team | Airola', description: 'Airola team management.', noindex: true },
   [Page.ADD_PROPERTY]: { path: '/add-property', title: 'Register a Property | Airola', description: 'Add a listing to your Airola portfolio.', noindex: true },
-  [Page.BONUS]: { path: '/giveaway/entered', title: "You're In | Airola Giveaway", description: 'Giveaway entry confirmed.' },
-  [Page.THANKS]: { path: '/thanks', title: 'Thank You | Airola', description: 'Thanks from Airola.' },
+  [Page.BONUS]: { path: '/giveaway/entered', title: "You're In | Airola Giveaway", description: 'Giveaway entry confirmed.', noindex: true },
+  [Page.THANKS]: { path: '/thanks', title: 'Thank You | Airola', description: 'Thanks from Airola.', noindex: true },
   [Page.NOT_FOUND]: { path: '/404', title: 'Page Not Found | Airola', description: 'This page could not be found.', noindex: true },
   // Area pages stay noindex until every [CONFIRM] in config/areas.ts is filled in.
   [Page.AREA_STRATFORD]: { ...AREA_PAGES.stratford.meta, noindex: areaNeedsConfirmation(AREA_PAGES.stratford) },

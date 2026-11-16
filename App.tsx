@@ -18,14 +18,13 @@ import BlogIndex from './pages/BlogIndex';
 import BlogPost from './pages/BlogPost';
 import { BLOG_POSTS } from './content/blog';
 import ErrorBoundary from './components/ErrorBoundary';
-import { PAGE_META, canonicalUrl, DEFAULT_OG_IMAGE } from './config/routes';
+import { PAGE_META, canonicalUrl, DEFAULT_OG_IMAGE, DEFAULT_OG_IMAGE_ALT } from './config/routes';
 import { AREA_PAGES } from './config/areas';
 import { loadQuoteDraft, saveQuoteDraft } from './utils/quoteSafety';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import WhatsAppFAB from './components/WhatsAppFAB';
-import NotificationCenter from './components/NotificationCenter';
-import ChatBot from './components/ChatBot';
+import LocalBusinessSchema from './components/LocalBusinessSchema';
 import MobileActionBar, { MOBILE_BAR_SPACER } from './components/MobileActionBar';
 
 // Private and post-quote routes load on demand, keeping them out of the public pages' bundle.
@@ -34,6 +33,9 @@ const AdminDashboard = lazy(() => import('./pages/AdminDashboard'));
 const StaffManagementPage = lazy(() => import('./pages/StaffManagementPage'));
 const AddPropertyPage = lazy(() => import('./pages/AddPropertyPage'));
 const QuoteReview = lazy(() => import('./pages/QuoteReview'));
+// Not needed for first paint: loaded after the page renders, keeping them out of the main bundle.
+const NotificationCenter = lazy(() => import('./components/NotificationCenter'));
+const ChatBot = lazy(() => import('./components/ChatBot'));
 
 const PageLoading: React.FC = () => (
   <p role="status" className="max-w-xl mx-auto px-4 py-24 text-center text-slate-600">Loading…</p>
@@ -150,6 +152,12 @@ const App: React.FC = () => {
     upsertHeadTag('meta[property="og:description"]', metaTag('property', 'og:description'), 'content', meta.ogDescription ?? meta.description);
     upsertHeadTag('meta[property="og:url"]', metaTag('property', 'og:url'), 'content', url);
     upsertHeadTag('meta[property="og:image"]', metaTag('property', 'og:image'), 'content', DEFAULT_OG_IMAGE);
+    upsertHeadTag('meta[property="og:image:width"]', metaTag('property', 'og:image:width'), 'content', '1200');
+    upsertHeadTag('meta[property="og:image:height"]', metaTag('property', 'og:image:height'), 'content', '630');
+    upsertHeadTag('meta[property="og:image:alt"]', metaTag('property', 'og:image:alt'), 'content', DEFAULT_OG_IMAGE_ALT);
+    upsertHeadTag('meta[property="og:type"]', metaTag('property', 'og:type'), 'content', BLOG_POSTS.some(p => p.page === currentPage) ? 'article' : 'website');
+    upsertHeadTag('meta[property="og:site_name"]', metaTag('property', 'og:site_name'), 'content', 'Airola');
+    upsertHeadTag('meta[name="twitter:card"]', metaTag('name', 'twitter:card'), 'content', 'summary_large_image');
     let robots = document.querySelector('meta[name="robots"]');
     if (meta.noindex) {
       if (!robots) {
@@ -298,6 +306,7 @@ const App: React.FC = () => {
         notifications={mailboxNotifications}
         onToggleNotifications={() => setShowNotifications(!showNotifications)}
       />
+      <LocalBusinessSchema />
       <main id="main" tabIndex={-1} className="flex-grow pt-[90px] focus:outline-none">
         <ErrorBoundary key={currentPage}>
           <Suspense fallback={<PageLoading />}>
@@ -308,6 +317,7 @@ const App: React.FC = () => {
       <Footer onNavigate={navigate} />
       {/* Room for the mobile action bar so it never covers the end of the footer */}
       <div aria-hidden="true" className={MOBILE_BAR_SPACER} />
+      <Suspense fallback={null}>
       <NotificationCenter
         isOpen={showNotifications}
         onClose={() => setShowNotifications(false)}
@@ -319,10 +329,13 @@ const App: React.FC = () => {
         onViewDetails={viewNotificationDetails}
         onDelete={deleteNotification}
       />
+      </Suspense>
       <aside aria-label="Contact shortcuts">
         <WhatsAppFAB />
         <MobileActionBar currentPage={currentPage} onNavigate={navigate} />
-        <ChatBot onNavigate={navigate} />
+        <Suspense fallback={null}>
+          <ChatBot onNavigate={navigate} />
+        </Suspense>
       </aside>
     </div>
   );

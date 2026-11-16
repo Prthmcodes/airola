@@ -73,6 +73,18 @@ const BlogPost: React.FC<BlogPostProps> = ({ post, onNavigate }) => {
         }}
       />
 
+      <JsonLd
+        data={{
+          '@context': 'https://schema.org',
+          '@type': 'BreadcrumbList',
+          itemListElement: [
+            { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE_URL}/` },
+            { '@type': 'ListItem', position: 2, name: 'Blog', item: canonicalUrl(PAGE_META[Page.BLOG].path) },
+            { '@type': 'ListItem', position: 3, name: post.title, item: canonicalUrl(post.meta.path) },
+          ],
+        }}
+      />
+
       {/* Built from the same faq array that renders below, so the two can't drift apart. */}
       <JsonLd
         data={{

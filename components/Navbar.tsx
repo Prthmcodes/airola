@@ -70,7 +70,7 @@ const Navbar: React.FC<NavbarProps> = ({ currentPage, user, onNavigate, onLogout
                 />
                 <img
                   src="/Final_logo-removebg-preview.png"
-                  alt="Airola logo"
+                  alt="Airola"
                   width={453}
                   height={367}
                   decoding="async"

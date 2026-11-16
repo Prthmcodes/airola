@@ -8,6 +8,7 @@ import { GIVEAWAY_ENDS_AT, isGiveawayOpen, formatUkDate, INSTAGRAM_URL, INSTAGRA
 import { EVERY_TURNOVER_RULE, REBOOK_RULE, ONE_OFFER_RULE } from '../config/pricing';
 import IllustrativeLabel from '../components/IllustrativeLabel';
 import { SITE_IMAGES } from '../config/images';
+import { areaPageFor } from '../config/areas';
 import SafeImage from '../components/SafeImage';
 import JsonLd from '../components/JsonLd';
 import TestimonialCard from '../components/TestimonialCard';
@@ -89,6 +90,8 @@ const LandingPage: React.FC<LandingPageProps> = ({ onNavigate }) => {
         <div className="absolute inset-0 z-0 bg-gradient-to-br from-[#2D6E5F] to-[#3D8D7A]">
           <SafeImage 
             {...SITE_IMAGES.hero}
+            // Background behind the headline: decorative, so screen readers skip it.
+            alt=""
             fetchPriority="high"
             className="w-full h-full object-cover"
             style={{
@@ -548,15 +551,30 @@ const LandingPage: React.FC<LandingPageProps> = ({ onNavigate }) => {
             </p>
           </div>
           <div className="flex flex-wrap justify-center gap-3 mb-12">
-            {['Stratford', 'Royal Wharf', 'Canary Wharf', 'Canning Town', 'Hackney Wick', 'Bow', 'Mile End', 'Leyton'].map(area => (
-              <span key={area} className="px-5 py-2.5 bg-white rounded-full border border-[rgb(204,236,229)] text-slate-700 font-bold text-sm shadow-sm flex items-center">
-                <MapPin className="w-3.5 h-3.5 mr-2 text-[rgb(61,141,122)]" /> {area}
-              </span>
-            ))}
+            {['Stratford', 'Royal Wharf', 'Canary Wharf', 'Canning Town', 'Hackney Wick', 'Bow', 'Mile End', 'Leyton'].map(area => {
+              // Areas with their own page link to it; the rest stay as labels.
+              const areaPage = areaPageFor(area);
+              const chip = 'px-5 py-2.5 bg-white rounded-full border border-[rgb(204,236,229)] text-slate-700 font-bold text-sm shadow-sm flex items-center';
+              const content = <><MapPin className="w-3.5 h-3.5 mr-2 text-[rgb(61,141,122)]" aria-hidden="true" /> {area}</>;
+              return areaPage ? (
+                <RouteLink key={area} page={areaPage} onNavigate={onNavigate} className={`${chip} underline-offset-2 hover:underline hover:border-[#2D6E5F] hover:text-[#2D6E5F]`}>
+                  {content}<span className="sr-only"> Airbnb cleaning</span>
+                </RouteLink>
+              ) : (
+                <span key={area} className={chip}>{content}</span>
+              );
+            })}
             <RouteLink page={Page.CONTACT} onNavigate={onNavigate} className="px-5 py-2.5 bg-[rgb(235,247,244)] rounded-full border border-[rgb(172,216,206)] text-[rgb(45,110,95)] font-bold text-sm hover:bg-[rgb(204,236,229)] transition-colors">
               Close by? Ask us
             </RouteLink>
           </div>
+
+          <p className="text-center text-slate-700 font-medium mb-12 -mt-6">
+            Hosting for the first time? Read our{' '}
+            <RouteLink page={Page.BLOG} onNavigate={onNavigate} className="font-bold text-[#2D6E5F] underline underline-offset-2 hover:text-[#245A4E]">guides for Airbnb hosts</RouteLink>
+            {' '}or{' '}
+            <RouteLink page={Page.PRICING} onNavigate={onNavigate} className="font-bold text-[#2D6E5F] underline underline-offset-2 hover:text-[#245A4E]">see packages and prices</RouteLink>.
+          </p>
 
           <div className="bg-white rounded-[2rem] border border-[rgb(204,236,229)] shadow-md p-8 flex flex-col md:flex-row items-center gap-6 text-center md:text-left">
             <div className="shrink-0 w-16 h-16 bg-gradient-to-br from-[rgb(61,141,122)] to-[rgb(45,110,95)] rounded-2xl flex items-center justify-center text-white shadow-lg">

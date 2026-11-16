@@ -398,7 +398,7 @@ export const BLOG_POSTS: BlogPost[] = [
     slug: 'how-long-does-an-airbnb-turnover-clean-take',
     title: 'How long does an Airbnb turnover clean take?',
     metaTitle: 'How Long Does an Airbnb Turnover Clean Take? | Airola',
-    description: 'What affects how long an Airbnb turnover clean takes, a rough guide by property size, and how to plan cleans around check-out and check-in.',
+    description: 'What affects how long an Airbnb turnover clean takes, a rough guide by property size, and how to plan your cleans around guest check-out and check-in.',
     intro: [
       "There is no single answer, because a turnover clean takes as long as your property needs. A tidy studio after a one-night stay and a three-bedroom flat after a week-long family stay are very different jobs.",
       "This guide covers what affects the time, gives a rough idea of what to plan for, and explains how to make turnovers quicker and more predictable.",

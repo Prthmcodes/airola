@@ -2,7 +2,9 @@ import React from 'react';
 import { Camera, Check } from 'lucide-react';
 import { Page } from '../types';
 import RouteLink from '../components/RouteLink';
-import { AreaPage as AreaPageData, isPlaceholder } from '../config/areas';
+import { AreaPage as AreaPageData, AREA_PAGES, AREA_PAGE_IDS, isPlaceholder } from '../config/areas';
+import JsonLd from '../components/JsonLd';
+import { SITE_URL, canonicalUrl } from '../config/routes';
 import { TIER_NAMES, tierPrice, EXTRA_BEDROOM, EVERY_TURNOVER_RULE } from '../config/pricing';
 
 interface AreaPageProps {
@@ -16,12 +18,34 @@ const SERVICES = [
   { name: TIER_NAMES.premium, price: `From £${tierPrice('premium')}`, detail: 'Everything in Standard plus dishwashing and kitchen reset, inside fridge and microwave, essentials restocked from your supplies, priority booking and a pre-check-in double inspection.' },
 ];
 
+// Host guides linked from every area page.
+const GUIDES = [
+  { page: Page.BLOG_COST, label: 'How much does Airbnb turnover cleaning cost in London?' },
+  { page: Page.BLOG_CHECKLIST, label: 'What should an Airbnb turnover clean include?' },
+];
+
+const LINK = 'font-bold text-[#2D6E5F] underline underline-offset-2 hover:text-[#245A4E]';
+
 const AreaPage: React.FC<AreaPageProps> = ({ area, onNavigate }) => {
+  const neighbours = (Object.keys(AREA_PAGES) as (keyof typeof AREA_PAGES)[])
+    .filter(slug => slug !== area.slug)
+    .map(slug => ({ page: AREA_PAGE_IDS[slug], name: AREA_PAGES[slug].name }));
+
   // Area-specific details only appear once they've been confirmed (see config/areas.ts).
   const localDetails = [area.local.propertyTypes, area.local.checkInNorms].filter(text => !isPlaceholder(text));
 
   return (
     <div className="max-w-4xl mx-auto px-4 py-16">
+      <JsonLd
+        data={{
+          '@context': 'https://schema.org',
+          '@type': 'BreadcrumbList',
+          itemListElement: [
+            { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE_URL}/` },
+            { '@type': 'ListItem', position: 2, name: `Airbnb cleaning in ${area.name}`, item: canonicalUrl(area.meta.path) },
+          ],
+        }}
+      />
       <h1 className="text-4xl md:text-5xl font-black text-slate-900 mb-6">Airbnb Turnover Cleaning in {area.name}</h1>
       <p className="text-lg text-slate-700 leading-relaxed mb-12">
         Airola does turnover cleaning for Airbnb and short-let hosts in {area.name} and across East London. We clean,
@@ -69,6 +93,29 @@ const AreaPage: React.FC<AreaPageProps> = ({ area, onNavigate }) => {
           When we finish, we send photos straight to your WhatsApp: beds staged, kitchen reset, bathroom done. If we
           spot damage or low stock, you hear about it right away. You see the result before your guest does.
         </p>
+      </section>
+
+      <section className="mb-12 grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm">
+          <h2 className="text-xl font-bold text-slate-900 mb-3">Nearby areas we cover</h2>
+          <ul className="space-y-2 text-slate-700">
+            {neighbours.map(n => (
+              <li key={n.name}>
+                <RouteLink page={n.page} onNavigate={onNavigate} className={LINK}>Airbnb turnover cleaning in {n.name}</RouteLink>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm">
+          <h2 className="text-xl font-bold text-slate-900 mb-3">Guides for hosts</h2>
+          <ul className="space-y-2 text-slate-700">
+            {GUIDES.map(g => (
+              <li key={g.label}>
+                <RouteLink page={g.page} onNavigate={onNavigate} className={LINK}>{g.label}</RouteLink>
+              </li>
+            ))}
+          </ul>
+        </div>
       </section>
 
       <div className="flex flex-col sm:flex-row gap-4">

@@ -52,7 +52,7 @@ const AboutUs: React.FC<AboutUsProps> = ({ onNavigate }) => {
                 src="/why-choose.jpg"
                 webpSrcSet={webpSet('why-choose', [480, 800, 1200, 1600])}
                 sizes="(min-width: 1024px) 50vw, 100vw"
-                alt="Airola cleaning professionals at work"
+                alt="Two cleaners mopping the floor and wiping a window in a modern kitchen"
                 width={1600}
                 height={1066}
                 loading="lazy"

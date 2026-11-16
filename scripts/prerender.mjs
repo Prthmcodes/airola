@@ -8,8 +8,13 @@
 // fails there, the script installs them with dnf and retries once.
 //
 // Fails the build (exit 1) if Puppeteer or Chrome is unavailable, or if any route doesn't render properly
-// (H1 present, no error page, valid JSON-LD, its own <title> and canonical). Nothing is written unless every
-// route passes, so a broken build never ships the bare SPA shell in place of real pages.
+// (H1 present, no error page, valid JSON-LD, its own <title> and canonical, Open Graph tags, the right robots
+// rule), or if two routes share a title, canonical or description. Nothing is written unless every route passes,
+// so a broken build never ships the bare SPA shell in place of real pages.
+//
+// NOINDEX_ROUTES are snapshotted too, so their static HTML already carries their own title and the noindex tag.
+// /404 is written to dist/404.html, which Vercel serves with a real 404 status for any unknown URL
+// (vercel.json only rewrites the signed-in app routes to the shell).
 
 import { createServer } from 'node:http';
 import { readFile, writeFile, mkdir, stat } from 'node:fs/promises';
@@ -17,7 +22,7 @@ import { join, extname, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { spawnSync } from 'node:child_process';
 
-// Public, indexable routes only. Never add /dashboard, /admin, /login, /add-property or /quote/review.
+// Public, indexable routes: must not be noindex, and must match public/sitemap.xml and public/llms.txt.
 const ROUTES = [
   '/', '/pricing', '/quote', '/about-us', '/contact', '/giveaway', '/legal', '/testimonials',
   '/blog',
@@ -28,6 +33,16 @@ const ROUTES = [
   '/blog/photo-proof-after-cleaning-airbnb',
   '/blog/airbnb-cleaning-fee',
 ];
+
+// Public but noindex. Area pages stay here until config/areas.ts has no [CONFIRM] left; the build fails if one
+// becomes indexable, so it gets moved to ROUTES (and the sitemap) on purpose.
+// Never add /dashboard, /admin, /admin/team or /add-property: they need a signed-in session.
+const NOINDEX_ROUTES = [
+  '/login', '/quote/review', '/thanks', '/giveaway/entered',
+  '/areas/stratford', '/areas/canary-wharf', '/areas/royal-wharf',
+  '/404',
+];
+const ALL_ROUTES = [...ROUTES, ...NOINDEX_ROUTES];
 
 const DIST = join(dirname(fileURLToPath(import.meta.url)), '..', 'dist');
 const TIMEOUT_MS = 30000;
@@ -72,6 +87,9 @@ const MIME = {
 const headTag = (html, re) => html.match(re)?.[1]?.trim() || null;
 const titleOf = html => headTag(html, /<title>([^<]*)<\/title>/i);
 const canonicalOf = html => headTag(html, /<link rel="canonical" href="([^"]*)"/i);
+const descriptionOf = html => headTag(html, /<meta name="description" content="([^"]*)"/i);
+const metaOf = (html, attr, name) => headTag(html, new RegExp(`<meta ${attr}="${name}" content="([^"]*)"`, 'i'));
+const isNoindex = html => /<meta name="robots" content="[^"]*noindex/i.test(html);
 
 // Serves dist/ like Vercel: real files first, everything else falls back to the original SPA shell.
 const startServer = shell =>
@@ -101,6 +119,13 @@ const validate = (html, route) => {
   const canonical = canonicalOf(html);
   if (!canonical) return 'no canonical link';
   if (new URL(canonical).pathname !== route) return `canonical is ${canonical}, expected path ${route}`;
+  if (!descriptionOf(html)) return 'no meta description';
+  for (const tag of ['og:title', 'og:description', 'og:url', 'og:type', 'og:image', 'og:site_name']) {
+    if (!metaOf(html, 'property', tag)) return `no ${tag}`;
+  }
+  if (!metaOf(html, 'name', 'twitter:card')) return 'no twitter:card';
+  if (ROUTES.includes(route) && isNoindex(html)) return 'indexable route is noindex (move it to NOINDEX_ROUTES)';
+  if (NOINDEX_ROUTES.includes(route) && !isNoindex(html)) return 'route is indexable now: move it to ROUTES and add it to the sitemap and llms.txt';
   if (html.includes('Something went wrong on our side') || html.includes("This page didn't load")) return 'error page rendered';
   if (html.includes('Loading reviews') || html.includes("couldn't load reviews")) return 'reviews did not load';
   for (const [, json] of html.matchAll(/<script type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/g)) {
@@ -127,7 +152,7 @@ const main = async () => {
     browser = await launchBrowser(puppeteer);
     const snapshots = new Map();
 
-    for (const route of ROUTES) {
+    for (const route of ALL_ROUTES) {
       const page = await browser.newPage();
       // Uncaught app errors (e.g. a missing VITE_ env var) explain why a route rendered no <h1>.
       const pageErrors = [];
@@ -169,7 +194,7 @@ const main = async () => {
               link.setAttribute('fetchpriority', 'high');
               document.head.appendChild(link);
             }
-            // dist/index.html is also the fallback for every non-prerendered route (/login, unknown URLs).
+            // dist/index.html is also served for the signed-in app routes (/dashboard, /admin, /add-property).
             // Clear the home content there before first paint, so those routes never flash the home page.
             const guard = document.createElement('script');
             guard.textContent = "if(location.pathname!=='/'){var r=document.getElementById('root');if(r)r.innerHTML=''}";
@@ -191,24 +216,33 @@ const main = async () => {
     if (failures.length) {
       const lines = failures.map(f =>
         `  ${f.route}: ${f.reason}${f.pageErrors.length ? `\n    page errors: ${[...new Set(f.pageErrors)].join(' | ')}` : ''}`);
-      throw new Error(`${failures.length} of ${ROUTES.length} routes failed to prerender:\n${lines.join('\n')}`);
+      throw new Error(`${failures.length} of ${ALL_ROUTES.length} routes failed to prerender:\n${lines.join('\n')}`);
     }
 
-    const titles = ROUTES.map(r => titleOf(snapshots.get(r)));
-    const dupes = [...new Set(titles.filter((t, i) => titles.indexOf(t) !== i))];
-    if (dupes.length) throw new Error(`duplicate <title> across routes: ${dupes.join(', ')}`);
+    const dupesOf = (routes, read) => {
+      const values = routes.map(r => read(snapshots.get(r)));
+      return [...new Set(values.filter((v, i) => values.indexOf(v) !== i))];
+    };
+    const dupeChecks = [
+      ['<title>', dupesOf(ALL_ROUTES, titleOf)],
+      ['canonical', dupesOf(ALL_ROUTES, canonicalOf)],
+      ['meta description', dupesOf(ROUTES, descriptionOf)],
+    ];
+    for (const [what, dupes] of dupeChecks) {
+      if (dupes.length) throw new Error(`duplicate ${what} across routes: ${dupes.join(', ')}`);
+    }
 
     // Home last: dist/index.html is the shell every other route was rendered from.
-    for (const route of [...ROUTES.filter(r => r !== '/'), '/']) {
-      const out = route === '/' ? join(DIST, 'index.html') : join(DIST, route, 'index.html');
+    for (const route of [...ALL_ROUTES.filter(r => r !== '/'), '/']) {
+      const out = route === '/' ? join(DIST, 'index.html') : route === '/404' ? join(DIST, '404.html') : join(DIST, route, 'index.html');
       await mkdir(dirname(out), { recursive: true });
       await writeFile(out, snapshots.get(route));
     }
 
-    console.log(`[prerender] Wrote static HTML for all ${ROUTES.length} routes:`);
-    for (const route of ROUTES) {
+    console.log(`[prerender] Wrote static HTML for all ${ALL_ROUTES.length} routes (${ROUTES.length} indexable):`);
+    for (const route of ALL_ROUTES) {
       const html = snapshots.get(route);
-      console.log(`[prerender]   ${route.padEnd(14)} ${titleOf(html)}  ->  ${canonicalOf(html)}`);
+      console.log(`[prerender]   ${route.padEnd(14)} ${isNoindex(html) ? '[noindex] ' : ''}${titleOf(html)}  ->  ${canonicalOf(html)}`);
     }
   } finally {
     await browser?.close().catch(() => {});
