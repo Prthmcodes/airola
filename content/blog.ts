@@ -1,14 +1,14 @@
 // Blog posts for /blog. Plain typed data, rendered by pages/BlogPost.tsx and listed by pages/BlogIndex.tsx.
 //
 // Content rules (UK consumer law: no misleading claims):
-// - Prices: only "from £45" and what /pricing already says. No other prices, averages or market figures.
+// - Prices: only the "from" price and what /pricing already says, always read from config/pricing.ts. No other prices, averages or market figures.
 // - No statistics, customer stories, testimonials, ratings or client counts. No competitor names, no "best"/"cheapest".
 // - Timings and checklists are general guidance, framed as typical and dependent on the property.
 //
 // Inline links use [text](/path) and must point at a route in config/routes.ts.
 
 import { Page } from '../types';
-import { TIER_NAMES, EXTRA_BEDROOM, EVERY_TURNOVER_SAVING, EVERY_TURNOVER_WINDOW_DAYS, tierPrice, everyTurnoverPrice } from '../config/pricing';
+import { TIER_NAMES, EXTRA_BEDROOM, EVERY_TURNOVER_SAVING, EVERY_TURNOVER_WINDOW_DAYS, REBOOK_CREDIT, REBOOK_WINDOW_DAYS, tierPrice, everyTurnoverPrice } from '../config/pricing';
 import { AREA_PAGES } from '../config/areas';
 
 const AREA_NAMES = Object.values(AREA_PAGES).map(a => a.name);
@@ -178,7 +178,7 @@ export const BLOG_POSTS: BlogPost[] = [
     slug: 'airbnb-turnover-cleaning-cost-london',
     title: 'How much does Airbnb turnover cleaning cost in London?',
     metaTitle: 'Airbnb Turnover Cleaning Cost in London | Airola',
-    description: 'What decides the price of an Airbnb turnover clean in London, what should be included, and how to plan for it. Airola turnovers start from £45.',
+    description: `What decides the price of an Airbnb turnover clean in London, what should be included, and how to plan for it. Airola turnovers start from £${tierPrice('standard')}.`,
     intro: [
       "Cleaning is one of the few costs you pay on almost every booking, so it is worth understanding what you are paying for. The price of a turnover clean is not one fixed number across London. It depends on your property, what you want done between guests, and how often you need it.",
       "This guide explains what usually drives the price, what a fair turnover should include, and exactly what Airola charges for hosts in East London.",
@@ -203,14 +203,14 @@ export const BLOG_POSTS: BlogPost[] = [
       {
         heading: 'What Airola charges',
         blocks: [
-          { type: 'p', text: "We keep our prices on the page so you can work out your cost before you book. Prices are for a 1-bedroom property, and every package adds £20 per extra bedroom." },
+          { type: 'p', text: `We keep our prices on the page so you can work out your cost before you book. Prices are for a 1-bedroom property, and every package adds £${EXTRA_BEDROOM} per extra bedroom.` },
           {
             type: 'ul',
             items: [
-              "Standard Turnover: from £45 for a 1-bed, one-off. A 2-bed Standard Turnover is £65. It covers a full turnover of the kitchen, bathroom and floors, a linen change and bed making using your clean linen, emptying the bins, a damage and low-stock check, and photo confirmation after every clean.",
-              "Premium Turnover: from £65 for a 1-bed, one-off. It includes everything in Standard Turnover plus dishwashing and a kitchen reset, inside the fridge and microwave, restocking essentials from your supplies, priority booking and faster response, and a pre-check-in double inspection.",
-              "Every-turnover rate: your first clean is at the one-off price. From your second clean you save £5 per clean, as long as each clean is booked within 30 days of your last one at the same property. That is £40 for a 1-bed Standard Turnover and £60 for a 1-bed Premium Turnover. There is no contract.",
-              "First rebook credit: rebook within 10 days of your first clean and get £10 off your second clean. It replaces the £5 saving on that clean, so the two never combine. Only one offer applies per clean.",
+              `${TIER_NAMES.standard}: from £${tierPrice('standard')} for a 1-bed, one-off. A 2-bed ${TIER_NAMES.standard} is £${tierPrice('standard', 2)}. It covers a full turnover of the kitchen, bathroom and floors, a linen change and bed making using your clean linen, emptying the bins, a damage and low-stock check, and photo confirmation after every clean.`,
+              `${TIER_NAMES.premium}: from £${tierPrice('premium')} for a 1-bed, one-off. It includes everything in ${TIER_NAMES.standard} plus dishwashing and a kitchen reset, the fridge cleaned inside and out and the microwave inside, restocking essentials from your supplies, priority booking and faster response, and a pre-check-in double inspection.`,
+              `Every-turnover rate: your first clean is at the one-off price. From your second clean you save £${EVERY_TURNOVER_SAVING} per clean, as long as each clean is booked within ${EVERY_TURNOVER_WINDOW_DAYS} days of your last one at the same property. That is £${everyTurnoverPrice('standard')} for a 1-bed ${TIER_NAMES.standard} and £${everyTurnoverPrice('premium')} for a 1-bed ${TIER_NAMES.premium}. There is no contract.`,
+              `First rebook credit: rebook within ${REBOOK_WINDOW_DAYS} days of your first clean and get £${REBOOK_CREDIT} off your second clean. It replaces the £${EVERY_TURNOVER_SAVING} saving on that clean, so the two never combine. Only one offer applies per clean.`,
             ],
           },
           { type: 'p', text: "Your final price is confirmed before we clean. You can see the full breakdown on our [pricing page](/pricing), or [get your price in about 60 seconds](/quote) by choosing your bedrooms, package and any add-ons." },
@@ -380,7 +380,7 @@ export const BLOG_POSTS: BlogPost[] = [
         heading: 'How this maps to Airola packages',
         blocks: [
           { type: 'p', text: "Our Standard Turnover covers the core reset: kitchen, bathroom and floors, a linen change and bed making using your clean linen, bins emptied, a damage and low-stock check, and photo confirmation after every clean. Premium Turnover adds dishwashing and a kitchen reset, inside the fridge and microwave, restocking essentials from your supplies, priority booking and a pre-check-in double inspection." },
-          { type: 'p', text: "Turnovers start from £45 for a 1-bed. You can compare both packages on our [pricing page](/pricing), read more about [what turnover cleaning costs in London](/blog/airbnb-turnover-cleaning-cost-london), or [get your price](/quote) for your property." },
+          { type: 'p', text: `Turnovers start from £${tierPrice('standard')} for a 1-bed. You can compare both packages on our [pricing page](/pricing), read more about [what turnover cleaning costs in London](/blog/airbnb-turnover-cleaning-cost-london), or [get your price](/quote) for your property.` },
         ],
       },
     ],
@@ -460,7 +460,7 @@ export const BLOG_POSTS: BlogPost[] = [
         heading: 'How Airola schedules turnovers',
         blocks: [
           { type: 'p', text: "We schedule each clean around your check-out and next check-in window, and you can share your booking calendar so cleans are planned around your check-outs. We only see dates, never guest details. When we finish, photos of each room go to your WhatsApp." },
-          { type: 'p', text: "Same-day cleans between check-out and check-in are available, subject to availability. You can see what each package includes on our [pricing page](/pricing), with turnovers from £45 for a 1-bed, or [get your price](/quote) for your property." },
+          { type: 'p', text: `Same-day cleans between check-out and check-in are available, subject to availability. You can see what each package includes on our [pricing page](/pricing), with turnovers from £${tierPrice('standard')} for a 1-bed, or [get your price](/quote) for your property.` },
         ],
       },
     ],
@@ -544,7 +544,7 @@ export const BLOG_POSTS: BlogPost[] = [
         heading: 'Booking same-day turnovers with Airola',
         blocks: [
           { type: 'p', text: "We offer same-day cleans between check-out and check-in, subject to availability, across East London including Stratford, Royal Wharf and Canary Wharf. Each clean ends with photos of every room sent to your WhatsApp, and we flag any damage or low stock we find." },
-          { type: 'p', text: "Turnovers start from £45 for a 1-bed. See what each package includes on our [pricing page](/pricing), or [get your price in about 60 seconds](/quote)." },
+          { type: 'p', text: `Turnovers start from £${tierPrice('standard')} for a 1-bed. See what each package includes on our [pricing page](/pricing), or [get your price in about 60 seconds](/quote).` },
         ],
       },
     ],
@@ -625,7 +625,7 @@ export const BLOG_POSTS: BlogPost[] = [
         heading: 'How Airola does it',
         blocks: [
           { type: 'p', text: "Photo confirmation is part of every Airola turnover. When we finish, we send photos straight to your WhatsApp: beds staged, kitchen reset, bathroom done. If we spot damage or low stock, you hear about it right away. And if your first clean isn't guest-ready, our First-Clean Guarantee means we come back and re-clean the affected areas free." },
-          { type: 'p', text: "Turnovers start from £45 for a 1-bed, with photo proof included. See our [pricing page](/pricing), or [get your price](/quote) for your property." },
+          { type: 'p', text: `Turnovers start from £${tierPrice('standard')} for a 1-bed, with photo proof included. See our [pricing page](/pricing), or [get your price](/quote) for your property.` },
         ],
       },
     ],
