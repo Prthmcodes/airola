@@ -5,8 +5,8 @@ import JsonLd from '../components/JsonLd';
 import { SITE_URL } from '../config/routes';
 import {
   TIER_BASE, TIER_NAMES, TIER_FEATURES, EXTRA_BEDROOM, STANDARD_ADD_ONS, STANDARD_ADD_ONS_TOTAL, PREMIUM_DIFFERENCE,
-  EVERY_TURNOVER_SAVING, REBOOK_CREDIT, EVERY_TURNOVER_RULE, REBOOK_RULE, REBOOK_NOT_COMBINED, ONE_OFFER_RULE,
-  tierPrice, everyTurnoverPrice,
+  REBOOK_DISCOUNT_PERCENT, REBOOK_SHORT, REBOOK_RULE, REBOOK_DETAIL, ONE_OFFER_RULE,
+  tierPrice, rebookPrice, formatPrice,
 } from '../config/pricing';
 import { Check, Info, ArrowRight } from 'lucide-react';
 
@@ -37,8 +37,6 @@ const PRICING_SCHEMA = {
     itemListElement: [
       offer(TIER_NAMES.standard, TIER_BASE.standard, `One-off clean, price for a 1-bedroom property. Add £${EXTRA_BEDROOM} per extra bedroom.`),
       offer(TIER_NAMES.premium, TIER_BASE.premium, `One-off clean, price for a 1-bedroom property. Add £${EXTRA_BEDROOM} per extra bedroom.`),
-      offer(`${TIER_NAMES.standard}, every-turnover rate`, everyTurnoverPrice('standard'), `Per clean for a 1-bedroom property from the second clean. ${EVERY_TURNOVER_RULE}`),
-      offer(`${TIER_NAMES.premium}, every-turnover rate`, everyTurnoverPrice('premium'), `Per clean for a 1-bedroom property from the second clean. ${EVERY_TURNOVER_RULE}`),
       offer('Extra bedroom', EXTRA_BEDROOM, 'Added per extra bedroom, on every package.'),
     ],
   },
@@ -104,7 +102,7 @@ const PricingPage: React.FC<PricingPageProps> = ({ onNavigate }) => {
                   <span className="price text-4xl text-slate-900">{pkg.price}</span>
                   <span className="text-slate-500 ml-2 font-medium">{pkg.period}</span>
                 </div>
-                <p className="text-slate-600 text-sm mt-2 font-medium">£{everyTurnoverPrice(pkg.tier)} per clean from your second clean, at the every-turnover rate</p>
+                <p className="text-slate-600 text-sm mt-2 font-medium">{REBOOK_SHORT}</p>
                 {pkg.description && (
                   <p className="text-slate-500 text-sm mt-2 font-medium">{pkg.description}</p>
                 )}
@@ -159,9 +157,9 @@ const PricingPage: React.FC<PricingPageProps> = ({ onNavigate }) => {
           Prices are for a 1-bedroom property. Add £{EXTRA_BEDROOM} per additional bedroom, on every package. A 2-bed Standard Turnover is £{tierPrice('standard', 2)}.
         </p>
 
-        {/* Discounts: exactly two, and only one applies per clean */}
+        {/* The one offer: rebook discount. Only one offer applies per clean. */}
         <div className="mb-32">
-          <div className="max-w-4xl mx-auto bg-white rounded-[3rem] p-8 md:p-12 border border-slate-100 shadow-xl relative overflow-hidden group">
+          <div className="max-w-2xl mx-auto bg-white rounded-[3rem] p-8 md:p-12 border border-slate-100 shadow-xl relative overflow-hidden group">
             <div className="absolute top-0 right-0 w-32 h-32 bg-[rgb(235,247,244)] rounded-full -mr-16 -mt-16 transition-transform duration-700 group-hover:scale-150"></div>
 
             <div className="relative z-10">
@@ -169,22 +167,14 @@ const PricingPage: React.FC<PricingPageProps> = ({ onNavigate }) => {
                 <div className="bg-[rgb(61,141,122)] p-2 rounded-xl">
                   <Info className="w-6 h-6 text-white" />
                 </div>
-                <h2 className="text-3xl font-bold text-slate-900">Savings for Returning Hosts</h2>
+                <h2 className="text-3xl font-bold text-slate-900">Rebook discount</h2>
               </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div className="flex flex-col p-6 sm:p-8 bg-slate-50 rounded-[2rem] border border-slate-100 transition-all hover:shadow-md hover:-translate-y-1 h-full">
-                  <div className="price self-start bg-white px-3 py-2 rounded-lg shadow-sm text-[#2D6E5F] mb-4">£{EVERY_TURNOVER_SAVING} off per clean</div>
-                  <h3 className="text-lg font-black mb-2">Every-turnover rate</h3>
-                  <p className="text-slate-600 text-sm leading-relaxed">{EVERY_TURNOVER_RULE}</p>
-                </div>
-
-                <div className="flex flex-col p-6 sm:p-8 bg-slate-50 rounded-[2rem] border border-slate-100 transition-all hover:shadow-md hover:-translate-y-1 h-full">
-                  <div className="price self-start bg-white px-3 py-2 rounded-lg shadow-sm text-[#2D6E5F] mb-4">£{REBOOK_CREDIT} off your second clean</div>
-                  <h3 className="text-lg font-black mb-2">First rebook credit</h3>
-                  <p className="text-slate-600 text-sm leading-relaxed">{REBOOK_RULE} {REBOOK_NOT_COMBINED}</p>
-                </div>
-              </div>
+              <div className="price inline-block bg-[rgb(235,247,244)] px-3 py-2 rounded-lg text-[#2D6E5F] mb-4">{REBOOK_DISCOUNT_PERCENT}% off</div>
+              <p className="text-slate-700 leading-relaxed mb-3 font-medium">{REBOOK_RULE}</p>
+              <p className="text-slate-600 text-sm leading-relaxed mb-3">{REBOOK_DETAIL}</p>
+              <p className="text-slate-600 text-sm leading-relaxed">
+                For a 1-bed, that is £{formatPrice(rebookPrice('standard'))} for a {TIER_NAMES.standard} and £{formatPrice(rebookPrice('premium'))} for a {TIER_NAMES.premium}.
+              </p>
             </div>
           </div>
           <p className="text-center text-sm text-slate-600 mt-4">{ONE_OFFER_RULE}</p>

@@ -5,7 +5,7 @@ import RouteLink from '../components/RouteLink';
 import { AreaPage as AreaPageData, AREA_PAGES, AREA_PAGE_IDS, isPlaceholder } from '../config/areas';
 import JsonLd from '../components/JsonLd';
 import { SITE_URL, canonicalUrl } from '../config/routes';
-import { TIER_NAMES, tierPrice, EXTRA_BEDROOM, EVERY_TURNOVER_RULE } from '../config/pricing';
+import { TIER_NAMES, tierPrice, EXTRA_BEDROOM, REBOOK_RULE } from '../config/pricing';
 
 interface AreaPageProps {
   area: AreaPageData;
@@ -75,7 +75,7 @@ const AreaPage: React.FC<AreaPageProps> = ({ area, onNavigate }) => {
         <ul className="mt-6 space-y-2 text-slate-700">
           {[
             `Prices are for a 1-bedroom property. Add £${EXTRA_BEDROOM} per extra bedroom.`,
-            `${EVERY_TURNOVER_RULE} No contract.`,
+            `${REBOOK_RULE} No contract.`,
             'Your exact price is confirmed before we clean.',
           ].map(line => (
             <li key={line} className="flex items-start">

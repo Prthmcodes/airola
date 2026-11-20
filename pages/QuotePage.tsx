@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Page, QuoteData, User as UserType } from '../types';
 import { safePrice, PRICE_FALLBACK_TEXT } from '../utils/quoteSafety';
-import { STANDARD_ADD_ONS, TIER_NAMES, tierName, tierPrice, everyTurnoverPrice, EVERY_TURNOVER_RULE, EVERY_TURNOVER_WINDOW_DAYS } from '../config/pricing';
+import { STANDARD_ADD_ONS, TIER_NAMES, tierName, tierPrice, rebookPrice, formatPrice, REBOOK_RULE, REBOOK_LABEL } from '../config/pricing';
 import {
   ChevronRight, ChevronLeft, Sparkles, CheckCircle, Calendar as CalendarIcon,
   Link as LinkIcon, MapPin, ClipboardList, User, Phone, Mail, Shield, Star, Check,
@@ -198,7 +198,7 @@ const QuotePage: React.FC<QuotePageProps> = ({ quote, setQuote, onNavigate, user
                   {/* Information only: nothing here changes the first-clean total. */}
                   <p className="mt-4 text-sm text-slate-600 font-medium flex items-start">
                     <Info className="w-4 h-4 mr-2 mt-0.5 shrink-0 text-[rgb(61,141,122)]" aria-hidden="true" />
-                    <span>Price from your second clean: £{everyTurnoverPrice(quote.cleaningType, beds)}. {EVERY_TURNOVER_RULE}</span>
+                    <span>{REBOOK_RULE} Your first clean at a property is at the full price; for a rebook, we apply the {REBOOK_LABEL.toLowerCase()} when we confirm your booking.</span>
                   </p>
                 </div>
 
@@ -366,7 +366,7 @@ const QuotePage: React.FC<QuotePageProps> = ({ quote, setQuote, onNavigate, user
                   : <span className="text-lg font-bold text-[rgb(106,176,160)] text-right">{PRICE_FALLBACK_TEXT}</span>}
               </div>
               <p className="mt-3 text-xs text-slate-400 font-medium">
-                From your second clean, {tierName(quote.cleaningType)} is £{everyTurnoverPrice(quote.cleaningType, beds)} when booked within {EVERY_TURNOVER_WINDOW_DAYS} days of your last clean at the same property.
+                {REBOOK_LABEL}: rebook within the window and {tierName(quote.cleaningType)} is £{formatPrice(rebookPrice(quote.cleaningType, beds))}. Applied when we confirm your booking.
               </p>
             </div>
 

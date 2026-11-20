@@ -7,8 +7,6 @@ export type Tier = 'standard' | 'premium';
 export const STANDARD_1BED = 55;
 export const PREMIUM_1BED = 75;
 export const EXTRA_BEDROOM = 20;
-// Every-turnover saving per clean, from the second clean.
-export const EVERY_TURNOVER_DISCOUNT = 5;
 
 export const TIER_BASE: Record<Tier, number> = { standard: STANDARD_1BED, premium: PREMIUM_1BED };
 export const TIER_NAMES: Record<Tier, string> = { standard: 'Standard Turnover', premium: 'Premium Turnover' };
@@ -44,11 +42,20 @@ export const ADD_ON_NAMES: Record<string, string> = Object.fromEntries(STANDARD_
 export const STANDARD_ADD_ONS_TOTAL = STANDARD_ADD_ONS.reduce((sum, a) => sum + a.price, 0);
 export const PREMIUM_DIFFERENCE = TIER_BASE.premium - TIER_BASE.standard;
 
-// Discounts. Only one applies to any clean.
-export const EVERY_TURNOVER_SAVING = EVERY_TURNOVER_DISCOUNT;
-export const EVERY_TURNOVER_WINDOW_DAYS = 30;
-export const REBOOK_CREDIT = 10;
-export const REBOOK_WINDOW_DAYS = 10;
+// Rebook discount: the one offer. Change the window or percentage here and nowhere else.
+// Eligibility is checked by the team when confirming a booking (see components/ActionQueue.tsx).
+export const REBOOK_WINDOW_DAYS = 7;
+export const REBOOK_DISCOUNT_PERCENT = 10;
+
+// UK calendar day number, so "within 7 days" means by the date, not the hour.
+const ukDayNumber = (d: Date) => {
+  const [y, m, day] = new Intl.DateTimeFormat('en-CA', { timeZone: 'Europe/London' }).format(d).split('-').map(Number);
+  return Date.UTC(y, m - 1, day) / 86_400_000;
+};
+// A clean qualifies if it is booked no later than REBOOK_WINDOW_DAYS after the date of the previous
+// completed clean at the same property. Booking before that clean also counts.
+export const qualifiesForRebook = (lastCleanCompletedAt: Date | string, bookedAt: Date | string) =>
+  ukDayNumber(new Date(bookedAt)) - ukDayNumber(new Date(lastCleanCompletedAt)) <= REBOOK_WINDOW_DAYS;
 
 export const tierName = (tier: string) => TIER_NAMES[tier as Tier] ?? TIER_NAMES.standard;
 
@@ -56,19 +63,26 @@ export const tierName = (tier: string) => TIER_NAMES[tier as Tier] ?? TIER_NAMES
 export const tierPrice = (tier: string, beds = 1) =>
   (TIER_BASE[tier as Tier] ?? TIER_BASE.standard) + EXTRA_BEDROOM * (Math.max(1, beds || 1) - 1);
 
-// Price from the second clean, at the every-turnover rate.
-export const everyTurnoverPrice = (tier: string, beds = 1) => tierPrice(tier, beds) - EVERY_TURNOVER_SAVING;
+// Clean price with the rebook discount, rounded to the penny.
+export const rebookPrice = (tier: string, beds = 1) =>
+  Math.round(tierPrice(tier, beds) * (100 - REBOOK_DISCOUNT_PERCENT)) / 100;
+
+// Money for display: whole pounds as "55", anything with pence as "49.50".
+export const formatPrice = (amount: number) => {
+  const pennies = Math.round(amount * 100) / 100;
+  return Number.isInteger(pennies) ? String(pennies) : pennies.toFixed(2);
+};
 
 // First-clean total the quote flow charges: one-off price plus any Standard add-ons (Premium has none).
 export const firstCleanTotal = (tier: string, beds = 1, addOnIds: readonly string[] = []) =>
   tierPrice(tier, beds) + (tier === 'premium' ? 0 :
     STANDARD_ADD_ONS.filter(a => addOnIds.includes(a.id)).reduce((sum, a) => sum + a.price, 0));
 
-export const EVERY_TURNOVER_RULE =
-  `Your first clean is at the one-off price. From your second clean you save £${EVERY_TURNOVER_SAVING} per clean, as long as each clean is booked within ${EVERY_TURNOVER_WINDOW_DAYS} days of your last one at the same property.`;
+export const REBOOK_LABEL = `Rebook discount (${REBOOK_DISCOUNT_PERCENT}%)`;
+export const REBOOK_SHORT = `${REBOOK_DISCOUNT_PERCENT}% off when you rebook within ${REBOOK_WINDOW_DAYS} days`;
 export const REBOOK_RULE =
-  `Rebook within ${REBOOK_WINDOW_DAYS} days of your first clean and get £${REBOOK_CREDIT} off your second clean.`;
-export const REBOOK_NOT_COMBINED =
-  `The £${REBOOK_CREDIT} replaces the £${EVERY_TURNOVER_SAVING} saving on that one clean; the two never combine. After that clean, the £${EVERY_TURNOVER_SAVING} every-turnover rate applies.`;
+  `Book your next clean within ${REBOOK_WINDOW_DAYS} days of your last clean at the same property and take ${REBOOK_DISCOUNT_PERCENT}% off that clean. It applies every time you do.`;
+export const REBOOK_DETAIL =
+  `Your first clean at a property is at the full price. A clean qualifies if it is booked no later than ${REBOOK_WINDOW_DAYS} days after your last completed clean at the same property; booking before that clean also counts.`;
 export const ONE_OFFER_RULE =
-  'Only one offer applies per clean. Credits apply to future bookings only and cannot be exchanged for cash.';
+  'Only one offer applies per clean. The rebook discount does not combine with any other offer, private rate or giveaway credit. Credits apply to future bookings only and cannot be exchanged for cash.';

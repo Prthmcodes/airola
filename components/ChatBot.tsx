@@ -3,7 +3,7 @@ import { Page } from '../types';
 import { MessageSquare, X, Send, Sparkles } from 'lucide-react';
 import { useFocusTrap } from './useFocusTrap';
 import { OPEN_CHAT_EVENT } from './MobileActionBar';
-import { TIER_NAMES, tierPrice, everyTurnoverPrice, EVERY_TURNOVER_SAVING, EVERY_TURNOVER_WINDOW_DAYS, REBOOK_RULE, ONE_OFFER_RULE } from '../config/pricing';
+import { TIER_NAMES, tierPrice, rebookPrice, formatPrice, REBOOK_DISCOUNT_PERCENT, REBOOK_RULE, REBOOK_DETAIL, ONE_OFFER_RULE } from '../config/pricing';
 import { isGiveawayOpen } from '../config/promos';
 
 interface ChatBotProps {
@@ -57,7 +57,7 @@ const ChatBot: React.FC<ChatBotProps> = ({ onNavigate }) => {
 
   const priceReply = (beds: number) => {
     bot(
-      `For a ${beds}-bed property: ${TIER_NAMES.standard} is £${tierPrice('standard', beds)} and ${TIER_NAMES.premium} is £${tierPrice('premium', beds)} for your first clean. From your second clean you save £${EVERY_TURNOVER_SAVING} per clean (£${everyTurnoverPrice('standard', beds)} and £${everyTurnoverPrice('premium', beds)}), as long as each clean is booked within ${EVERY_TURNOVER_WINDOW_DAYS} days of your last one at the same property. Both include photo proof after the clean. Final price is confirmed before we clean — no payment upfront on the site.`,
+      `For a ${beds}-bed property: ${TIER_NAMES.standard} is £${tierPrice('standard', beds)} and ${TIER_NAMES.premium} is £${tierPrice('premium', beds)} for your first clean. ${REBOOK_RULE} With ${REBOOK_DISCOUNT_PERCENT}% off, that is £${formatPrice(rebookPrice('standard', beds))} and £${formatPrice(rebookPrice('premium', beds))}. Both include photo proof after the clean. Final price is confirmed before we clean — no payment upfront on the site.`,
       ['Get a quote', "What's included?", 'Talk to a human']
     );
   };
@@ -130,7 +130,7 @@ const ChatBot: React.FC<ChatBotProps> = ({ onNavigate }) => {
     }
     if (/(discount|offer|deal|saving|save|credit|rebook|loyal)/.test(q)) {
       bot(
-        `From your second clean you save £${EVERY_TURNOVER_SAVING} per clean, as long as each clean is booked within ${EVERY_TURNOVER_WINDOW_DAYS} days of your last one at the same property. ${REBOOK_RULE} ${ONE_OFFER_RULE}`,
+        `${REBOOK_RULE} ${REBOOK_DETAIL} ${ONE_OFFER_RULE}`,
         ['Pricing', 'Get a quote']
       );
       return;

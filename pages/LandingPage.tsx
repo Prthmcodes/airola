@@ -5,7 +5,7 @@ import RouteLink from '../components/RouteLink';
 import { Sparkles, Calendar, ShoppingBag, CheckCircle, Star, ArrowRight, Gift, Trophy, Armchair, Shield, MessageCircle, Plus, Minus, Clock, Camera, MapPin, Instagram, PoundSterling, House } from 'lucide-react';
 import { TypeAnimation } from 'react-type-animation';
 import { GIVEAWAY_ENDS_AT, isGiveawayOpen, formatUkDate, INSTAGRAM_URL, INSTAGRAM_DM_URL } from '../config/promos';
-import { EVERY_TURNOVER_RULE, REBOOK_RULE, ONE_OFFER_RULE, EXTRA_BEDROOM, tierPrice } from '../config/pricing';
+import { REBOOK_RULE, REBOOK_DETAIL, ONE_OFFER_RULE, EXTRA_BEDROOM, tierPrice } from '../config/pricing';
 import IllustrativeLabel from '../components/IllustrativeLabel';
 import { SITE_IMAGES } from '../config/images';
 import { areaPageFor } from '../config/areas';
@@ -56,7 +56,7 @@ const FAQS = [
   },
   {
     q: "Do you offer discounts for regular cleans?",
-    a: `Yes. ${EVERY_TURNOVER_RULE} ${REBOOK_RULE} ${ONE_OFFER_RULE} There is no contract.`
+    a: `Yes. ${REBOOK_RULE} ${REBOOK_DETAIL} ${ONE_OFFER_RULE} There is no contract.`
   },
   {
     q: "Do you handle emergency same-day cleans?",
@@ -498,7 +498,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ onNavigate }) => {
                     },
                     {
                       title: "2. Select Your Turnover Plan",
-                      desc: "Choose Standard or Premium Turnover. Your first clean is at the one-off price, and from your second clean you save £5 per clean when you book within 30 days of your last one.",
+                      desc: `Choose Standard or Premium Turnover. Your first clean is at the full price. ${REBOOK_RULE}`,
                       icon: <ShoppingBag className="w-6 h-6" />
                     },
                     {

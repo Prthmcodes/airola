@@ -8,7 +8,7 @@
 // Inline links use [text](/path) and must point at a route in config/routes.ts.
 
 import { Page } from '../types';
-import { TIER_NAMES, EXTRA_BEDROOM, EVERY_TURNOVER_SAVING, EVERY_TURNOVER_WINDOW_DAYS, REBOOK_CREDIT, REBOOK_WINDOW_DAYS, tierPrice, everyTurnoverPrice } from '../config/pricing';
+import { TIER_NAMES, EXTRA_BEDROOM, REBOOK_WINDOW_DAYS, REBOOK_DISCOUNT_PERCENT, REBOOK_RULE, ONE_OFFER_RULE, tierPrice, rebookPrice, formatPrice } from '../config/pricing';
 import { AREA_PAGES } from '../config/areas';
 
 const AREA_NAMES = Object.values(AREA_PAGES).map(a => a.name);
@@ -136,12 +136,12 @@ export const BLOG_POSTS: BlogPost[] = [
             type: 'ul',
             items: [
               `Your first clean is at the one-off price of £${tierPrice('standard', 2)}.`,
-              `From your second clean you save £${EVERY_TURNOVER_SAVING} per clean, so each clean is £${everyTurnoverPrice('standard', 2)}, as long as each one is booked within ${EVERY_TURNOVER_WINDOW_DAYS} days of your last clean at the same property.`,
+              `If you book each next clean within ${REBOOK_WINDOW_DAYS} days of your last clean at the same property, you take ${REBOOK_DISCOUNT_PERCENT}% off that clean, so it is £${formatPrice(rebookPrice('standard', 2))}. It applies every time you do.`,
               "On top of that, add your own costs per turnover: washing the linen and towels, and the guest essentials you replace.",
             ],
           },
-          { type: 'p', text: `So the starting point for your fee is £${everyTurnoverPrice('standard', 2)} plus your laundry and essentials. If your calendar can have gaps of more than ${EVERY_TURNOVER_WINDOW_DAYS} days, plan around the one-off £${tierPrice('standard', 2)} instead, so a quiet month does not leave you short.` },
-          { type: 'p', text: `If you would rather hand over more of the work, a ${TIER_NAMES.premium} for a 2-bed is £${tierPrice('premium', 2)}, or £${everyTurnoverPrice('premium', 2)} from your second clean on the same terms. It adds dishwashing, inside the fridge and microwave, and restocking essentials from your supplies. Compare both packages on our [pricing page](/pricing).` },
+          { type: 'p', text: `So with regular bookings, the starting point for your fee is £${formatPrice(rebookPrice('standard', 2))} plus your laundry and essentials. If your calendar can have gaps of more than ${REBOOK_WINDOW_DAYS} days between cleans, plan around the full £${tierPrice('standard', 2)} instead, so a quiet week does not leave you short.` },
+          { type: 'p', text: `If you would rather hand over more of the work, a ${TIER_NAMES.premium} for a 2-bed is £${tierPrice('premium', 2)}, or £${formatPrice(rebookPrice('premium', 2))} with the rebook discount on the same terms. It adds dishwashing, the fridge cleaned inside and out and the microwave inside, and restocking essentials from your supplies. Compare both packages on our [pricing page](/pricing).` },
         ],
       },
       {
@@ -209,8 +209,8 @@ export const BLOG_POSTS: BlogPost[] = [
             items: [
               `${TIER_NAMES.standard}: from £${tierPrice('standard')} for a 1-bed, one-off. A 2-bed ${TIER_NAMES.standard} is £${tierPrice('standard', 2)}. It covers a full turnover of the kitchen, bathroom and floors, a linen change and bed making using your clean linen, emptying the bins, a damage and low-stock check, and photo confirmation after every clean.`,
               `${TIER_NAMES.premium}: from £${tierPrice('premium')} for a 1-bed, one-off. It includes everything in ${TIER_NAMES.standard} plus dishwashing and a kitchen reset, the fridge cleaned inside and out and the microwave inside, restocking essentials from your supplies, priority booking and faster response, and a pre-check-in double inspection.`,
-              `Every-turnover rate: your first clean is at the one-off price. From your second clean you save £${EVERY_TURNOVER_SAVING} per clean, as long as each clean is booked within ${EVERY_TURNOVER_WINDOW_DAYS} days of your last one at the same property. That is £${everyTurnoverPrice('standard')} for a 1-bed ${TIER_NAMES.standard} and £${everyTurnoverPrice('premium')} for a 1-bed ${TIER_NAMES.premium}. There is no contract.`,
-              `First rebook credit: rebook within ${REBOOK_WINDOW_DAYS} days of your first clean and get £${REBOOK_CREDIT} off your second clean. It replaces the £${EVERY_TURNOVER_SAVING} saving on that clean, so the two never combine. Only one offer applies per clean.`,
+              `Rebook discount: your first clean at a property is at the full price. ${REBOOK_RULE} That is £${formatPrice(rebookPrice('standard'))} for a 1-bed ${TIER_NAMES.standard} and £${formatPrice(rebookPrice('premium'))} for a 1-bed ${TIER_NAMES.premium}. There is no contract.`,
+              ONE_OFFER_RULE,
             ],
           },
           { type: 'p', text: "Your final price is confirmed before we clean. You can see the full breakdown on our [pricing page](/pricing), or [get your price in about 60 seconds](/quote) by choosing your bedrooms, package and any add-ons." },
@@ -246,7 +246,7 @@ export const BLOG_POSTS: BlogPost[] = [
               "Keep spare sets of linen and towels in the property so a linen change never holds up the clean.",
               "Store cleaning supplies and guest essentials in one labelled place.",
               "Leave clear notes on access, bins and anything specific to your property.",
-              "Book your next clean within 30 days of the last one at the same property, so every clean after the first is at the every-turnover rate.",
+              `Book your next clean within ${REBOOK_WINDOW_DAYS} days of the last one at the same property to take ${REBOOK_DISCOUNT_PERCENT}% off that clean.`,
             ],
           },
         ],

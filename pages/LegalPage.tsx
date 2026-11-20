@@ -1,5 +1,5 @@
 import React from 'react';
-import { EVERY_TURNOVER_RULE, REBOOK_RULE, REBOOK_NOT_COMBINED, ONE_OFFER_RULE } from '../config/pricing';
+import { REBOOK_RULE, REBOOK_DETAIL, ONE_OFFER_RULE } from '../config/pricing';
 
 const LegalPage: React.FC = () => {
   return (
@@ -38,7 +38,7 @@ const LegalPage: React.FC = () => {
           by contacting us.
         </p>
         <p className="mb-4 leading-relaxed">
-          Every-turnover rate: {EVERY_TURNOVER_RULE} First rebook credit: {REBOOK_RULE} {REBOOK_NOT_COMBINED}{' '}
+          Rebook discount: {REBOOK_RULE} {REBOOK_DETAIL}{' '}
           {ONE_OFFER_RULE}
         </p>
         <p className="mb-4 leading-relaxed">

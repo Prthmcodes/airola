@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { CleaningTask } from '../types';
 import { Zap, MessageCircle, Clock, Gift, Copy, Check, TrendingUp, Star, RotateCcw } from 'lucide-react';
-import { REBOOK_CREDIT, REBOOK_RULE, REBOOK_WINDOW_DAYS, tierName } from '../config/pricing';
+import { REBOOK_LABEL, REBOOK_RULE, REBOOK_WINDOW_DAYS, formatPrice, qualifiesForRebook, tierName } from '../config/pricing';
 
 // Paste your Google review link here once your Google Business Profile is live.
 const GOOGLE_REVIEW_LINK = '';
@@ -34,14 +34,16 @@ const ActionQueue: React.FC<ActionQueueProps> = ({ tasks, onTaskUpdate }) => {
     t.confirmationSent && !t.reminderSent && (t.paymentStatus ?? 'unpaid') !== 'paid'
   );
 
-  // 3. A client's first completed clean, still inside the rebook-credit window, offer not yet sent
-  const completedCount = (ownerId?: string) =>
-    ownerId ? manageable.filter(x => x.ownerId === ownerId && x.status === 'completed').length : 0;
+  // 3. Rebook discount reminder: the latest completed clean at a property, still inside the rebook
+  // window, with nothing booked there yet and no reminder sent. Applies after every clean, not just the first.
+  // Eligibility stays a manual check: the team applies the discount to the price when confirming the next booking.
+  const propertyKey = (t: CleaningTask) => t.propertyId || t.propertyAddress;
   const rebooks = manageable.filter(t => {
     if (t.status !== 'completed' || t.rebookOfferSent || !t.completedAt) return false;
-    if (completedCount(t.ownerId) !== 1) return false;
-    const age = now - new Date(t.completedAt).getTime();
-    return age >= 0 && age <= REBOOK_WINDOW_DAYS * DAY_MS;
+    const sameProperty = manageable.filter(x => propertyKey(x) === propertyKey(t));
+    if (sameProperty.some(x => x.status === 'pending' || x.status === 'in-progress')) return false;
+    if (sameProperty.some(x => x.status === 'completed' && x.completedAt && new Date(x.completedAt) > new Date(t.completedAt!))) return false;
+    return now >= new Date(t.completedAt).getTime() && qualifiesForRebook(t.completedAt, new Date(now));
   });
 
   // Group completed jobs by client for lifecycle triggers
@@ -74,10 +76,10 @@ const ActionQueue: React.FC<ActionQueueProps> = ({ tasks, onTaskUpdate }) => {
   });
 
   const confirmationMsg = (t: CleaningTask) =>
-    `Hi ${firstName(t.ownerName)}, confirming your clean: ${t.propertyAddress}, ${t.scheduledAt || 'date TBC'}, ${tierName(t.type)}, ${t.beds} bed — £${t.price}. Includes photo confirmation after the clean. 50% (£${Math.round(t.price / 2)}) to book. Reply YES to confirm.`;
+    `Hi ${firstName(t.ownerName)}, confirming your clean: ${t.propertyAddress}, ${t.scheduledAt || 'date TBC'}, ${tierName(t.type)}, ${t.beds} bed — £${formatPrice(t.price)}. Includes photo confirmation after the clean. 50% (£${Math.round(t.price / 2)}) to book. Reply YES to confirm.`;
 
   const reminderMsg = (t: CleaningTask) =>
-    `Hi ${firstName(t.ownerName)}, quick nudge — just need the ${(t.paymentStatus === 'deposit_paid') ? 'balance' : 'booking payment'} for the clean at ${t.propertyAddress} (£${t.price} total). Want me to hold the slot?`;
+    `Hi ${firstName(t.ownerName)}, quick nudge — just need the ${(t.paymentStatus === 'deposit_paid') ? 'balance' : 'booking payment'} for the clean at ${t.propertyAddress} (£${formatPrice(t.price)} total). Want me to hold the slot?`;
 
   const rebookMsg = (t: CleaningTask) =>
     `Hi ${firstName(t.ownerName)}, glad the turnover at ${t.propertyName} went well! Reminder: ${REBOOK_RULE.replace('Rebook', 'rebook')} Want me to pencil in your next changeover?`;
@@ -106,10 +108,10 @@ const ActionQueue: React.FC<ActionQueueProps> = ({ tasks, onTaskUpdate }) => {
     const lines = [
       `AIROLA — Weekly Summary (${new Date().toLocaleDateString('en-GB')})`,
       `Cleans completed (7 days): ${completedThisWeek.length}`,
-      `Revenue from completed cleans: £${weekRevenue}`,
+      `Revenue from completed cleans: £${formatPrice(weekRevenue)}`,
       `Open pipeline: ${openPipeline.length} job${openPipeline.length === 1 ? '' : 's'}`,
-      `Value awaiting payment: £${unpaidValue}`,
-      completedThisWeek.length > 0 ? `Completed: ${completedThisWeek.map(t => `${t.propertyName} (£${t.price})`).join(', ')}` : '',
+      `Value awaiting payment: £${formatPrice(unpaidValue)}`,
+      completedThisWeek.length > 0 ? `Completed: ${completedThisWeek.map(t => `${t.propertyName} (£${formatPrice(t.price)})`).join(', ')}` : '',
     ].filter(Boolean);
     try {
       await navigator.clipboard.writeText(lines.join('\n'));
@@ -121,7 +123,7 @@ const ActionQueue: React.FC<ActionQueueProps> = ({ tasks, onTaskUpdate }) => {
   const groups = [
     { title: 'Send booking confirmation', icon: <MessageCircle className="w-4 h-4" />, items: confirmations, msg: confirmationMsg, flag: 'confirmationSent' as const, color: 'text-[rgb(61,141,122)] bg-[rgb(235,247,244)]' },
     { title: 'Chase payment', icon: <Clock className="w-4 h-4" />, items: reminders, msg: reminderMsg, flag: 'reminderSent' as const, color: 'text-amber-700 bg-amber-50' },
-    { title: `Send £${REBOOK_CREDIT} rebooking offer`, icon: <Gift className="w-4 h-4" />, items: rebooks, msg: rebookMsg, flag: 'rebookOfferSent' as const, color: 'text-[rgb(61,141,122)] bg-[rgb(235,247,244)]' },
+    { title: `Send ${REBOOK_LABEL.toLowerCase()} reminder`, icon: <Gift className="w-4 h-4" />, items: rebooks, msg: rebookMsg, flag: 'rebookOfferSent' as const, color: 'text-[rgb(61,141,122)] bg-[rgb(235,247,244)]' },
     { title: 'Ask for a review (3+ cleans done)', icon: <Star className="w-4 h-4" />, items: reviewAsks, msg: reviewMsg, flag: 'reviewRequestSent' as const, color: 'text-yellow-700 bg-yellow-50' },
     { title: 'Win back quiet client (30+ days)', icon: <RotateCcw className="w-4 h-4" />, items: winbacks, msg: winbackMsg, flag: 'winbackSent' as const, color: 'text-slate-600 bg-slate-100' },
   ];
@@ -143,7 +145,7 @@ const ActionQueue: React.FC<ActionQueueProps> = ({ tasks, onTaskUpdate }) => {
         </div>
 
         {totalActions === 0 ? (
-          <p className="text-slate-400 text-sm font-medium py-6 text-center">All caught up. New actions appear here when bookings come in, payments are due, or completed jobs enter the 10-day rebooking window.</p>
+          <p className="text-slate-400 text-sm font-medium py-6 text-center">All caught up. New actions appear here when bookings come in, payments are due, or completed jobs enter the {REBOOK_WINDOW_DAYS}-day rebooking window.</p>
         ) : (
           <div className="space-y-5">
             {groups.map(g => g.items.length > 0 && (
@@ -156,7 +158,7 @@ const ActionQueue: React.FC<ActionQueueProps> = ({ tasks, onTaskUpdate }) => {
                     <div key={`${g.flag}-${t.id}`} className="flex items-center justify-between gap-4 p-4 bg-slate-50 rounded-2xl border border-slate-100">
                       <div className="min-w-0">
                         <p className="font-bold text-slate-900 text-sm truncate">{t.propertyName} — {t.ownerName}</p>
-                        <p className="text-xs text-slate-400 truncate">£{t.price} · {(t.paymentStatus ?? 'unpaid').replace('_', ' ')}</p>
+                        <p className="text-xs text-slate-400 truncate">£{formatPrice(t.price)} · {(t.paymentStatus ?? 'unpaid').replace('_', ' ')}</p>
                       </div>
                       <button
                         onClick={() => sendAction(t, g.msg(t), g.flag)}
@@ -190,7 +192,7 @@ const ActionQueue: React.FC<ActionQueueProps> = ({ tasks, onTaskUpdate }) => {
           </div>
           <div className="flex justify-between items-baseline border-b border-white/10 pb-3">
             <span className="text-slate-400 text-sm font-medium">Revenue (completed)</span>
-            <span className="text-2xl font-black">£{weekRevenue}</span>
+            <span className="text-2xl font-black">£{formatPrice(weekRevenue)}</span>
           </div>
           <div className="flex justify-between items-baseline border-b border-white/10 pb-3">
             <span className="text-slate-400 text-sm font-medium">Open pipeline</span>
@@ -198,7 +200,7 @@ const ActionQueue: React.FC<ActionQueueProps> = ({ tasks, onTaskUpdate }) => {
           </div>
           <div className="flex justify-between items-baseline">
             <span className="text-slate-400 text-sm font-medium">Awaiting payment</span>
-            <span className="text-2xl font-black text-amber-400">£{unpaidValue}</span>
+            <span className="text-2xl font-black text-amber-400">£{formatPrice(unpaidValue)}</span>
           </div>
         </div>
         <p className="text-[11px] text-slate-500 mt-6 leading-relaxed">Tap copy to paste this summary into your partner chat or weekly notes.</p>
