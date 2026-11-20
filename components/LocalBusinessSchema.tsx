@@ -41,7 +41,7 @@ export const LOCAL_BUSINESS_SCHEMA = {
       name: TIER_NAMES.premium,
       price: String(tierPrice('premium')),
       priceCurrency: 'GBP',
-      description: 'Everything in Standard plus dishwashing, inside fridge and microwave, essentials restocking, priority booking and pre-check-in double inspection. Price for 1 bedroom.',
+      description: 'Everything in Standard plus dishwashing, fridge cleaned inside and out and microwave inside, essentials restocking, priority booking and pre-check-in double inspection. Price for 1 bedroom.',
     },
   ],
   sameAs: [INSTAGRAM_URL],

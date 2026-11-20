@@ -15,7 +15,7 @@ interface AreaPageProps {
 // Same prices and inclusions as /pricing and /quote.
 const SERVICES = [
   { name: TIER_NAMES.standard, price: `From £${tierPrice('standard')}`, detail: 'Full turnover of kitchen, bathroom and floors, linen change and bed making with your clean linen, bins emptied, damage and low-stock check.' },
-  { name: TIER_NAMES.premium, price: `From £${tierPrice('premium')}`, detail: 'Everything in Standard plus dishwashing and kitchen reset, inside fridge and microwave, essentials restocked from your supplies, priority booking and a pre-check-in double inspection.' },
+  { name: TIER_NAMES.premium, price: `From £${tierPrice('premium')}`, detail: 'Everything in Standard plus dishwashing and kitchen reset, fridge cleaned inside and out and microwave inside, essentials restocked from your supplies, priority booking and a pre-check-in double inspection.' },
 ];
 
 // Host guides linked from every area page.

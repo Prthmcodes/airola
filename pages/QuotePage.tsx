@@ -166,7 +166,7 @@ const QuotePage: React.FC<QuotePageProps> = ({ quote, setQuote, onNavigate, user
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                     {[
                       { id: 'standard', name: TIER_NAMES.standard, icon: <Sparkles className="w-6 h-6" />, desc: 'Full turnover of kitchen, bathroom and floors, linen change and bed making with your clean linen, bins emptied, damage and low-stock check, and photo confirmation.' },
-                      { id: 'premium', name: TIER_NAMES.premium, icon: <Star className="w-6 h-6" />, desc: 'Everything in Standard plus dishwashing and kitchen reset, inside fridge and microwave, essentials restocked from your supplies, priority booking and a pre-check-in double inspection.' }
+                      { id: 'premium', name: TIER_NAMES.premium, icon: <Star className="w-6 h-6" />, desc: 'Everything in Standard plus dishwashing and kitchen reset, fridge cleaned inside and out and microwave inside, essentials restocked from your supplies, priority booking and a pre-check-in double inspection.' }
                     ].map((pkg) => (
                       <button
                         key={pkg.id}

@@ -85,7 +85,7 @@ const ChatBot: React.FC<ChatBotProps> = ({ onNavigate }) => {
     }
     if (/(includ|what.*(do|does)|service|clean.*what|package)/.test(q)) {
       bot(
-        `${TIER_NAMES.standard} covers the kitchen, bathroom and floors, a linen change and bed making with your clean linen, emptying the bins, a damage and low-stock check, and photos sent to your WhatsApp when we finish. ${TIER_NAMES.premium} adds dishwashing and a kitchen reset, inside the fridge and microwave, restocking essentials from your supplies, priority booking and a pre-check-in double inspection.`,
+        `${TIER_NAMES.standard} covers the kitchen, bathroom and floors, a linen change and bed making with your clean linen, emptying the bins, a damage and low-stock check, and photos sent to your WhatsApp when we finish. ${TIER_NAMES.premium} adds dishwashing and a kitchen reset, the fridge cleaned inside and out and the microwave inside, restocking essentials from your supplies, priority booking and a pre-check-in double inspection.`,
         ['Pricing', 'Photo proof?', 'Get a quote']
       );
       return;

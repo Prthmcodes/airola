@@ -5,7 +5,7 @@ import RouteLink from '../components/RouteLink';
 import { Sparkles, Calendar, ShoppingBag, CheckCircle, Star, ArrowRight, Gift, Trophy, Armchair, Shield, MessageCircle, Plus, Minus, Clock, Camera, MapPin, Instagram, PoundSterling, House } from 'lucide-react';
 import { TypeAnimation } from 'react-type-animation';
 import { GIVEAWAY_ENDS_AT, isGiveawayOpen, formatUkDate, INSTAGRAM_URL, INSTAGRAM_DM_URL } from '../config/promos';
-import { EVERY_TURNOVER_RULE, REBOOK_RULE, ONE_OFFER_RULE } from '../config/pricing';
+import { EVERY_TURNOVER_RULE, REBOOK_RULE, ONE_OFFER_RULE, EXTRA_BEDROOM, tierPrice } from '../config/pricing';
 import IllustrativeLabel from '../components/IllustrativeLabel';
 import { SITE_IMAGES } from '../config/images';
 import { areaPageFor } from '../config/areas';
@@ -191,7 +191,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ onNavigate }) => {
               {
                 icon: PoundSterling,
                 title: 'Prices shown upfront',
-                desc: 'From £45 for a 1-bed, plus £20 per extra bedroom. No emergency fees, and your final price is confirmed before we clean.',
+                desc: `From £${tierPrice('standard')} for a 1-bed, plus £${EXTRA_BEDROOM} per extra bedroom. No emergency fees, and your final price is confirmed before we clean.`,
                 link: <RouteLink page={Page.PRICING} onNavigate={onNavigate} className={whyLinkClass}>See our prices</RouteLink>,
               },
               {
