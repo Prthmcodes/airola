@@ -310,7 +310,7 @@ export const GiveawayPage: React.FC<GiveawayPageProps> = ({ onNavigate }) => {
                 <li>3rd: £15 cleaning credit.</li>
               </ul>
             </li>
-            <li>Credits are taken off the price of one booked clean. A prize is claimed when the winner books a clean with Airola, within {GIVEAWAY_PRIZE_VALID_DAYS} days of being notified. The property must be in an area Airola serves ({AREAS_TEXT}). There is no cash alternative. Prizes cannot be combined with other offers or transferred.</li>
+            <li>Credits are taken off the price of one booked clean. A prize is claimed when the winner books a clean with Airola, within {GIVEAWAY_PRIZE_VALID_DAYS} days of being notified. The property must be in an area Airola serves ({AREAS_TEXT}). There is no cash alternative. Prizes cannot be combined with other offers, including the rebook discount, or transferred.</li>
             <li>The three winners are chosen by {GIVEAWAY_DRAW_METHOD}. The draw takes place within 7 days of the closing date.</li>
             <li>Winners are contacted by email or phone within 3 days of the draw and have 7 days to reply. If a winner does not reply within 7 days, another winner is drawn.</li>
             <li>Winners' names are not published without their consent. The name of the winners is available on request by emailing contact@airola.co.uk.</li>
