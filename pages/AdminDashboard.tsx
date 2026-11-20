@@ -3,6 +3,7 @@ import { Page, CleaningTask, TaskStatus, Cleaner, Property, AdminTestimonial, Te
 import { StarDisplay } from '../components/StarRating';
 import { db } from '../db';
 import ActionQueue from '../components/ActionQueue';
+import { formatPrice } from '../config/pricing';
 import {
   Search,
   Users,
@@ -358,7 +359,7 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ onNavigate, focusTaskId
                         </td>
                         <td className="px-8 py-8 font-bold text-sm">{task.cleanerName || 'Unassigned'}</td>
                         <td className="px-8 py-8"><span className={`px-3 py-1 rounded-xl text-[10px] font-black uppercase tracking-widest border ${getStatusStyle(task.status)}`}>{task.status}</span></td>
-                        <td className="px-8 py-8 text-right font-black">£{task.price}</td>
+                        <td className="px-8 py-8 text-right font-black">£{formatPrice(task.price)}</td>
                       </tr>
                       {expandedTaskId === task.id && (
                         <tr className="bg-slate-50"><td colSpan={7} className="p-8">
