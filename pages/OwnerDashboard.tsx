@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { Page, User, Property, QuoteData, CleaningTask } from '../types';
 import { db } from '../db';
+import { tierPrice } from '../config/pricing';
 import { Plus, Home, MapPin, Clock, Sparkles, Package, Eye, Settings, TrendingUp, Calendar, CheckCircle2, ShieldAlert, ShieldCheck, Database, Phone, User as UserIcon, Check, X } from 'lucide-react';
 
 interface OwnerDashboardProps {
@@ -305,8 +306,8 @@ const OwnerDashboard: React.FC<OwnerDashboardProps> = ({ user, onNavigate, onSel
                           laundry: true,
                           toiletries: [],
                           frequency: 'one-time',
-                          basePrice: 45,
-                          totalPrice: 45,
+                          basePrice: tierPrice('standard', prop.beds),
+                          totalPrice: tierPrice('standard', prop.beds),
                           listingDocUrl: prop.listingDocUrl
                         });
                         onNavigate(Page.QUOTE);

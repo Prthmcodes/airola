@@ -21,6 +21,7 @@ import ErrorBoundary from './components/ErrorBoundary';
 import { PAGE_META, canonicalUrl, DEFAULT_OG_IMAGE, DEFAULT_OG_IMAGE_ALT } from './config/routes';
 import { AREA_PAGES } from './config/areas';
 import { loadQuoteDraft, saveQuoteDraft } from './utils/quoteSafety';
+import { tierPrice, firstCleanTotal } from './config/pricing';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import WhatsAppFAB from './components/WhatsAppFAB';
@@ -77,9 +78,16 @@ const initialQuote: QuoteData = {
   laundry: false,
   toiletries: [],
   frequency: 'one-time',
-  basePrice: 45,
-  totalPrice: 45,
+  basePrice: tierPrice('standard'),
+  totalPrice: tierPrice('standard'),
   notes: ''
+};
+
+// A restored draft keeps what the visitor entered, but its price is always worked out again from
+// config/pricing.ts, so a draft saved before a price change can't carry an old price to the review page.
+const restoreQuote = (): QuoteData => {
+  const q: QuoteData = { ...initialQuote, ...loadQuoteDraft() };
+  return { ...q, basePrice: tierPrice(q.cleaningType, q.beds), totalPrice: firstCleanTotal(q.cleaningType, q.beds, q.toiletries) };
 };
 
 const App: React.FC = () => {
@@ -91,7 +99,7 @@ const App: React.FC = () => {
   // Task the admin dashboard should open, set by a notification's "View details"
   const [focusTaskId, setFocusTaskId] = useState<string | null>(null);
   // Restore an in-progress quote after a reload so the visitor doesn't lose what they entered.
-  const [currentQuote, setCurrentQuote] = useState<QuoteData>(() => ({ ...initialQuote, ...loadQuoteDraft() }));
+  const [currentQuote, setCurrentQuote] = useState<QuoteData>(restoreQuote);
 
   useEffect(() => {
     saveQuoteDraft(currentQuote);

@@ -3,9 +3,15 @@
 
 export type Tier = 'standard' | 'premium';
 
-export const TIER_BASE: Record<Tier, number> = { standard: 45, premium: 65 };
-export const TIER_NAMES: Record<Tier, string> = { standard: 'Standard Turnover', premium: 'Premium Turnover' };
+// Base prices, 1-bedroom, one-off. Change prices here and nowhere else.
+export const STANDARD_1BED = 55;
+export const PREMIUM_1BED = 75;
 export const EXTRA_BEDROOM = 20;
+// Every-turnover saving per clean, from the second clean.
+export const EVERY_TURNOVER_DISCOUNT = 5;
+
+export const TIER_BASE: Record<Tier, number> = { standard: STANDARD_1BED, premium: PREMIUM_1BED };
+export const TIER_NAMES: Record<Tier, string> = { standard: 'Standard Turnover', premium: 'Premium Turnover' };
 
 // Includes, in the order shown on /pricing.
 export const TIER_FEATURES: Record<Tier, string[]> = {
@@ -20,7 +26,7 @@ export const TIER_FEATURES: Record<Tier, string[]> = {
   premium: [
     'Everything in Standard Turnover',
     'Dishwashing and kitchen reset',
-    'Inside fridge and microwave',
+    'Fridge cleaned inside and out, and microwave inside',
     'Essentials restocked from your supplies',
     'Priority booking and faster response',
     'Pre-check-in double inspection',
@@ -39,7 +45,7 @@ export const STANDARD_ADD_ONS_TOTAL = STANDARD_ADD_ONS.reduce((sum, a) => sum + 
 export const PREMIUM_DIFFERENCE = TIER_BASE.premium - TIER_BASE.standard;
 
 // Discounts. Only one applies to any clean.
-export const EVERY_TURNOVER_SAVING = 5;
+export const EVERY_TURNOVER_SAVING = EVERY_TURNOVER_DISCOUNT;
 export const EVERY_TURNOVER_WINDOW_DAYS = 30;
 export const REBOOK_CREDIT = 10;
 export const REBOOK_WINDOW_DAYS = 10;
@@ -52,6 +58,11 @@ export const tierPrice = (tier: string, beds = 1) =>
 
 // Price from the second clean, at the every-turnover rate.
 export const everyTurnoverPrice = (tier: string, beds = 1) => tierPrice(tier, beds) - EVERY_TURNOVER_SAVING;
+
+// First-clean total the quote flow charges: one-off price plus any Standard add-ons (Premium has none).
+export const firstCleanTotal = (tier: string, beds = 1, addOnIds: readonly string[] = []) =>
+  tierPrice(tier, beds) + (tier === 'premium' ? 0 :
+    STANDARD_ADD_ONS.filter(a => addOnIds.includes(a.id)).reduce((sum, a) => sum + a.price, 0));
 
 export const EVERY_TURNOVER_RULE =
   `Your first clean is at the one-off price. From your second clean you save £${EVERY_TURNOVER_SAVING} per clean, as long as each clean is booked within ${EVERY_TURNOVER_WINDOW_DAYS} days of your last one at the same property.`;
